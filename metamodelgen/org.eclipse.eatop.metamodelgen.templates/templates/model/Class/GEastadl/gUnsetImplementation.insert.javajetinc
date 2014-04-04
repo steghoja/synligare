@@ -1,0 +1,16 @@
+// Class/GEastadl/gUnsetImplementation.insert.javajetinc
+
+<% GAwareGenFeature gGenFeature = (GAwareGenFeature)genFeature; %>
+<% TargetFeaturePath tgtFeaturePath = gGenFeature.getTargetFeaturePath(genClass); %>
+<% if(tgtFeaturePath.getClass().equals(NoMappingTargetFeaturePath.class)){%>
+	<%@ include file="unsupportedGEastadlFeature.insert.javajetinc" %>
+<% } else { %>
+	<% if(tgtFeaturePath.getSegmentCount() == 1) { %>
+		<%= tgtFeaturePath.getLastFeature().getUnsetAccessorName() %>();
+	<% } else if(tgtFeaturePath.getSegmentCount() > 1) { %>
+		<%@ include file="gBuildTargetFeaturePath.insert.javajetinc" %>
+		<%= previousFeature.getName() %>.<%= tgtFeaturePath.getLastFeature().getUnsetAccessorName() %>();
+	<%} else { %>
+		ERROR: An empty TargetFeaturePath was provided to the generator for this Feature!	
+	<% } %>
+<% } %>	

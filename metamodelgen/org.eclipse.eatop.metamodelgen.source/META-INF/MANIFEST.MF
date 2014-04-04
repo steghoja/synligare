@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.eatop.metamodelgen.source
+Bundle-Version: 0.5.0.qualifier
+Bundle-Activator: org.eclipse.eatop.metamodelgen.source.internal.Activator$Implementation
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.common
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: %providerName

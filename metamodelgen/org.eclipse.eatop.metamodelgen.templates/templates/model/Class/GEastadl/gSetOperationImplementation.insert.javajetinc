@@ -1,0 +1,7 @@
+<% boolean isEastadlType = tgtFeature.getEcoreFeature().getEGenericType().getERawType().getInstanceClass() == null; %> 
+<% String paramName = genOperation.getParameterNames("~"); %>
+<% if(isEastadlType) { %>
+			set<%=tgtFeature.getAccessorName()%>((<%=tgtFeature.getImportedType()%>)<%=paramName%>);
+<% } else if(!tgtFeature.isListType()) { %>
+			set<%=tgtFeature.getAccessorName()%>(<%=paramName%>);		
+<% } %>	

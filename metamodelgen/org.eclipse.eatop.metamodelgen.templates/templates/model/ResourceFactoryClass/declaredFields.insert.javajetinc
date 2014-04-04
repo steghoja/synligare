@@ -1,0 +1,9 @@
+<%if (GenModels.getRootGenPackage(genModel).equals(genPackage)){%>
+	<%for(EastADLSourceRevision sourceRevision : EastADLSourceRevisions.get(EastADLSourceRevisions.get().major)){%>
+	<%if(sourceRevision.getRevisionOrdinal() < EastADLSourceRevisions.get().getRevisionOrdinal()){%>
+	public static final <%=genModel.getImportedName("org.eclipse.eatop.common.metamodel.EastADLReleaseDescriptor")%> EAST_ADL_<%=sourceRevision.major%>_<%=sourceRevision.minor%>_<%=sourceRevision.revision%>_RESOURCE_DESCRIPTOR = new EastADL<%=sourceRevision.major%><%=sourceRevision.minor%><%=sourceRevision.revision%>ResourceDescriptor();
+	<%}else{%>
+	public static final <%=genModel.getImportedName("org.eclipse.eatop.common.metamodel.EastADLReleaseDescriptor")%> EAST_ADL_<%=sourceRevision.major%>_<%=sourceRevision.minor%>_<%=sourceRevision.revision%>_RESOURCE_DESCRIPTOR = <%=GenModels.getUtilityClassSimpleName(genModel, "ReleaseDescriptor")%>.INSTANCE;	
+	<%}%>
+	<%}%>
+<%}%>

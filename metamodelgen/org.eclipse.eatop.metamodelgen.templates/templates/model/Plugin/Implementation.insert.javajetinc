@@ -1,0 +1,10 @@
+
+	/** 
+	* This method registers the plug-in for the sphinx validation 
+	*/
+	@Override
+	public void start(org.osgi.framework.BundleContext context) throws Exception {
+		super.start(context);
+		// Register EValidator for each contribution to org.eclipse.sphinx.emf.validation.registration
+		org.eclipse.sphinx.emf.validation.evalidator.adapter.EValidatorRegistering.getSingleton().eValidatorSetAllContributions(getSymbolicName());		
+	}

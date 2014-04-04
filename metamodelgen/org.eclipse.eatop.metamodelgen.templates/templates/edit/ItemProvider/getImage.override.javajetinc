@@ -1,0 +1,17 @@
+		if(object != null){
+			String nsURI = ((<%=genModel.getImportedName("org.eclipse.emf.ecore.EObject")%>) object).eClass().getEPackage().getNsURI();
+			<%=genModel.getImportedName("org.eclipse.emf.common.util.ResourceLocator")%> resourceLocator = <%=genModel.getImportedName("org.eclipse.sphinx.emf.edit.ResourceLocatorRegistry")%>.INSTANCE
+						.getResourceLocator(nsURI);
+				if (resourceLocator != null) {
+					try {
+						Object image = resourceLocator.getImage("full/obj16/<%=genClass.getName()%>"); <%=genModel.getNonNLS()%>
+						if (image != null) {
+							return overlayImage(object, image);
+						}
+					}catch(<%=genModel.getImportedName("java.util.MissingResourceException")%> ex){
+						// Fail silent
+					}
+				}
+			return overlayImage(object, getResourceLocator().getImage("full/obj16/<%=genClass.getName()%>"));<%=genModel.getNonNLS()%>
+		}
+		return null;

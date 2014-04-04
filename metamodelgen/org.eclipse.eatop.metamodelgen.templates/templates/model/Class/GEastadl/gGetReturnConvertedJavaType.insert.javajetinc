@@ -1,0 +1,13 @@
+<% if(gGenFeature.isInteger() && tgtFeaturePath.isLong()) { // Integer => Long %>
+	return tgtFeatureValue.intValue();
+<% } else if(gGenFeature.isInteger() && tgtFeaturePath.isString()) { // Integer => String %>
+	return new Integer(tgtFeatureValue);
+<% } else if(gGenFeature.isDouble() && tgtFeaturePath.isString()) { // Double => String %>
+	return	new Double(tgtFeatureValue);
+<% } else if(gGenFeature.isBigDecimal() && tgtFeaturePath.isString()) { // BigDecimal => String %>
+	return new <%=genModel.getImportedName("java.math.BigDecimal")%>(tgtFeatureValue);
+<% } else if(gGenFeature.isBigDecimal() && tgtFeaturePath.isInteger()) { // BigDecimal => Integer %>
+	return new <%=genModel.getImportedName("java.math.BigDecimal")%>(tgtFeatureValue);																				
+<% } else { // Any JavaMappedType => Any JavaMappedType %>						
+	return tgtFeatureValue;
+<% } %>

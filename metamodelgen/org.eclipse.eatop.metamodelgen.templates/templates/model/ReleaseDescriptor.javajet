@@ -1,0 +1,70 @@
+<%@ jet package="org.eclipse.eatop.metamodelgen.emf.codegen.ecore.templates.model" class="ReleaseDescriptor" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.eclipse.eatop.metamodelgen.templates.internal.util.GenModels org.eclipse.eatop.metamodelgen.templates.internal.util.EASTADLGenModels org.eclipse.eatop.metamodelgen.templates.source.*" %>
+<%
+/**
+ * <copyright>
+ * 
+ * Copyright (c) Continental AG and others.
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 
+ * which accompanies this distribution, and is
+ * available at http://www.eclipse.org/org/documents/epl-v10.php
+ * 
+ * Contributors: 
+ *     Continental AG - Initial API and implementation
+ * 
+ * </copyright>
+ */
+%>
+<%GenPackage genPackage = (GenPackage)argument; GenModel genModel=genPackage.getGenModel();%>
+<%@ include file="../Header.javajetinc"%>
+package <%=GenModels.getRootGenPackage(genModel).getUtilitiesPackageName()%>;
+
+<%genModel.markImportLocation(stringBuffer);%>
+
+public class <%=GenModels.getUtilityClassSimpleName(genModel, "ReleaseDescriptor")%> extends <%=genModel.getImportedName("org.eclipse.eatop.common.metamodel.EastADLReleaseDescriptor")%> {
+	
+	/**
+	 * The id of the content type for <%=EastADLSourceRevisions.get().getReleaseLabel()%> XML files.
+	 */
+	public static final String EAXML_CONTENT_TYPE_ID = "<%=GenModels.getRootGenPackage(genModel).getContentTypeIdentifier()%>"; //$NON-NLS-1$
+
+	/**
+	 * Identifier.
+	 */
+	private static final String ID = "<%=EASTADLGenModels.getEastADLMMDescriptorID(genModel)%>";
+	private static final String NAME = "<%=EastADLSourceRevisions.get().getReleaseLabel()%>";
+	private static final int MAJOR = <%=EastADLSourceRevisions.get().major%>;
+	private static final int MINOR = <%=EastADLSourceRevisions.get().minor%>;
+	private static final int REVISION = <%=EastADLSourceRevisions.get().revision%>;
+
+	/**
+	 * Default instance.
+	 */
+	public static final <%=GenModels.getUtilityClassSimpleName(genModel, "ReleaseDescriptor")%> INSTANCE = new <%=GenModels.getUtilityClassSimpleName(genModel, "ReleaseDescriptor")%>();
+
+	/**
+	 * Default constructor.
+	 */
+	public <%=GenModels.getUtilityClassSimpleName(genModel, "ReleaseDescriptor")%>() {
+		super(ID, new <%=genModel.getImportedName("org.eclipse.eatop.common.metamodel.EastADLMetaModelVersionData")%>(NAME, MAJOR, MINOR, REVISION));
+	}
+	
+<%if(genModel.useClassOverrideAnnotation()){%>
+	@Override<%}%>
+	public String getDefaultContentTypeId() {
+		return EAXML_CONTENT_TYPE_ID;
+	}
+
+<%if(genModel.useClassOverrideAnnotation()){%>
+	@Override<%}%>
+	public  <%=genModel.getImportedName("java.util.Collection")%><<%=genModel.getImportedName("org.eclipse.sphinx.emf.metamodel.IMetaModelDescriptor")%>> getCompatibleResourceVersionDescriptors() {
+		<%=genModel.getImportedName("java.util.List")%><IMetaModelDescriptor> result = new <%=genModel.getImportedName("java.util.ArrayList")%><IMetaModelDescriptor>();
+<%for(EastADLSourceRevision sourceRevision : EastADLSourceRevisions.get(EastADLSourceRevisions.get().major)){%>
+<%if(sourceRevision.getRevisionOrdinal() <= EastADLSourceRevisions.get().getRevisionOrdinal()){%>
+		result.add(<%=genPackage.getResourceFactoryClassName()%>.EAST_ADL_<%=sourceRevision.major%>_<%=sourceRevision.minor%>_<%=sourceRevision.revision%>_RESOURCE_DESCRIPTOR);
+<%}%>
+<%}%>
+		return <%=genModel.getImportedName("java.util.Collections")%>.unmodifiableList(result);
+	}   
+}
+<%genModel.emitSortedImports();%>

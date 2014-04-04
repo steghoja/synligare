@@ -1,0 +1,11 @@
+   <%if (genModel.useClassOverrideAnnotation()) {%>
+	@Override
+   <%}%>
+   protected <%=genModel.getImportedName("org.eclipse.emf.common.command.Command")%> createAddCommand(<%=genModel.getImportedName("org.eclipse.emf.edit.domain.EditingDomain")%> domain, <%=genModel.getImportedName("org.eclipse.emf.ecore.EObject")%> owner, <%=genModel.getImportedName("org.eclipse.emf.ecore.EStructuralFeature")%> feature, <%=genModel.getImportedName("java.util.Collection")%><?> collection, int index) {
+		Command addCommand = <%=genModel.getImportedName("org.eclipse.sphinx.emf.edit.CustomCommandRegistry")%>.INSTANCE.createCustomCommand(domain, new <%=genModel.getImportedName("org.eclipse.emf.edit.command.CommandParameter")%>(owner, feature, collection, index),
+				<%=genModel.getImportedName("org.eclipse.emf.edit.command.AddCommand")%>.class);
+		if (addCommand != null) {
+			return addCommand  ;
+		}
+		return super.createAddCommand(domain, owner, feature, collection, index);
+	}

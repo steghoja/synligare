@@ -1,0 +1,37 @@
+<%if (GenModels.getRootGenPackage(genModel).equals(genPackage)) {%>
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	<%if (genModel.useClassOverrideAnnotation()) {%>
+	@Override
+    <%}%>
+	protected <%=genModel.getImportedName("org.eclipse.emf.ecore.xmi.XMLLoad")%> createXMLLoad() {
+		return <%=genModel.getImportedName("org.eclipse.eatop.serialization.SerializationFactory")%>.createXMLLoad(<%=genModel.getImportedName("org.eclipse.eatop.eastadl21.Eastadl21Package")%>.eINSTANCE, this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	<%if (genModel.useClassOverrideAnnotation()) {%>
+	@Override
+    <%}%>
+	protected <%=genModel.getImportedName("org.eclipse.emf.ecore.xmi.XMLSave")%> createXMLSave() {
+		return SerializationFactory.createXMLSave(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	<%if (genModel.useClassOverrideAnnotation()) {%>
+	@Override
+    <%}%>
+	protected <%=genModel.getImportedName("org.eclipse.emf.ecore.xmi.XMLHelper")%> createXMLHelper() {
+		return SerializationFactory.createXMLHelper(this);
+	}
+<%}%>

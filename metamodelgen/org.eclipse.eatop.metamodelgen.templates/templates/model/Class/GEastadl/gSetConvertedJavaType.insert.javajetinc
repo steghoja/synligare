@@ -1,0 +1,13 @@
+<% if(gGenFeature.isInteger() && tgtFeaturePath.isLong()) { // Integer => Long %>
+	<%if(tgtFeaturePath.length() > 1){%><%=previousFeature.getName()%>.<%}%>set<%=tgtFeature.getAccessorName()%><%if (genClass.hasCollidingSetAccessorOperation(tgtFeature)) {%>_<%}%>(<%=setAccessorOperation == null ? "new" + gGenFeature.getCapName() : setAccessorOperation.getGenParameters().get(0).getName()%>.longValue());
+<% } else if(gGenFeature.isInteger() && tgtFeaturePath.isString()) { // Integer => String %>
+	<%if(tgtFeaturePath.length() > 1){%><%=previousFeature.getName()%>.<%}%>set<%=tgtFeature.getAccessorName()%><%if (genClass.hasCollidingSetAccessorOperation(tgtFeature)) {%>_<%}%>(Integer.toString(<%=setAccessorOperation == null ? "new" + gGenFeature.getCapName() : setAccessorOperation.getGenParameters().get(0).getName()%>));
+<% } else if(gGenFeature.isDouble() && tgtFeaturePath.isString()) { // Double => String %>
+	<%if(tgtFeaturePath.length() > 1){%><%=previousFeature.getName()%>.<%}%>set<%=tgtFeature.getAccessorName()%><%if (genClass.hasCollidingSetAccessorOperation(tgtFeature)) {%>_<%}%>(<%=setAccessorOperation == null ? "new" + gGenFeature.getCapName() : setAccessorOperation.getGenParameters().get(0).getName()%>.toString());
+<% } else if(gGenFeature.isBigDecimal() && tgtFeaturePath.isString()) { // BigDecimal => String %>
+	<%if(tgtFeaturePath.length() > 1){%><%=previousFeature.getName()%>.<%}%>set<%=tgtFeature.getAccessorName()%><%if (genClass.hasCollidingSetAccessorOperation(tgtFeature)) {%>_<%}%>(<%=setAccessorOperation == null ? "new" + gGenFeature.getCapName() : setAccessorOperation.getGenParameters().get(0).getName()%>.toPlainString());
+<% } else if(gGenFeature.isBigDecimal() && tgtFeaturePath.isInteger()) { // BigDecimal => Integer %>
+	<%if(tgtFeaturePath.length() > 1){%><%=previousFeature.getName()%>.<%}%>set<%=tgtFeature.getAccessorName()%><%if (genClass.hasCollidingSetAccessorOperation(tgtFeature)) {%>_<%}%>(<%=setAccessorOperation == null ? "new" + gGenFeature.getCapName() : setAccessorOperation.getGenParameters().get(0).getName()%>.intValueExact());																								
+<% } else { // Any JavaMappedType => Any JavaMappedType %>						
+	<%if(tgtFeaturePath.length() > 1){%><%=previousFeature.getName()%>.<%}%>set<%=tgtFeature.getAccessorName()%><%if (genClass.hasCollidingSetAccessorOperation(tgtFeature)) {%>_<%}%>(<%=setAccessorOperation == null ? "new" + gGenFeature.getCapName() : setAccessorOperation.getGenParameters().get(0).getName()%>);
+<% } %>
