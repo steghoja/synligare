@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.eatop.license"
+      label="EATOP License"
+      version="0.5.0.qualifier"
+      provider-name="Eclipse EATOP">
+
+   <description>
+      License for EATOP.
+   </description>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+</feature>
