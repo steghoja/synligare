@@ -1,0 +1,80 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.eclipse.eatop.releng</groupId>
+	<artifactId>org.eclipse.eatop.releng.builds</artifactId>
+	<version>0.5.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>./parent</module>
+		<module>../../tools/org.eclipse.eatop.targets/${platform.version.name}</module>
+
+		<!-- Plug-ins -->
+		<module>../../plugins/org.eclipse.eatop.geastadl</module>
+		<module>../../plugins/org.eclipse.eatop.common</module>
+		<module>../../plugins/org.eclipse.eatop.common.ui</module>
+		<module>../../plugins/org.eclipse.eatop.eastadl21</module>
+		<module>../../plugins/org.eclipse.eatop.eastadl2112</module>
+		<module>../../plugins/org.eclipse.eatop.serialization</module>
+		<module>../../plugins/org.eclipse.eatop.eastadl21.edit</module>
+		<module>../../plugins/org.eclipse.eatop.geastadl.edit</module>
+		<module>../../plugins/org.eclipse.eatop.workspace</module>
+		<module>../../plugins/org.eclipse.eatop.workspace.ui</module>
+		<module>../../plugins/org.eclipse.eatop.sdk</module>
+		<module>../../plugins/org.eclipse.eatop.eastadl2112.edit</module>
+ 
+ 		<!-- Examples -->
+		<module>../../examples/org.eclipse.eatop.examples.common.ui</module>
+		<module>../../examples/org.eclipse.eatop.demonstrator</module>
+		<module>../../examples/org.eclipse.eatop.examples.explorer</module>
+		<module>../../examples/org.eclipse.eatop.examples.editor</module>
+		<module>../../examples/org.eclipse.eatop.examples.actions</module>
+		
+		<!-- Tests -->
+		<module>../../tests/org.eclipse.eatop.serialization.tests</module>
+		<module>../../tests/org.eclipse.eatop.testutils</module>
+				
+		<!-- Features -->
+		<module>../../features/org.eclipse.eatop.license-feature</module>
+		<module>../../features/org.eclipse.eatop.metamodel2112-feature</module>
+		<module>../../features/org.eclipse.eatop.eastadl2112.sdk-feature</module>
+		<module>../../features/org.eclipse.eatop.metamodels-feature</module>
+			
+		<module>../../features/org.eclipse.eatop.base-feature</module>
+		<module>../../features/org.eclipse.eatop.base.sdk-feature</module>
+		
+		<module>../../features/org.eclipse.eatop-feature</module>
+		<module>../../features/org.eclipse.eatop.sdk-feature</module>
+		
+		<module>../../features/org.eclipse.eatop.workspace-feature</module>		
+		<module>../../features/org.eclipse.eatop.examples-feature</module>
+
+		<module>../../features/org.eclipse.eatop.demonstrator-feature</module>
+		
+		<module>./repository</module>
+		<module>./product</module>
+	</modules>
+	
+	<profiles>
+		<profile>
+			<id>platform-juno</id>
+			<properties>
+				<platform.version.name>juno</platform.version.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>platform-kepler</id>
+			<properties>
+				<platform.version.name>kepler</platform.version.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>platform-luna</id>
+			<properties>
+				<platform.version.name>luna</platform.version.name>
+			</properties>
+		</profile>
+	</profiles>
+	
+</project>
