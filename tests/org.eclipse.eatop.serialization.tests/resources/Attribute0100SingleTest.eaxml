@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EAXML xmlns="http://east-adl.info/2.1.11" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://east-adl.info/2.1.11 eastadl_2-1-11.xsd">
+  <TOP-LEVEL-PACKAGES>
+    <EA-PACKAGE UUID="packageAUuid">
+      <SHORT-NAME>packageA</SHORT-NAME>
+      <ELEMENTS>
+        <FUNCTION-BEHAVIOR>
+          <SHORT-NAME>functionBehavior1</SHORT-NAME>
+          <PATH>path1</PATH>
+          <REPRESENTATION>UML</REPRESENTATION>
+        </FUNCTION-BEHAVIOR>
+      </ELEMENTS>
+    </EA-PACKAGE>
+  </TOP-LEVEL-PACKAGES>
+</EAXML>

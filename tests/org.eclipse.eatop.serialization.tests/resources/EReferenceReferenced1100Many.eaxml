@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EAXML xmlns="http://east-adl.info/2.1.12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://east-adl.info/2.1.12 eastadl_2-1-12.xsd">
+  <TOP-LEVEL-PACKAGES>
+    <EA-PACKAGE UUID="1eaf181e-24f2-44ce-93dc-40245b1a8ab7">
+      <SHORT-NAME>packageA</SHORT-NAME>
+      <ELEMENTS>
+        <FUNCTION-BEHAVIOR UUID="b010af17-db3a-46fe-a268-5515e3112a8e">
+          <SHORT-NAME>functionBehaviorA</SHORT-NAME>
+          <PATH>pathA</PATH>
+          <REPRESENTATION>SIMULINK</REPRESENTATION>
+          <FUNCTION-REF TYPE="FUNCTIONAL-DEVICE">/packageA/functionalDeviceA</FUNCTION-REF>
+        </FUNCTION-BEHAVIOR>
+        <FUNCTIONAL-DEVICE UUID="692cc55e-8fed-471c-b107-9ddee78514c0">
+          <SHORT-NAME>functionalDeviceA</SHORT-NAME>
+          <IS-ELEMENTARY>true</IS-ELEMENTARY>
+        </FUNCTIONAL-DEVICE>
+      </ELEMENTS>
+    </EA-PACKAGE>
+  </TOP-LEVEL-PACKAGES>
+</EAXML>
