@@ -305,6 +305,9 @@ public class ModelSearcher {
 		if (annotation == null) {
 			return ""; //$NON-NLS-1$
 		}
+		if (annotation.indexOf("<em><b>") == -1) { //$NON-NLS-1$
+			return ""; //$NON-NLS-1$
+		}
 		String qualifiedName = annotation.substring(annotation.indexOf("<em><b>") + "<em><b>".length(), annotation.lastIndexOf("</b></em>")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		String packageName = qualifiedName.substring(qualifiedName.indexOf("EAST-ADL.") + "EAST-ADL.".length()); //$NON-NLS-1$ //$NON-NLS-2$
 		return packageName;
