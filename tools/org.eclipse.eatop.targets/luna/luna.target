@@ -16,6 +16,7 @@
 <unit id="org.eclipse.emf.sdk.feature.group" version="2.10.0.v20140407-1058"/>
 <unit id="org.eclipse.emf.transaction.sdk.feature.group" version="1.8.0.201403111732"/>
 <unit id="org.eclipse.emf.validation.sdk.feature.group" version="1.8.0.201403111711"/>
+<unit id="org.eclipse.gef.sdk.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.8.0.201403111536"/>
 <unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.8.0.201403111830"/>
 <unit id="org.eclipse.gmf.tooling.feature.group" version="3.2.0.201403121855"/>
@@ -25,6 +26,10 @@
 <unit id="org.eclipse.xsd.sdk.feature.group" version="2.10.0.v20140407-1058"/>
 <unit id="org.eclipse.xtext.xbase.lib.feature.group" version="2.6.0.v201403111428"/>
 <repository location="http://download.eclipse.org/releases/staging"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.xtend.sdk.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.nebula.feature.feature.group" version="0.0.0"/>
