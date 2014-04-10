@@ -15,6 +15,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.eatop.metamodelgen.serialization.generators.persistencemapping,
  org.eclipse.eatop.metamodelgen.serialization.generators.util,
- org.eclipse.eatop.metamodelgen.serialization.generators.xsd,
- org.eclipse.eatop.metamodelgen.serialization.generators.xtend
+ org.eclipse.eatop.metamodelgen.serialization.generators.xsd
 Bundle-Vendor: %providerName
