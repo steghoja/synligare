@@ -96,4 +96,6 @@ public interface IEASTADLConstants {
 	public static String RELEASE_DESCRIPTOR_ITEM_LABEL_PROVIDER_CLASS = "org.eclipse.emf.codegen.ecore.templates.edit.ReleaseDescriptorItemLabelProvider"; //$NON-NLS-1$
 	public static String FACTORY_CLASS_JAVAJET = "model/FactoryClass.javajet"; //$NON-NLS-1$
 	public static String FACTORY_CLASS = "org.eclipse.emf.codegen.ecore.templates.model.Factory"; //$NON-NLS-1$
+	public static String PACKAGE_CLASS_JAVAJET = "model/PackageClass.javajet"; //$NON-NLS-1$
+	public static String PACKAGE_CLASS = "org.eclipse.emf.codegen.ecore.templates.model.Package"; //$NON-NLS-1$
 }
