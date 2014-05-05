@@ -97,7 +97,7 @@
       <navigatorContent
             activeByDefault="true"
             
-            contentProvider="org.eclipse.sphinx.emf.explorer.BasicExplorerContentProvider"
+            contentProvider="org.eclipse.eatop.examples.explorer.AppearanceExampleExplorerContentProvider"
             icon="icons/full/obj16/eacont_obj.png"
             id="org.eclipse.eatop.examples.explorer.navigatorContent.eastadl"
             labelProvider="org.eclipse.eatop.examples.explorer.AppearanceExampleExplorerLabelProvider"
