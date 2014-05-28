@@ -27,20 +27,20 @@
 <repository location="http://download.eclipse.org/releases/kepler"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.xtend.sdk.feature.group" version="2.5.3.v201402240820"/>
+<unit id="org.eclipse.xtend.sdk.feature.group" version="2.6.0.v201405210727"/>
 <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.nebula.feature.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.nebula.examples.release.feature.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.nebula.feature.feature.group" version="1.0.0.201405151353"/>
+<unit id="org.eclipse.nebula.examples.release.feature.feature.group" version="1.0.4.201405151353"/>
 <repository location="http://download.eclipse.org/technology/nebula/snapshot"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.sphinx.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.sphinx.sdk.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.sphinx.examples.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.sphinx.thirdparty.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.sphinx.testutils.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.sphinx.feature.group" version="0.8.0.201405211459"/>
+<unit id="org.eclipse.sphinx.sdk.feature.group" version="0.8.0.201405211459"/>
+<unit id="org.eclipse.sphinx.examples.feature.group" version="0.8.0.201405211459"/>
+<unit id="org.eclipse.sphinx.thirdparty.feature.group" version="0.8.0.201405211459"/>
+<unit id="org.eclipse.sphinx.testutils.feature.group" version="0.8.0.201405211459"/>
 <repository location="http://download.eclipse.org/sphinx/updates/interim"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
