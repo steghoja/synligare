@@ -57,6 +57,10 @@
 <unit id="org.artop.eel.serialization" version="0.0.0"/>
 <repository location="https://www.artop.org/containers/artop-eel-update-site-1.0"/>
 </location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.license.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/cbi/updates/license"/>
+</location>
 </locations>
 <environment>
 <nl>en_EN</nl>
