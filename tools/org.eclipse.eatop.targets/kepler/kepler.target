@@ -36,11 +36,11 @@
 <repository location="http://download.eclipse.org/technology/nebula/snapshot"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.sphinx.feature.group" version="0.8.0.201405211459"/>
-<unit id="org.eclipse.sphinx.sdk.feature.group" version="0.8.0.201405211459"/>
-<unit id="org.eclipse.sphinx.examples.feature.group" version="0.8.0.201405211459"/>
-<unit id="org.eclipse.sphinx.thirdparty.feature.group" version="0.8.0.201405211459"/>
-<unit id="org.eclipse.sphinx.testutils.feature.group" version="0.8.0.201405211459"/>
+<unit id="org.eclipse.sphinx.feature.group" version="0.8.0.201405281456"/>
+<unit id="org.eclipse.sphinx.sdk.feature.group" version="0.8.0.201405281456"/>
+<unit id="org.eclipse.sphinx.examples.feature.group" version="0.8.0.201405281456"/>
+<unit id="org.eclipse.sphinx.thirdparty.feature.group" version="0.8.0.201405281456"/>
+<unit id="org.eclipse.sphinx.testutils.feature.group" version="0.8.0.201405281456"/>
 <repository location="http://download.eclipse.org/sphinx/updates/interim"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
