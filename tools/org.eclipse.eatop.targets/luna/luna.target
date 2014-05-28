@@ -2,31 +2,25 @@
 <?pde version="3.8"?><target name="EATOP Tool Platform Luna Target" sequenceNumber="1">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.sdk.ide" version="4.4.0.I20140501-0200"/>
-<unit id="org.eclipse.equinox.executable.feature.group" version="3.6.100.v20140427-1923"/>
-<unit id="org.eclipse.rcp.configuration.feature.group" version="1.0.1.v20140430-0717"/>
+<unit id="org.eclipse.sdk.ide" version="4.4.0.I20140522-1330"/>
+<unit id="org.eclipse.equinox.executable.feature.group" version="3.6.100.v20140521-1744"/>
+<unit id="org.eclipse.rcp.configuration.feature.group" version="1.0.1.v20140522-1150"/>
 <repository location="http://download.eclipse.org/eclipse/updates/4.4milestones"/>
 </location>
-<!--
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.compare.sdk.feature.group" version="1.3.3.v20130213-0806"/>
-<repository location="http://download.eclipse.org/releases/juno"/>
-</location>
--->
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.mwe.sdk.feature.group" version="1.3.2.v201404280517"/>
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.10.0.v20140428-0403"/>
-<unit id="org.eclipse.emf.transaction.sdk.feature.group" version="1.8.0.201403111732"/>
-<unit id="org.eclipse.emf.validation.sdk.feature.group" version="1.8.0.201403111711"/>
+<unit id="org.eclipse.emf.mwe.sdk.feature.group" version="1.3.2.v201405200714"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.10.0.v20140519-0339"/>
+<unit id="org.eclipse.emf.transaction.sdk.feature.group" version="1.8.0.201405051603"/>
+<unit id="org.eclipse.emf.validation.sdk.feature.group" version="1.8.0.201405051541"/>
 <unit id="org.eclipse.gef.sdk.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.8.0.201403111536"/>
-<unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.8.0.201403111830"/>
-<unit id="org.eclipse.gmf.tooling.feature.group" version="3.2.0.201403121855"/>
-<unit id="org.eclipse.uml2.sdk.feature.group" version="5.0.0.v20140310-0733"/>
-<unit id="org.eclipse.wst.xml_ui.feature.feature.group" version="3.6.0.v201309181520-7H7KFkTDxumWu927fhgQdnhvMMbQCrrLoRz012TB"/>
-<unit id="org.eclipse.xpand.sdk.feature.group" version="2.0.0.v201404280756"/>
-<unit id="org.eclipse.xsd.sdk.feature.group" version="2.10.0.v20140428-0403"/>
-<unit id="org.eclipse.xtext.xbase.lib.feature.group" version="2.6.0.v201403111428"/>
+<unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.8.0.201405051431"/>
+<unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.8.0.201405052122"/>
+<unit id="org.eclipse.gmf.tooling.feature.group" version="3.2.0.201405070759"/>
+<unit id="org.eclipse.uml2.sdk.feature.group" version="5.0.0.v20140519-1951"/>
+<unit id="org.eclipse.wst.xml_ui.feature.feature.group" version="3.6.0.v201405062148-7H7NFm0DxumWv9-7bhgNooiVMQ_TBruLpRz012TF"/>
+<unit id="org.eclipse.xpand.sdk.feature.group" version="2.0.0.v201405200738"/>
+<unit id="org.eclipse.xsd.sdk.feature.group" version="2.10.0.v20140519-0339"/>
+<unit id="org.eclipse.xtext.xbase.lib.feature.group" version="2.6.0.v201405210727"/>
 <repository location="http://download.eclipse.org/releases/staging"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -34,16 +28,16 @@
 <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.nebula.feature.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.nebula.examples.release.feature.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.nebula.feature.feature.group" version="1.0.0.201405151353"/>
+<unit id="org.eclipse.nebula.examples.release.feature.feature.group" version="1.0.4.201405151353"/>
 <repository location="http://download.eclipse.org/technology/nebula/snapshot"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.sphinx.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.sphinx.sdk.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.sphinx.examples.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.sphinx.thirdparty.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.sphinx.testutils.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.sphinx.feature.group" version="0.8.0.201405281456"/>
+<unit id="org.eclipse.sphinx.sdk.feature.group" version="0.8.0.201405281456"/>
+<unit id="org.eclipse.sphinx.examples.feature.group" version="0.8.0.201405281456"/>
+<unit id="org.eclipse.sphinx.thirdparty.feature.group" version="0.8.0.201405281456"/>
+<unit id="org.eclipse.sphinx.testutils.feature.group" version="0.8.0.201405281456"/>
 <repository location="http://download.eclipse.org/sphinx/updates/interim"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
