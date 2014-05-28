@@ -36,7 +36,6 @@
 		<module>../../tests/org.eclipse.eatop.testutils</module>
 				
 		<!-- Features -->
-		<module>../../features/org.eclipse.eatop.license-feature</module>
 		<module>../../features/org.eclipse.eatop.metamodel2112-feature</module>
 		<module>../../features/org.eclipse.eatop.eastadl2112.sdk-feature</module>
 		<module>../../features/org.eclipse.eatop.metamodels-feature</module>
