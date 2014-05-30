@@ -97,7 +97,7 @@ public class EcoreUtil {
 		return result;
 	}
 
-	private static EClass findEClassInEPackage(String className, EPackage ePackage) {
+	public static EClass findEClassInEPackage(String className, EPackage ePackage) {
 		// Search in classifiers
 		for (EClassifier classifier : ePackage.getEClassifiers()) {
 			if (classifier instanceof EClass) {
