@@ -2,9 +2,9 @@
 <?pde version="3.8"?><target name="EATOP Tool Platform Luna Target" sequenceNumber="1">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.sdk.ide" version="4.4.0.I20140522-1330"/>
+<unit id="org.eclipse.sdk.ide" version="4.4.0.I20140528-2000"/>
 <unit id="org.eclipse.equinox.executable.feature.group" version="3.6.100.v20140521-1744"/>
-<unit id="org.eclipse.rcp.configuration.feature.group" version="1.0.1.v20140522-1150"/>
+<unit id="org.eclipse.rcp.configuration.feature.group" version="1.0.1.v20140528-1053"/>
 <repository location="http://download.eclipse.org/eclipse/updates/4.4milestones"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -14,11 +14,11 @@
 <unit id="org.eclipse.emf.validation.sdk.feature.group" version="1.8.0.201405281429"/>
 <unit id="org.eclipse.gef.sdk.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.8.0.201405281433"/>
-<unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.8.0.201405281701"/>
-<unit id="org.eclipse.gmf.tooling.feature.group" version="3.2.0.201405070759"/>
-<unit id="org.eclipse.uml2.sdk.feature.group" version="5.0.0.v20140519-1951"/>
+<unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.8.0.201406041640"/>
+<unit id="org.eclipse.gmf.tooling.feature.group" version="3.2.0.201406041235"/>
+<unit id="org.eclipse.uml2.sdk.feature.group" version="5.0.0.v20140602-0749"/>
 <unit id="org.eclipse.wst.xml_ui.feature.feature.group" version="3.6.0.v201405062148-7H7NFm0DxumWv9-7bhgNooiVMQ_TBruLpRz012TF"/>
-<unit id="org.eclipse.xpand.sdk.feature.group" version="2.0.0.v201405200738"/>
+<unit id="org.eclipse.xpand.sdk.feature.group" version="2.0.0.v201406030414"/>
 <unit id="org.eclipse.xsd.sdk.feature.group" version="2.10.0.v20140519-0339"/>
 <unit id="org.eclipse.xtext.xbase.lib.feature.group" version="2.6.0.v201405210727"/>
 <repository location="http://download.eclipse.org/releases/staging"/>
@@ -33,11 +33,11 @@
 <repository location="http://download.eclipse.org/technology/nebula/snapshot"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.sphinx.feature.group" version="0.8.0.201405281456"/>
-<unit id="org.eclipse.sphinx.sdk.feature.group" version="0.8.0.201405281456"/>
-<unit id="org.eclipse.sphinx.examples.feature.group" version="0.8.0.201405281456"/>
-<unit id="org.eclipse.sphinx.thirdparty.feature.group" version="0.8.0.201405281456"/>
-<unit id="org.eclipse.sphinx.testutils.feature.group" version="0.8.0.201405281456"/>
+<unit id="org.eclipse.sphinx.feature.group" version="0.8.0.201406040902"/>
+<unit id="org.eclipse.sphinx.sdk.feature.group" version="0.8.0.201406040902"/>
+<unit id="org.eclipse.sphinx.examples.feature.group" version="0.8.0.201406040902"/>
+<unit id="org.eclipse.sphinx.thirdparty.feature.group" version="0.8.0.201406040902"/>
+<unit id="org.eclipse.sphinx.testutils.feature.group" version="0.8.0.201406040902"/>
 <repository location="http://download.eclipse.org/sphinx/updates/interim"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
