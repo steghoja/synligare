@@ -8,10 +8,6 @@
 <repository location="http://download.eclipse.org/eclipse/updates/4.3"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.compare.sdk.feature.group" version="1.3.3.v20130213-0806"/>
-<repository location="http://download.eclipse.org/releases/juno"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.sdk.feature.group" version="2.9.2.v20140203-1126"/>
 <unit id="org.eclipse.emf.mwe.sdk.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.emf.transaction.sdk.feature.group" version="0.0.0"/>
@@ -36,9 +32,9 @@
 <repository location="http://download.eclipse.org/technology/nebula/snapshot"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.sphinx.sdk.feature.group" version="0.8.0.201405281456"/>
-<unit id="org.eclipse.sphinx.examples.feature.group" version="0.8.0.201405281456"/>
-<unit id="org.eclipse.sphinx.thirdparty.feature.group" version="0.8.0.201405281456"/>
+<unit id="org.eclipse.sphinx.sdk.feature.group" version="0.8.0.201406040902"/>
+<unit id="org.eclipse.sphinx.examples.feature.group" version="0.8.0.201406040902"/>
+<unit id="org.eclipse.sphinx.thirdparty.feature.group" version="0.8.0.201406040902"/>
 <repository location="http://download.eclipse.org/sphinx/updates/interim"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -54,8 +50,8 @@
 <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140114142710/repository/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.artop.eel.common" version="0.0.0"/>
-<unit id="org.artop.eel.serialization" version="0.0.0"/>
+<unit id="org.artop.eel.common" version="1.0.0.201302082307"/>
+<unit id="org.artop.eel.serialization" version="1.0.0.201302082307"/>
 <repository location="https://www.artop.org/containers/artop-eel-update-site-1.0"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
