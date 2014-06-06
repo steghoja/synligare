@@ -29,8 +29,8 @@ import org.eclipse.eatop.metamodelgen.serialization.generators.util.IEASTADLGene
 
 class EASTADLEcore2XSDGenerator extends Ecore2XSDGenerator {
 	 
-	new(URI xsdFileURI, File schemaFile, EPackage ecoreModel) {
-		super(xsdFileURI, schemaFile, ecoreModel)
+	new(URI xsdFileURI, EPackage ecoreModel) {
+		super(xsdFileURI, ecoreModel)
 	}
 	
 	// provide EAST-ADL ecore2xsd converter

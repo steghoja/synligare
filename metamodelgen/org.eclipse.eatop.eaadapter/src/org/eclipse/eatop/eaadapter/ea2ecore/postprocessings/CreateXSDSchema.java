@@ -46,7 +46,7 @@ public class CreateXSDSchema extends PostProcessingTemplate {
 				eapFile.getFullPath().toString().replace(IConstants.EAP_FILE_POSTFIX, IConstants.XSD_FILE_POSTFIX), true);
 
 		// xtend ecore to xsd generator
-		Ecore2XSDGenerator ecore2XSDGenerator = new Ecore2XSDGenerator(xsdFileURI, schemaFile, model);
+		Ecore2XSDGenerator ecore2XSDGenerator = new Ecore2XSDGenerator(xsdFileURI, model);
 
 		if (ecore2XSDGenerator != null) {
 			ecore2XSDGenerator.run(monitor);
