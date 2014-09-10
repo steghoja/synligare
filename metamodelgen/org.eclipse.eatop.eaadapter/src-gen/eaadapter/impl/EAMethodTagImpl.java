@@ -1,70 +1,64 @@
 /**
  * <copyright>
- * Copyright (c) Continental AG and others.
- * All rights reserved. This program and the accompanying materials are made navailable under the terms of the Eclipse Public License 
- * which accompanies this distribution, and is navailable at http://www.eclipse.org/org/documents/epl-v10.php
- * 
+ *  
+ * Copyright (c) 2014 Continental AG and others.
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 
+ * which accompanies this distribution, and is
+ * available at http://www.eclipse.org/org/documents/epl-v10.php
+ *  
  * Contributors:
- * 	Continental AG, 2012 Matthias Nick - Initial API and implementation
+ * 		Continental AG, Matthias Nick - Initial API and implementation
  * </copyright>
  * 
  */
 package eaadapter.impl;
 
-import eaadapter.EAMethodTag;
-import eaadapter.EaadapterPackage;
-
-import eaadapter.abstracthierachy.util.AbstracthierachyValidator;
-
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import org.eclipse.emf.ecore.util.EObjectValidator;
-
 import org.sparx.MethodTag;
 
+import eaadapter.EAMethodTag;
+import eaadapter.EaadapterPackage;
+import eaadapter.abstracthierachy.util.AbstracthierachyValidator;
+
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>EA Method Tag</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>EA Method Tag</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link eaadapter.impl.EAMethodTagImpl#getName <em>Name</em>}</li>
- *   <li>{@link eaadapter.impl.EAMethodTagImpl#getNotes <em>Notes</em>}</li>
- *   <li>{@link eaadapter.impl.EAMethodTagImpl#getGuid <em>Guid</em>}</li>
- *   <li>{@link eaadapter.impl.EAMethodTagImpl#getId <em>Id</em>}</li>
- *   <li>{@link eaadapter.impl.EAMethodTagImpl#getValue <em>Value</em>}</li>
- *   <li>{@link eaadapter.impl.EAMethodTagImpl#getEaLink <em>Ea Link</em>}</li>
+ * <li>{@link eaadapter.impl.EAMethodTagImpl#getName <em>Name</em>}</li>
+ * <li>{@link eaadapter.impl.EAMethodTagImpl#getNotes <em>Notes</em>}</li>
+ * <li>{@link eaadapter.impl.EAMethodTagImpl#getGuid <em>Guid</em>}</li>
+ * <li>{@link eaadapter.impl.EAMethodTagImpl#getId <em>Id</em>}</li>
+ * <li>{@link eaadapter.impl.EAMethodTagImpl#getValue <em>Value</em>}</li>
+ * <li>{@link eaadapter.impl.EAMethodTagImpl#getEaLink <em>Ea Link</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static final String copyright = "<copyright>\r\nCopyright (c) Continental AG and others.\r\nAll rights reserved. This program and the accompanying materials are made navailable under the terms of the Eclipse Public License \r\nwhich accompanies this distribution, and is navailable at http://www.eclipse.org/org/documents/epl-v10.php\r\n\r\nContributors:\r\n\tContinental AG, 2012 Matthias Nick - Initial API and implementation\r\n</copyright>\r\n";
 
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -72,9 +66,9 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	protected static final String NAME_EDEFAULT = "name";
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @see #getName()
 	 * @generated
 	 * @ordered
@@ -82,9 +76,9 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getNotes() <em>Notes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getNotes() <em>Notes</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #getNotes()
 	 * @generated
 	 * @ordered
@@ -92,9 +86,9 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	protected static final String NOTES_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getNotes() <em>Notes</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getNotes() <em>Notes</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @see #getNotes()
 	 * @generated
 	 * @ordered
@@ -102,9 +96,9 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	protected String notes = NOTES_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getGuid() <em>Guid</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getGuid() <em>Guid</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @see #getGuid()
 	 * @generated
 	 * @ordered
@@ -112,9 +106,9 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	protected static final String GUID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getGuid() <em>Guid</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getGuid() <em>Guid</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @see #getGuid()
 	 * @generated
 	 * @ordered
@@ -122,9 +116,8 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	protected String guid = GUID_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getId()
 	 * @generated
 	 * @ordered
@@ -132,9 +125,8 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	protected static final long ID_EDEFAULT = 0L;
 
 	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getId()
 	 * @generated
 	 * @ordered
@@ -142,9 +134,9 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	protected long id = ID_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -152,9 +144,9 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	protected static final String VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -162,9 +154,9 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	protected String value = VALUE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getEaLink() <em>Ea Link</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getEaLink() <em>Ea Link</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #getEaLink()
 	 * @generated
 	 * @ordered
@@ -172,9 +164,9 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	protected static final MethodTag EA_LINK_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getEaLink() <em>Ea Link</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getEaLink() <em>Ea Link</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #getEaLink()
 	 * @generated
 	 * @ordered
@@ -182,8 +174,8 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	protected MethodTag eaLink = EA_LINK_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected EAMethodTagImpl() {
@@ -191,8 +183,8 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -201,136 +193,155 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, EaadapterPackage.EA_METHOD_TAG__NAME, oldName, name));
+		}
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public String getNotes() {
 		return notes;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public void setNotes(String newNotes) {
 		String oldNotes = notes;
 		notes = newNotes;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, EaadapterPackage.EA_METHOD_TAG__NOTES, oldNotes, notes));
+		}
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public String getGuid() {
 		return guid;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public void setGuid(String newGuid) {
 		String oldGuid = guid;
 		guid = newGuid;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, EaadapterPackage.EA_METHOD_TAG__GUID, oldGuid, guid));
+		}
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public long getId() {
 		return id;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public void setId(long newId) {
 		long oldId = id;
 		id = newId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, EaadapterPackage.EA_METHOD_TAG__ID, oldId, id));
+		}
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public String getValue() {
 		return value;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public void setValue(String newValue) {
 		String oldValue = value;
 		value = newValue;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, EaadapterPackage.EA_METHOD_TAG__VALUE, oldValue, value));
+		}
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public MethodTag getEaLink() {
 		return eaLink;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public void setEaLink(MethodTag newEaLink) {
 		MethodTag oldEaLink = eaLink;
 		eaLink = newEaLink;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, EaadapterPackage.EA_METHOD_TAG__EA_LINK, oldEaLink, eaLink));
+		}
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
+	@Override
 	public boolean validate(DiagnosticChain diagnostic, Map<Object, Object> context) {
 		// TODO: implement this method
 		// -> specify the condition that violates the invariant
@@ -338,13 +349,9 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 		// Ensure that you remove @generated or mark it @generated NOT
 		if (false) {
 			if (diagnostic != null) {
-				diagnostic.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 AbstracthierachyValidator.DIAGNOSTIC_SOURCE,
-						 AbstracthierachyValidator.EA_NAMED_ELEMENT__VALIDATE,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericInvariant_diagnostic", new Object[] { "validate", EObjectValidator.getObjectLabel(this, context) }),
-						 new Object [] { this }));
+				diagnostic.add(new BasicDiagnostic(Diagnostic.ERROR, AbstracthierachyValidator.DIAGNOSTIC_SOURCE,
+						AbstracthierachyValidator.EA_NAMED_ELEMENT__VALIDATE, EcorePlugin.INSTANCE.getString("_UI_GenericInvariant_diagnostic",
+								new Object[] { "validate", EObjectValidator.getObjectLabel(this, context) }), new Object[] { this }));
 			}
 			return false;
 		}
@@ -352,121 +359,123 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EaadapterPackage.EA_METHOD_TAG__NAME:
-				return getName();
-			case EaadapterPackage.EA_METHOD_TAG__NOTES:
-				return getNotes();
-			case EaadapterPackage.EA_METHOD_TAG__GUID:
-				return getGuid();
-			case EaadapterPackage.EA_METHOD_TAG__ID:
-				return getId();
-			case EaadapterPackage.EA_METHOD_TAG__VALUE:
-				return getValue();
-			case EaadapterPackage.EA_METHOD_TAG__EA_LINK:
-				return getEaLink();
+		case EaadapterPackage.EA_METHOD_TAG__NAME:
+			return getName();
+		case EaadapterPackage.EA_METHOD_TAG__NOTES:
+			return getNotes();
+		case EaadapterPackage.EA_METHOD_TAG__GUID:
+			return getGuid();
+		case EaadapterPackage.EA_METHOD_TAG__ID:
+			return getId();
+		case EaadapterPackage.EA_METHOD_TAG__VALUE:
+			return getValue();
+		case EaadapterPackage.EA_METHOD_TAG__EA_LINK:
+			return getEaLink();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EaadapterPackage.EA_METHOD_TAG__NAME:
-				setName((String)newValue);
-				return;
-			case EaadapterPackage.EA_METHOD_TAG__NOTES:
-				setNotes((String)newValue);
-				return;
-			case EaadapterPackage.EA_METHOD_TAG__GUID:
-				setGuid((String)newValue);
-				return;
-			case EaadapterPackage.EA_METHOD_TAG__ID:
-				setId((Long)newValue);
-				return;
-			case EaadapterPackage.EA_METHOD_TAG__VALUE:
-				setValue((String)newValue);
-				return;
-			case EaadapterPackage.EA_METHOD_TAG__EA_LINK:
-				setEaLink((MethodTag)newValue);
-				return;
+		case EaadapterPackage.EA_METHOD_TAG__NAME:
+			setName((String) newValue);
+			return;
+		case EaadapterPackage.EA_METHOD_TAG__NOTES:
+			setNotes((String) newValue);
+			return;
+		case EaadapterPackage.EA_METHOD_TAG__GUID:
+			setGuid((String) newValue);
+			return;
+		case EaadapterPackage.EA_METHOD_TAG__ID:
+			setId((Long) newValue);
+			return;
+		case EaadapterPackage.EA_METHOD_TAG__VALUE:
+			setValue((String) newValue);
+			return;
+		case EaadapterPackage.EA_METHOD_TAG__EA_LINK:
+			setEaLink((MethodTag) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EaadapterPackage.EA_METHOD_TAG__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case EaadapterPackage.EA_METHOD_TAG__NOTES:
-				setNotes(NOTES_EDEFAULT);
-				return;
-			case EaadapterPackage.EA_METHOD_TAG__GUID:
-				setGuid(GUID_EDEFAULT);
-				return;
-			case EaadapterPackage.EA_METHOD_TAG__ID:
-				setId(ID_EDEFAULT);
-				return;
-			case EaadapterPackage.EA_METHOD_TAG__VALUE:
-				setValue(VALUE_EDEFAULT);
-				return;
-			case EaadapterPackage.EA_METHOD_TAG__EA_LINK:
-				setEaLink(EA_LINK_EDEFAULT);
-				return;
+		case EaadapterPackage.EA_METHOD_TAG__NAME:
+			setName(NAME_EDEFAULT);
+			return;
+		case EaadapterPackage.EA_METHOD_TAG__NOTES:
+			setNotes(NOTES_EDEFAULT);
+			return;
+		case EaadapterPackage.EA_METHOD_TAG__GUID:
+			setGuid(GUID_EDEFAULT);
+			return;
+		case EaadapterPackage.EA_METHOD_TAG__ID:
+			setId(ID_EDEFAULT);
+			return;
+		case EaadapterPackage.EA_METHOD_TAG__VALUE:
+			setValue(VALUE_EDEFAULT);
+			return;
+		case EaadapterPackage.EA_METHOD_TAG__EA_LINK:
+			setEaLink(EA_LINK_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EaadapterPackage.EA_METHOD_TAG__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case EaadapterPackage.EA_METHOD_TAG__NOTES:
-				return NOTES_EDEFAULT == null ? notes != null : !NOTES_EDEFAULT.equals(notes);
-			case EaadapterPackage.EA_METHOD_TAG__GUID:
-				return GUID_EDEFAULT == null ? guid != null : !GUID_EDEFAULT.equals(guid);
-			case EaadapterPackage.EA_METHOD_TAG__ID:
-				return id != ID_EDEFAULT;
-			case EaadapterPackage.EA_METHOD_TAG__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
-			case EaadapterPackage.EA_METHOD_TAG__EA_LINK:
-				return EA_LINK_EDEFAULT == null ? eaLink != null : !EA_LINK_EDEFAULT.equals(eaLink);
+		case EaadapterPackage.EA_METHOD_TAG__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+		case EaadapterPackage.EA_METHOD_TAG__NOTES:
+			return NOTES_EDEFAULT == null ? notes != null : !NOTES_EDEFAULT.equals(notes);
+		case EaadapterPackage.EA_METHOD_TAG__GUID:
+			return GUID_EDEFAULT == null ? guid != null : !GUID_EDEFAULT.equals(guid);
+		case EaadapterPackage.EA_METHOD_TAG__ID:
+			return id != ID_EDEFAULT;
+		case EaadapterPackage.EA_METHOD_TAG__VALUE:
+			return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+		case EaadapterPackage.EA_METHOD_TAG__EA_LINK:
+			return EA_LINK_EDEFAULT == null ? eaLink != null : !EA_LINK_EDEFAULT.equals(eaLink);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
@@ -485,4 +494,4 @@ public class EAMethodTagImpl extends EObjectImpl implements EAMethodTag {
 		return result.toString();
 	}
 
-} //EAMethodTagImpl
+} // EAMethodTagImpl
