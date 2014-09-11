@@ -367,7 +367,7 @@ public class SetTaggedValuesAndAssociatedAttributes extends PostProcessingTempla
 				typeElement = Boolean.FALSE.toString();
 			}
 		} else {
-			// dirty hack, refinement required for primitive datatypes, etc.
+			// Refinement required for primitive datatypes, etc.
 			typeElement = Boolean.FALSE.toString();
 		}
 
