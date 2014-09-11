@@ -370,7 +370,7 @@ public class ReleasePreferencePage extends PreferenceAndPropertyPage {
 	}
 
 	private void updateRelease(String eastadlReleaseId) {
-		// hack to trick combo field into selecting the different value
+		// To trick combo field into selecting the different value
 		// TODO replace combo field with custom combo
 		String value = getPreferenceStore().getString(IEastADLWorkspacePreferenceConstants.PREF_EAST_ADL_RELEASE);
 		getPreferenceStore().setValue(IEastADLWorkspacePreferenceConstants.PREF_EAST_ADL_RELEASE, eastadlReleaseId);
