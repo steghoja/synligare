@@ -32,8 +32,8 @@ projectUpdateSitesBasePath=eatop/updates
 projectDownloadSitesBasePath=eatop/downloads
 updateSiteArchiveFileNamePrefix=eatop-Update
 
-eclipsePackageVersion=4.2.2
-eclipsePackageBuildId=201302041200
+eclipsePackageVersion=4.4
+eclipsePackageBuildId=201406061215
 
 ##################
 # Derived settings
@@ -150,7 +150,7 @@ echo "Copying $applicableLocalUpdateSiteArchiveLocation to $applicableProjectDow
 mkdir -p $applicableProjectDownloadSiteLocation
 cp $applicableLocalUpdateSiteArchiveLocation $applicableProjectDownloadSiteLocation
 
-if [ $MERGE_UPDATE_SITE ] && [ -f $applicableProjectUpdateSiteLocation/content.* ];
+if [ $MERGE_UPDATE_SITE != "false" ] && [ -f $applicableProjectUpdateSiteLocation/content.* ];
 	then
 		echo "------------------------------------------------------------------------"
 		echo "Merging project update site into build update site"
