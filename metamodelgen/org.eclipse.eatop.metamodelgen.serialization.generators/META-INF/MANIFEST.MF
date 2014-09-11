@@ -6,7 +6,7 @@ Bundle-Version: 0.5.0.qualifier
 Bundle-Activator: org.eclipse.eatop.metamodelgen.serialization.generators.internal.Activator$Implementation
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.xtend.lib,
+ org.eclipse.xtext.xbase.lib,
  org.eclipse.sphinx.emf.serialization,
  org.eclipse.sphinx.emf.serialization.generators,
  org.eclipse.xsd,
