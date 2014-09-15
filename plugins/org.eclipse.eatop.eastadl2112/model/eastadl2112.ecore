@@ -13104,7 +13104,7 @@
       <details key="wrapperName" value="REFERRABLES"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="shortName" lowerBound="1"
-        eType="#//Identifier" defaultValueLiteral="" unsettable="true">
+        eType="#//Identifier" unsettable="true">
       <eAnnotations source="MetaData">
         <details key="guid" value="{3FE09079-22D7-4736-82A5-5C743E31871E}"/>
         <details key="id" value="1415085471"/>
@@ -13207,7 +13207,7 @@
       <details key="wrapperName" value="IDENTIFIABLES"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="#//Identifier"
-        defaultValueLiteral="" unsettable="true">
+        unsettable="true">
       <eAnnotations source="MetaData">
         <details key="guid" value="{08AA5134-D7F8-4560-B626-A952B30D27CF}"/>
         <details key="id" value="1679633962"/>
@@ -13637,7 +13637,7 @@
       <details key="wrapperName" value="EA-NUMERICALS"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="#//Numerical"
-        defaultValueLiteral="" unsettable="true">
+        unsettable="true">
       <eAnnotations source="MetaData">
         <details key="guid" value="{C25DD0A8-12A0-4bc5-BC92-21570DBF9E1C}"/>
         <details key="id" value="-787980997"/>
@@ -13660,7 +13660,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="#//Numerical"
-        defaultValueLiteral="" unsettable="true">
+        unsettable="true">
       <eAnnotations source="MetaData">
         <details key="guid" value="{6800E957-5D78-4ccd-9A07-F217138D38BE}"/>
         <details key="id" value="1331249250"/>
@@ -14367,7 +14367,7 @@
       <details key="wrapperName" value="EA-NUMERICAL-VALUES"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="#//Numerical"
-        defaultValueLiteral="" unsettable="true">
+        unsettable="true">
       <eAnnotations source="MetaData">
         <details key="guid" value="{F96B188B-0E55-4624-A088-E49B88CC7F66}"/>
         <details key="id" value="-1869404443"/>
