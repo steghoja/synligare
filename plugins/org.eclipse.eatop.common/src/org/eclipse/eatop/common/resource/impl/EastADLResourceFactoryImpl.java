@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2014 Continental AG and others.
+ * Copyright (c) 2014 Continental AG, itemis and others.
  * All rights reserved. This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 
  * which accompanies this distribution, and is
@@ -9,6 +9,7 @@
  * 
  * Contributors: 
  *     Continental AG - Initial API and implementation
+ *     itemis - Bug 444145 - Incorporate changes of Sphinx triming context information from proxy URIs when serializing proxyfied cross-document references
  * 
  * </copyright>
  */
@@ -198,6 +199,9 @@ public abstract class EastADLResourceFactoryImpl extends ResourceFactoryImpl {
 		resource.getDefaultLoadOptions().put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, Boolean.TRUE);
 
 		resource.getDefaultLoadOptions().put(XMLResource.OPTION_SUPPRESS_DOCUMENT_ROOT, Boolean.TRUE);
+
+		// Configure not to augment contextAwareURI since EAST-ADL extends the advanced ExtendEObjectImpl
+		resource.getDefaultLoadOptions().put(ExtendedResource.OPTION_USE_CONTEXT_AWARE_PROXY_URIS, Boolean.FALSE);
 	}
 
 	/**

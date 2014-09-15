@@ -28,12 +28,12 @@
 <repository location="http://download.eclipse.org/technology/nebula/snapshot"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.sphinx.feature.group" version="0.9.0.201408200758"/>
-<unit id="org.eclipse.sphinx.sdk.feature.group" version="0.9.0.201408200758"/>
-<unit id="org.eclipse.sphinx.examples.feature.group" version="0.9.0.201408200758"/>
-<unit id="org.eclipse.sphinx.thirdparty.feature.group" version="0.9.0.201408200758"/>
-<unit id="org.eclipse.sphinx.testutils.feature.group" version="0.9.0.201408200758"/>
-<repository location="http://download.eclipse.org/sphinx/updates/interim"/>
+<unit id="org.eclipse.sphinx.feature.group" version="0.8.1.201409100602"/>
+<unit id="org.eclipse.sphinx.sdk.feature.group" version="0.8.1.201409100602"/>
+<unit id="org.eclipse.sphinx.examples.feature.group" version="0.8.1.201409100602"/>
+<unit id="org.eclipse.sphinx.thirdparty.feature.group" version="0.8.1.201409100602"/>
+<unit id="org.eclipse.sphinx.testutils.feature.group" version="0.8.1.201409100602"/>
+<repository location="https://hudson.eclipse.org/sphinx/job/sphinx-0.8-luna/154/artifact/releng/org.eclipse.sphinx.releng.builds/repository/target/repository/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="com.google.guava" version="15.0.0.v201403281430"/>

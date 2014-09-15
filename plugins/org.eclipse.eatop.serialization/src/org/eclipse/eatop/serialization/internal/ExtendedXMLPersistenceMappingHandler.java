@@ -9,6 +9,7 @@
  *  
  * Contributors: 
  *     itemis - Initial API and implementation
+ *     itemis - Bug 444145 - Incorporate changes of Sphinx triming context information from proxy URIs when serializing proxyfied cross-document references
  *  
  * </copyright>
  * 
@@ -41,6 +42,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+@SuppressWarnings("restriction")
 public class ExtendedXMLPersistenceMappingHandler extends XMLPersistenceMappingHandler {
 
 	protected static final String EXTENDED_TYPE_ATTRIB = "TYPE"; //$NON-NLS-1$
@@ -185,16 +187,39 @@ public class ExtendedXMLPersistenceMappingHandler extends XMLPersistenceMappingH
 		processObject(object);
 	}
 
-	/*
-	 * Overridden to enrich proxy URIs being created with context information required to honor their {@link
-	 * IResourceScope resource scope}s when they are being resolved and to support the resolution of proxified
-	 * references between objects from different metamodels.
-	 * @see org.eclipse.emf.ecore.xmi.impl.XMLHandler#handleProxy(org.eclipse.emf.ecore.InternalEObject,
-	 * java.lang.String)
-	 */
+	// Copied from ExtendedSAXXMLHandler
 	@Override
 	protected void handleProxy(InternalEObject proxy, String uriLiteral) {
-		super.handleProxy(proxy, uriLiteral);
+		URI proxyURI;
+		if (oldStyleProxyURIs) {
+			uriLiteral = uriLiteral.startsWith(ExtendedResource.URI_SEGMENT_SEPARATOR) ? uriLiteral : ExtendedResource.URI_SEGMENT_SEPARATOR
+					+ uriLiteral;
+			proxyURI = URI.createURI(uriLiteral);
+			proxy.eSetProxyURI(proxyURI);
+		} else {
+			if (extendedResource != null) {
+				proxyURI = extendedResource.createURI(uriLiteral);
+			} else {
+				proxyURI = URI.createURI(uriLiteral);
+			}
+
+			if (uriHandler != null) {
+				proxyURI = uriHandler.resolve(proxyURI);
+			} else if (resolve
+					&& proxyURI.isRelative()
+					&& proxyURI.hasRelativePath()
+					&& (extendedMetaData == null ? !packageRegistry.containsKey(proxyURI.trimFragment().toString()) : extendedMetaData
+							.getPackage(proxyURI.trimFragment().toString()) == null)) {
+				proxyURI = helper.resolve(proxyURI, resourceURI);
+			}
+
+			proxy.eSetProxyURI(proxyURI);
+		}
+
+		// Test for a same document reference that would usually be handled as an IDREF
+		if (proxyURI.trimFragment().equals(resourceURI)) {
+			sameDocumentProxies.add(proxy);
+		}
 
 		if (extendedResource != null) {
 			extendedResource.augmentToContextAwareProxy(proxy);

@@ -7,7 +7,8 @@ Bundle-Activator: org.eclipse.eatop.common.internal.Activator$Implementation
 Require-Bundle: org.eclipse.sphinx.emf;visibility:=reexport,
  org.eclipse.eatop.geastadl;visibility:=reexport,
  org.artop.eel.common,
- org.eclipse.sphinx.emf.serialization
+ org.eclipse.sphinx.emf.serialization,
+ org.eclipse.emf.ecore
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: %providerName

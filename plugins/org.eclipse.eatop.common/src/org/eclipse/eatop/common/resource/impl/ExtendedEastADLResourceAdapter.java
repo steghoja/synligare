@@ -9,6 +9,7 @@
  * 
  * Contributors: 
  *     itemis - Initial API and implementation
+ *     itemis - Bug 444145 - Incorporate changes of Sphinx triming context information from proxy URIs when serializing proxyfied cross-document references
  * 
  * </copyright>
  */
@@ -25,6 +26,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.sphinx.emf.resource.ExtendedResource;
 import org.eclipse.sphinx.emf.resource.ExtendedResourceAdapter;
 
@@ -32,6 +34,8 @@ import org.eclipse.sphinx.emf.resource.ExtendedResourceAdapter;
  * {@link Adapter}-based implementation of {@link ExtendedResource} for EastADL.
  */
 public class ExtendedEastADLResourceAdapter extends ExtendedResourceAdapter {
+
+	public static String DESTINATION_TYPE_KEY = "type";
 
 	/*
 	 * @see org.eclipse.sphinx.emf.resource.ExtendedResourceAdapter#getURI(org.eclipse.emf.ecore.EObject,
@@ -77,5 +81,57 @@ public class ExtendedEastADLResourceAdapter extends ExtendedResourceAdapter {
 		}
 
 		return EastADLURIFactory.validateURI(uri);
+	}
+
+	/*
+	 * @see org.eclipse.sphinx.emf.resource.ExtendedResourceAdapter#createURI(java.lang.String)
+	 */
+	@Override
+	public URI createURI(String uriLiteral) {
+		int index = uriLiteral.lastIndexOf(URI_FRAGMENT_SEPARATOR); // "#"
+		if (index != -1) {
+			uriLiteral = uriLiteral.substring(index + 1);
+		}
+		index = uriLiteral.lastIndexOf(URI_QUERY_SEPARATOR + DESTINATION_TYPE_KEY + URI_QUERY_KEY_VALUE_SEPARATOR); // "?type="
+		if (index != -1) {
+			uriLiteral = uriLiteral.substring(0, index);
+		}
+
+		return EastADLURIFactory.createEastADLURI(uriLiteral);
+	}
+
+	// Create URI with class type in fragment
+	public URI createURI(InternalEObject proxy, String uriLiteral) {
+		int index = uriLiteral.lastIndexOf(URI_FRAGMENT_SEPARATOR); // "#"
+		if (index != -1) {
+			uriLiteral = uriLiteral.substring(index + 1);
+		}
+		index = uriLiteral.lastIndexOf(URI_QUERY_SEPARATOR + DESTINATION_TYPE_KEY + URI_QUERY_KEY_VALUE_SEPARATOR); // "?type="
+		if (index != -1) {
+			uriLiteral = uriLiteral.substring(0, index);
+		}
+
+		return EastADLURIFactory.createEastADLURI(uriLiteral, proxy.eClass().getName());
+	}
+
+	/*
+	 * @see org.eclipse.sphinx.emf.resource.ExtendedResourceAdapter#getHREF(org.eclipse.emf.ecore.EObject)
+	 */
+	@Override
+	public URI getHREF(EObject eObject) {
+		// Return a fragment-only URI of given object as HREF
+		URI uri = getURI(eObject);
+
+		String result = uri.fragment();
+		int index = result.lastIndexOf(URI_FRAGMENT_SEPARATOR); // "#"
+		if (index != -1) {
+			result = result.substring(index + 1);
+		}
+		index = result.lastIndexOf(URI_QUERY_SEPARATOR + DESTINATION_TYPE_KEY + URI_QUERY_KEY_VALUE_SEPARATOR); // "?type="
+		if (index != -1) {
+			result = result.substring(0, index);
+		}
+
+		return URI.createURI(/* URI_FRAGMENT_SEPARATOR + */result);
 	}
 }
