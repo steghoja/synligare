@@ -49,6 +49,7 @@ import org.eclipse.sphinx.platform.util.PlatformLogUtil;
 import org.eclipse.sphinx.platform.util.ReflectUtil;
 import org.w3c.dom.Element;
 
+@SuppressWarnings("restriction")
 public class ExtendedXMLPersistenceMappingSaveImpl extends XMLPersistenceMappingSaveImpl {
 
 	protected static final String TYPE_NS = "TYPE"; //XMLResource.XSI_NS + ":" + XMLResource.TYPE; //"TYPE"; //$NON-NLS-1$
@@ -290,9 +291,7 @@ public class ExtendedXMLPersistenceMappingSaveImpl extends XMLPersistenceMapping
 						declareXSI = xsiNoNamespaceSchemaLocation != null;
 					}
 				} else {
-					// FIXME
 					String namespace = extendedMetaData == null ? ePackage.getNsURI() : extendedMetaData.getNamespace(ePackage);
-					// String namespace = getRootPackageNsURI(ePackage);
 
 					// Need to adjust schema namespace according to applicable model converter?
 					if (converter != null) {
@@ -352,10 +351,7 @@ public class ExtendedXMLPersistenceMappingSaveImpl extends XMLPersistenceMapping
 		for (EPackage ePackage : packages) {
 			if (ePackage != noNamespacePackage && ePackage != XMLNamespacePackage.eINSTANCE
 					&& !ExtendedMetaData.XMLNS_URI.equals(ePackage.getNsURI())) {
-				// FIXME
-				// String nsURI = extendedMetaData == null ? ePackage.getNsURI() :
-				// extendedMetaData.getNamespace(ePackage);
-				String nsURI = getRootPackageNsURI(ePackage);
+				String nsURI = extendedMetaData == null ? ePackage.getNsURI() : extendedMetaData.getNamespace(ePackage);
 
 				if (ePackage == xmlSchemaTypePackage) {
 					nsURI = XMLResource.XML_SCHEMA_URI;
@@ -465,13 +461,4 @@ public class ExtendedXMLPersistenceMappingSaveImpl extends XMLPersistenceMapping
 		}
 	}
 
-	/**
-	 * get package namespace
-	 * 
-	 * @param ePackage
-	 * @return
-	 */
-	protected String getRootPackageNsURI(EPackage ePackage) {
-		return extendedMetaData == null ? ePackage.getNsURI() : extendedMetaData.getNamespace(ePackage);
-	}
 }
