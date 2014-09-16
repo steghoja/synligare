@@ -35,7 +35,7 @@ import org.eclipse.sphinx.emf.resource.ExtendedResourceAdapter;
  */
 public class ExtendedEastADLResourceAdapter extends ExtendedResourceAdapter {
 
-	public static String DESTINATION_TYPE_KEY = "type";
+	public static String DESTINATION_TYPE_KEY = "type"; //$NON-NLS-1$
 
 	/*
 	 * @see org.eclipse.sphinx.emf.resource.ExtendedResourceAdapter#getURI(org.eclipse.emf.ecore.EObject,
@@ -106,7 +106,7 @@ public class ExtendedEastADLResourceAdapter extends ExtendedResourceAdapter {
 		if (index != -1) {
 			uriLiteral = uriLiteral.substring(index + 1);
 		}
-		index = uriLiteral.lastIndexOf(URI_QUERY_SEPARATOR + DESTINATION_TYPE_KEY + URI_QUERY_KEY_VALUE_SEPARATOR); // "?type="
+		index = uriLiteral.lastIndexOf(URI_QUERY_SEPARATOR + DESTINATION_TYPE_KEY + URI_QUERY_KEY_VALUE_SEPARATOR);// "?type="
 		if (index != -1) {
 			uriLiteral = uriLiteral.substring(0, index);
 		}
@@ -119,19 +119,6 @@ public class ExtendedEastADLResourceAdapter extends ExtendedResourceAdapter {
 	 */
 	@Override
 	public URI getHREF(EObject eObject) {
-		// Return a fragment-only URI of given object as HREF
-		URI uri = getURI(eObject);
-
-		String result = uri.fragment();
-		int index = result.lastIndexOf(URI_FRAGMENT_SEPARATOR); // "#"
-		if (index != -1) {
-			result = result.substring(index + 1);
-		}
-		index = result.lastIndexOf(URI_QUERY_SEPARATOR + DESTINATION_TYPE_KEY + URI_QUERY_KEY_VALUE_SEPARATOR); // "?type="
-		if (index != -1) {
-			result = result.substring(0, index);
-		}
-
-		return URI.createURI(/* URI_FRAGMENT_SEPARATOR + */result);
+		return URI.createURI(EastADLURIFactory.getAbsoluteQualifiedName(eObject));
 	}
 }
