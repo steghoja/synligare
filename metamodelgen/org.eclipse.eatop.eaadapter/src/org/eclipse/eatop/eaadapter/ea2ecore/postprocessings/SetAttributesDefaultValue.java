@@ -47,7 +47,8 @@ public class SetAttributesDefaultValue extends PostProcessingTemplate {
 				String instanceClassName = getInstanceClassNameForAttribute(attribute);
 				if (instanceClassName != null) {
 					if (String.class.getName().equals(instanceClassName)) {
-						setDefaultValueForAttribute(attribute, ""); //$NON-NLS-1$
+						// Set default string value to be null instead of empty string
+						setDefaultValueForAttribute(attribute, null);
 					} else if (Boolean.class.getName().equals(instanceClassName)) {
 						setDefaultValueForAttribute(attribute, IConstants.FALSE);
 					} else if (IConstants.BOOLEAN_TYPE.equals(instanceClassName)) {
