@@ -198,7 +198,7 @@ public class ExtendedXMLPersistenceMappingHandler extends XMLPersistenceMappingH
 			proxy.eSetProxyURI(proxyURI);
 		} else {
 			if (extendedResource != null) {
-				proxyURI = extendedResource.createURI(uriLiteral);
+				proxyURI = extendedResource.createURI(uriLiteral, proxy.eClass());
 			} else {
 				proxyURI = URI.createURI(uriLiteral);
 			}

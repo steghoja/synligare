@@ -24,9 +24,9 @@ import org.eclipse.eatop.common.resource.EastADLURIFactory;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.sphinx.emf.resource.ExtendedResource;
 import org.eclipse.sphinx.emf.resource.ExtendedResourceAdapter;
 
@@ -83,35 +83,11 @@ public class ExtendedEastADLResourceAdapter extends ExtendedResourceAdapter {
 		return EastADLURIFactory.validateURI(uri);
 	}
 
-	/*
-	 * @see org.eclipse.sphinx.emf.resource.ExtendedResourceAdapter#createURI(java.lang.String)
-	 */
 	@Override
-	public URI createURI(String uriLiteral) {
-		int index = uriLiteral.lastIndexOf(URI_FRAGMENT_SEPARATOR); // "#"
-		if (index != -1) {
-			uriLiteral = uriLiteral.substring(index + 1);
-		}
-		index = uriLiteral.lastIndexOf(URI_QUERY_SEPARATOR + DESTINATION_TYPE_KEY + URI_QUERY_KEY_VALUE_SEPARATOR); // "?type="
-		if (index != -1) {
-			uriLiteral = uriLiteral.substring(0, index);
-		}
-
-		return EastADLURIFactory.createEastADLURI(uriLiteral);
-	}
-
-	// Create URI with class type in fragment
-	public URI createURI(InternalEObject proxy, String uriLiteral) {
-		int index = uriLiteral.lastIndexOf(URI_FRAGMENT_SEPARATOR); // "#"
-		if (index != -1) {
-			uriLiteral = uriLiteral.substring(index + 1);
-		}
-		index = uriLiteral.lastIndexOf(URI_QUERY_SEPARATOR + DESTINATION_TYPE_KEY + URI_QUERY_KEY_VALUE_SEPARATOR);// "?type="
-		if (index != -1) {
-			uriLiteral = uriLiteral.substring(0, index);
-		}
-
-		return EastADLURIFactory.createEastADLURI(uriLiteral, proxy.eClass().getName());
+	public URI createURI(String uriLiteral, EClass eClass) {
+		URI uri = EastADLURIFactory.createEastADLURI(uriLiteral, eClass.getName());
+		// Removes unnecessary resource URI in front of the URI
+		return uri.trimSegments(uri.segmentCount());
 	}
 
 	/*

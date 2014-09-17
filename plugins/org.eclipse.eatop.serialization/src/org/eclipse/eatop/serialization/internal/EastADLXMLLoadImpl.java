@@ -48,8 +48,7 @@ public class EastADLXMLLoadImpl extends ExtendedXMLPersistenceMappingLoadImpl {
 	 */
 	@Override
 	protected DefaultHandler makeDefaultHandler() {
-		EastADLSAXXMLHandler handler = new EastADLSAXXMLHandler(resource, helper, options);
-
+		ExtendedXMLPersistenceMappingHandler handler = new ExtendedXMLPersistenceMappingHandler(resource, helper, options);
 		return handler;
 	}
 }
