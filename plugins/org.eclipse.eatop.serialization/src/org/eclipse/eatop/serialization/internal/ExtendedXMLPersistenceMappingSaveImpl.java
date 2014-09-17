@@ -417,10 +417,6 @@ public class ExtendedXMLPersistenceMappingSaveImpl extends XMLPersistenceMapping
 		}
 	}
 
-	protected void addAttributes(EPackage[] packages, EPackage noNamespacePackage) {
-
-	}
-
 	protected StringBuffer getBuffer() {
 		try {
 			return (StringBuffer) ReflectUtil.getInvisibleFieldValue(this, "buffer"); //$NON-NLS-1$
