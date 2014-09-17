@@ -37,7 +37,7 @@
 <unit id="org.eclipse.sphinx.examples.feature.group" version="0.8.1.201409171422"/>
 <unit id="org.eclipse.sphinx.thirdparty.feature.group" version="0.8.1.201409171422"/>
 <unit id="org.eclipse.sphinx.testutils.feature.group" version="0.8.1.201409171422"/>
-<repository location="https://hudson.eclipse.org/sphinx/job/sphinx-0.8-luna/161/artifact/releng/org.eclipse.sphinx.releng.builds/repository/target/repository/"/>
+<repository location="http://download.eclipse.org/sphinx/updates/interim"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="com.google.guava" version="12.0.0.v201212092141"/>
