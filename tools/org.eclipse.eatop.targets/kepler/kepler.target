@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="EATOP Tool Platform Kepler Target" sequenceNumber="0">
+<?pde version="3.8"?><target name="EATOP Tool Platform Kepler Target" sequenceNumber="7">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.equinox.executable.feature.group" version="3.6.0.v20140117-1004"/>
@@ -23,20 +23,20 @@
 <repository location="http://download.eclipse.org/releases/kepler"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.xtext.xbase.lib.feature.group" version="2.5.3.v201402240820"/>
+<unit id="org.eclipse.xtext.xbase.lib.feature.group" version="2.7.2.v201409160908"/>
 <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.nebula.feature.feature.group" version="1.0.0.201409040043"/>
-<unit id="org.eclipse.nebula.examples.release.feature.feature.group" version="1.0.4.201409040043"/>
+<unit id="org.eclipse.nebula.feature.feature.group" version="1.0.0.201411031952"/>
+<unit id="org.eclipse.nebula.examples.release.feature.feature.group" version="1.0.4.201411031952"/>
 <repository location="http://download.eclipse.org/technology/nebula/snapshot"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.sphinx.feature.group" version="0.8.1.201409171422"/>
-<unit id="org.eclipse.sphinx.sdk.feature.group" version="0.8.1.201409171422"/>
-<unit id="org.eclipse.sphinx.examples.feature.group" version="0.8.1.201409171422"/>
-<unit id="org.eclipse.sphinx.thirdparty.feature.group" version="0.8.1.201409171422"/>
-<unit id="org.eclipse.sphinx.testutils.feature.group" version="0.8.1.201409171422"/>
+<unit id="org.eclipse.sphinx.feature.group" version="0.9.0.201410241543"/>
+<unit id="org.eclipse.sphinx.sdk.feature.group" version="0.9.0.201410241543"/>
+<unit id="org.eclipse.sphinx.examples.feature.group" version="0.9.0.201410241543"/>
+<unit id="org.eclipse.sphinx.thirdparty.feature.group" version="0.9.0.201410241543"/>
+<unit id="org.eclipse.sphinx.testutils.feature.group" version="0.9.0.201410241543"/>
 <repository location="http://download.eclipse.org/sphinx/updates/interim"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
