@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="EATOP Mars Target" sequenceNumber="25">
+<?pde version="3.8"?><target name="EATOP Mars Target" sequenceNumber="30">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.sdk.ide" version="4.5.0.I20141029-2000"/>
@@ -15,7 +15,7 @@
 <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.9.0.201409241407"/>
 <unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.9.0.201409241816"/>
 <unit id="org.eclipse.gmf.tooling.feature.group" version="3.2.0.201406111907"/>
-<unit id="org.eclipse.graphiti.sdk.feature.feature.group" version="0.12.0.v20140930-1047"/>
+<unit id="org.eclipse.graphiti.sdk.feature.feature.group" version="0.12.0.v20141111-0920"/>
 <unit id="org.eclipse.uml2.sdk.feature.group" version="5.1.0.v20141110-0909"/>
 <unit id="org.eclipse.wst.xml_ui.feature.feature.group" version="3.6.1.v201410030012"/>
 <unit id="org.eclipse.xpand.sdk.feature.group" version="2.1.0.v201411111024"/>
