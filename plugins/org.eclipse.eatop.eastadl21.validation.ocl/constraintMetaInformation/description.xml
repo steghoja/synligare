@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+   <copyright>
+  
+  Copyright (c) 2014 Continental AG and others.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Public License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/legal/epl-v10.html
+  
+  Contributors: 
+      Continental AG - Initial API and implementation
+  
+  </copyright>
+-->
+<ocl-meta-information xmlns="http://www.east-adl.info/constraint-description"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.east-adl.info/constraint-description http://www.east-adl.info/constraint-description/EATOPMetaInformationSchema.xsd">
+	<constraint oclName="SPEC_01" code="1" name="SPEC_01"> 
+		<mode value="Batch" />
+		<severity value="Error" />
+		<message>All contained feature models are FeatureModels that only contain VehicleFeatures. Violated on {0}.</message>
+		<description>All contained feature models are FeatureModels that only contain VehicleFeatures.</description>
+	</constraint>
+	<constraint oclName='SPEC_02' code='2' name='SPEC_02'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+		</mode>
+		<severity value='Error'/>
+		<message>The start and end Features of a FeatureLink must be contained in the FeatureModel that contains the FeatureLink. Violated on {0}.</message>
+		<description>The start and end Features of a FeatureLink must be contained in the FeatureModel that contains the FeatureLink.</description>
+	</constraint>
+	<constraint oclName='SPEC_03' code='3' name='SPEC_03'> 
+		<mode value='Live'>
+			<event value ='ADD'/>
+			<event value ='REMOVE'/>
+		</mode>
+		<severity value='Error'/>
+		<message>VehicleFeatures can only be contained in FeatureModels on VehicleLevel. Violated on {0}.</message>
+		<description>VehicleFeatures can only be contained in FeatureModels on VehicleLevel.</description>
+	</constraint>
+	<constraint oclName='SPEC_06' code='6' name='SPEC_06'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+		</mode>
+		<severity value='Error'/>
+		<message>A FunctionClientServerPort of clientServerType "client" can only be connected to one FunctionClientServerPort of clientServerType "server". Violated on {0}.</message>
+		<description>A FunctionClientServerPort of clientServerType "client" can only be connected to one FunctionClientServerPort of clientServerType "server".</description>
+	</constraint>
+	<constraint oclName='SPEC_07' code='7' name='SPEC_07'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Can connect two FunctionFlowPorts of different directions when this is an assembly FunctionConnector or can connect two FunctionFlowPorts with direction inout. Violated on {0}.</message>
+		<description>Can connect two FunctionFlowPorts of different directions when this is an assembly FunctionConnector or can connect two FunctionFlowPorts with direction inout.</description>
+	</constraint>
+	<constraint oclName='SPEC_08' code='8' name='SPEC_08'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Can connect two FunctionFlowPorts of the same direction when this is a delegation FunctionConnector or can connect two FunctionFlowPorts with direction inout. Violated on {0}.</message>
+		<description>Can connect two FunctionFlowPorts of the same direction when this is a delegation FunctionConnector or can connect two FunctionFlowPorts with direction inout.</description>
+	</constraint>
+	<constraint oclName='SPEC_09' code='9' name='SPEC_09'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Can connect two ClientServerPorts of different kinds when this is an assembly FunctionConnector. Violated on {0}.</message>
+		<description>Can connect two ClientServerPorts of different kinds when this is an assembly FunctionConnector.</description>
+	</constraint>
+	<constraint oclName='SPEC_10' code='10' name='SPEC_10'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Can connect two ClientServerPorts of the same kind when this is a delegation FunctionConnector. Violated on {0}.</message>
+		<description>Can connect two ClientServerPorts of the same kind when this is a delegation FunctionConnector.</description>
+	</constraint>
+	<constraint oclName='SPEC_12' code='12' name='SPEC_12'> 
+		<mode value='Live'>
+			<event value ='ADD'/>
+			<event value ='REMOVE'/>
+		</mode>
+		<severity value='Error'/>
+		<message>The owner of a FunctionPowerPort is either a FunctionalDevice or a HardwareFunctionType. Alternatively it is owned by a FunctionType typing a prototype in Environment. Violated on {0}.</message>
+		<description>The owner of a FunctionPowerPort is either a FunctionalDevice or a HardwareFunctionType. Alternatively it is owned by a FunctionType typing a prototype in Environment.</description>
+	</constraint>
+	<constraint oclName='SPEC_13' code='13' name='SPEC_13'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Two connected FunctionPowerPort must have the same Datatype. Alternatively it is owned by a FunctionType typing a prototype in Environment. Violated on {0}.</message>
+		<description>Two connected FunctionPowerPort must have the same Datatype.</description>
+	</constraint>
+	<constraint oclName='SPEC_14' code='14' name='SPEC_14'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>The typing Datatype shall have two datatypePrototypes called Across and Through, with Datatypes that are consistent and representing the variables of the PowerPort. Violated on {0}.</message>
+		<description>The typing Datatype shall have two datatypePrototypes called Across and Through, with Datatypes that are consistent and representing the variables of the PowerPort.</description>
+	</constraint>
+	<constraint oclName='SPEC_15_1' code='151' name='SPEC_15_1'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+		</mode>
+		<severity value='Error'/>
+		<message>Elementary FunctionTypes shall not have parts. Violated on {0}.</message>
+		<description>Elementary FunctionTypes shall not have parts.</description>
+	</constraint>
+	<constraint oclName='SPEC_15_2' code='152' name='SPEC_15_2'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+		</mode>
+		<severity value='Error'/>
+		<message>Elementary FunctionTypes shall not have parts. Violated on {0}.</message>
+		<description>Elementary FunctionTypes shall not have parts.</description>
+	</constraint>
+	<constraint oclName='SPEC_17' code='17' name='SPEC_17'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>A DesignFunctionPrototype typed by a HardwareFunctionType shall be connected to the EnvironmentModel via ClampConnectors and to BSWFunctions via FunctionConnectors. Violated on {0}.</message>
+		<description>A DesignFunctionPrototype typed by a HardwareFunctionType shall be connected to the EnvironmentModel via ClampConnectors and to BSWFunctions via FunctionConnectors.</description>
+	</constraint>
+	<constraint oclName='SPEC_18' code='18' name='SPEC_18'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>A HardwareFunctionType shall only contain prototypes typed by HardwareFunctionType. Violated on {0}.</message>
+		<description>A HardwareFunctionType shall only contain prototypes typed by HardwareFunctionType.</description>
+	</constraint>
+	<constraint oclName='SPEC_18' code='18' name='SPEC_18'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>A HardwareFunctionType shall only contain prototypes typed by HardwareFunctionType. Violated on {0}.</message>
+		<description>A HardwareFunctionType shall only contain prototypes typed by HardwareFunctionType.</description>
+	</constraint>
+	<constraint oclName='SPEC_19' code='19' name='SPEC_19'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>A DesignFunctionPrototype typed by a LocalDeviceManager shall be allocated to the same ECU node as the device that it manages is connected to. Violated on {0}.</message>
+		<description>A DesignFunctionPrototype typed by a LocalDeviceManager shall be allocated to the same ECU node as the device that it manages is connected to.</description>
+	</constraint>
+	<constraint oclName='SPEC_20' code='20' name='SPEC_20'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>A LocalDeviceManager shall interface BSWFunctions and DesignFunctions. Violated on {0}.</message>
+		<description>A LocalDeviceManager shall interface BSWFunctions and DesignFunctions.</description>
+	</constraint>
+	<constraint oclName='SPEC_21' code='21' name='SPEC_21'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>All FunctionPorts in a PortGroup must be of the same kind (FunctionFlowPort with same EADirectionKind or FunctionClientServerPort with same ClientServerKind). Violated on {0}.</message>
+		<description>All FunctionPorts in a PortGroup must be of the same kind (FunctionFlowPort with same EADirectionKind or FunctionClientServerPort with same ClientServerKind).</description>
+	</constraint>
+	<constraint oclName='SPEC_22' code='22' name='SPEC_22'> 
+		<mode value='Live'>
+			<event value ='ADD'/>
+			<event value ='REMOVE'/>
+		</mode>
+		<severity value='Error'/>
+		<message>The FunctionPorts in a PortGroup must all be of the same component. Violated on {0}.</message>
+		<description>The FunctionPorts in a PortGroup must all be of the same component.</description>
+	</constraint>
+	<constraint oclName='SPEC_23' code='23' name='SPEC_23'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Can connect two FunctionFlowPorts of different direction. Violated on {0}.</message>
+		<description>Can connect two FunctionFlowPorts of different direction.</description>
+	</constraint>
+	<constraint oclName='SPEC_24' code='24' name='SPEC_24'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Can connect two FunctionClientServerPorts of different clientServerType. Violated on {0}.</message>
+		<description>Can connect two FunctionClientServerPorts of different clientServerType.</description>
+	</constraint>
+	<constraint oclName='SPEC_26' code='26' name='SPEC_26'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Cannot connect ports in the same SystemModel. Violated on {0}.</message>
+		<description>Cannot connect ports in the same SystemModel.</description>
+	</constraint>
+	<constraint oclName='SPEC_27' code='27' name='SPEC_27'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+			<event value ='ADD'/>
+			<event value ='REMOVE'/>
+		</mode>
+		<severity value='Error'/>
+		<message>The port association must not be empty when triggerPolicy is EVENT. Violated on {0}.</message>
+		<description>The port association must not be empty when triggerPolicy is EVENT.</description>
+	</constraint>
+	<constraint oclName='SPEC_28' code='28' name='SPEC_28'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+			<event value ='ADD'/>
+			<event value ='REMOVE'/>
+		</mode>
+		<severity value='Error'/>
+		<message>The port association is empty when triggerPolicy is TIME. Violated on {0}.</message>
+		<description>The port association is empty when triggerPolicy is TIME.</description>
+	</constraint>
+	<constraint oclName='SPEC_29' code='29' name='SPEC_29'> 
+		<mode value='Live'>
+			<event value ='ADD'/>
+			<event value ='REMOVE'/>
+		</mode>
+		<severity value='Error'/>
+		<message>Function and functionPrototype are mutually exclusive associations. A FunctionTrigger either identifies a FunctionType or a FunctionPrototype as its target function, but not both. Violated on {0}.</message>
+		<description>Function and functionPrototype are mutually exclusive associations. A FunctionTrigger either identifies a FunctionType or a FunctionPrototype as its target function, but not both.</description>
+	</constraint>
+	<constraint oclName='SPEC_30' code='30' name='SPEC_30'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Only FunctionFlowPort of FlowDirection=in shall be referred to in the association port. Violated on {0}.</message>
+		<description>Only FunctionFlowPort of FlowDirection=in shall be referred to in the association port.</description>
+	</constraint>
+	<constraint oclName='SPEC_31' code='31' name='SPEC_31'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+		</mode>
+		<severity value='Error'/>
+		<message>Identifies one FunctionType or one HardwareComponentType. Violated on {0}.</message>
+		<description>Identifies one FunctionType or one HardwareComponentType.</description>
+	</constraint>
+	<constraint oclName='SPEC_32' code='32' name='SPEC_32'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>The publicFeatureModel is only allowed to contain Features (no VehicleFeatures). Violated on {0}.</message>
+		<description>The publicFeatureModel is only allowed to contain Features (no VehicleFeatures).</description>
+	</constraint>
+	<constraint oclName='SPEC_33' code='33' name='SPEC_33'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+			<event value ='ADD'/>
+			<event value ='REMOVE'/>
+		</mode>
+		<severity value='Error'/>
+		<message>Attribute "criterion" or association "selectionCriterion" (or both) must be defined. Violated on {0}.</message>
+		<description>Attribute "criterion" or association "selectionCriterion" (or both) must be defined.</description>
+	</constraint>
+	<constraint oclName='SPEC_34' code='34' name='SPEC_34'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+		</mode>
+		<severity value='Error'/>
+		<message>Identifies either one FunctionPrototype or one FunctionPort or one FunctionConnector or one HardwareComponentPrototype or one HardwarePort or one ClampConnector. Violated on {0}.</message>
+		<description>Identifies either one FunctionPrototype or one FunctionPort or one FunctionConnector or one HardwareComponentPrototype or one HardwarePort or one ClampConnector.</description>
+	</constraint>
+	<constraint oclName='SPEC_35' code='35' name='SPEC_35'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+		</mode>
+		<severity value='Error'/>
+		<message>Identifies either one FunctionPrototype or one FunctionPort or one FunctionConnector or one HardwareComponentPrototype or one HardwarePin or one ClampConnector. Violated on {0}.</message>
+		<description>Identifies either one FunctionPrototype or one FunctionPort or one FunctionConnector or one HardwareComponentPrototype or one HardwarePin or one ClampConnector.</description>
+	</constraint>
+	<constraint oclName='SPEC_36' code='36' name='SPEC_36'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>The sourceVehicleFeatureModels shall only contain VehicleFeatures. Violated on {0}.</message>
+		<description>The sourceVehicleFeatureModels shall only contain VehicleFeatures.</description>
+	</constraint>
+	<constraint oclName='SPEC_37' code='37' name='SPEC_37'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>The sourceVehicleFeatureModels shall be different from the targetFeatureModels. Violated on {0}.</message>
+		<description>The sourceVehicleFeatureModels shall be different from the targetFeatureModels.</description>
+	</constraint>
+	<constraint oclName='SPEC_38' code='38' name='SPEC_38'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>The property refinedBy must not have the types Requirement or RequirementContainer. Violated on {0}.</message>
+		<description>The property refinedBy must not have the types Requirement or RequirementContainer.</description>
+	</constraint>
+	<constraint oclName='SPEC_39' code='39' name='SPEC_39'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Only non-root RequirementsHierarchy which is contained in another RequirementHierarchy are allowed to reference a Requirement. Violated on {0}.</message>
+		<description>Only non-root RequirementsHierarchy which is contained in another RequirementHierarchy are allowed to reference a Requirement.</description>
+	</constraint>
+	<constraint oclName='SPEC_40' code='40' name='SPEC_40'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>The validFor attribute of the UserElementType shall be "Requirement". Violated on {0}.</message>
+		<description>The validFor attribute of the UserElementType shall be "Requirement".</description>
+	</constraint>
+	<constraint oclName='SPEC_41' code='41' name='SPEC_41'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>The EAElement in the association satisfiedBy may not be a Requirement or RequirementContainer. Violated on {0}.</message>
+		<description>The EAElement in the association satisfiedBy may not be a Requirement or RequirementContainer.</description>
+	</constraint>
+	<constraint oclName='SPEC_42' code='42' name='SPEC_42'> 
+		<mode value='Live'>
+			<event value ='ADD'/>
+			<event value ='REMOVE'/>
+		</mode>
+		<severity value='Error'/>
+		<message>An element of type Satisfy is only allowed to have associations to either elements of type UseCase (see satisfiedUseCase) or elements of type Requirement (see satisfiedRequirement). Not both at the same time! Violated on {0}.</message>
+		<description>An element of type Satisfy is only allowed to have associations to either elements of type UseCase (see satisfiedUseCase) or elements of type Requirement (see satisfiedRequirement). Not both at the same time!</description>
+	</constraint>
+	<constraint oclName='SPEC_43' code='43' name='SPEC_43'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Only a concrete VVCase can have vvLog. Violated on {0}.</message>
+		<description>Only a concrete VVCase can have vvLog.</description>
+	</constraint>
+	<constraint oclName='SPEC_44' code='44' name='SPEC_44'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Only a concrete VVCase can have vvTarget. Violated on {0}.</message>
+		<description>Only a concrete VVCase can have vvTarget.</description>
+	</constraint>
+	<constraint oclName='SPEC_45' code='45' name='SPEC_45'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Only a concrete VVCase can have an abstractVVCase. Violated on {0}.</message>
+		<description>Only a concrete VVCase can have an abstractVVCase.</description>
+	</constraint>
+	<constraint oclName='SPEC_46' code='46' name='SPEC_46'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Only a concrete VVProcedure can have vvStimuli. Violated on {0}.</message>
+		<description>Only a concrete VVProcedure can have vvStimuli.</description>
+	</constraint>
+	<constraint oclName='SPEC_47' code='47' name='SPEC_47'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Only a concrete VVProcedure can have vvIntendedOutcome. Violated on {0}.</message>
+		<description>Only a concrete VVProcedure can have vvIntendedOutcome.</description>
+	</constraint>
+	<constraint oclName='SPEC_48' code='48' name='SPEC_48'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Only a concrete VVProcedure can have an abstractVVProcedure. Violated on {0}.</message>
+		<description>Only a concrete VVProcedure can have an abstractVVProcedure.</description>
+	</constraint>
+	<constraint oclName='SPEC_49' code='49' name='SPEC_49'> 
+		<mode value='Live'>
+			<event value ='ADD'/>
+			<event value ='REMOVE'/>
+		</mode>
+		<severity value='Error'/>
+		<message>The number of elements in minimum and maximum must be equal. Violated on {0}.</message>
+		<description>The number of elements in minimum and maximum must be equal.</description>
+	</constraint>
+	<constraint oclName='SPEC_50' code='50' name='SPEC_50'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>All scopes must reference one common response event. Violated on {0}.</message>
+		<description>All scopes must reference one common response event.</description>
+	</constraint>
+	<constraint oclName='SPEC_51' code='51' name='SPEC_51'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>All scopes must reference one common stimulus event. Violated on {0}.</message>
+		<description>All scopes must reference one common stimulus event.</description>
+	</constraint>
+	<constraint oclName='SPEC_52' code='52' name='SPEC_52'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+			<event value ='ADD'/>
+			<event value ='REMOVE'/>
+		</mode>
+		<severity value='Error'/>
+		<message>An EventFunction either identifies a FunctionType or a FunctionPrototype as its target function. Violated on {0}.</message>
+		<description>An EventFunction either identifies a FunctionType or a FunctionPrototype as its target function.</description>
+	</constraint>
+	<constraint oclName='SPEC_53' code='53' name='SPEC_53'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>EventKind is sentRequest or receivedResponse for a FunctionClientServerPort of type client. Violated on {0}.</message>
+		<description>EventKind is sentRequest or receivedResponse for a FunctionClientServerPort of type client.</description>
+	</constraint>
+	<constraint oclName='SPEC_54' code='54' name='SPEC_54'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>EventKind is receivedRequest or sentResponse for a FunctionClientServerPort of type server. Violated on {0}.</message>
+		<description>EventKind is receivedRequest or sentResponse for a FunctionClientServerPort of type server.</description>
+	</constraint>
+	<constraint oclName='SPEC_55' code='55' name='SPEC_55'> 
+		<mode value='Live'>
+			<event value ='ADD'/>
+			<event value ='REMOVE'/>
+		</mode>
+		<severity value='Error'/>
+		<message>An ErrorModelType without part shall have one errorBehaviorDescription. Violated on {0}.</message>
+		<description>An ErrorModelType without part shall have one errorBehaviorDescription.</description>
+	</constraint>
+	<constraint oclName='SPEC_56' code='56' name='SPEC_56'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>The direction of the nominal port must be 'out'. Violated on {0}.</message>
+		<description>The direction of the nominal port must be 'out'.</description>
+	</constraint>
+	<constraint oclName='SPEC_57' code='57' name='SPEC_57'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Only compatible fromPort-toPort pairs may be connected. Violated on {0}.</message>
+		<description>Only compatible fromPort-toPort pairs may be connected.</description>
+	</constraint>
+	<constraint oclName='SPEC_58' code='58' name='SPEC_58'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>Two fault/failure ports are compatible if the EADatatype of the fromPort represents a subset of the Fault/Failure set represented by the toPort’s EADatatype. Violated on {0}.</message>
+		<description>Two fault/failure ports are compatible if the EADatatype of the fromPort represents a subset of the Fault/Failure set represented by the toPort’s EADatatype.</description>
+	</constraint>
+	<constraint oclName='SPEC_59' code='59' name='SPEC_59'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>The direction of the nominal port must be 'in'. Violated on {0}.</message>
+		<description>The direction of the nominal port must be 'in'.</description>
+	</constraint>
+	<constraint oclName='SPEC_60' code='60' name='SPEC_60'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>FaultFailureValue shall have the same datatype as the referenced Anomal(ies) or be of type EABoolean. Violated on {0}.</message>
+		<description>FaultFailureValue shall have the same datatype as the referenced Anomal(ies) or be of type EABoolean.</description>
+	</constraint>
+	<constraint oclName='SPEC_62' code='62' name='SPEC_62'> 
+		<mode value='Live'>
+			<event value ='ADD'/>
+			<event value ='REMOVE'/>
+		</mode>
+		<severity value='Error'/>
+		<message>The cardinality of target is > 0. Violated on {0}.</message>
+		<description>The cardinality of target is > 0.</description>
+	</constraint>
+		<constraint oclName='SPEC_63' code='63' name='SPEC_63'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>In the case of an AR implementation, an EADatatype is realized generally by PrimitiveTypeWithSemantics, which has to be consistent w.r.t. range, resolution, etc. Violated on {0}.</message>
+		<description>In the case of an AR implementation, an EADatatype is realized generally by PrimitiveTypeWithSemantics, which has to be consistent w.r.t. range, resolution, etc.</description>
+	</constraint>
+	<constraint oclName='SPEC_64' code='64' name='SPEC_64'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+		</mode>
+		<severity value='Error'/>
+		<message>Shall be typed by an ArrayDatatype. Violated on {0}.</message>
+		<description>Shall be typed by an ArrayDatatype.</description>
+	</constraint>
+	<constraint oclName='SPEC_65' code='65' name='SPEC_65'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+		</mode>
+		<severity value='Error'/>
+		<message>Shall be typed by an EABoolean. Violated on {0}.</message>
+		<description>Shall be typed by an EABoolean.</description>
+	</constraint>
+	<constraint oclName='SPEC_66' code='66' name='SPEC_66'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+		</mode>
+		<severity value='Error'/>
+		<message>Shall be typed by an CompositeDatatype. Violated on {0}.</message>
+		<description>Shall be typed by an CompositeDatatype.</description>
+	</constraint>
+	<constraint oclName='SPEC_67' code='67' name='SPEC_67'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+		</mode>
+		<severity value='Error'/>
+		<message>The values in this EACompositeValue shall be typed and ordered in the same way as the EADatatypePrototypes in the typing CompositeDatatype. Violated on {0}.</message>
+		<description>The values in this EACompositeValue shall be typed and ordered in the same way as the EADatatypePrototypes in the typing CompositeDatatype.</description>
+	</constraint>
+	<constraint oclName='SPEC_68' code='68' name='SPEC_68'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+		</mode>
+		<severity value='Error'/>
+		<message>Shall be typed by an Enumeration or an EnumerationValueType. Violated on {0}.</message>
+		<description>Shall be typed by an Enumeration or an EnumerationValueType.</description>
+	</constraint>
+	<constraint oclName='SPEC_69' code='69' name='SPEC_69'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+		</mode>
+		<severity value='Error'/>
+		<message>Shall be typed by an EANumerical or a RangeableValueType. Violated on {0}.</message>
+		<description>Shall be typed by an EANumerical or a RangeableValueType.</description>
+	</constraint>
+	<constraint oclName='SPEC_70' code='70' name='SPEC_70'> 
+		<mode value='Live'>
+			<event value ='SET'/>
+			<event value ='UNSET'/>
+		</mode>
+		<severity value='Error'/>
+		<message>Shall be typed by an EAString. Violated on {0}.</message>
+		<description>Shall be typed by an EAString.</description>
+	</constraint>
+	<constraint oclName='SPEC_71' code='71' name='SPEC_71'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>The realizedBy elements shall be on a lower abstraction level than the realized relements. Violated on {0}.</message>
+		<description>The realizedBy elements shall be on a lower abstraction level than the realized relements.</description>
+	</constraint>
+	<constraint oclName='SPEC_72' code='72' name='SPEC_72'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>The realizedBy or realized elements shall be structural or behavioral. Violated on {0}.</message>
+		<description>The realizedBy or realized elements shall be structural or behavioral.</description>
+	</constraint>
+	<constraint oclName='SPEC_73' code='73' name='SPEC_73'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>The associations "uaValue" and the uaDefinitions of all "uaType"s must refer to the same number of elements. Violated on {0}.</message>
+		<description>The associations "uaValue" and the uaDefinitions of all "uaType"s must refer to the same number of elements.</description>
+	</constraint>
+	<constraint oclName='SPEC_74' code='74' name='SPEC_74'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>The order of associations "uaValue" and "uaType" / "uaDefinition" must be consistent, i.e. the nth EAValue must correspond to the n-th UserAttributeDefinition when listing all UserElementTypes' definitions in depth-first order. Violated on {0}.</message>
+		<description>The order of associations "uaValue" and "uaType" / "uaDefinition" must be consistent, i.e. the nth EAValue must correspond to the n-th UserAttributeDefinition when listing all UserElementTypes' definitions in depth-first order.</description>
+	</constraint>
+	<constraint oclName='SPEC_75' code='75' name='SPEC_75'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>The short names of all UserAttributeDefinitions (i.e. value of attribute "shortName" in UserAttributeDefinition, which is inherited from meta-class Referrable) referred to by association "uaDefinition" must be unique within this UserElementType. In other words, no two UserAttributeDefinitions referred to by association "uaDefinition" must have the same short name. Violated on {0}.</message>
+		<description>The short names of all UserAttributeDefinitions (i.e. value of attribute "shortName" in UserAttributeDefinition, which is inherited from meta-class Referrable) referred to by association "uaDefinition" must be unique within this UserElementType. In other words, no two UserAttributeDefinitions referred to by association "uaDefinition" must have the same short name.</description>
+	</constraint>
+	<constraint oclName='SPEC_76' code='76' name='SPEC_76'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>When a binding of behavior constraint prototypes go across different system functions or components, there should be at least one corresponding structural communication connector through which such bindings can take place (i.e. bindingThroughFunctionConnector, bindingThroughClampConnector, bindingThrough-LogicalBus, or bindingThrough-HardwareConnector). Violated on {0}.</message>
+		<description>When a binding of behavior constraint prototypes go across different system functions or components, there should be at least one corresponding structural communication connector through which such bindings can take place (i.e. bindingThroughFunctionConnector, bindingThroughClampConnector, bindingThrough-LogicalBus, or bindingThrough-HardwareConnector).</description>
+	</constraint>
+	<constraint oclName='SPEC_77' code='77' name='SPEC_77'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>When a binding of behavior constraint prototypes go across different system functions or components, there should be at least one corresponding structural communication connector through which such bindings can take place (i.e. bindingThroughFunctionConnector, bindingThroughClampConnector, bindingThrough-LogicalBus, or bindingThrough-HardwareConnector). Violated on {0}.</message>
+		<description>When a binding of behavior constraint prototypes go across different system functions or components, there should be at least one corresponding structural communication connector through which such bindings can take place (i.e. bindingThroughFunctionConnector, bindingThroughClampConnector, bindingThrough-LogicalBus, or bindingThrough-HardwareConnector).</description>
+	</constraint>
+	<constraint oclName='SPEC_78' code='78' name='SPEC_78'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>A BehaviorConstraintPrototype must has a type (BehaviorConstraintPrototype.type) and a context where it acts as part (BehaviorConstraintType.part). Violated on {0}.</message>
+		<description>A BehaviorConstraintPrototype must has a type (BehaviorConstraintPrototype.type) and a context where it acts as part (BehaviorConstraintType.part).</description>
+	</constraint>
+	<constraint oclName='SPEC_79' code='79' name='SPEC_79'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>BehaviorConstraintType.part:BehaviorConstraintPrototype.instantiationVariable can only be a subset of the BehaviorConstraintType.interfaceVariable. Violated on {0}.</message>
+		<description>BehaviorConstraintType.part:BehaviorConstraintPrototype.instantiationVariable can only be a subset of the BehaviorConstraintType.interfaceVariable.</description>
+	</constraint>
+	<constraint oclName='SPEC_80' code='80' name='SPEC_80'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>A behavior constraint references at least one requirement, vehicle feature, mode, function type, function behavior, function trigger, or error behavior definition. Violated on {0}.</message>
+		<description>A behavior constraint references at least one requirement, vehicle feature, mode, function type, function behavior, function trigger, or error behavior definition.</description>
+	</constraint>
+	<constraint oclName='SPEC_81' code='81' name='SPEC_81'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>An attribute must be typed by EADataType. Violated on {0}.</message>
+		<description>An attribute must be typed by EADataType.</description>
+	</constraint>
+	<constraint oclName='SPEC_83' code='83' name='SPEC_83'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>A quantification is applied to at least one attribute. Violated on {0}.</message>
+		<description>A quantification is applied to at least one attribute.</description>
+	</constraint>
+	<constraint oclName='SPEC_84' code='84' name='SPEC_84'> 
+		<mode value='Live'>
+			<event value ='ADD'/>
+			<event value ='REMOVE'/>
+		</mode>
+		<severity value='Error'/>
+		<message>A computation constraint contains at least one transformation or one flow definition. Violated on {0}.</message>
+		<description>A computation constraint contains at least one transformation or one flow definition.</description>
+	</constraint>
+	<constraint oclName='SPEC_85' code='85' name='SPEC_85'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>If a logical transformation description is applied to a client-server interface (isClientServerInterface=true), it has at least one corresponding operation specified in a clientserver interface definition (FunctionModelling::Operation). Violated on {0}.</message>
+		<description>If a logical transformation description is applied to a client-server interface (isClientServerInterface=true), it has at least one corresponding operation specified in a clientserver interface definition (FunctionModelling::Operation).</description>
+	</constraint>
+	<constraint oclName='SPEC_86' code='86' name='SPEC_86'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>For behavior constraint descriptions that target application software functions, SynchronousTransition should not be applied. Violated on {0}.</message>
+		<description>For behavior constraint descriptions that target application software functions, SynchronousTransition should not be applied.</description>
+	</constraint>
+	<constraint oclName='SPEC_87' code='87' name='SPEC_87'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>A Temporal constraint has a single initial state. Violated on {0}.</message>
+		<description>A Temporal constraint has a single initial state.</description>
+	</constraint>
+	<constraint oclName='SPEC_88' code='88' name='SPEC_88'> 
+		<mode value='Batch'/>
+		<severity value='Error'/>
+		<message>A transition connects one or two states. This means that the from and to roles can be applied to two distinct states or a single state. Violated on {0}.</message>
+		<description>A transition connects one or two states. This means that the from and to roles can be applied to two distinct states or a single state.</description>
+	</constraint>
+	<constraint oclName='SPEC_89' code='89' name='SPEC_89'> 
+		<mode value='Batch'></mode>
+		<severity value='Error'/>
+		<message>The set of occurred erroneous events ((occurredFeatureFlaw, occurredHazardousEvent, or occurredAnomaly) is a symmetric set difference of feature flaws (Dependability::FeatureFlaw), system hazards (Dependability::HazardeousEvent, and system faults/failures (ErrorModel::Anomaly) as such concepts only differ in scope or in abstraction level. Violated on {0}.</message>
+		<description>The set of occurred erroneous events ((occurredFeatureFlaw, occurredHazardousEvent, or occurredAnomaly) is a symmetric set difference of feature flaws (Dependability::FeatureFlaw), system hazards (Dependability::HazardeousEvent, and system faults/failures (ErrorModel::Anomaly) as such concepts only differ in scope or in abstraction level.</description>
+	</constraint>
+</ocl-meta-information>
