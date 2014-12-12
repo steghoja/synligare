@@ -9,7 +9,7 @@
 		<relativePath>../../releng/org.eclipse.eatop.releng.builds/parent/pom.xml</relativePath>
 	</parent>
 	<groupId>org.eclipse.eatop.plugins</groupId>
-	<artifactId>org.eclipse.eatop.geastadl.edit</artifactId>
+	<artifactId>org.eclipse.eatop.tableview.ui</artifactId>
 	<version>0.5.0-SNAPSHOT</version>
 	<packaging>eclipse-plugin</packaging>
 </project>
