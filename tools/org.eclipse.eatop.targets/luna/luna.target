@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="EATOP Luna Target" sequenceNumber="18">
+<?pde version="3.8"?><target name="EATOP Luna Target" sequenceNumber="19">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.sdk.ide" version="4.4.1.M20140925-0400"/>
@@ -53,6 +53,15 @@
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.license.feature.group" version="0.0.0"/>
 <repository location="http://download.eclipse.org/cbi/updates/license"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.compare.ide.ui.feature.group" version="3.0.0.201406111328"/>
+<unit id="org.eclipse.emf.compare.rcp.ui.feature.group" version="3.0.0.201406111328"/>
+<unit id="org.eclipse.emf.compare.ide.ui.source.feature.group" version="3.0.0.201406111328"/>
+<unit id="org.eclipse.emf.compare.feature.group" version="3.0.0.201406111328"/>
+<unit id="org.eclipse.emf.compare.source.feature.group" version="3.0.0.201406111328"/>
+<unit id="org.eclipse.emf.compare.rcp.ui.source.feature.group" version="3.0.0.201406111328"/>
+<repository location="http://download.eclipse.org/modeling/emf/compare/updates/releases/latest"/>
 </location>
 </locations>
 <environment>
