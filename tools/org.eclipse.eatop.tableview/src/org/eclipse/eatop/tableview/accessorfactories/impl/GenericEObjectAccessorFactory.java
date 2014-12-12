@@ -63,7 +63,16 @@ public class GenericEObjectAccessorFactory implements IEObjectAccessorFactory {
 			
 			@Override
 			public int compare(EStructuralFeature arg0, EStructuralFeature arg1) {
-				return arg0.getName().compareTo(arg1.getName());
+				String name = arg0.getName();
+				String name2 = arg1.getName();
+				if (name != null && name2 != null) {
+					return name.compareTo(name2);
+				} else if (name != null && name2 == null) {
+					return 1;
+				} else if (name == null && name2 != null) {
+					return -1;
+				}
+				return 0;
 			}
 		};
 		return comp;
