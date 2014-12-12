@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="EATOP Luna Target" sequenceNumber="19">
+<?pde version="3.8"?><target name="EATOP Luna Target" sequenceNumber="18">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.sdk.ide" version="4.4.1.M20140925-0400"/>
@@ -29,6 +29,7 @@
 <repository location="http://download.eclipse.org/technology/nebula/snapshot"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.sphinx.feature.group" version="0.9.0.201411121307"/>
 <unit id="org.eclipse.sphinx.sdk.feature.group" version="0.9.0.201411121307"/>
 <unit id="org.eclipse.sphinx.testutils.feature.group" version="0.9.0.201411121307"/>
 <repository location="http://download.eclipse.org/sphinx/updates/interim"/>
@@ -55,29 +56,17 @@
 <repository location="http://download.eclipse.org/cbi/updates/license"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.artop.eel.feature.group" version="1.0.0.201302082307"/>
-<unit id="org.artop.eel.sdk.feature.group" version="1.0.0.201302082307"/>
-<repository location="https://www.artop.org/containers/artop-eel-update-site-1.0"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<repository location="http://download.eclipse.org/nattable/releases/1.1.1/repository/"/>
 <unit id="org.eclipse.nebula.widgets.nattable.extension.poi.feature.feature.group" version="1.1.1.201409122046"/>
 <unit id="org.eclipse.nebula.widgets.nattable.core.feature.feature.group" version="1.1.1.201409122046"/>
 <unit id="org.eclipse.nebula.widgets.nattable.extension.poi.source.feature.feature.group" version="1.1.1.201409122046"/>
 <unit id="org.eclipse.nebula.widgets.nattable.extension.glazedlists.source.feature.feature.group" version="1.1.1.201409122046"/>
 <unit id="org.eclipse.nebula.widgets.nattable.core.source.feature.feature.group" version="1.1.1.201409122046"/>
 <unit id="org.eclipse.nebula.widgets.nattable.extension.glazedlists.feature.feature.group" version="1.1.1.201409122046"/>
-<repository location="http://download.eclipse.org/nattable/releases/1.1.1/repository/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="ca.odell.glazedlists" version="1.9.0.v201303080712"/>
 <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
-<unit id="org.eclipse.emf.compare.ide.ui.feature.group" version="3.0.0.201406111328"/>
-<unit id="org.eclipse.emf.compare.rcp.ui.feature.group" version="3.0.0.201406111328"/>
-<unit id="org.eclipse.emf.compare.ide.ui.source.feature.group" version="3.0.0.201406111328"/>
-<unit id="org.eclipse.emf.compare.feature.group" version="3.0.0.201406111328"/>
-<unit id="org.eclipse.emf.compare.source.feature.group" version="3.0.0.201406111328"/>
-<unit id="org.eclipse.emf.compare.rcp.ui.source.feature.group" version="3.0.0.201406111328"/>
-<repository location="http://download.eclipse.org/modeling/emf/compare/updates/releases/latest"/>
+<unit id="ca.odell.glazedlists" version="1.9.0.v201303080712"/>
 </location>
 </locations>
 <environment>
