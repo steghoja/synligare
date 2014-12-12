@@ -103,9 +103,7 @@
             labelProvider="org.eclipse.eatop.examples.explorer.AppearanceExampleExplorerLabelProvider"
             name="EAST-ADL Content"
             priority="normal">
-         <triggerPoints>
-            <and>
-               <instanceof
+         <triggerPoints><and><instanceof
                      value="org.eclipse.core.resources.IFile">
                </instanceof>
                <test
@@ -176,6 +174,7 @@
          <actionProvider
                class="org.eclipse.eatop.examples.explorer.AppearanceExampleActionProvider"
                id="org.eclipse.eatop.examples.explorer.ExampleAppearanceActionProvider">
+            <enablement></enablement>
          </actionProvider>
          <actionProvider
                class="org.eclipse.eatop.examples.explorer.ModelExampleActionProvider"
@@ -298,5 +297,26 @@
          </enablement>
       </decorator>
    </extension>
+   <extension
+          point="org.eclipse.ui.views">
+       <view
+             allowMultiple="false"
+             category="org.eclipse.eatop.examples.common.ui.category.eatopExampleViews"
+             class="org.eclipse.eatop.examples.contextview.ExplorerContextView"
+             icon="icons/full/obj16/eacont_obj.png"
+             id="org.eclipse.eatop.examples.explorer.views.contextview"
+             name="Explorer Context">
+       </view>
+    </extension>
+    <extension
+          point="org.eclipse.core.runtime.adapters">
+       <factory
+             adaptableType="org.eclipse.emf.ecore.EObject"
+             class="org.eclipse.eatop.examples.contextview.providers.ContextProviderFactory">
+          <adapter
+                type="org.eclipse.eatop.examples.contextview.providers.IContextProvider">
+          </adapter>
+       </factory>
+    </extension>
 
 </plugin>
