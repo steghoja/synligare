@@ -68,6 +68,15 @@
 <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
 <unit id="ca.odell.glazedlists" version="1.9.0.v201303080712"/>
 </location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.compare.ide.ui.feature.group" version="3.0.0.201406111328"/>
+<unit id="org.eclipse.emf.compare.rcp.ui.feature.group" version="3.0.0.201406111328"/>
+<unit id="org.eclipse.emf.compare.ide.ui.source.feature.group" version="3.0.0.201406111328"/>
+<unit id="org.eclipse.emf.compare.feature.group" version="3.0.0.201406111328"/>
+<unit id="org.eclipse.emf.compare.source.feature.group" version="3.0.0.201406111328"/>
+<unit id="org.eclipse.emf.compare.rcp.ui.source.feature.group" version="3.0.0.201406111328"/>
+<repository location="http://download.eclipse.org/modeling/emf/compare/updates/releases/latest"/>
+</location>
 </locations>
 <environment>
 <nl>en_EN</nl>
