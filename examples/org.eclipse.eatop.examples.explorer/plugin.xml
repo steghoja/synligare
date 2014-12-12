@@ -103,9 +103,7 @@
             labelProvider="org.eclipse.eatop.examples.explorer.AppearanceExampleExplorerLabelProvider"
             name="EAST-ADL Content"
             priority="normal">
-         <triggerPoints>
-            <and>
-               <instanceof
+         <triggerPoints><and><instanceof
                      value="org.eclipse.core.resources.IFile">
                </instanceof>
                <test
@@ -176,6 +174,7 @@
          <actionProvider
                class="org.eclipse.eatop.examples.explorer.AppearanceExampleActionProvider"
                id="org.eclipse.eatop.examples.explorer.ExampleAppearanceActionProvider">
+            <enablement></enablement>
          </actionProvider>
          <actionProvider
                class="org.eclipse.eatop.examples.explorer.ModelExampleActionProvider"
