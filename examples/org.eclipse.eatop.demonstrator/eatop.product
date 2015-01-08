@@ -14,17 +14,20 @@
    </configIni>
 
    <launcherArgs>
-      <programArgs>-data workspace --launcher.XXMaxPermSize 256m</programArgs>
-      <vmArgs>-Xms128m -Xmx768m -Xss4m -XX:MaxPermSize=256m</vmArgs>
-      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+      <programArgs>-data workspace --launcher.XXMaxPermSize 256m
+      </programArgs>
+      <vmArgs>-Xms128m -Xmx768m -Xss4m -XX:MaxPermSize=256m
+      </vmArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
+      </vmArgsMac>
    </launcherArgs>
 
    <windowImages i16="/org.eclipse.eatop.demonstrator/icons/window_16.gif" i32="/org.eclipse.eatop.demonstrator/icons/window_32.gif"/>
 
    <splash
       location="org.eclipse.eatop.demonstrator"
-      startupProgressRect="80,164,390,15"
-      startupMessageRect="80,189,390,20"
+      startupProgressRect="70,160,390,15"
+      startupMessageRect="70,183,390,20"
       startupForegroundColor="000000" />
    <launcher name="eatop">
       <solaris/>

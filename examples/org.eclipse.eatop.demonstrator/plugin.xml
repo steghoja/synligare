@@ -54,7 +54,7 @@
          </property>
          <property
                name="startupMessageRect"
-               value="80,189,390,20">
+               value="80,210,390,20">
          </property>
          <property
                name="startupForegroundColor"
@@ -62,7 +62,7 @@
          </property>
          <property
                name="startupProgressRect"
-               value="80,164,390,15">
+               value="80,190,390,15">
          </property>
          <property
                name="aboutImage"
@@ -86,6 +86,16 @@
             introId="org.eclipse.ui.intro.universal"
             productId="org.eclipse.eatop.demonstrator.product">
       </introProductBinding>
+   </extension>
+   <extension point="org.eclipse.ui.splashHandlers">
+      <splashHandler
+            class="org.eclipse.eatop.demonstrator.splashscreen.EatopSplashHandler"
+            id="org.eclipse.eatop.demonstrator.splashscreen">
+      </splashHandler>
+      <splashHandlerProductBinding
+            productId="org.eclipse.eatop.demonstrator.product"
+            splashId="org.eclipse.eatop.demonstrator.splashscreen">
+      </splashHandlerProductBinding>
    </extension>
 
 </plugin>

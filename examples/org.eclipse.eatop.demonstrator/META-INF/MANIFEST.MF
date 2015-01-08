@@ -12,4 +12,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.equinox.p2.reconciler.dropins,
  org.eclipse.equinox.simpleconfigurator,
  org.eclipse.update.configurator,
- org.eclipse.ui
+ org.eclipse.ui,
+ org.eclipse.ui.intro,
+ org.eclipse.eatop.common
