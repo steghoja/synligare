@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="accessorfactory" name="Accessor Factory" schema="schema/accessorfactory.exsd"/>
+   <extension
+         point="org.eclipse.eatop.examples.tableview.accessorfactory">
+      <accessorfactory
+            class="org.eclipse.eatop.examples.tableview.accessorfactories.impl.GenericEObjectAccessorFactory"
+            priority="2">
+      </accessorfactory>
+   </extension>
+
+</plugin>
