@@ -83,20 +83,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.eatop.tableview"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.eatop.tableview.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.emf.compare"
          download-size="0"
          install-size="0"
@@ -182,6 +168,20 @@
 
    <plugin
          id="org.eclipse.emf.compare.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.eatop.examples.tableview"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.eatop.examples.tableview.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
