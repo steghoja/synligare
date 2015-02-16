@@ -6,7 +6,6 @@ Bundle-Version: 0.5.0.qualifier
 Bundle-Activator: org.eclipse.eatop.examples.tableview.TableViewPlugin
 Require-Bundle: org.eclipse.nebula.widgets.nattable.core;bundle-version="1.0.1";visibility:=reexport,
  org.eclipse.sphinx.emf,
- org.eclipse.ui.views.properties.tabbed;bundle-version="3.6.0",
  org.eclipse.emf.edit.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

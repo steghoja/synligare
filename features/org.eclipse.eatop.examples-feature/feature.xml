@@ -19,6 +19,10 @@
       %license
    </license>
 
+   <includes
+         id="org.eclipse.eatop.examples.tableview.feature"
+         version="0.0.0"/>
+
    <plugin
          id="org.eclipse.eatop.examples.actions"
          download-size="0"
@@ -77,20 +81,6 @@
 
    <plugin
          id="org.eclipse.eatop.demonstrator"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.eatop.examples.tableview"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.eatop.examples.tableview.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
