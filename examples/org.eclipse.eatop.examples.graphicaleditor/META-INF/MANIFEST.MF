@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EAST-ADL Editor Main
+Bundle-SymbolicName: org.eclipse.eatop.examples.graphicaleditor;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.eatop.examples.graphicaleditor.internal.Activator$Implementation
+Require-Bundle: org.eclipse.eatop.eastadl2112,
+ org.eclipse.graphiti.examples.common,
+ org.eclipse.eatop.examples.graphicaleditor.common;bundle-version="1.0.0",
+ org.eclipse.gmf.runtime.diagram.ui,
+ org.eclipse.sphinx.graphiti.workspace.ui
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.eclipse.eatop.examples.graphicaleditor.features,
+ org.eclipse.eatop.examples.graphicaleditor.features.add,
+ org.eclipse.eatop.examples.graphicaleditor.features.create,
+ org.eclipse.eatop.examples.graphicaleditor.internal;x-internal:=true,
+ org.eclipse.eatop.examples.graphicaleditor.properties,
+ org.eclipse.eatop.examples.graphicaleditor.provider,
+ org.eclipse.eatop.examples.graphicaleditor.wizards,
+ org.eclipse.eatop.examples.graphicaleditor.wizards.pages
