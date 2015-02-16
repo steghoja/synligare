@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.eatop.examples.emf.compare.feature"
       label="Compare"
-      version="1.0.0.qualifier">
+      version="0.5.0.qualifier">
 
    <description url="http://www.example.com/description">
       EMF compare integrated into EATop
