@@ -11,7 +11,6 @@ import java.util.Map;
 import org.eclipse.eatop.examples.tableview.IConfigLabels;
 import org.eclipse.eatop.examples.tableview.TableViewHelpers;
 import org.eclipse.eatop.examples.tableview.accessors.impl.EStructuralFeatureAccessor;
-import org.eclipse.eatop.examples.tableview.ui.GEatopDisplayConverter;
 import org.eclipse.eatop.geastadl.ginfrastructure.gelements.GReferrable;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
@@ -21,13 +20,16 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EAttributeImpl;
 import org.eclipse.emf.ecore.impl.EEnumImpl;
+import org.eclipse.nebula.widgets.nattable.config.CellConfigAttributes;
+import org.eclipse.nebula.widgets.nattable.config.IConfigRegistry;
+import org.eclipse.nebula.widgets.nattable.data.convert.IDisplayConverter;
+import org.eclipse.nebula.widgets.nattable.style.DisplayMode;
 
 public class EATopEStructuralFeatureAccessor extends EStructuralFeatureAccessor {
 	private enum DataTypes {
 		BOOLEAN, STRING, ENUM, REFERENCE, REFERENCE_MANY
 	}
 	private DataTypes type;
-	private static final GEatopDisplayConverter displayConverter = new GEatopDisplayConverter();
 	private Map<String, Object> literals = new HashMap<String, Object>();
 	private Map<String, Object> referenceChoices = new HashMap<String, Object>();
 	
@@ -73,12 +75,14 @@ public class EATopEStructuralFeatureAccessor extends EStructuralFeatureAccessor 
 	}
 
 	@Override
-	public Object canonicalToDisplayValue(Object canonicalValue) {
+	public Object canonicalToDisplayValue(Object canonicalValue, IConfigRegistry configRegistry) {
+		IDisplayConverter displayConverter = configRegistry.getConfigAttribute(CellConfigAttributes.DISPLAY_CONVERTER, DisplayMode.NORMAL, IConfigLabels.DISPLAYCONVERTER);
 		return displayConverter.canonicalToDisplayValue(canonicalValue);
 	}
 
 	@Override
-	public Object displayToCanonicalValue(Object displayValue) {
+	public Object displayToCanonicalValue(Object displayValue, IConfigRegistry configRegistry) {
+		IDisplayConverter displayConverter = configRegistry.getConfigAttribute(CellConfigAttributes.DISPLAY_CONVERTER, DisplayMode.NORMAL, IConfigLabels.DISPLAYCONVERTER);
 		return displayConverter.displayToCanonicalValue(displayValue);
 	}
 
@@ -115,7 +119,6 @@ public class EATopEStructuralFeatureAccessor extends EStructuralFeatureAccessor 
 	public List<String> getConfigLabels() {
 		List<String> labels = new ArrayList<String>();
 
-		labels.add(IConfigLabels.ALIGN_LEFT);
 		if (type != null) {
 			switch (type) {
 			case BOOLEAN:

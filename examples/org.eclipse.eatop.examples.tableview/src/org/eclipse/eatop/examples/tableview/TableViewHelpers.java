@@ -15,15 +15,21 @@ public class TableViewHelpers {
 
 	
 	public static String toMultilineString(List<?> list) {
+		return separateList(list, "\n");
+	}
+
+	public static String toCommaSeparatedString(List<?> list) {
+		return separateList(list, ", ");
+	}
+	
+	private static String separateList(List<?> list, String separator) {
 		String result = "";
-		
 		if (!list.isEmpty()) {
-			
 			int i = 0;
 			for (; i < list.size() - 1; i++) {
 				Object value = list.get(i);
 				result += value == null ? "null" : value.toString();
-				result += "\n";
+				result += separator;
 			}
 			Object display = list.get(i);
 			result += display == null ? "null" : display.toString();

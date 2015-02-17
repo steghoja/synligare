@@ -8,6 +8,7 @@ import java.util.Observable;
 import org.eclipse.eatop.examples.tableview.accessors.IEObjectAccessor;
 import org.eclipse.eatop.examples.tableview.accessors.IEObjectPropertyAccessor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.nebula.widgets.nattable.config.IConfigRegistry;
 
 /**
  * IEObjectAccessor where each column delegates to an IEObjectPropertyAccessor
@@ -84,20 +85,20 @@ public class PropertyAccessorEObjectAccessor extends Observable implements IEObj
 	}
 
 	@Override
-	public Object canonicalToDisplayValue(Object canonicalValue, int columnIndex) {
+	public Object canonicalToDisplayValue(Object canonicalValue, int columnIndex, IConfigRegistry configRegistry) {
 		IEObjectPropertyAccessor accessor = getIndexedValue(columnIndex);
 		if (accessor != null) {
-			return accessor.canonicalToDisplayValue(canonicalValue);
+			return accessor.canonicalToDisplayValue(canonicalValue, configRegistry);
 		} else {
 			return null;
 		}
 	}
 
 	@Override
-	public Object displayToCanonicalValue(Object displayValue, int columnIndex) {
+	public Object displayToCanonicalValue(Object displayValue, int columnIndex, IConfigRegistry configRegistry) {
 		IEObjectPropertyAccessor accessor = getIndexedValue(columnIndex);
 		if (accessor != null) {
-			return accessor.displayToCanonicalValue(displayValue);
+			return accessor.displayToCanonicalValue(displayValue, configRegistry);
 		} else {
 			return null;
 		}

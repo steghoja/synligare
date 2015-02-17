@@ -3,7 +3,6 @@ package org.eclipse.eatop.examples.tableview.ui;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import org.eclipse.eatop.eastadl21.EAArrayValue;
 import org.eclipse.eatop.eastadl21.EABooleanValue;
@@ -14,6 +13,7 @@ import org.eclipse.eatop.eastadl21.EAStringValue;
 import org.eclipse.eatop.eastadl21.FaultFailurePropagationLink_fromPort;
 import org.eclipse.eatop.eastadl21.FaultFailurePropagationLink_toPort;
 import org.eclipse.eatop.eastadl21.FunctionConnector_port;
+import org.eclipse.eatop.examples.tableview.TableViewHelpers;
 import org.eclipse.eatop.geastadl.ginfrastructure.gelements.GReferrable;
 import org.eclipse.nebula.widgets.nattable.data.convert.DisplayConverter;
 
@@ -27,7 +27,7 @@ public class GEatopDisplayConverter extends DisplayConverter {
 			for (Object canonicalElement : canonicalCollection) {
 				displayCollection.add(canonicalToDisplayValue(canonicalElement));
 			}
-			return toMultilineString(displayCollection);
+			return getConvertedMultiLine(displayCollection);
 			
 		} else if (canonicalValue instanceof GReferrable) {
 			GReferrable canonicalReferrable = (GReferrable) canonicalValue;
@@ -75,6 +75,10 @@ public class GEatopDisplayConverter extends DisplayConverter {
 		}
 		
 	}
+	
+	protected Object getConvertedMultiLine(ArrayList<Object> displayCollection) {
+		return TableViewHelpers.toMultilineString(displayCollection);
+	}
 
 	@Override
 	public Object displayToCanonicalValue(Object displayValue) {
@@ -82,19 +86,5 @@ public class GEatopDisplayConverter extends DisplayConverter {
 	}
 	
 	
-	private String toMultilineString(List<Object> values) {
-		String result = "";
-		if (!values.isEmpty()) {
-			int i = 0;
-			for (; i < values.size() - 1; i++) {
-				Object value = values.get(i);
-				result += value == null ? "null" : value.toString();
-				result += "\n";
-			}
-			Object display = values.get(i);
-			result += display == null ? "null" : display.toString();
-		}
-		return result;
-	}
 
 }

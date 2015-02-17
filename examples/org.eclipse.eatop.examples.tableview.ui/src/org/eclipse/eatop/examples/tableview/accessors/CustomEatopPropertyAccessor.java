@@ -3,10 +3,15 @@ package org.eclipse.eatop.examples.tableview.accessors;
 import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.eatop.examples.tableview.IConfigLabels;
 import org.eclipse.eatop.examples.tableview.accessors.IEObjectPropertyAccessor;
 import org.eclipse.eatop.examples.tableview.ui.GEatopDisplayConverter;
 import org.eclipse.eatop.geastadl.ginfrastructure.gelements.GReferrable;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.nebula.widgets.nattable.config.CellConfigAttributes;
+import org.eclipse.nebula.widgets.nattable.config.IConfigRegistry;
+import org.eclipse.nebula.widgets.nattable.data.convert.IDisplayConverter;
+import org.eclipse.nebula.widgets.nattable.style.DisplayMode;
 
 public abstract class CustomEatopPropertyAccessor implements IEObjectPropertyAccessor {
 
@@ -32,12 +37,14 @@ public abstract class CustomEatopPropertyAccessor implements IEObjectPropertyAcc
 	}
 
 	@Override
-	public Object canonicalToDisplayValue(Object canonicalValue) {
+	public Object canonicalToDisplayValue(Object canonicalValue, IConfigRegistry configRegistry) {
+		IDisplayConverter displayConverter = configRegistry.getConfigAttribute(CellConfigAttributes.DISPLAY_CONVERTER, DisplayMode.NORMAL, IConfigLabels.DISPLAYCONVERTER);
 		return displayConverter.canonicalToDisplayValue(canonicalValue);
 	}
 
 	@Override
-	public Object displayToCanonicalValue(Object displayValue) {
+	public Object displayToCanonicalValue(Object displayValue, IConfigRegistry configRegistry) {
+		IDisplayConverter displayConverter = configRegistry.getConfigAttribute(CellConfigAttributes.DISPLAY_CONVERTER, DisplayMode.NORMAL, IConfigLabels.DISPLAYCONVERTER);
 		return displayConverter.displayToCanonicalValue(displayValue);
 	}
 	

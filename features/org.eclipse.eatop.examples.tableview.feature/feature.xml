@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.eatop.examples.tableview.feature"
       label="TableView"
-      version="1.0.0.qualifier">
+      version="0.5.0.qualifier">
 
    <description url="http://www.example.com/description">
       View which can edit and display properties of a model in a table.

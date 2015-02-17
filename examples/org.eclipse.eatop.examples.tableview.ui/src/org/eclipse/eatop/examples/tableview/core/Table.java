@@ -10,30 +10,34 @@ import org.eclipse.eatop.examples.tableview.IConfigLabels;
 import org.eclipse.eatop.examples.tableview.accessors.IEObjectAccessor;
 import org.eclipse.eatop.examples.tableview.accessors.impl.EmptyEObjectAccessor;
 import org.eclipse.eatop.examples.tableview.accessors.impl.PropertyAccessorEObjectAccessor;
-import org.eclipse.eatop.examples.tableview.celleditors.EATopMultiReferenceCellEditor;
 import org.eclipse.eatop.examples.tableview.dataproviders.ColumnHeaderDataProvider;
 import org.eclipse.eatop.examples.tableview.dataproviders.EObjectAccessorComboBoxDataProvider;
 import org.eclipse.eatop.examples.tableview.dataproviders.EObjectAccessorReferenceDataProvider;
+import org.eclipse.eatop.examples.tableview.dataproviders.EObjectCornerDataProvider;
 import org.eclipse.eatop.examples.tableview.dataproviders.EObjectListDataProvider;
 import org.eclipse.eatop.examples.tableview.dataproviders.RowHeaderDataProvider;
+import org.eclipse.eatop.examples.tableview.export.ExcelExportCommandHandler;
+import org.eclipse.eatop.examples.tableview.export.ExcelExportFormatter;
+import org.eclipse.eatop.examples.tableview.export.ExcelExporter;
+import org.eclipse.eatop.examples.tableview.ui.CommaSeparatedDisplayConverter;
+import org.eclipse.eatop.examples.tableview.ui.EATopStyleConfiguration;
+import org.eclipse.eatop.examples.tableview.ui.EditConfiguration;
+import org.eclipse.eatop.examples.tableview.ui.GEatopDisplayConverter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.nebula.widgets.nattable.NatTable;
+import org.eclipse.nebula.widgets.nattable.config.AbstractRegistryConfiguration;
 import org.eclipse.nebula.widgets.nattable.config.AbstractUiBindingConfiguration;
 import org.eclipse.nebula.widgets.nattable.config.CellConfigAttributes;
 import org.eclipse.nebula.widgets.nattable.config.ConfigRegistry;
-import org.eclipse.nebula.widgets.nattable.config.DefaultNatTableStyleConfiguration;
 import org.eclipse.nebula.widgets.nattable.config.IConfigRegistry;
-import org.eclipse.nebula.widgets.nattable.config.IEditableRule;
 import org.eclipse.nebula.widgets.nattable.coordinate.PositionCoordinate;
-import org.eclipse.nebula.widgets.nattable.data.IColumnAccessor;
 import org.eclipse.nebula.widgets.nattable.data.IDataProvider;
-import org.eclipse.nebula.widgets.nattable.edit.EditConfigAttributes;
 import org.eclipse.nebula.widgets.nattable.edit.command.UpdateDataCommand;
 import org.eclipse.nebula.widgets.nattable.edit.config.DefaultEditBindings;
-import org.eclipse.nebula.widgets.nattable.edit.editor.ComboBoxCellEditor;
-import org.eclipse.nebula.widgets.nattable.edit.editor.TextCellEditor;
+import org.eclipse.nebula.widgets.nattable.export.ExportConfigAttributes;
+import org.eclipse.nebula.widgets.nattable.export.command.ExportCommand;
+import org.eclipse.nebula.widgets.nattable.extension.poi.HSSFExcelExporter;
 import org.eclipse.nebula.widgets.nattable.grid.GridRegion;
-import org.eclipse.nebula.widgets.nattable.grid.data.DefaultCornerDataProvider;
 import org.eclipse.nebula.widgets.nattable.grid.layer.ColumnHeaderLayer;
 import org.eclipse.nebula.widgets.nattable.grid.layer.CornerLayer;
 import org.eclipse.nebula.widgets.nattable.grid.layer.GridLayer;
@@ -44,11 +48,7 @@ import org.eclipse.nebula.widgets.nattable.layer.DataLayer;
 import org.eclipse.nebula.widgets.nattable.layer.ILayer;
 import org.eclipse.nebula.widgets.nattable.layer.LabelStack;
 import org.eclipse.nebula.widgets.nattable.layer.cell.IConfigLabelAccumulator;
-import org.eclipse.nebula.widgets.nattable.painter.cell.ICellPainter;
-import org.eclipse.nebula.widgets.nattable.painter.cell.TextPainter;
-import org.eclipse.nebula.widgets.nattable.painter.cell.VerticalTextPainter;
-import org.eclipse.nebula.widgets.nattable.painter.cell.decorator.LineBorderDecorator;
-import org.eclipse.nebula.widgets.nattable.painter.cell.decorator.PaddingDecorator;
+import org.eclipse.nebula.widgets.nattable.painter.cell.decorator.CustomLineBorderDecorator;
 import org.eclipse.nebula.widgets.nattable.reorder.ColumnReorderLayer;
 import org.eclipse.nebula.widgets.nattable.resize.action.AutoResizeColumnAction;
 import org.eclipse.nebula.widgets.nattable.resize.action.AutoResizeRowAction;
@@ -64,15 +64,7 @@ import org.eclipse.nebula.widgets.nattable.selection.SelectionLayer;
 import org.eclipse.nebula.widgets.nattable.selection.command.SelectCellCommand;
 import org.eclipse.nebula.widgets.nattable.sort.SortHeaderLayer;
 import org.eclipse.nebula.widgets.nattable.sort.config.SingleClickSortConfiguration;
-import org.eclipse.nebula.widgets.nattable.style.BorderStyle;
-import org.eclipse.nebula.widgets.nattable.style.BorderStyle.LineStyleEnum;
-import org.eclipse.nebula.widgets.nattable.style.CellStyleAttributes;
-import org.eclipse.nebula.widgets.nattable.style.ConfigAttribute;
 import org.eclipse.nebula.widgets.nattable.style.DisplayMode;
-import org.eclipse.nebula.widgets.nattable.style.HorizontalAlignmentEnum;
-import org.eclipse.nebula.widgets.nattable.style.IStyle;
-import org.eclipse.nebula.widgets.nattable.style.Style;
-import org.eclipse.nebula.widgets.nattable.style.VerticalAlignmentEnum;
 import org.eclipse.nebula.widgets.nattable.ui.action.ClearCursorAction;
 import org.eclipse.nebula.widgets.nattable.ui.action.IKeyAction;
 import org.eclipse.nebula.widgets.nattable.ui.action.NoOpMouseAction;
@@ -83,9 +75,9 @@ import org.eclipse.nebula.widgets.nattable.util.GCFactory;
 import org.eclipse.nebula.widgets.nattable.util.GUIHelper;
 import org.eclipse.nebula.widgets.nattable.viewport.ViewportLayer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StackLayout;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
@@ -105,13 +97,29 @@ public class Table implements Observer {
 	private SortedList<EObject> sortedList = null;
 	private SortModel sortModel = null;
 	private EObjectAccessorReferenceDataProvider referenceDataProvider;
+	private StyledText styledText;
+	private StackLayout stackLayout;
+	private boolean latestResize = false;
+	private EObjectCornerDataProvider cornerDataProvider;
+	private ConfigRegistry configRegistry;
+	public boolean multiLine = true;
 
-	public Table(Composite parent) {
+	public Table(Composite parent, StackLayout stackLayout) {
+		this.stackLayout = stackLayout;
+		if (stackLayout != null) {
+			stackLayout.topControl = natTable;
+			styledText = new StyledText(parent, SWT.NONE);
+			styledText.setText("No elements to display in the table. \nSelect an element or several elements which have some property in common to populate the table.");
+		}
+		
 		createTable(parent);
 	}
 
 	public void dispose() {
 		natTable.dispose();
+		if (styledText != null) {
+			styledText.dispose();
+		}
 	}
 
 	public void setFocus() {
@@ -120,7 +128,8 @@ public class Table implements Observer {
 		}
 	}
 
-	public void updateTable(List<EObject> data, boolean resize) {
+	@SuppressWarnings("unchecked")
+	public void updateTable(List<? extends EObject> data, boolean resize) {
 		IEObjectAccessor accessor = AccessorManager.INSTANCE.createAccessor(data);
 
 		if (accessor != null) {
@@ -134,7 +143,7 @@ public class Table implements Observer {
 			}
 
 			if (sortedList != null && data != null) {
-				GlazedLists.replaceAll(sortedList, data, false);
+				GlazedLists.replaceAll(sortedList, (List<EObject>)data, false);
 			}
 			if (sortModel != null) {
 				sortModel.setAccessor(accessor);
@@ -163,8 +172,13 @@ public class Table implements Observer {
 			if (displayConverter != null) {
 				displayConverter.setEObjectAccessor(accessor);
 			}
-
+			
 			if (natTable != null) {
+				if (accessor.getColumnCount() == 2 && stackLayout != null) {
+					stackLayout.topControl = styledText;
+				} else if (stackLayout != null) {
+					stackLayout.topControl = natTable;
+				}
 				refresh(resize);
 			}
 
@@ -172,6 +186,7 @@ public class Table implements Observer {
 	}
 
 	public void refresh(boolean resize) {
+		latestResize = resize;
 		if (resize) {
 			natTable.addListener(SWT.Paint, new Resizer());
 		}
@@ -192,199 +207,75 @@ public class Table implements Observer {
 
 		// --- Layers
 		BodyLayerStack bodyLayer = new BodyLayerStack(dataProvider);
-		ConfigRegistry configRegistry = new ConfigRegistry();
-		ColumnHeaderLayerStack columnHeaderLayer = new ColumnHeaderLayerStack(colHeaderDataProvider, bodyLayer, sortedList, emptyAccessor);
+		configRegistry = new ConfigRegistry();
+		ColumnHeaderLayerStack columnHeaderLayer = new ColumnHeaderLayerStack(colHeaderDataProvider, bodyLayer, sortedList);
 		RowHeaderLayerStack rowHeaderLayer = new RowHeaderLayerStack(rowHeaderDataProvider, bodyLayer);
-
-		DefaultCornerDataProvider cornerDataProvider = new DefaultCornerDataProvider(colHeaderDataProvider, rowHeaderDataProvider);
-		CornerLayer cornerLayer = new CornerLayer(new DataLayer(cornerDataProvider), rowHeaderLayer, columnHeaderLayer);
+		
+		cornerDataProvider = new EObjectCornerDataProvider(colHeaderDataProvider, rowHeaderDataProvider, dataProvider);
+		DataLayer dataLayer = new DataLayer(cornerDataProvider);
+		dataLayer.setConfigLabelAccumulator(new BorderConfigLabelAccumulator());
+		CornerLayer cornerLayer = new CornerLayer(dataLayer, rowHeaderLayer, columnHeaderLayer);
+		
 		GridLayer gridLayer = new GridLayer(bodyLayer, columnHeaderLayer, rowHeaderLayer, cornerLayer);
-		// Fetches cell labels used to bind specific configuration
-		configLabelAccumulator = new EObjectAccessorConfigLabelAccumulator(bodyLayer);
-		bodyLayer.setConfigLabelAccumulator(configLabelAccumulator);
-		// The table widget
+		// --- The table widget
 		natTable = new NatTable(parent, gridLayer, false);
-		natTable.addListener(SWT.Paint, new Resizer());
-		natTable.addConfiguration(new DefaultNatTableStyleConfiguration());
+		// --- Styling
+		natTable.addConfiguration(new EATopStyleConfiguration());
 		natTable.addConfiguration(new RowHeaderResizeBindings());
+		// --- Excel
+		natTable.addConfiguration(new AbstractRegistryConfiguration() {
+			@Override
+			public void configureRegistry(IConfigRegistry configRegistry) {
+				
+				HSSFExcelExporter excelExporter = new ExcelExporter();
+				excelExporter.setApplyVerticalTextConfiguration(true);
+				excelExporter.setApplyBackgroundColor(true);
+				configRegistry.registerConfigAttribute(ExportConfigAttributes.EXPORTER, excelExporter);
+				configRegistry.registerConfigAttribute(ExportConfigAttributes.EXPORT_FORMATTER, new ExcelExportFormatter());				
+			}
+		});
+		// --- Editing
 		natTable.addConfiguration(new EditBindings());
+		comboBoxDataProvider = new EObjectAccessorComboBoxDataProvider(dataProvider, emptyAccessor);
+		referenceDataProvider = new EObjectAccessorReferenceDataProvider(emptyAccessor, dataProvider);
+		natTable.addConfiguration(new EditConfiguration(comboBoxDataProvider, referenceDataProvider));
+		// --- DisplayConverters
+		displayConverter = new EObjectAccessorDisplayConverter(emptyAccessor);
+		natTable.addConfiguration(new DisplayConverterConfiguration());
+		
 		natTable.setConfigRegistry(configRegistry);
 		natTable.configure();
 		natTable.setBackground(GUIHelper.COLOR_WHITE);
-
-		// --- Editing
-		setupEditing(configRegistry, emptyAccessor);
-
-		// --- Styling
-		setupTableStyle(configRegistry, emptyAccessor);
-	}
-
-	private void setupTableStyle(ConfigRegistry configRegistry, EmptyEObjectAccessor emptyAccessor) {
-		displayConverter = new EObjectAccessorDisplayConverter(emptyAccessor);
-
-
-
-		configRegistry.registerConfigAttribute(
-				CellConfigAttributes.DISPLAY_CONVERTER,
-				displayConverter);
-
-		Font font = GUIHelper.getFont(new FontData("Segoe UI", 9, SWT.BOLD));
-		cellStyle(configRegistry,
-				new Styler()
-		.set(CellStyleAttributes.FONT, font)
-		.set(CellStyleAttributes.HORIZONTAL_ALIGNMENT, HorizontalAlignmentEnum.CENTER)
-		.set(CellStyleAttributes.VERTICAL_ALIGNMENT, VerticalAlignmentEnum.BOTTOM)
-		.set(CellStyleAttributes.BORDER_STYLE, new BorderStyle(1, GUIHelper.COLOR_GRAY, LineStyleEnum.SOLID))
-		.style(),
-		GridRegion.COLUMN_HEADER, GridRegion.CORNER);
-
-		cellStyle(configRegistry,
-				new Styler()
-		.set(CellStyleAttributes.FONT, font)
-		.set(CellStyleAttributes.HORIZONTAL_ALIGNMENT, HorizontalAlignmentEnum.LEFT)
-		.set(CellStyleAttributes.VERTICAL_ALIGNMENT, VerticalAlignmentEnum.BOTTOM)
-		.set(CellStyleAttributes.BORDER_STYLE, new BorderStyle(1, GUIHelper.COLOR_GRAY, LineStyleEnum.SOLID))
-		.style(),
-		GridRegion.ROW_HEADER);
-
-		cellStyle(configRegistry, 
-				new Styler()
-		.set(CellStyleAttributes.HORIZONTAL_ALIGNMENT, HorizontalAlignmentEnum.LEFT)
-		.set(CellStyleAttributes.VERTICAL_ALIGNMENT, VerticalAlignmentEnum.TOP)
-		.set(CellStyleAttributes.FONT, GUIHelper.DEFAULT_FONT)
-		.style(), 
-		GridRegion.BODY);
-
-		cellStyle(configRegistry, 
-				new Styler()
-		.set(CellStyleAttributes.HORIZONTAL_ALIGNMENT, HorizontalAlignmentEnum.RIGHT)
-		.style(), 
-		IConfigLabels.ALIGN_RIGHT);
-
-
+		natTable.unregisterCommandHandler(ExportCommand.class);
+		natTable.registerCommandHandler(new ExcelExportCommandHandler(natTable.getLayer()));
 
 	}
+	
+	private class DisplayConverterConfiguration extends AbstractRegistryConfiguration {
 
-	private void setupEditing(ConfigRegistry configRegistry, IEObjectAccessor emptyAccessor) {
-		setupForAllModes(configRegistry,
-				EditConfigAttributes.CELL_EDITABLE_RULE,
-				IEditableRule.ALWAYS_EDITABLE,
-				IConfigLabels.EDITOR_TEXT);
-		
-		setupForAllModes(configRegistry,
-				EditConfigAttributes.CELL_EDITABLE_RULE,
-				IEditableRule.ALWAYS_EDITABLE,
-				IConfigLabels.EDITOR_COMBO);
-		
-		setupForAllModes(configRegistry,
-				EditConfigAttributes.CELL_EDITABLE_RULE,
-				IEditableRule.ALWAYS_EDITABLE,
-				IConfigLabels.REFERENCE_MULTI);
-		
-		// Enums
-		comboBoxDataProvider = new EObjectAccessorComboBoxDataProvider(dataProvider, emptyAccessor);
-		ComboBoxCellEditor comboBoxCellEditor = new ComboBoxCellEditor(comboBoxDataProvider);
-
-		setupForAllModes(configRegistry,
-						EditConfigAttributes.CELL_EDITOR, 
-						comboBoxCellEditor, 
-						IConfigLabels.EDITOR_COMBO);
-		
-		// Reference editing
-		referenceDataProvider = new EObjectAccessorReferenceDataProvider(emptyAccessor, dataProvider);
-		
-		EATopMultiReferenceCellEditor eaTopMultiReferenceCellEditor = new EATopMultiReferenceCellEditor(referenceDataProvider);
-		
-		configRegistry.registerConfigAttribute(
-				EditConfigAttributes.CELL_EDITOR, 
-				eaTopMultiReferenceCellEditor,
-				DisplayMode.EDIT,
-				IConfigLabels.REFERENCE_MULTI);
-
-
-		configRegistry.registerConfigAttribute(
-				EditConfigAttributes.CELL_EDITOR, 
-				new TextCellEditor(),
-				DisplayMode.EDIT,
-				IConfigLabels.EDITOR_TEXT); 
-
-		ICellPainter verticalTextPainter = new LineBorderDecorator(new PaddingDecorator(new VerticalTextPainter(true, true, 5, true), 0, 0, 5, 0));
-		configRegistry.registerConfigAttribute(
-				CellConfigAttributes.CELL_PAINTER, 
-				verticalTextPainter,
-				DisplayMode.NORMAL, 
-				GridRegion.COLUMN_HEADER);
-
-		ICellPainter textPainter = new PaddingDecorator(new TextPainter(), 0, 1, 0, 3);
-
-		configRegistry.registerConfigAttribute(
-				CellConfigAttributes.CELL_PAINTER, 
-				textPainter,
-				DisplayMode.NORMAL,
-				GridRegion.BODY);
-
-		configRegistry.registerConfigAttribute(
-				CellConfigAttributes.CELL_PAINTER, 
-				textPainter,
-				DisplayMode.NORMAL,
-				GridRegion.ROW_HEADER);
-
-	}
-
-	private <T> void setupForAllModes(ConfigRegistry configRegistry, ConfigAttribute<T> configAttribute, T attributeValue, String configLabel) {
-		configRegistry.registerConfigAttribute(
-				configAttribute, 
-				attributeValue,
-				DisplayMode.EDIT,
-				configLabel);
-		configRegistry.registerConfigAttribute(
-				configAttribute, 
-				attributeValue,
-				DisplayMode.NORMAL,
-				configLabel);
-		configRegistry.registerConfigAttribute(
-				configAttribute, 
-				attributeValue,
-				DisplayMode.SELECT,
-				configLabel);
-		configRegistry.registerConfigAttribute(
-				configAttribute, 
-				attributeValue,
-				DisplayMode.HOVER,
-				configLabel);
-		configRegistry.registerConfigAttribute(
-				configAttribute, 
-				attributeValue,
-				DisplayMode.SELECT_HOVER,
-				configLabel);
-	}
-
-	private void cellStyle(IConfigRegistry reg, IStyle style, String... labels) {
-		for (String label : labels) {
-			reg.registerConfigAttribute(CellConfigAttributes.CELL_STYLE, style, DisplayMode.NORMAL, label);
-			reg.registerConfigAttribute(CellConfigAttributes.CELL_STYLE, style, DisplayMode.SELECT, label);
-			reg.registerConfigAttribute(CellConfigAttributes.CELL_STYLE, style, DisplayMode.EDIT, label);
+		@Override
+		public void configureRegistry(IConfigRegistry configRegistry) {
+			configRegistry.registerConfigAttribute(
+					CellConfigAttributes.DISPLAY_CONVERTER,
+					displayConverter);
+			if (multiLine) {
+				configRegistry.registerConfigAttribute(
+						CellConfigAttributes.DISPLAY_CONVERTER, 
+						new GEatopDisplayConverter(), 
+						DisplayMode.NORMAL, 
+						IConfigLabels.DISPLAYCONVERTER);
+			} else {
+				configRegistry.registerConfigAttribute(
+						CellConfigAttributes.DISPLAY_CONVERTER, 
+						new CommaSeparatedDisplayConverter(), 
+						DisplayMode.NORMAL, 
+						IConfigLabels.DISPLAYCONVERTER);
+			}
+			
 		}
+		
 	}
-
-	private class Styler {
-		private Style style;
-
-		public Styler() {
-			this.style = new Style();
-		}
-
-		public <T> Styler set(ConfigAttribute<T> styleAttribute, T value) {
-			style.setAttributeValue(styleAttribute, value);
-			return this;
-		}
-
-		public Style style() {
-			return style;
-		}
-
-	}
-
+	
 	private class EObjectAccessorConfigLabelAccumulator implements IConfigLabelAccumulator {
 
 		private IEObjectAccessor accessor;
@@ -410,9 +301,17 @@ public class Table implements Observer {
 				}
 			}
 		}
-
 	}
-
+	
+	private class BorderConfigLabelAccumulator implements IConfigLabelAccumulator {
+		
+		@Override
+		public void accumulateConfigLabels(LabelStack configLabels,
+				int columnPosition, int rowPosition) {
+			configLabels.addLabel(CustomLineBorderDecorator.BOTTOM_LINE_BORDER_LABEL);
+			configLabels.addLabel(CustomLineBorderDecorator.RIGHT_LINE_BORDER_LABEL);
+		}
+	}
 
 
 	// =========================================================================================
@@ -426,8 +325,8 @@ public class Table implements Observer {
 								natTable, i, natTable.getConfigRegistry(), 
 								new GCFactory(natTable)); 
 				natTable.doCommand(columnCommand); 
-			} 
-
+			}
+			
 			for (int i=0; i < natTable.getRowCount(); i++) { 
 				InitializeAutoResizeRowsCommand rowCommand = 
 						new InitializeAutoResizeRowsCommand(natTable, i, 
@@ -435,10 +334,11 @@ public class Table implements Observer {
 								new GCFactory(natTable)); 
 				natTable.doCommand(rowCommand); 
 			} 
+			
+			
 			natTable.removeListener(SWT.Paint, this);
 		} 
 	}
-
 
 	//	Table stacks
 	private class BodyLayerStack extends AbstractLayerTransform {
@@ -447,6 +347,10 @@ public class Table implements Observer {
 
 		public BodyLayerStack(IDataProvider dataProvider) {
 			DataLayer bodyDataLayer = new DataLayer(dataProvider);
+			// Fetches cell labels used to bind specific configuration
+			configLabelAccumulator = new EObjectAccessorConfigLabelAccumulator(bodyDataLayer);
+			bodyDataLayer.setConfigLabelAccumulator(configLabelAccumulator);
+			
 			ColumnReorderLayer columnReorderLayer = new ColumnReorderLayer(bodyDataLayer);
 			ColumnHideShowLayer columnHideShowLayer = new ColumnHideShowLayer(columnReorderLayer);
 			selectionLayer = new SelectionLayer(columnHideShowLayer);
@@ -462,8 +366,9 @@ public class Table implements Observer {
 	}
 
 	private class ColumnHeaderLayerStack extends AbstractLayerTransform {
-		public ColumnHeaderLayerStack(IDataProvider dataProvider, BodyLayerStack bodyLayer, SortedList<EObject> sortedList, IColumnAccessor<EObject> emptyAccessor) {
+		public ColumnHeaderLayerStack(IDataProvider dataProvider, BodyLayerStack bodyLayer, SortedList<EObject> sortedList) {
 			DataLayer dataLayer = new DataLayer(dataProvider);
+			dataLayer.setConfigLabelAccumulator(new BorderConfigLabelAccumulator());
 			ColumnHeaderLayer colHeaderLayer = new ColumnHeaderLayer(dataLayer, bodyLayer, bodyLayer.getSelectionLayer());
 			SortHeaderLayer<EObject> sortHeaderLayer = new SortHeaderLayer<EObject>(colHeaderLayer, sortModel, false);
 			sortHeaderLayer.addConfiguration(new SingleClickSortConfiguration());
@@ -474,6 +379,7 @@ public class Table implements Observer {
 	private class RowHeaderLayerStack extends AbstractLayerTransform {
 		public RowHeaderLayerStack(IDataProvider dataProvider, BodyLayerStack bodyLayer) {
 			DataLayer dataLayer = new DataLayer(dataProvider, 100, 20);
+			dataLayer.setConfigLabelAccumulator(new BorderConfigLabelAccumulator());
 			RowHeaderLayer rowHeaderLayer = new RowHeaderLayer(dataLayer, bodyLayer, bodyLayer.getSelectionLayer());
 			setUnderlyingLayer(rowHeaderLayer);
 
@@ -544,10 +450,22 @@ public class Table implements Observer {
 
 		}
 	}
+	
+
+	public void saveToExcel() {
+		ExportCommand cmd = new ExportCommand(natTable.getConfigRegistry(), natTable.getShell());
+		natTable.doCommand(cmd);
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		refresh(true);
+		refresh(latestResize);
+	}
+
+	public void setMultiLine(boolean multiLine) {
+		this.multiLine = multiLine;
+		natTable.configure();
+		refresh(latestResize);
 	}
 
 }

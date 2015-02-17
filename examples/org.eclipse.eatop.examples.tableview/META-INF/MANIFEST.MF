@@ -22,6 +22,6 @@ Export-Package: org.eclipse.eatop.examples.tableview;
    org.eclipse.eatop.examples.accessors.impl,
    org.eclipse.eatop.examples.accessors",
  org.eclipse.eatop.examples.tableview.accessors;uses:="org.eclipse.emf.ecore,org.eclipse.nebula.widgets.nattable.data",
- org.eclipse.eatop.examples.tableview.accessors.impl;uses:="org.eclipse.emf.ecore,com.arccore.tableview.accessors"
+ org.eclipse.eatop.examples.tableview.accessors.impl;uses:="org.eclipse.emf.ecore"
 Bundle-ClassPath: .
 Import-Package: org.eclipse.eatop.eastadl21
