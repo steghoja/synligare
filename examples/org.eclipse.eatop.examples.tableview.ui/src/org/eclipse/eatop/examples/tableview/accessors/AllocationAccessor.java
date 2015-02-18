@@ -9,6 +9,14 @@ import java.util.Set;
 import org.eclipse.eatop.eastadl21.EAPrototype;
 import org.eclipse.eatop.eastadl21.ErrorModelPrototype;
 import org.eclipse.eatop.eastadl21.ErrorModelType;
+import org.eclipse.eatop.eastadl21.FunctionAllocation_target;
+import org.eclipse.eatop.eastadl21.FunctionType;
+import org.eclipse.eatop.eastadl21.Realization;
+import org.eclipse.eatop.eastadl21.Realization_realizedBy;
+import org.eclipse.eatop.eastadl21.Refine;
+import org.eclipse.eatop.eastadl21.Refine_refinedBy;
+import org.eclipse.eatop.eastadl21.Satisfy;
+import org.eclipse.eatop.eastadl21.Satisfy_satisfiedBy;
 import org.eclipse.eatop.geastadl.ginfrastructure.gelements.GReferrable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -39,16 +47,7 @@ public class AllocationAccessor extends CustomEatopPropertyAccessor {
 					if (eObject instanceof EAPrototype) {
 						eObject = checkType(rowObject, (EAPrototype) eObject);
 					}
-					if (eObject instanceof ErrorModelPrototype) {
-						if (((ErrorModelPrototype) eObject).getTarget() == rowObject) {
-							eObject = null;
-						}
-					}
-					if (eObject instanceof ErrorModelType) {
-						if (((ErrorModelType) eObject).getTarget() == rowObject) {
-							eObject = null;
-						}
-					}
+					eObject = checkTarget(rowObject, eObject);
 					if (eObject != null) {
 						requirements.add(eObject);
 					}
@@ -69,6 +68,46 @@ public class AllocationAccessor extends CustomEatopPropertyAccessor {
 			}
 		} catch (Exception e) {
 			return reference;
+		}
+		return reference;
+	}
+	
+	private EObject checkTarget(EObject referenced, EObject reference) {
+		EObject target = null;
+		if (reference instanceof FunctionAllocation_target) {
+			target = ((FunctionAllocation_target) reference).getAllocationTarget();
+			
+		} else if (reference instanceof Satisfy) {
+			for (Satisfy_satisfiedBy ta : ((Satisfy) reference).getSatisfiedBy()) {
+				if (ta.getIdentifiable_target() == referenced && !ta.getIdentifiable_context().isEmpty()) {
+					return null;
+				}
+			}
+
+		} else if (reference instanceof Realization) {
+			for (Realization_realizedBy ta : ((Realization) reference).getRealizedBy()) {
+				if (ta.getIdentifiable_target() == referenced && !ta.getIdentifiable_context().isEmpty()) {
+					return null;
+				}
+			}
+
+		} else if (reference instanceof Refine) {
+			for (Refine_refinedBy ta : ((Refine) reference).getRefinedBy()) {
+				if (ta.getIdentifiable_target() == referenced && !ta.getIdentifiable_context().isEmpty()) {
+					return null;
+				}
+			}
+		} else if (reference instanceof ErrorModelPrototype) {
+			target = ((ErrorModelPrototype) reference).getTarget();
+		} else if (reference instanceof ErrorModelType) {
+			for (FunctionType tar : ((ErrorModelType) reference).getTarget()) {
+				if (tar == referenced) {
+					return null;
+				}
+			}
+		}
+		if (target == referenced) {
+			return null;
 		}
 		return reference;
 	}
