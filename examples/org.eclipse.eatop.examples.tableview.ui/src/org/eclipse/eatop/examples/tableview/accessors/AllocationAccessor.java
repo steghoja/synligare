@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.eclipse.eatop.eastadl21.EAPrototype;
 import org.eclipse.eatop.eastadl21.ErrorModelPrototype;
+import org.eclipse.eatop.eastadl21.ErrorModelType;
 import org.eclipse.eatop.geastadl.ginfrastructure.gelements.GReferrable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -39,7 +40,14 @@ public class AllocationAccessor extends CustomEatopPropertyAccessor {
 						eObject = checkType(rowObject, (EAPrototype) eObject);
 					}
 					if (eObject instanceof ErrorModelPrototype) {
-						eObject = checkTarget(rowObject, (ErrorModelPrototype) eObject);
+						if (((ErrorModelPrototype) eObject).getTarget() == rowObject) {
+							eObject = null;
+						}
+					}
+					if (eObject instanceof ErrorModelType) {
+						if (((ErrorModelType) eObject).getTarget() == rowObject) {
+							eObject = null;
+						}
 					}
 					if (eObject != null) {
 						requirements.add(eObject);
@@ -61,13 +69,6 @@ public class AllocationAccessor extends CustomEatopPropertyAccessor {
 			}
 		} catch (Exception e) {
 			return reference;
-		}
-		return reference;
-	}
-	
-	private EObject checkTarget(EObject referenced, ErrorModelPrototype reference) {
-		if (reference.getTarget() == referenced) {
-			return null;
 		}
 		return reference;
 	}
