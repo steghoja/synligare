@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2014 Arccore and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors: 
+ *
+ * Contributors:
  *     Arccore - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.eatop.common.ui.util;
@@ -29,6 +29,7 @@ import java.util.Set;
 import org.eclipse.eatop.geastadl.ginfrastructure.gelements.GIdentifiable;
 import org.eclipse.eatop.geastadl.ginfrastructure.gelements.GReferrable;
 import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -80,7 +81,7 @@ public class ModelSearcher {
 
 	/**
 	 * Calculate the path of the given EObject
-	 * 
+	 *
 	 * @param e
 	 *            The EObject to calculate the path for
 	 * @return The path of the given EObject
@@ -98,7 +99,7 @@ public class ModelSearcher {
 
 	/**
 	 * Searching for reference values referring to target. All resources in the resource set are searched.
-	 * 
+	 *
 	 * @param target
 	 *            The object referred to.
 	 * @return A list of all objects found.
@@ -120,10 +121,6 @@ public class ModelSearcher {
 			return false;
 		}
 
-		if (isTypeOf(target, ref)) {
-			return false;
-		}
-
 		if (ref.eClass().eContainer().getClass().getName().endsWith(INSTANCE_REF_PACK)) {
 			return false;
 		}
@@ -133,7 +130,7 @@ public class ModelSearcher {
 
 	/**
 	 * Searching for reference values referring to target. All resources in the resource set are searched.
-	 * 
+	 *
 	 * @param target
 	 *            The object referred to.
 	 * @return A list of all objects found.
@@ -300,6 +297,25 @@ public class ModelSearcher {
 		}
 	}
 
+	/* Get the complete pretty path to an EObject */
+	public static String getPathTo(EObject eo) {
+		StringBuilder sb = new StringBuilder(""); //$NON-NLS-1$
+		if (eo == null) {
+			return sb.toString();
+		}
+		if (eo instanceof GIdentifiable) {
+			sb.append("/" + ((GReferrable) eo).gGetShortName()); //$NON-NLS-1$
+		}
+		EObject parent = eo.eContainer();
+		while (parent != null) {
+			if (parent instanceof GIdentifiable) {
+				sb.insert(0, "/" + ((GIdentifiable) parent).gGetShortName()); //$NON-NLS-1$
+			}
+			parent = parent.eContainer();
+		}
+		return sb.toString();
+	}
+
 	public static String getOriginalMetamodelPackage(EObject eo) {
 		String annotation = EcoreUtil.getAnnotation((EModelElement) eo, "http://www.eclipse.org/emf/2002/GenModel", "documentation"); //$NON-NLS-1$ //$NON-NLS-2$
 		if (annotation == null) {
@@ -338,7 +354,7 @@ public class ModelSearcher {
 	/**
 	 * Checks whether an object is the ancestor of another object, taking into account "virtual" containment caused by
 	 * type-protoype relationships
-	 * 
+	 *
 	 * @param root
 	 *            The root object from which the search begins
 	 * @param target
@@ -383,7 +399,7 @@ public class ModelSearcher {
 	/**
 	 * Checks whether an object is the ancestor, but not the direct parent, of another object, taking into account
 	 * virtual containment
-	 * 
+	 *
 	 * @param root
 	 *            The root object from which the search begins
 	 * @param target
@@ -441,6 +457,23 @@ public class ModelSearcher {
 		}
 
 		return null;
+	}
+
+	public static Map<EClass, List<EObject>> getChildrenMapByEClass(EObject object) {
+		Map<EClass, List<EObject>> result = new HashMap<EClass, List<EObject>>();
+		if (object == null) {
+			return result;
+		}
+		for (EObject eo : object.eContents()) {
+			if (result.containsKey(eo.eClass())) {
+				result.get(eo.eClass()).add(eo);
+			} else {
+				List<EObject> lst = new ArrayList<EObject>();
+				lst.add(eo);
+				result.put(eo.eClass(), lst);
+			}
+		}
+		return result;
 	}
 
 	// This searcher class skips direct parents of elements. That is, will only find virtual

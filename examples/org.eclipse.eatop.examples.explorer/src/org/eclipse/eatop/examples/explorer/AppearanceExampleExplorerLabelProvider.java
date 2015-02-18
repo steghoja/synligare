@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2014 Arccore and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors: 
+ *
+ * Contributors:
  *     Arccore - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.eatop.examples.explorer;
@@ -22,12 +22,14 @@ import org.eclipse.eatop.examples.explorer.internal.messages.Messages;
 import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.jface.viewers.IFontProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.sphinx.emf.explorer.BasicExplorerLabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.navigator.ICommonContentExtensionSite;
 
@@ -53,13 +55,21 @@ public class AppearanceExampleExplorerLabelProvider extends BasicExplorerLabelPr
 			IStructuredSelection selection = (IStructuredSelection) element;
 			element = selection.getFirstElement();
 		}
+		if (element instanceof CategorizationNode) {
+			return ((CategorizationNode) element).getName();
+		}
 
 		String text = super.getText(element);
-		if (isShowTypeName()) {
+		if (isShowTypeName() && typeNameLabelDecorator != null) {
 			return typeNameLabelDecorator.decorateText(text, element);
 		} else {
 			return text;
 		}
+	}
+
+	@Override
+	public StyledString getStyledText(Object element) {
+		return new StyledString(getText(element));
 	}
 
 	private boolean isShowTypeName() {
@@ -69,6 +79,9 @@ public class AppearanceExampleExplorerLabelProvider extends BasicExplorerLabelPr
 	@Override
 	public Font getFont(Object element) {
 		if (element instanceof ChildWrapper) {
+			return new Font(Display.getDefault(), new FontData("Segoe UI", 9, SWT.ITALIC)); //$NON-NLS-1$
+		}
+		if (element instanceof CategorizationNode) {
 			return new Font(Display.getDefault(), new FontData("Segoe UI", 9, SWT.ITALIC)); //$NON-NLS-1$
 		}
 		return new Font(Display.getDefault(), new FontData("Segoe UI", 9, SWT.NONE)); //$NON-NLS-1$
@@ -94,6 +107,9 @@ public class AppearanceExampleExplorerLabelProvider extends BasicExplorerLabelPr
 
 	@Override
 	public Color getForeground(Object element) {
+		if (element instanceof CategorizationNode) {
+			return new Color(Display.getDefault(), new RGB(150, 0, 150));
+		}
 		return null;
 	}
 

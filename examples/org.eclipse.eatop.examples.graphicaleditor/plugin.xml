@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypes">
+      <diagramType
+            id="org.eclipse.eatop.examples.graphicaleditor.diagramType"
+            name="org.eclipse.eatop.examples.graphicaleditor"
+            type="org.eclipse.eatop.examples.graphicaleditor">
+      </diagramType>
+   </extension>
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypeProviders">
+      <diagramTypeProvider
+            class="org.eclipse.eatop.examples.graphicaleditor.provider.EastadlDiagramTypeProvider"
+            description="EAST-ADL Main Editor"
+            id="org.eclipse.eatop.examples.graphicaleditor.diagramTypeProvider"
+            name="org.eclipse.eatop.examples.graphicaleditor">
+         <diagramType
+               id="org.eclipse.eatop.examples.graphicaleditor.diagramType">
+         </diagramType>
+         <diagramType
+               id="org.eclipse.eatop.examples.graphicaleditor.imageProvider">
+         </diagramType>
+      </diagramTypeProvider>
+   </extension>
+   <extension
+         point="org.eclipse.graphiti.ui.imageProviders">
+      <imageProvider
+            class="org.eclipse.eatop.examples.graphicaleditor.provider.EastadlImageProvider"
+            id="org.eclipse.eatop.examples.graphicaleditor.imageProvider">
+      </imageProvider>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.eatop.examples.graphicaleditor.editor.category"
+            name="EAST-ADL Editor">
+      </category>
+      <wizard
+            category="org.eclipse.eatop.examples.graphicaleditor.editor.category"
+            class="org.eclipse.eatop.examples.graphicaleditor.wizards.EastadlGraphitiModelDiagramWizard"
+            hasPages="true"
+            icon="icons/wizban16/NewModel.gif"
+            id="org.eclipse.eatop.examples.graphicaleditor.wizard"
+            name="EAST-ADL Graphiti Editor">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <propertyContributor
+            contributorId="org.eclipse.eatop.examples.graphicaleditor.PropertyContributor">
+         <propertyCategory
+               category="Graphiti"></propertyCategory>
+      </propertyContributor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs
+            contributorId="org.eclipse.eatop.examples.graphicaleditor.PropertyContributor">
+         <propertyTab
+               category="Graphiti"
+               id="graphiti.advanced.tab"
+               label="Advanced">
+         </propertyTab>
+      </propertyTabs>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections
+            contributorId="org.eclipse.eatop.examples.graphicaleditor.PropertyContributor">
+         <propertySection
+               class="org.eclipse.eatop.examples.graphicaleditor.properties.EAPPropertySection"
+               filter="org.eclipse.eatop.examples.graphicaleditor.properties.EAPPropertyFilter"
+               id="graphiti.advanced.tab.eap"
+               tab="graphiti.advanced.tab">
+         </propertySection>
+      </propertySections>
+   </extension>
+</plugin>
