@@ -1,10 +1,12 @@
 package org.eclipse.eatop.examples.tableview.accessors;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.eclipse.eatop.eastadl21.EAPrototype;
 import org.eclipse.eatop.geastadl.ginfrastructure.gelements.GReferrable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -21,7 +23,7 @@ public class AllocationAccessor extends CustomEatopPropertyAccessor {
 		Set<EObject> requirements = new LinkedHashSet<EObject>();
 		
 		ECrossReferenceAdapter referenceAdapter = ECrossReferenceAdapterFactory.INSTANCE.adapt(rowObject);
-		Collection<Setting> inverseReferences = referenceAdapter.getInverseReferences(rowObject);
+		Collection<Setting> inverseReferences = referenceAdapter.getNonNavigableInverseReferences(rowObject, true);
 		
 		for (Setting setting : inverseReferences) {
 			EStructuralFeature feature = setting.getEStructuralFeature();
@@ -31,6 +33,9 @@ public class AllocationAccessor extends CustomEatopPropertyAccessor {
 					EObject eObject = setting.getEObject();
 					while (eObject != null && !(eObject instanceof GReferrable)) {
 						eObject = eObject.eContainer();
+					}
+					if (eObject instanceof EAPrototype) {
+						eObject = checkType(rowObject, (EAPrototype) eObject);
 					}
 					if (eObject != null) {
 						requirements.add(eObject);
@@ -43,6 +48,19 @@ public class AllocationAccessor extends CustomEatopPropertyAccessor {
 		return new ArrayList<EObject>(requirements);
 	}
 
+	private EObject checkType(EObject referenced, EAPrototype reference) {
+		try {
+			Method getType = reference.getClass().getMethod("getType");
+			Object type = getType.invoke(reference);
+			if (type == referenced) {
+				return null;
+			}
+		} catch (Exception e) {
+			return reference;
+		}
+		return reference;
+	}
+	
 	@Override
 	public String getName() {
 		return "Incoming references";
