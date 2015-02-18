@@ -29,7 +29,13 @@ public class TableViewHelpers {
 			for (; i < list.size() - 1; i++) {
 				Object value = list.get(i);
 				result += value == null ? "null" : value.toString();
-				result += separator;
+				if (value instanceof String) {
+					String st = (String) value;
+					if (!st.isEmpty()) {
+						result += separator;
+					}
+				}
+				
 			}
 			Object display = list.get(i);
 			result += display == null ? "null" : display.toString();
