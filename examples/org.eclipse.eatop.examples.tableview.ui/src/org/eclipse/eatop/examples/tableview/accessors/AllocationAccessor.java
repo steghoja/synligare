@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.eatop.eastadl21.EAPrototype;
+import org.eclipse.eatop.eastadl21.ErrorModelPrototype;
 import org.eclipse.eatop.geastadl.ginfrastructure.gelements.GReferrable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -23,7 +24,7 @@ public class AllocationAccessor extends CustomEatopPropertyAccessor {
 		Set<EObject> requirements = new LinkedHashSet<EObject>();
 		
 		ECrossReferenceAdapter referenceAdapter = ECrossReferenceAdapterFactory.INSTANCE.adapt(rowObject);
-		Collection<Setting> inverseReferences = referenceAdapter.getNonNavigableInverseReferences(rowObject, true);
+		Collection<Setting> inverseReferences = referenceAdapter.getInverseReferences(rowObject);
 		
 		for (Setting setting : inverseReferences) {
 			EStructuralFeature feature = setting.getEStructuralFeature();
@@ -36,6 +37,9 @@ public class AllocationAccessor extends CustomEatopPropertyAccessor {
 					}
 					if (eObject instanceof EAPrototype) {
 						eObject = checkType(rowObject, (EAPrototype) eObject);
+					}
+					if (eObject instanceof ErrorModelPrototype) {
+						eObject = checkTarget(rowObject, (ErrorModelPrototype) eObject);
 					}
 					if (eObject != null) {
 						requirements.add(eObject);
@@ -57,6 +61,13 @@ public class AllocationAccessor extends CustomEatopPropertyAccessor {
 			}
 		} catch (Exception e) {
 			return reference;
+		}
+		return reference;
+	}
+	
+	private EObject checkTarget(EObject referenced, ErrorModelPrototype reference) {
+		if (reference.getTarget() == referenced) {
+			return null;
 		}
 		return reference;
 	}
