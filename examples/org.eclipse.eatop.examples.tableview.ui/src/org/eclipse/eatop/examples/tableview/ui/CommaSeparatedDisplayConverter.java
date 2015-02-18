@@ -1,12 +1,13 @@
 package org.eclipse.eatop.examples.tableview.ui;
 
-import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.eatop.examples.tableview.TableViewHelpers;
 
 public class CommaSeparatedDisplayConverter extends GEatopDisplayConverter {
 	
 	@Override
-	protected Object getConvertedMultiLine(ArrayList<Object> displayCollection) {
+	protected String getConvertedMultiLine(List<Object> displayCollection) {
 		return TableViewHelpers.toCommaSeparatedString(displayCollection);
 	}
 }
