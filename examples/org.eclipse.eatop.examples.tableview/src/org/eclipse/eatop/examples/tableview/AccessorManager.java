@@ -50,9 +50,9 @@ public class AccessorManager {
 				String p2 = priorities.get(o2);
 				int val;
 				
-				if(p1 == p2)        val = 0;
-				else if(p1 == null) val = 1;
+				if(p1 == null) val = 1;
 				else if(p2 == null) val = -1;
+				else if (p1.equals(p2)) val = 0;
 				else                val = p1.compareTo(p2);
 				
 				return val;

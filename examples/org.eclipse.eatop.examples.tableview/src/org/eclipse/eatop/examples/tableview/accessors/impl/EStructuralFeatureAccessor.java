@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
+import org.eclipse.nebula.widgets.nattable.config.IConfigRegistry;
 import org.eclipse.sphinx.emf.util.WorkspaceTransactionUtil;
 
 public class EStructuralFeatureAccessor implements IEObjectPropertyAccessor {
@@ -83,10 +84,6 @@ public class EStructuralFeatureAccessor implements IEObjectPropertyAccessor {
 	public List<String> getConfigLabels() {
 		List<String> labels = new ArrayList<String>();
 
-		labels.add(IConfigLabels.EDITABLE);
-
-		labels.add(IConfigLabels.ALIGN_LEFT);
-
 		labels.add(IConfigLabels.EDITOR_TEXT);
 
 		return labels;
@@ -98,12 +95,12 @@ public class EStructuralFeatureAccessor implements IEObjectPropertyAccessor {
 	}
 
 	@Override
-	public Object canonicalToDisplayValue(Object canonicalValue) {
+	public Object canonicalToDisplayValue(Object canonicalValue, IConfigRegistry configRegistry) {
 		return canonicalValue;
 	}
 
 	@Override
-	public Object displayToCanonicalValue(Object displayValue) {
+	public Object displayToCanonicalValue(Object displayValue, IConfigRegistry configRegistry) {
 		return displayValue;
 	}
 

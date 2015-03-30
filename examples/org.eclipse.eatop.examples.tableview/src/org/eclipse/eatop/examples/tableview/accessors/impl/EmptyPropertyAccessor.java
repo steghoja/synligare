@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.eclipse.eatop.examples.tableview.accessors.IEObjectPropertyAccessor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.nebula.widgets.nattable.config.IConfigRegistry;
 
 public class EmptyPropertyAccessor implements IEObjectPropertyAccessor {
 
@@ -34,12 +35,12 @@ public class EmptyPropertyAccessor implements IEObjectPropertyAccessor {
 	}
 
 	@Override
-	public Object canonicalToDisplayValue(Object canonicalValue) {
+	public Object canonicalToDisplayValue(Object canonicalValue, IConfigRegistry configRegistry) {
 		return null;
 	}
 
 	@Override
-	public Object displayToCanonicalValue(Object displayValue) {
+	public Object displayToCanonicalValue(Object displayValue, IConfigRegistry configRegistry) {
 		return null;
 	}
 

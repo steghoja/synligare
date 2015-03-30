@@ -23,6 +23,10 @@
          id="org.eclipse.eatop.examples.emf.compare.feature"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.eatop.examples.tableview.feature"
+         version="0.0.0"/>
+
    <plugin
          id="org.eclipse.eatop.examples.actions"
          download-size="0"

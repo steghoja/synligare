@@ -7,6 +7,7 @@ import org.eclipse.eatop.eastadl21.DesignFunctionType;
 import org.eclipse.eatop.eastadl21.TraceableSpecification;
 import org.eclipse.eatop.examples.tableview.ui.GEatopDisplayConverter;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.nebula.widgets.nattable.config.IConfigRegistry;
 
 public class TraceableSpecificationAccessor extends CustomEatopPropertyAccessor {
 	
@@ -43,12 +44,12 @@ public class TraceableSpecificationAccessor extends CustomEatopPropertyAccessor 
 	}
 
 	@Override
-	public Object canonicalToDisplayValue(Object canonicalValue) {
+	public Object canonicalToDisplayValue(Object canonicalValue, IConfigRegistry configResistry) {
 		return displayConverter.canonicalToDisplayValue(canonicalValue);
 	}
 
 	@Override
-	public Object displayToCanonicalValue(Object displayValue) {
+	public Object displayToCanonicalValue(Object displayValue, IConfigRegistry configResistry) {
 		return displayConverter.displayToCanonicalValue(displayValue);
 	}
 

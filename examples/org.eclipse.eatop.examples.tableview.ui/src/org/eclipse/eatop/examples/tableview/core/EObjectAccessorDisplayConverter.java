@@ -30,13 +30,13 @@ public class EObjectAccessorDisplayConverter implements IDisplayConverter {
 	@Override
 	public Object canonicalToDisplayValue(ILayerCell cell,
 			IConfigRegistry configRegistry, Object canonicalValue) {
-		return accessor.canonicalToDisplayValue(canonicalValue, cell.getColumnIndex());
+		return accessor.canonicalToDisplayValue(canonicalValue, cell.getColumnIndex(), configRegistry);
 	}
 
 	@Override
 	public Object displayToCanonicalValue(ILayerCell cell,
 			IConfigRegistry configRegistry, Object displayValue) {
-		return accessor.displayToCanonicalValue(displayValue, cell.getColumnIndex());
+		return accessor.displayToCanonicalValue(displayValue, cell.getColumnIndex(), configRegistry);
 	}
 
 }

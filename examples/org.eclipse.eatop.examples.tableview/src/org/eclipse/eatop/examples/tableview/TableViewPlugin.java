@@ -64,6 +64,7 @@ public class TableViewPlugin extends AbstractUIPlugin {
 		
 		reg.put("lock",    imageDescriptorFromPlugin(PLUGIN_ID, "icons/lock.png"));
 		reg.put("columns", imageDescriptorFromPlugin(PLUGIN_ID, "icons/text_columns.png"));
+		reg.put("resize", imageDescriptorFromPlugin(PLUGIN_ID, "icons/resize.png"));
 		
 	}
 	

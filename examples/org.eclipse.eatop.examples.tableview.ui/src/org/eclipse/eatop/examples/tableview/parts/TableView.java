@@ -11,11 +11,14 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.ISelectionService;
+import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 
@@ -40,6 +43,7 @@ public class TableView extends ViewPart{
 					}
 				}
 				table.updateTable(data, autoResize.isChecked());
+				parent.layout();
 			}
 		}
 	};
@@ -60,7 +64,7 @@ public class TableView extends ViewPart{
 	private class AutoResizeToggleAction extends Action {
 		public AutoResizeToggleAction() {
 			super("Automatic resize", IAction.AS_CHECK_BOX);
-			setImageDescriptor(TableViewPlugin.getImageDescriptor("columns"));
+			setImageDescriptor(TableViewPlugin.getImageDescriptor("resize"));
 		}
 
 		@Override public void run() {
@@ -68,16 +72,54 @@ public class TableView extends ViewPart{
 		}
 	};
 	
+	public class MultiLineToggleAction extends Action {
+		public MultiLineToggleAction() {
+			super("Multi line rows", IAction.AS_CHECK_BOX);
+			setImageDescriptor(TableViewPlugin.getImageDescriptor("columns"));
+		}
+		
+		@Override
+		public void run() {
+			if (isChecked()) {
+				table.setMultiLine(true);
+			} else {
+				table.setMultiLine(false);
+			}
+			table.refresh(autoResize.isChecked());
+		}
+	}
+	
+	public class SaveToExcelAction extends Action {
+		public SaveToExcelAction() {
+			super("Export to Excel", IAction.AS_PUSH_BUTTON);
+			setImageDescriptor(PlatformUI.getWorkbench()
+			        .getSharedImages()
+	        		.getImageDescriptor(ISharedImages.IMG_ETOOL_SAVE_EDIT));
+		}
+		
+		@Override
+		public void run() {
+			table.saveToExcel();
+		}
+	}
+	
 	Action lockSelection = new LockSelectionToggleAction();
 	Action autoResize = new AutoResizeToggleAction();
+	Action multiLine = new MultiLineToggleAction();
+	Action saveToExcelAction = new SaveToExcelAction();
 	
 	private ISelectionService selectionService;
 	private Table table;
+	private Composite parent;
+	
 	public TableView() { }
 
 	@Override
 	public void createPartControl(Composite parent) {
-		table = new Table(parent);
+		this.parent = parent;
+		StackLayout stackLayout = new StackLayout();
+		parent.setLayout(stackLayout);
+		table = new Table(parent, stackLayout);
 		selectionService = getSite().getWorkbenchWindow().getSelectionService();
 		selectionService.addSelectionListener(listener);
 		createToolBar();
@@ -107,9 +149,15 @@ public class TableView extends ViewPart{
 
 		autoResize.setChecked(true);
 		toolBar.add(autoResize);		
+		
+		autoResize.setChecked(true);
+		toolBar.add(multiLine);
+		
+		toolBar.add(saveToExcelAction);	
 	}
 
 	public void refresh() {
 		table.refresh(autoResize.isChecked());
+		parent.layout();
 	}
 }
