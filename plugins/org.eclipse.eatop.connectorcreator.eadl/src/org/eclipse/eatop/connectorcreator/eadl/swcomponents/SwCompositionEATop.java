@@ -7,9 +7,11 @@ import org.eclipse.eatop.connectorcreator.eadl.ports.PortPrototypeEATop;
 import org.eclipse.eatop.connectorcreator.ports.PortPrototypeInterface;
 import org.eclipse.eatop.connectorcreator.swcomponents.SwComponentPrototypeInterface;
 import org.eclipse.eatop.connectorcreator.swcomponents.SwCompositionInterface;
+import org.eclipse.eatop.eastadl21.AnalysisFunctionPrototype;
 import org.eclipse.eatop.eastadl21.DesignFunctionType;
 import org.eclipse.eatop.eastadl21.FunctionPort;
 import org.eclipse.eatop.eastadl21.FunctionPrototype;
+import org.eclipse.eatop.eastadl21.FunctionType;
 import org.eclipse.emf.ecore.EObject;
 
 
@@ -47,8 +49,8 @@ public class SwCompositionEATop implements SwCompositionInterface {
 
 	@Override
 	public String getName() {
-		if (composition instanceof DesignFunctionType) {
-			DesignFunctionType type = (DesignFunctionType) composition;
+		if (composition instanceof FunctionType) {
+			FunctionType type = (FunctionType) composition;
 			return type.getShortName();
 		}
 		return "";

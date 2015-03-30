@@ -85,13 +85,13 @@ public class AssemblyPortEATop extends PortRepresentationAbstract {
 		
 		for (PortRepresentationInterface abstractPort : getAllPorts()) {
 			if (abstractPort instanceof PortRepresentationAbstract) {
-				PortRepresentationAbstract autosarPort = (PortRepresentationAbstract) abstractPort;
-				if (abstractPort instanceof AssemblyPortEATop && autosarPort.port.getPortDirection().equals(assemblyDirection) && type.equals(autosarPort.type) && !equals(autosarPort)) {
+				PortRepresentationAbstract eaPort = (PortRepresentationAbstract) abstractPort;
+				if (abstractPort instanceof AssemblyPortEATop && eaPort.port.getPortDirection().equals(assemblyDirection) && type.equals(eaPort.type) && !equals(eaPort)) {
 					AssemblyPortEATop assembly = (AssemblyPortEATop) abstractPort;
 					boolean connected = isConnected(assembly);
 					result.add(new AssemblyPortEATop(assembly.port, assembly.componentPrototype, assembly.type, connected));
 				}
-				if (abstractPort instanceof DelegationPortEATop && autosarPort.port.getPortDirection().equals(delegationDirection) && type.equals(autosarPort.type) && !equals(autosarPort)) {
+				if (abstractPort instanceof DelegationPortEATop && eaPort.port.getPortDirection().equals(delegationDirection) && type.equals(eaPort.type) && !equals(eaPort)) {
 					DelegationPortEATop delegation = (DelegationPortEATop) abstractPort;
 					boolean connected = isConnected(delegation);
 					result.add(new DelegationPortEATop(delegation.port, delegation.swComposition, delegation.type, connected));

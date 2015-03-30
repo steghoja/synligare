@@ -19,6 +19,8 @@ import org.eclipse.eatop.eastadl21.FunctionConnector;
 import org.eclipse.eatop.eastadl21.FunctionFlowPort;
 import org.eclipse.eatop.eastadl21.FunctionPort;
 import org.eclipse.eatop.eastadl21.FunctionPrototype;
+import org.eclipse.eatop.eastadl21.HardwareComponentPrototype;
+import org.eclipse.eatop.eastadl21.HardwarePort;
 import org.eclipse.emf.ecore.EObject;
 
 public class SwComponentPrototypeEATop implements SwComponentPrototypeInterface {
@@ -63,13 +65,17 @@ public class SwComponentPrototypeEATop implements SwComponentPrototypeInterface 
 		List<PortPrototypeInterface> result = new ArrayList<PortPrototypeInterface>();
 		if (prototype instanceof DesignFunctionPrototype) {
 			DesignFunctionPrototype designFunction = (DesignFunctionPrototype) prototype;
-			for (FunctionPort port : designFunction.getType().getPort()) {
-				result.add(new PortPrototypeEATop(port));
+			if (designFunction.getType() != null) {
+				for (FunctionPort port : designFunction.getType().getPort()) {
+					result.add(new PortPrototypeEATop(port));
+				}	
 			}
 		} else if (prototype instanceof AnalysisFunctionPrototype) {
 			AnalysisFunctionPrototype analysisFunction = (AnalysisFunctionPrototype) prototype;
-			for (FunctionPort port : analysisFunction.getType().getPort()) {
-				result.add(new PortPrototypeEATop(port));
+			if (analysisFunction.getType() != null) {
+				for (FunctionPort port : analysisFunction.getType().getPort()) {
+					result.add(new PortPrototypeEATop(port));
+				}
 			}
 		}
 		return result;
