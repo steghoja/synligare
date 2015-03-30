@@ -700,6 +700,9 @@ public class EMFCompareStructureMergeViewer extends AbstractStructuredViewerWrap
 			// display problem tabs if any
 			SWTUtil.safeAsyncExec(new Runnable() {
 				public void run() {
+					if (comparison.getDiagnostic() == null) {
+						comparison.setDiagnostic(new BasicDiagnostic());
+					}
 					updateProblemIndication(comparison.getDiagnostic());
 				}
 			});
@@ -867,6 +870,9 @@ public class EMFCompareStructureMergeViewer extends AbstractStructuredViewerWrap
 	private void selectFirstDiffOrDisplayLabelViewer(final Comparison comparison) {
 		ICompareInput compareInput = (ICompareInput)EcoreUtil.getAdapter(comparison.eAdapters(),
 				ICompareInput.class);
+		if (compareInput == null) {
+			compareInput = new TreeNodeCompareInput(new TreeCompareInputAdapterFactory());
+		}
 		List<Diff> differences = comparison.getDifferences();
 		if (differences.isEmpty()) {
 			navigatable.fireOpen(new NoDifferencesCompareInput(compareInput));
