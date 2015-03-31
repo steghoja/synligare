@@ -242,11 +242,7 @@ public abstract class PortRepresentationAbstract implements PortRepresentationIn
 			AssemblyPortEATop assemblyPort = (AssemblyPortEATop) portRepresentation;
 			DelegationPortEATop delegationPort = (DelegationPortEATop) this;
 			return assemblyPort.getConnector(delegationPort);
-		} else if (this instanceof DelegationPortEATop && portRepresentation instanceof DelegationPortEATop) {
-			DelegationPortEATop delegationPort1 = (DelegationPortEATop) portRepresentation;
-			DelegationPortEATop delegationPort2 = (DelegationPortEATop) this;
-			delegationPort1.getConnector(delegationPort2);
-		}
+		} 
 		return null;
 	}
 	
