@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.eatop.connectorcreator.ports.PortPrototypeInterface;
-import org.eclipse.eatop.connectorcreator.ports.PortRepresentationInterface;
 import org.eclipse.eatop.connectorcreator.ports.PortPrototypeInterface.PortDirection;
+import org.eclipse.eatop.connectorcreator.ports.PortRepresentationInterface;
 import org.eclipse.eatop.connectorcreator.swcomponents.SwComponentPrototypeInterface;
 import org.eclipse.eatop.connectorcreator.swcomponents.SwCompositionInterface;
-import org.eclipse.eatop.eastadl21.DesignFunctionPrototype;
+import org.eclipse.eatop.eastadl21.ErrorModelPrototype;
+import org.eclipse.eatop.eastadl21.FaultFailurePort;
+import org.eclipse.eatop.eastadl21.FaultFailurePropagationLink;
+import org.eclipse.eatop.eastadl21.FaultFailurePropagationLink_fromPort;
+import org.eclipse.eatop.eastadl21.FaultFailurePropagationLink_toPort;
 import org.eclipse.eatop.eastadl21.FunctionClientServerPort;
 import org.eclipse.eatop.eastadl21.FunctionConnector;
 import org.eclipse.eatop.eastadl21.FunctionConnector_port;
@@ -54,6 +58,8 @@ public class DelegationPortEATop extends PortRepresentationAbstract {
 					result.add(new AssemblyPortEATop(portPrototype, componentPrototype, PortType.FLOW));
 				} else if (portPrototype.getObject() instanceof FunctionClientServerPort) {
 					result.add(new AssemblyPortEATop(portPrototype, componentPrototype, PortType.CLIENTSERVER));
+				} else if (portPrototype.getObject() instanceof FaultFailurePort) {
+					result.add(new AssemblyPortEATop(portPrototype, componentPrototype, PortType.FAULTFAILURE));
 				}
 			}
 		}
@@ -64,25 +70,12 @@ public class DelegationPortEATop extends PortRepresentationAbstract {
 					result.add(new DelegationPortEATop(portRepresentationInterface, composition, PortType.FLOW));
 				} else if (portRepresentationInterface.getObject() instanceof FunctionClientServerPort) {
 					result.add(new DelegationPortEATop(portRepresentationInterface, composition, PortType.CLIENTSERVER));
+				} else if (portRepresentationInterface.getObject() instanceof FaultFailurePort) {
+					result.add(new DelegationPortEATop(portRepresentationInterface, composition, PortType.FAULTFAILURE));
 				}
 			}
 		}
 		return result;
-	}
-
-	@Override
-	public String getContainerName() {
-		return swComposition.getName();
-	}
-
-	@Override
-	public boolean getIsConnected() {
-		return isConnected;
-	}
-
-	@Override
-	public void deleteConnection(PortRepresentationInterface lowerElement) {
-		//Never gets here since left list only contains AssemblyPorts
 	}
 	
 	protected Object getConnector(DelegationPortEATop portRepresentation) {
@@ -125,10 +118,59 @@ public class DelegationPortEATop extends PortRepresentationAbstract {
 						}
 					}
 				}
+				if (element instanceof FaultFailurePropagationLink) {
+					if (swComposition.getObject() instanceof EObject
+							&& portRepresentation.swComposition.getObject() instanceof EObject
+							&& port.getObject() instanceof FaultFailurePort
+							&& portRepresentation.port.getObject() instanceof FaultFailurePort) {
+						FaultFailurePropagationLink connector = (FaultFailurePropagationLink) element;
+						FaultFailurePropagationLink_fromPort fromPort = connector.getFromPort();
+						FaultFailurePropagationLink_toPort toPort = connector.getToPort();
+						
+						FaultFailurePort port1 = (FaultFailurePort) port.getObject();
+						EObject component1 = (EObject) swComposition.getObject();
+	
+						FaultFailurePort port2 = (FaultFailurePort) portRepresentation.port.getObject();
+						EObject component2 = (EObject) portRepresentation.swComposition.getObject();
+	
+						FaultFailurePort fromFault = fromPort.getFaultFailurePort();
+						EList<ErrorModelPrototype> fromErrorProtList = fromPort.getErrorModelPrototype();
+						
+						FaultFailurePort toFault = toPort.getFaultFailurePort();
+						EList<ErrorModelPrototype> toErrorProtList = toPort.getErrorModelPrototype();
+
+						if (port1.equals(fromFault) && fromErrorProtList.contains(component1)) {
+							if(port2.equals(toFault) && toErrorProtList.contains(component2)) {
+								return connector;
+							} 
+						} else if (port1.equals(toFault) && toErrorProtList.contains(component1)) {
+							if(port2.equals(fromFault) && fromErrorProtList.contains(component2)) {
+								return connector;
+							}
+						}
+					}
+				}
 			}
 		}
 		return null;
 	}
+
+	@Override
+	public String getContainerName() {
+		return swComposition.getName();
+	}
+
+	@Override
+	public boolean getIsConnected() {
+		return isConnected;
+	}
+
+	@Override
+	public void deleteConnection(PortRepresentationInterface lowerElement) {
+		//Never gets here since left list only contains AssemblyPorts
+	}
+
+
 
 	@Override
 	public boolean isConnected(PortRepresentationInterface portRepresentation) {

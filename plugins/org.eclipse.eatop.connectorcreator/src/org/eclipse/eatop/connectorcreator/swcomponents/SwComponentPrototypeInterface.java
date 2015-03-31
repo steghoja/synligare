@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.eclipse.eatop.connectorcreator.ports.PortPrototypeInterface;
 import org.eclipse.eatop.connectorcreator.ports.PortRepresentationInterface;
-import org.eclipse.jface.viewers.IStructuredSelection;
 
 public interface SwComponentPrototypeInterface {
 	/**

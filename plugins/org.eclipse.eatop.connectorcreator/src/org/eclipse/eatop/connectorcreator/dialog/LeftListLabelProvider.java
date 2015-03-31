@@ -1,7 +1,7 @@
 package org.eclipse.eatop.connectorcreator.dialog;
 
-import org.eclipse.eatop.connectorcreator.ports.PortRepresentationInterface;
 import org.eclipse.eatop.connectorcreator.ports.PortPrototypeInterface.PortDirection;
+import org.eclipse.eatop.connectorcreator.ports.PortRepresentationInterface;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;

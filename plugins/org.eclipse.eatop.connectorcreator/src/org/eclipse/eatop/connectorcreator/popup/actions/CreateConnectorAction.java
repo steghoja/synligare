@@ -14,13 +14,13 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 
-public class NewAction implements IObjectActionDelegate {
+public class CreateConnectorAction implements IObjectActionDelegate {
 	private Shell shell;
 	
 	/**
 	 * Constructor for Action1.
 	 */
-	public NewAction() {
+	public CreateConnectorAction() {
 		super();
 	}
 

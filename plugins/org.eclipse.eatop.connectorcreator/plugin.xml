@@ -7,7 +7,7 @@
             id="org.eclipse.eatop.connectcreator.createEATopConnection"
             objectClass="org.eclipse.eatop.eastadl21.FunctionPrototype">
          <action
-               class="org.eclipse.eatop.connectorcreator.popup.actions.NewAction"
+               class="org.eclipse.eatop.connectorcreator.popup.actions.CreateConnectorAction"
                icon="META-INF/icons/portOverviewIcon.png"
                id="org.eclipse.eatop.connectorcreator.newAction"
                label="Create connection">
@@ -20,7 +20,20 @@
             id="org.eclipse.eatop.connectcreator.createAutosarConnection"
             objectClass="autosar40.swcomponent.composition.SwComponentPrototype">
          <action
-               class="org.eclipse.eatop.connectorcreator.popup.actions.NewAction"
+               class="org.eclipse.eatop.connectorcreator.popup.actions.CreateConnectorAction"
+               icon="META-INF/icons/portOverviewIcon.png"
+               id="org.eclipse.eatop.connectorcreator.newAction"
+               label="Create connection">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.eclipse.eatop.connectcreator.createAutosarConnection"
+            objectClass="org.eclipse.eatop.eastadl21.ErrorModelPrototype">
+         <action
+               class="org.eclipse.eatop.connectorcreator.popup.actions.CreateConnectorAction"
                icon="META-INF/icons/portOverviewIcon.png"
                id="org.eclipse.eatop.connectorcreator.newAction"
                label="Create connection">

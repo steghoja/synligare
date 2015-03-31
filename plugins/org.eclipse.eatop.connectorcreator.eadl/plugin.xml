@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.core.runtime.adapters">
       <factory
-            adaptableType="org.eclipse.eatop.eastadl21.FunctionPrototype"
+            adaptableType="org.eclipse.eatop.eastadl21.EAPrototype"
             class="org.eclipse.eatop.connectorcreator.eadl.adapterfactory.SwComponentAdapterFactory">
          <adapter
                type="org.eclipse.eatop.connectorcreator.swcomponents.SwComponentPrototypeInterface">

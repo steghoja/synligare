@@ -8,10 +8,10 @@ import org.eclipse.eatop.eastadl21.FunctionFlowPort;
 import org.eclipse.eatop.eastadl21.FunctionPort;
 
 
-public class PortPrototypeEATop implements PortPrototypeInterface {
+public class FunctionPortEATop implements PortPrototypeInterface {
 	private FunctionPort port;
 
-	public PortPrototypeEATop(FunctionPort port) {
+	public FunctionPortEATop(FunctionPort port) {
 		this.port = port;
 	}
 
@@ -46,4 +46,5 @@ public class PortPrototypeEATop implements PortPrototypeInterface {
 		}
 		return null;
 	}
+
 }
