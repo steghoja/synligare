@@ -11,12 +11,12 @@ import org.eclipse.swt.graphics.Image;
 public class RightListLabelProvider implements ILabelProvider {
 	HashMap<String, Image> imageMap = new HashMap<String, Image>() {
 		private static final long serialVersionUID = -2492700282717978144L;
-
 		{
 			put("lib/RxChannel.png", new Image(null, this.getClass().getClassLoader().getResourceAsStream("lib/RxChannel.png")));
 			put("lib/TxChannel.png", new Image(null, this.getClass().getClassLoader().getResourceAsStream("lib/TxChannel.png")));
 			put("lib/arrow_left_right.gif", new Image(null, this.getClass().getClassLoader().getResourceAsStream("lib/arrow_left_right.gif")));
 			put("lib/ok.png",new Image(null, this.getClass().getClassLoader().getResourceAsStream("lib/ok.png")));
+			put("lib/pin.png", new Image(null, this.getClass().getClassLoader().getResourceAsStream("lib/pin.png")));
 		}
 	};
 	@Override
@@ -51,6 +51,8 @@ public class RightListLabelProvider implements ILabelProvider {
 				return imageMap.get("lib/TxChannel.png");
 			} else if (portRepresentation.getPortDirection().equals(PortDirection.INOUT)) {
 				return imageMap.get("lib/arrow_left_right.gif");
+			} else if (portRepresentation.getPortDirection().equals(PortDirection.PIN)) {
+				return imageMap.get("lib/pin.png");
 			}
 		}
 		return null;

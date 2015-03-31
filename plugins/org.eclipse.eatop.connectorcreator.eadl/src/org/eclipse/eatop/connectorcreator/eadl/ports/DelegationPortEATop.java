@@ -8,19 +8,10 @@ import org.eclipse.eatop.connectorcreator.ports.PortPrototypeInterface.PortDirec
 import org.eclipse.eatop.connectorcreator.ports.PortRepresentationInterface;
 import org.eclipse.eatop.connectorcreator.swcomponents.SwComponentPrototypeInterface;
 import org.eclipse.eatop.connectorcreator.swcomponents.SwCompositionInterface;
-import org.eclipse.eatop.eastadl21.ErrorModelPrototype;
 import org.eclipse.eatop.eastadl21.FaultFailurePort;
-import org.eclipse.eatop.eastadl21.FaultFailurePropagationLink;
-import org.eclipse.eatop.eastadl21.FaultFailurePropagationLink_fromPort;
-import org.eclipse.eatop.eastadl21.FaultFailurePropagationLink_toPort;
 import org.eclipse.eatop.eastadl21.FunctionClientServerPort;
-import org.eclipse.eatop.eastadl21.FunctionConnector;
-import org.eclipse.eatop.eastadl21.FunctionConnector_port;
 import org.eclipse.eatop.eastadl21.FunctionFlowPort;
-import org.eclipse.eatop.eastadl21.FunctionPort;
-import org.eclipse.eatop.eastadl21.FunctionPrototype;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.eatop.eastadl21.HardwarePort;
 
 public class DelegationPortEATop extends PortRepresentationAbstract {
 	public SwCompositionInterface swComposition;
@@ -60,6 +51,8 @@ public class DelegationPortEATop extends PortRepresentationAbstract {
 					result.add(new AssemblyPortEATop(portPrototype, componentPrototype, PortType.CLIENTSERVER));
 				} else if (portPrototype.getObject() instanceof FaultFailurePort) {
 					result.add(new AssemblyPortEATop(portPrototype, componentPrototype, PortType.FAULTFAILURE));
+				} else if (portPrototype.getObject() instanceof HardwarePort) {
+					result.add(new AssemblyPortEATop(portPrototype, componentPrototype, PortType.HARDWARE));
 				}
 			}
 		}
@@ -72,7 +65,10 @@ public class DelegationPortEATop extends PortRepresentationAbstract {
 					result.add(new DelegationPortEATop(portRepresentationInterface, composition, PortType.CLIENTSERVER));
 				} else if (portRepresentationInterface.getObject() instanceof FaultFailurePort) {
 					result.add(new DelegationPortEATop(portRepresentationInterface, composition, PortType.FAULTFAILURE));
+				} else if (portRepresentationInterface.getObject() instanceof HardwarePort) {
+					result.add(new DelegationPortEATop(portRepresentationInterface, composition, PortType.HARDWARE));
 				}
+				
 			}
 		}
 		return result;

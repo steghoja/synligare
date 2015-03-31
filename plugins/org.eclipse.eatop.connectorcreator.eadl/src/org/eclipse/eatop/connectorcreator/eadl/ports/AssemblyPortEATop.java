@@ -26,6 +26,11 @@ import org.eclipse.eatop.eastadl21.FunctionConnector_port;
 import org.eclipse.eatop.eastadl21.FunctionFlowPort;
 import org.eclipse.eatop.eastadl21.FunctionPort;
 import org.eclipse.eatop.eastadl21.FunctionPrototype;
+import org.eclipse.eatop.eastadl21.HardwareComponentPrototype;
+import org.eclipse.eatop.eastadl21.HardwareComponentType;
+import org.eclipse.eatop.eastadl21.HardwarePort;
+import org.eclipse.eatop.eastadl21.HardwarePortConnector;
+import org.eclipse.eatop.eastadl21.HardwarePortConnector_port;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -64,6 +69,8 @@ public class AssemblyPortEATop extends PortRepresentationAbstract {
 					result.add(new AssemblyPortEATop(portPrototype, prototype, PortType.CLIENTSERVER));
 				} else if (portPrototype.getObject() instanceof FaultFailurePort) {
 					result.add(new AssemblyPortEATop(portPrototype, prototype, PortType.FAULTFAILURE));
+				} else if (portPrototype.getObject() instanceof HardwarePort) {
+					result.add(new AssemblyPortEATop(portPrototype, prototype, PortType.HARDWARE));
 				}
 			}
 		}
@@ -74,6 +81,8 @@ public class AssemblyPortEATop extends PortRepresentationAbstract {
 				result.add(new DelegationPortEATop(portPrototype, componentPrototype.getComposition(), PortType.CLIENTSERVER));
 			} else if (portPrototype.getObject() instanceof FaultFailurePort) {
 				result.add(new DelegationPortEATop(portPrototype, componentPrototype.getComposition(), PortType.FAULTFAILURE));
+			} else if (portPrototype.getObject() instanceof HardwarePort) {
+				result.add(new DelegationPortEATop(portPrototype, componentPrototype.getComposition(), PortType.HARDWARE));
 			}
 		}
 		return result;
@@ -84,7 +93,6 @@ public class AssemblyPortEATop extends PortRepresentationAbstract {
 		List<PortRepresentationInterface> result = new ArrayList<PortRepresentationInterface>();
 		PortDirection assemblyDirection = null;
 		PortDirection delegationDirection = null;
-		
 		if (portDirection.equals(PortDirection.IN)) {
 			assemblyDirection = PortDirection.OUT;
 			delegationDirection = PortDirection.IN;
@@ -94,6 +102,9 @@ public class AssemblyPortEATop extends PortRepresentationAbstract {
 		} else if (portDirection.equals(PortDirection.INOUT)) {
 			assemblyDirection = PortDirection.INOUT;
 			delegationDirection = PortDirection.INOUT;
+		} else if (portDirection.equals(PortDirection.PIN)) {
+			assemblyDirection = PortDirection.PIN;
+			delegationDirection = PortDirection.PIN;
 		}
 		
 		for (PortRepresentationInterface abstractPort : getAllPorts()) {
@@ -161,6 +172,15 @@ public class AssemblyPortEATop extends PortRepresentationAbstract {
 								d.getFaultFailureConnector().remove(connector);
 							}
 						}
+					} else if (componentPrototype.getObject() instanceof HardwareComponentPrototype) {
+						HardwareComponentPrototype hardwarePrototype = (HardwareComponentPrototype) componentPrototype.getObject();
+						boolean remove = hardwarePrototype.getType().getPortConnector().remove(connector);
+						if (remove == false) {
+							if (hardwarePrototype.eContainer() instanceof HardwareComponentType) {
+								HardwareComponentType d = (HardwareComponentType) hardwarePrototype.eContainer();
+								d.getPortConnector().remove(connector);
+							}
+						}
 					}
 				}
 			}, "Deleting connector");
@@ -176,8 +196,7 @@ public class AssemblyPortEATop extends PortRepresentationAbstract {
 			FunctionPrototype component = (FunctionPrototype) componentPrototype.getObject();
 			for (EObject element : component.eContainer().eContents()) {
 				if (element instanceof FunctionConnector) {
-					if (componentPrototype.getObject() instanceof FunctionPrototype
-							&& port.getObject() instanceof FunctionPort
+					if (port.getObject() instanceof FunctionPort
 							&& outerPortRepresentation.port.getObject() instanceof FunctionPort) {
 						FunctionConnector connector = (FunctionConnector) element;
 						
@@ -189,8 +208,6 @@ public class AssemblyPortEATop extends PortRepresentationAbstract {
 						FunctionConnector_port connectorPort2 = connector.getPort().get(1);
 						
 						FunctionPort port1 = (FunctionPort) port.getObject();
-						FunctionPrototype component1 = (FunctionPrototype) componentPrototype.getObject();
-
 						FunctionPort port2 = (FunctionPort) outerPortRepresentation.port.getObject();
 
 						FunctionPort functionPort1 = connectorPort1.getFunctionPort();
@@ -199,9 +216,9 @@ public class AssemblyPortEATop extends PortRepresentationAbstract {
 						FunctionPort functionPort2 = connectorPort2.getFunctionPort();
 						FunctionPrototype functionPrototype2 = connectorPort2.getFunctionPrototype();
 						
-						if (port2.equals(functionPort1) && port1.equals(functionPort2) && component1.equals(functionPrototype2)) {
+						if (port2.equals(functionPort1) && port1.equals(functionPort2) && component.equals(functionPrototype2)) {
 							return connector;
-						} else if (port2.equals(functionPort2) && port1.equals(functionPort1) && component1.equals(functionPrototype1)) {
+						} else if (port2.equals(functionPort2) && port1.equals(functionPort1) && component.equals(functionPrototype1)) {
 							return connector;
 						}
 					}
@@ -212,16 +229,13 @@ public class AssemblyPortEATop extends PortRepresentationAbstract {
 			ErrorModelPrototype component = (ErrorModelPrototype) componentPrototype.getObject();
 			for (EObject element : component.eContainer().eContents()) {
 				if (element instanceof FaultFailurePropagationLink) {
-					if (componentPrototype.getObject() instanceof ErrorModelPrototype
-							&& port.getObject() instanceof FaultFailurePort
+					if (port.getObject() instanceof FaultFailurePort
 							&& outerPortRepresentation.port.getObject() instanceof FaultFailurePort) {
 						FaultFailurePropagationLink connector = (FaultFailurePropagationLink) element;
 						FaultFailurePropagationLink_fromPort fromPort = connector.getFromPort();
 						FaultFailurePropagationLink_toPort toPort = connector.getToPort();
 						
 						FaultFailurePort port1 = (FaultFailurePort) port.getObject();
-						EObject component1 = (EObject) componentPrototype.getObject();
-	
 						FaultFailurePort port2 = (FaultFailurePort) outerPortRepresentation.port.getObject();
 	
 						FaultFailurePort fromFault = fromPort.getFaultFailurePort();
@@ -230,15 +244,48 @@ public class AssemblyPortEATop extends PortRepresentationAbstract {
 						FaultFailurePort toFault = toPort.getFaultFailurePort();
 						EList<ErrorModelPrototype> toErrorProtList = toPort.getErrorModelPrototype();
 
-						if (port1.equals(fromFault) && port2.equals(toFault) && fromErrorProtList.contains(component1)) {
+						if (port1.equals(fromFault) && port2.equals(toFault) && fromErrorProtList.contains(component)) {
 								return connector;
-						} else if (port1.equals(toFault) && port2.equals(fromFault) && toErrorProtList.contains(component1)) {
+						} else if (port1.equals(toFault) && port2.equals(fromFault) && toErrorProtList.contains(component)) {
 								return connector;
 						}
 					}
 				}
 			}
 		}
+		if (componentPrototype.getObject() instanceof HardwareComponentPrototype) {
+			HardwareComponentPrototype component = (HardwareComponentPrototype) componentPrototype.getObject();
+		for (EObject element : component.eContainer().eContents()) {
+			if (element instanceof HardwarePortConnector) {
+				if (port.getObject() instanceof HardwarePort
+						&& outerPortRepresentation.port.getObject() instanceof HardwarePort) {
+					HardwarePortConnector connector = (HardwarePortConnector) element;
+					
+					if (connector.getPort().size() != 2) {
+						return null;
+					}
+					
+					HardwarePortConnector_port connectorPort1 = connector.getPort().get(0);
+					HardwarePortConnector_port connectorPort2 = connector.getPort().get(1);
+					
+					HardwarePort port1 = (HardwarePort) port.getObject();
+					HardwarePort port2 = (HardwarePort) outerPortRepresentation.port.getObject();
+
+					HardwarePort hardwarePort1 = connectorPort1.getHardwarePort();
+					HardwareComponentPrototype hardwarePrototype1 = connectorPort1.getHardwareComponentPrototype();
+					
+					HardwarePort hardwarePort2 = connectorPort2.getHardwarePort();
+					HardwareComponentPrototype hardwarePrototype2 = connectorPort2.getHardwareComponentPrototype();
+					
+					if (port2.equals(hardwarePort1) && port1.equals(hardwarePort2) && component.equals(hardwarePrototype2)) {
+						return connector;
+					} else if (port2.equals(hardwarePort2) && port1.equals(hardwarePort1) && component.equals(hardwarePrototype1)) {
+						return connector;
+					}
+				}
+			}
+		}
+	}
 		return null;
 	}
 	
@@ -307,9 +354,45 @@ public class AssemblyPortEATop extends PortRepresentationAbstract {
 							if(port2.equals(toFault) && toErrorProtList.contains(component2)) {
 								return connector;
 							} 
-								return connector;
 						} else if (port1.equals(toFault) && toErrorProtList.contains(component1)) {
 							if (port2.equals(fromFault) && fromErrorProtList.contains(component2)) {
+								return connector;
+							}
+						}
+					}
+				}
+				if (element instanceof HardwarePortConnector) {
+					if (componentPrototype.getObject() instanceof HardwareComponentPrototype
+							&& portRepresentation.componentPrototype.getObject() instanceof HardwareComponentPrototype
+							&& port.getObject() instanceof HardwarePort
+							&& portRepresentation.port.getObject() instanceof HardwarePort) {
+						HardwarePortConnector connector = (HardwarePortConnector) element;
+						
+						if (connector.getPort().size() != 2) {
+							return null;
+						}
+						
+						HardwarePortConnector_port connectorPort1 = connector.getPort().get(0);
+						HardwarePortConnector_port connectorPort2 = connector.getPort().get(1);
+						
+						HardwarePort port1 = (HardwarePort) port.getObject();
+						HardwareComponentPrototype component1 = (HardwareComponentPrototype) componentPrototype.getObject();
+
+						HardwarePort port2 = (HardwarePort) portRepresentation.port.getObject();
+						HardwareComponentPrototype component2 = (HardwareComponentPrototype) portRepresentation.componentPrototype.getObject();
+
+						HardwarePort hardwarePort1 = connectorPort1.getHardwarePort();
+						HardwareComponentPrototype hardwarePrototype1 = connectorPort1.getHardwareComponentPrototype();
+						
+						HardwarePort hardwarePort2 = connectorPort2.getHardwarePort();
+						HardwareComponentPrototype hardwarePrototype2 = connectorPort2.getHardwareComponentPrototype();
+
+						if (port1.equals(hardwarePort1) && component1.equals(hardwarePrototype1)) {
+							if(port2.equals(hardwarePort2) && component2.equals(hardwarePrototype2)) {
+								return connector;
+							} 
+						} else if (port1.equals(hardwarePort2) && component1.equals(hardwarePrototype2)) {
+							if (port2.equals(hardwarePort1) && component2.equals(hardwarePrototype1)) {
 								return connector;
 							}
 						}
@@ -324,19 +407,8 @@ public class AssemblyPortEATop extends PortRepresentationAbstract {
 	public boolean equals(Object object) {
 		if (object instanceof AssemblyPortEATop) {
 			AssemblyPortEATop portRepresentation = (AssemblyPortEATop) object;
-			if (componentPrototype.getObject() instanceof FunctionPrototype
-					&& portRepresentation.componentPrototype.getObject() instanceof FunctionPrototype
-					&& port.getObject() instanceof FunctionPort
-					&& portRepresentation.port.getObject() instanceof FunctionPort) {
-				
-				FunctionPort port1 = (FunctionPort) port.getObject();
-				FunctionPrototype component1 = (FunctionPrototype) componentPrototype.getObject();
-
-				FunctionPort port2 = (FunctionPort) portRepresentation.port.getObject();
-				FunctionPrototype component2 = (FunctionPrototype) portRepresentation.componentPrototype.getObject();
-				
-				return port1.equals(port2) && component1.equals(component2);
-			}
+			return port.getObject().equals(portRepresentation.port.getObject()) && 
+					componentPrototype.getObject().equals(portRepresentation.componentPrototype.getObject());
 		}
 		return false;
 	}

@@ -1,8 +1,5 @@
 package org.eclipse.eatop.connectorcreator.eadl.adapterfactory;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.eatop.connectorcreator.eadl.swcomponents.SwComponentPrototypeEATop;
@@ -24,8 +21,6 @@ public class SwComponentAdapterFactory implements IAdapterFactory {
 
 	@Override
 	public Class[] getAdapterList() {
-		List<Class> list = new ArrayList();
-		list.add(SwComponentPrototypeInterface.class);
-		return (Class[]) list.toArray();
+		return new Class[] { SwComponentPrototypeInterface.class };
 	}
 }

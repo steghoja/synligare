@@ -31,4 +31,5 @@ public class ErrorPortEATop implements PortPrototypeInterface {
 			return PortDirection.OUT;
 		}
 		return null;
-	}}
+	}
+}

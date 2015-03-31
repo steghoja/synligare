@@ -18,6 +18,11 @@ import org.eclipse.eatop.eastadl21.FunctionConnector_port;
 import org.eclipse.eatop.eastadl21.FunctionPort;
 import org.eclipse.eatop.eastadl21.FunctionPrototype;
 import org.eclipse.eatop.eastadl21.FunctionType;
+import org.eclipse.eatop.eastadl21.HardwareComponentPrototype;
+import org.eclipse.eatop.eastadl21.HardwareComponentType;
+import org.eclipse.eatop.eastadl21.HardwarePort;
+import org.eclipse.eatop.eastadl21.HardwarePortConnector;
+import org.eclipse.eatop.eastadl21.HardwarePortConnector_port;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.sphinx.emf.util.WorkspaceEditingDomainUtil;
 import org.eclipse.sphinx.emf.util.WorkspaceTransactionUtil;
@@ -25,7 +30,7 @@ import org.eclipse.sphinx.emf.util.WorkspaceTransactionUtil;
 public abstract class PortRepresentationAbstract implements PortRepresentationInterface {
 	
 	public enum PortType {
-		CLIENTSERVER, FLOW, FAULTFAILURE
+		CLIENTSERVER, FLOW, FAULTFAILURE, HARDWARE
 	}
 	
 	public PortPrototypeInterface port;
@@ -119,6 +124,39 @@ public abstract class PortRepresentationAbstract implements PortRepresentationIn
 				}
 			};
 		}
+		if (providerElement.port.getObject() instanceof HardwarePort
+				&& providerElement.componentPrototype.getObject() instanceof HardwareComponentPrototype
+				&& receiverElement.port.getObject() instanceof HardwarePort
+				&& receiverElement.componentPrototype.getObject() instanceof HardwareComponentPrototype) {
+			final HardwarePortConnector connector = Eastadl21Factory.eINSTANCE.createHardwarePortConnector();
+			HardwarePortConnector_port portProvider = Eastadl21Factory.eINSTANCE.createHardwarePortConnector_port();
+			HardwarePortConnector_port portReceiver = Eastadl21Factory.eINSTANCE.createHardwarePortConnector_port();
+			
+			HardwareComponentPrototype hardWarePrototype = (HardwareComponentPrototype) providerElement.componentPrototype.getObject();
+			portProvider.setHardwarePort((HardwarePort) providerElement.port.getObject());
+			portProvider.setHardwareComponentPrototype(hardWarePrototype);
+
+			portReceiver.setHardwarePort((HardwarePort) receiverElement.port.getObject());
+			portReceiver.setHardwareComponentPrototype((HardwareComponentPrototype) receiverElement.componentPrototype.getObject());
+
+			connector.getPort().add(portProvider);
+			connector.getPort().add(portReceiver);
+
+			connector.setShortName(getAssemblyConnectorName(assemblyPortEATop, lowerElement));
+			edit = hardWarePrototype;
+			run = new Runnable() {
+				@Override
+				public void run() {
+					if (providerElement.componentPrototype.getObject() instanceof HardwareComponentPrototype) {
+						HardwareComponentPrototype d = (HardwareComponentPrototype) providerElement.componentPrototype.getObject();
+						if (d.eContainer() instanceof HardwareComponentType) {
+							HardwareComponentType hardWare = (HardwareComponentType) d.eContainer();
+							hardWare.getPortConnector().add(connector);
+						}
+					}
+				}
+			};
+		}
 		if (edit != null && run != null) {
 			executeWrite(run, edit);
 		}
@@ -190,6 +228,35 @@ public abstract class PortRepresentationAbstract implements PortRepresentationIn
 			};
 		}
 		
+		if (providerElement.port.getObject() instanceof HardwarePort
+				&& providerElement.componentPrototype.getObject() instanceof HardwareComponentPrototype
+				&& receiverElement.port.getObject() instanceof HardwarePort) {
+
+			final HardwarePortConnector connector = Eastadl21Factory.eINSTANCE.createHardwarePortConnector();
+			HardwarePortConnector_port portProvider = Eastadl21Factory.eINSTANCE.createHardwarePortConnector_port();
+			HardwarePortConnector_port portReceiver = Eastadl21Factory.eINSTANCE.createHardwarePortConnector_port();
+			
+			HardwareComponentPrototype hardwarePrototype = (HardwareComponentPrototype) providerElement.componentPrototype.getObject();
+			portProvider.setHardwareComponentPrototype(hardwarePrototype);
+			
+			portProvider.setHardwarePort((HardwarePort) providerElement.port.getObject());
+			portReceiver.setHardwarePort((HardwarePort) receiverElement.port.getObject());
+
+			connector.getPort().add(portProvider);
+			connector.getPort().add(portReceiver);
+
+			connector.setShortName(getDelegateConnectorName(assemblyPortEATop, delegationElement));
+			edit = hardwarePrototype;
+			run = new Runnable() {
+				@Override
+				public void run() {
+					if (receiverElement.swComposition.getObject() instanceof HardwareComponentType) {
+						HardwareComponentType d = (HardwareComponentType) receiverElement.swComposition.getObject();
+						d.getPortConnector().add(connector);
+					}
+				}
+			};
+		}
 		if (run != null && edit != null) {
 			executeWrite(run, edit);
 		}

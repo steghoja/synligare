@@ -15,6 +15,7 @@ public class LeftListLabelProvider implements ILabelProvider {
 			put("lib/RxChannel.png", new Image(null, this.getClass().getClassLoader().getResourceAsStream("lib/RxChannel.png")));
 			put("lib/TxChannel.png", new Image(null, this.getClass().getClassLoader().getResourceAsStream("lib/TxChannel.png")));
 			put("lib/arrow_left_right.gif", new Image(null, this.getClass().getClassLoader().getResourceAsStream("lib/arrow_left_right.gif")));
+			put("lib/pin.png", new Image(null, this.getClass().getClassLoader().getResourceAsStream("lib/pin.png")));
 		}
 	};
 	@Override
@@ -48,6 +49,8 @@ public class LeftListLabelProvider implements ILabelProvider {
 				return imageMap.get("lib/TxChannel.png");
 			} else if (portRepresentation.getPortDirection().equals(PortDirection.INOUT)) {
 				return imageMap.get("lib/arrow_left_right.gif");
+			} else if (portRepresentation.getPortDirection().equals(PortDirection.PIN)) {
+				return imageMap.get("lib/pin.png");
 			}
 		}
 		return null;

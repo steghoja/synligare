@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.eatop.connectorcreator.eadl.ports.AssemblyPortEATop;
 import org.eclipse.eatop.connectorcreator.eadl.ports.ErrorPortEATop;
 import org.eclipse.eatop.connectorcreator.eadl.ports.FunctionPortEATop;
+import org.eclipse.eatop.connectorcreator.eadl.ports.HardwarePortEATop;
 import org.eclipse.eatop.connectorcreator.eadl.ports.PortRepresentationAbstract.PortType;
 import org.eclipse.eatop.connectorcreator.eadl.utils.ConnectorUtils;
 import org.eclipse.eatop.connectorcreator.ports.PortPrototypeInterface;
@@ -18,12 +19,16 @@ import org.eclipse.eatop.eastadl21.EAPrototype;
 import org.eclipse.eatop.eastadl21.ErrorModelPrototype;
 import org.eclipse.eatop.eastadl21.FailureOutPort;
 import org.eclipse.eatop.eastadl21.FaultFailurePort;
+import org.eclipse.eatop.eastadl21.FaultFailurePropagationLink;
 import org.eclipse.eatop.eastadl21.FaultInPort;
 import org.eclipse.eatop.eastadl21.FunctionClientServerPort;
 import org.eclipse.eatop.eastadl21.FunctionConnector;
 import org.eclipse.eatop.eastadl21.FunctionFlowPort;
 import org.eclipse.eatop.eastadl21.FunctionPort;
 import org.eclipse.eatop.eastadl21.FunctionPrototype;
+import org.eclipse.eatop.eastadl21.HardwareComponentPrototype;
+import org.eclipse.eatop.eastadl21.HardwarePort;
+import org.eclipse.eatop.eastadl21.HardwarePortConnector;
 import org.eclipse.emf.ecore.EObject;
 
 public class SwComponentPrototypeEATop implements SwComponentPrototypeInterface {
@@ -42,6 +47,9 @@ public class SwComponentPrototypeEATop implements SwComponentPrototypeInterface 
 		}
 		if (prototype instanceof ErrorModelPrototype) {
 			return ((ErrorModelPrototype) prototype).getShortName();
+		}
+		if (prototype instanceof HardwareComponentPrototype) {
+			return ((HardwareComponentPrototype) prototype).getShortName();
 		}
 		return "";
 	}
@@ -66,6 +74,8 @@ public class SwComponentPrototypeEATop implements SwComponentPrototypeInterface 
 				result.add(new AssemblyPortEATop(portPrototype, this, PortType.CLIENTSERVER));
 			} else if (portPrototype.getObject() instanceof FaultFailurePort) {
 				result.add(new AssemblyPortEATop(portPrototype, this, PortType.FAULTFAILURE));
+			} else if (portPrototype.getObject() instanceof HardwarePort) {
+				result.add(new AssemblyPortEATop(portPrototype, this, PortType.HARDWARE));
 			}
 		}
 		return result;
@@ -98,6 +108,13 @@ public class SwComponentPrototypeEATop implements SwComponentPrototypeInterface 
 					result.add(new ErrorPortEATop(port));
 				}
 			}
+		} else if (prototype instanceof HardwareComponentPrototype) {
+			HardwareComponentPrototype hardwareProt = (HardwareComponentPrototype) prototype;
+			if (hardwareProt.getType() != null) {
+				for (HardwarePort port : hardwareProt.getType().getPort()) {
+					result.add(new HardwarePortEATop(port));
+				}
+			}
 		}
 		return result;
 	}
@@ -111,7 +128,17 @@ public class SwComponentPrototypeEATop implements SwComponentPrototypeInterface 
 				if (! ConnectorUtils.validateConnector(connector)) {
 					result.add(connector.getShortName());
 				}
-			} 
+			} else if (element instanceof FaultFailurePropagationLink) {
+				FaultFailurePropagationLink connector = (FaultFailurePropagationLink) element;
+				if (! ConnectorUtils.validateConnector(connector)) {
+					result.add(connector.getShortName());
+				}
+			} else if (element instanceof HardwarePortConnector) {
+				HardwarePortConnector connector = (HardwarePortConnector) element;
+				if (! ConnectorUtils.validateConnector(connector)) {
+					result.add(connector.getShortName());
+				}
+			}
 		}
 		return result;
 	}

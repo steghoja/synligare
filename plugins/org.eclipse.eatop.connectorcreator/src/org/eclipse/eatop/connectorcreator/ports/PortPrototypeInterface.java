@@ -6,7 +6,7 @@ package org.eclipse.eatop.connectorcreator.ports;
  */
 public interface PortPrototypeInterface {
 	public enum PortDirection {
-		IN, OUT, INOUT
+		IN, OUT, INOUT, PIN
 	}
 	/**
 	 * @return: The name of the given Port.

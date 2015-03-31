@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.eatop.connectorcreator.eadl.ports.ErrorPortEATop;
 import org.eclipse.eatop.connectorcreator.eadl.ports.FunctionPortEATop;
+import org.eclipse.eatop.connectorcreator.eadl.ports.HardwarePortEATop;
 import org.eclipse.eatop.connectorcreator.ports.PortPrototypeInterface;
 import org.eclipse.eatop.connectorcreator.swcomponents.SwComponentPrototypeInterface;
 import org.eclipse.eatop.connectorcreator.swcomponents.SwCompositionInterface;
@@ -14,6 +15,9 @@ import org.eclipse.eatop.eastadl21.FaultFailurePort;
 import org.eclipse.eatop.eastadl21.FunctionPort;
 import org.eclipse.eatop.eastadl21.FunctionPrototype;
 import org.eclipse.eatop.eastadl21.FunctionType;
+import org.eclipse.eatop.eastadl21.HardwareComponentPrototype;
+import org.eclipse.eatop.eastadl21.HardwareComponentType;
+import org.eclipse.eatop.eastadl21.HardwarePort;
 import org.eclipse.emf.ecore.EObject;
 
 
@@ -36,6 +40,10 @@ public class SwCompositionEATop implements SwCompositionInterface {
 				ErrorModelPrototype prototype = (ErrorModelPrototype) element;
 				result.add(new SwComponentPrototypeEATop(prototype));
 			}
+			if (element instanceof HardwareComponentPrototype) {
+				HardwareComponentPrototype prototype = (HardwareComponentPrototype) element;
+				result.add(new SwComponentPrototypeEATop(prototype));
+			}
 		}
 		
 		return result;
@@ -53,6 +61,10 @@ public class SwCompositionEATop implements SwCompositionInterface {
 				FaultFailurePort port = (FaultFailurePort) element;
 				result.add(new ErrorPortEATop(port));
 			}
+			if (element instanceof HardwarePort) {
+				HardwarePort port = (HardwarePort) element;
+				result.add(new HardwarePortEATop(port));
+			}
 		}
 		return result;
 	}
@@ -65,6 +77,10 @@ public class SwCompositionEATop implements SwCompositionInterface {
 		}
 		if (composition instanceof ErrorModelType) {
 			ErrorModelType type = (ErrorModelType) composition;
+			return type.getShortName();
+		}
+		if (composition instanceof HardwareComponentType) {
+			HardwareComponentType type = (HardwareComponentType) composition;
 			return type.getShortName();
 		}
 		return "";
