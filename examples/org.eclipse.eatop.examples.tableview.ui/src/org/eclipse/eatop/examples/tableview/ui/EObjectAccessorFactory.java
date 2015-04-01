@@ -6,9 +6,12 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.eclipse.eatop.eastadl21.DesignFunctionType;
+import org.eclipse.eatop.eastadl21.HardwareComponentPrototype;
+import org.eclipse.eatop.eastadl21.Node;
 import org.eclipse.eatop.examples.tableview.accessorfactories.impl.GenericEObjectAccessorFactory;
 import org.eclipse.eatop.examples.tableview.accessors.AllocationAccessor;
 import org.eclipse.eatop.examples.tableview.accessors.EATopEStructuralFeatureAccessor;
+import org.eclipse.eatop.examples.tableview.accessors.FunctionAllocationAccessor;
 import org.eclipse.eatop.examples.tableview.accessors.IEObjectPropertyAccessor;
 import org.eclipse.eatop.examples.tableview.accessors.RequirementAccessor;
 import org.eclipse.eatop.examples.tableview.accessors.TraceableSpecificationAccessor;
@@ -40,6 +43,10 @@ public class EObjectAccessorFactory extends GenericEObjectAccessorFactory {
 		for (EObject eo : data) {
 			if (eo instanceof DesignFunctionType) {
 				accessors.add(new TraceableSpecificationAccessor());
+				break;
+			}
+			if (eo instanceof HardwareComponentPrototype) {
+				accessors.add(new FunctionAllocationAccessor());
 				break;
 			}
 		}
