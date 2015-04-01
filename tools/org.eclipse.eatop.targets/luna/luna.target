@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="EATOP Luna Target" sequenceNumber="18">
+<?pde version="3.8"?><target name="EATOP Luna Target" sequenceNumber="21">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.sdk.ide" version="4.4.1.M20140925-0400"/>
@@ -15,7 +15,6 @@
 <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.8.0.201405281433"/>
 <unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.8.1.201408201453"/>
 <unit id="org.eclipse.gmf.tooling.feature.group" version="3.2.1.201409171321"/>
-<unit id="org.eclipse.graphiti.sdk.feature.feature.group" version="0.11.1.v20140903-1228"/>
 <unit id="org.eclipse.uml2.sdk.feature.group" version="5.0.1.v20140910-1354"/>
 <unit id="org.eclipse.wst.xml_ui.feature.feature.group" version="3.6.1.v201409111852"/>
 <unit id="org.eclipse.xpand.sdk.feature.group" version="2.0.0.v201406030414"/>
@@ -55,6 +54,10 @@
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.license.feature.group" version="0.0.0"/>
 <repository location="http://download.eclipse.org/cbi/updates/license"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.graphiti.sdk.feature.feature.group" version="0.12.0.v20141111-0920"/>
+<repository location="http://download.eclipse.org/releases/mars"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <repository location="http://download.eclipse.org/nattable/releases/1.1.1/repository/"/>

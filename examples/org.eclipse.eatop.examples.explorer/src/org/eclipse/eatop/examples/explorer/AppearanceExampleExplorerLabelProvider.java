@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2014 Arccore and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors: 
+ *
+ * Contributors:
  *     Arccore - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.eatop.examples.explorer;
@@ -22,6 +22,7 @@ import org.eclipse.eatop.examples.explorer.internal.messages.Messages;
 import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.jface.viewers.IFontProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.sphinx.emf.explorer.BasicExplorerLabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
@@ -60,6 +61,11 @@ public class AppearanceExampleExplorerLabelProvider extends BasicExplorerLabelPr
 		} else {
 			return text;
 		}
+	}
+
+	@Override
+	public StyledString getStyledText(Object element) {
+		return new StyledString(getText(element));
 	}
 
 	private boolean isShowTypeName() {
