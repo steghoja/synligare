@@ -18,6 +18,14 @@
    <license url="%licenseURL">
       %license
    </license>
+   
+   <includes
+         id="org.eclipse.eatop.examples.emf.compare.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.eatop.examples.tableview.feature"
+         version="0.0.0"/>
 
    <plugin
          id="org.eclipse.eatop.examples.actions"
@@ -25,7 +33,7 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.eatop.examples.actions.source"
          download-size="0"
@@ -40,13 +48,13 @@
          version="0.0.0"
          unpack="false"/>
 
-	 <plugin
+   <plugin
          id="org.eclipse.eatop.examples.common.ui.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.eatop.examples.editor"
          download-size="0"
@@ -54,7 +62,7 @@
          version="0.0.0"
          unpack="false"/>
 
-	<plugin
+   <plugin
          id="org.eclipse.eatop.examples.editor.source"
          download-size="0"
          install-size="0"
@@ -68,15 +76,29 @@
          version="0.0.0"
          unpack="false"/>
 
-	<plugin
+   <plugin
          id="org.eclipse.eatop.examples.explorer.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.eatop.demonstrator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.eatop.tableview"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.eatop.tableview.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

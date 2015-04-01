@@ -60,10 +60,7 @@ public class AppearanceExampleExplorerLabelProvider extends BasicExplorerLabelPr
 		}
 
 		String text = super.getText(element);
-		if (isShowTypeName()) {
-			if (typeNameLabelDecorator == null) {
-				typeNameLabelDecorator = new TypeNameLabelDecorator();
-			}
+		if (isShowTypeName() && typeNameLabelDecorator != null) {
 			return typeNameLabelDecorator.decorateText(text, element);
 		} else {
 			return text;
