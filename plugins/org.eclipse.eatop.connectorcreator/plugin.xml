@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.eclipse.eatop.connectcreator.createEATopConnection"
+            objectClass="org.eclipse.eatop.eastadl21.FunctionPrototype">
+         <action
+               class="org.eclipse.eatop.connectorcreator.popup.actions.CreateConnectorAction"
+               icon="META-INF/icons/portOverviewIcon.png"
+               id="org.eclipse.eatop.connectorcreator.newAction"
+               label="Create connection">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.eclipse.eatop.connectcreator.createAutosarConnection"
+            objectClass="autosar40.swcomponent.composition.SwComponentPrototype">
+         <action
+               class="org.eclipse.eatop.connectorcreator.popup.actions.CreateConnectorAction"
+               icon="META-INF/icons/portOverviewIcon.png"
+               id="org.eclipse.eatop.connectorcreator.newAction"
+               label="Create connection">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.eclipse.eatop.connectcreator.createAutosarConnection"
+            objectClass="org.eclipse.eatop.eastadl21.ErrorModelPrototype">
+         <action
+               class="org.eclipse.eatop.connectorcreator.popup.actions.CreateConnectorAction"
+               icon="META-INF/icons/portOverviewIcon.png"
+               id="org.eclipse.eatop.connectorcreator.newAction"
+               label="Create connection">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.eclipse.eatop.connectcreator.createAutosarConnection"
+            objectClass="org.eclipse.eatop.eastadl21.HardwareComponentPrototype">
+         <action
+               class="org.eclipse.eatop.connectorcreator.popup.actions.CreateConnectorAction"
+               icon="META-INF/icons/portOverviewIcon.png"
+               id="org.eclipse.eatop.connectorcreator.newAction"
+               label="Create connection">
+         </action>
+      </objectContribution>
+   </extension>
+</plugin>
