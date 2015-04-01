@@ -17,10 +17,6 @@ import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.sphinx.emf.ecore.ECrossReferenceAdapterFactory;
 
 public class ASILLevelContentProvider extends BasicContextContentProvider {
-	@Override
-	public Object[] getElements(Object inputElement) {
-		return null;
-	}
 
 	private Map<FaultFailure_anomaly, List<TextOnlyNode>> reqToAsilMap = new HashMap<FaultFailure_anomaly, List<TextOnlyNode>>();
 
