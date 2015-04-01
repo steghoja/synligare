@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.eatop.eastadl21.ASILKind;
+import org.eclipse.eatop.eastadl21.FaultFailure;
 import org.eclipse.eatop.eastadl21.FaultFailurePort;
 import org.eclipse.eatop.eastadl21.FaultFailure_anomaly;
 import org.eclipse.eatop.eastadl21.SafetyConstraint;
@@ -18,12 +19,17 @@ import org.eclipse.sphinx.emf.ecore.ECrossReferenceAdapterFactory;
 
 public class ASILLevelContentProvider extends BasicContextContentProvider {
 
-	private Map<FaultFailure_anomaly, List<TextOnlyNode>> reqToAsilMap = new HashMap<FaultFailure_anomaly, List<TextOnlyNode>>();
+	private Map<EObject, List<TextOnlyNode>> reqToAsilMap = new HashMap<EObject, List<TextOnlyNode>>();
+
+	@Override
+	public String getNameForInstanceReferencedBy() {
+		return "ASIL Analysis";
+	}
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
 		List<Object> result = new ArrayList<Object>();
-		if (parentElement instanceof TextOnlyNode && ((TextOnlyNode) parentElement).getType() == NodeType.REFERENCED_BY) {
+		if (parentElement instanceof TextOnlyNode && ((TextOnlyNode) parentElement).getType() == NodeType.INSTANCE_REFERENCED_BY) {
 			reqToAsilMap.clear();
 			if (input instanceof FaultFailurePort) {
 				FaultFailurePort failurePort = (FaultFailurePort) input;
@@ -46,16 +52,16 @@ public class ASILLevelContentProvider extends BasicContextContentProvider {
 									asils = new ArrayList<>();
 								}
 								asils.add(new TextOnlyNode(asilValue.getName(), NodeType.REFERENCES));
-								reqToAsilMap.put(failure, asils);
+								reqToAsilMap.put(faultFailure, asils);
 							}
 						}
-
+						result.add(faultFailure);
 					}
 				}
 
 			}
 		}
-		if (parentElement instanceof FaultFailure_anomaly) {
+		if (parentElement instanceof FaultFailure) {
 			if (reqToAsilMap.containsKey(parentElement)) {
 				return reqToAsilMap.get(parentElement).toArray();
 			}
