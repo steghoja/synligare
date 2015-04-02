@@ -10,9 +10,6 @@
 		<module>./parent</module>
 		<module>../../tools/org.eclipse.eatop.targets/${platform.version.name}</module>
 		
-		<module>../../plugins/org.eclipse.eatop.connectorcreator</module>
-		<module>../../plugins/org.eclipse.eatop.connectorcreator.eadl</module>
-
 		<!-- Plug-ins -->
 		<module>../../plugins/org.eclipse.eatop.geastadl</module>
 		<module>../../plugins/org.eclipse.eatop.common</module>
@@ -26,6 +23,10 @@
 		<module>../../plugins/org.eclipse.eatop.workspace.ui</module>
 		<module>../../plugins/org.eclipse.eatop.sdk</module>
 		<module>../../plugins/org.eclipse.eatop.eastadl2112.edit</module>
+		<module>../../plugins/org.eclipse.emf.compare.ide.ui</module>
+		<module>../../plugins/org.eclipse.eatop.connectorcreator</module>
+		<module>../../plugins/org.eclipse.eatop.connectorcreator.eadl</module>
+		
 
  		<!-- Examples -->
 		<module>../../examples/org.eclipse.eatop.examples.common.ui</module>
@@ -35,6 +36,7 @@
 		<module>../../examples/org.eclipse.eatop.examples.actions</module>
 		<module>../../examples/org.eclipse.eatop.examples.tableview.ui</module>
 		<module>../../examples/org.eclipse.eatop.examples.tableview</module>
+		<module>../../examples/org.eclipse.eatop.examples.emf.compare</module>
 
 		<!-- Tests -->
 		<module>../../tests/org.eclipse.eatop.serialization.tests</module>
@@ -54,6 +56,8 @@
 		<module>../../features/org.eclipse.eatop.workspace-feature</module>
 		<module>../../features/org.eclipse.eatop.examples-feature</module>
 
+		<module>../../features/org.eclipse.eatop.examples.tableview.feature</module>
+		<module>../../features/org.eclipse.eatop.examples.emf.compare.feature</module>
 		<module>../../features/org.eclipse.eatop.demonstrator-feature</module>
 
 		<module>./repository</module>
