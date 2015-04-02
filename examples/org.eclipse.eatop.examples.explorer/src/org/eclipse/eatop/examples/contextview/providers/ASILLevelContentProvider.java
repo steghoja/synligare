@@ -49,7 +49,7 @@ public class ASILLevelContentProvider extends BasicContextContentProvider {
 								ASILKind asilValue = constraint.getAsilValue();
 								List<TextOnlyNode> asils = reqToAsilMap.get(failure);
 								if (asils == null) {
-									asils = new ArrayList<>();
+									asils = new ArrayList<TextOnlyNode>();
 								}
 								asils.add(new TextOnlyNode(asilValue.getName(), NodeType.REFERENCES));
 								reqToAsilMap.put(faultFailure, asils);
