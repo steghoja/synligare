@@ -24,9 +24,9 @@ public class LeftListLabelProvider implements ILabelProvider {
 
 	@Override
 	public void dispose() {
-		imageMap.values().stream().forEach((image) -> {
+		for (Image image : imageMap.values()) {
 			image.dispose();
-		});
+		}
 	}
 
 	@Override
