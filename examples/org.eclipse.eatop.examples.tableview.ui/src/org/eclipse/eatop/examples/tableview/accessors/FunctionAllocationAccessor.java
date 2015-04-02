@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.eclipse.eatop.eastadl21.DesignFunctionPrototype;
 import org.eclipse.eatop.eastadl21.FunctionAllocation;
 import org.eclipse.eatop.eastadl21.FunctionAllocation_allocatedElement;
 import org.eclipse.eatop.eastadl21.FunctionAllocation_target;
@@ -34,18 +35,23 @@ public class FunctionAllocationAccessor extends CustomEatopPropertyAccessor {
 			EObject eo = setting.getEObject();
 			if (rowObject instanceof HardwareComponentPrototype) {
 				if (eo instanceof FunctionAllocation_target) {
-					EObject eContainer = eo.eContainer();
-					if (eContainer instanceof FunctionAllocation) {
-						FunctionAllocation funcAllocation = (FunctionAllocation) eContainer;
-						allocations.add(funcAllocation.getAllocatedElement());
+					if (((FunctionAllocation_target) eo).getAllocationTarget().equals(rowObject)) {
+						EObject eContainer = eo.eContainer();
+						if (eContainer instanceof FunctionAllocation) {
+							FunctionAllocation funcAllocation = (FunctionAllocation) eContainer;
+							allocations.add(funcAllocation.getAllocatedElement());
+						}
 					}
+					
 				}
-			} else if (rowObject instanceof FunctionConnector) {
+			} else if (rowObject instanceof FunctionConnector || rowObject instanceof DesignFunctionPrototype) {
 				if (eo instanceof FunctionAllocation_allocatedElement) {
-					EObject eContainer = eo.eContainer();
-					if (eContainer instanceof FunctionAllocation) {
-						FunctionAllocation funcAllocation = (FunctionAllocation) eContainer;
-						allocations.add(funcAllocation.getTarget());
+					if (((FunctionAllocation_allocatedElement) eo).getAllocateableElement().equals(rowObject)) {
+						EObject eContainer = eo.eContainer();
+						if (eContainer instanceof FunctionAllocation) {
+							FunctionAllocation funcAllocation = (FunctionAllocation) eContainer;
+							allocations.add(funcAllocation.getTarget());
+						}
 					}
 				}
 			}
@@ -59,7 +65,7 @@ public class FunctionAllocationAccessor extends CustomEatopPropertyAccessor {
 		if (held instanceof HardwareComponentPrototype) {
 			return "Function Allocations";
 			
-		} else if (held instanceof FunctionConnector) {
+		} else if (held instanceof FunctionConnector || held instanceof DesignFunctionPrototype) {
 			return "Function Targets";
 		}
 		return "";

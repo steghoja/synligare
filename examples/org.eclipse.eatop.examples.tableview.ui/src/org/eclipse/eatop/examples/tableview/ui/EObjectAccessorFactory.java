@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.eclipse.eatop.eastadl21.DesignFunctionPrototype;
 import org.eclipse.eatop.eastadl21.DesignFunctionType;
 import org.eclipse.eatop.eastadl21.FunctionConnector;
 import org.eclipse.eatop.eastadl21.FunctionConnector_port;
@@ -47,7 +48,7 @@ public class EObjectAccessorFactory extends GenericEObjectAccessorFactory {
 				accessors.add(new TraceableSpecificationAccessor());
 				break;
 			}
-			if (eo instanceof HardwareComponentPrototype || eo instanceof FunctionConnector) {
+			if (eo instanceof HardwareComponentPrototype || eo instanceof FunctionConnector || eo instanceof DesignFunctionPrototype) {
 				accessors.add(new FunctionAllocationAccessor(eo));
 				break;
 			}
