@@ -39,7 +39,7 @@ Export-Package: org.eclipse.emf.compare.ide.ui.internal;x-internal:=tr
  rnal:=true,org.eclipse.emf.compare.ide.ui.internal.structuremergeview
  er.provider;x-internal:=true,org.eclipse.emf.compare.ide.ui.internal.
  util;x-internal:=true,org.eclipse.emf.compare.ide.ui.logical
-Bundle-Version: 4.0.0.201406111328
+Bundle-Version: 0.5.0.qualifier
 Build-Jdk: 1.7.0_51
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
