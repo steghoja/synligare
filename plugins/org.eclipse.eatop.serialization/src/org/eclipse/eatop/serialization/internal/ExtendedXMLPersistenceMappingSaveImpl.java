@@ -1,17 +1,17 @@
 /**
  * <copyright>
- *  
+ *
  * Copyright (c) 2014 itemis and others.
  * All rights reserved. This program and the accompanying materials are made
- * available under the terms of the Eclipse Public License 
+ * available under the terms of the Eclipse Public License
  * which accompanies this distribution, and is
  * available at http://www.eclipse.org/org/documents/epl-v10.php
- *  
- * Contributors: 
+ *
+ * Contributors:
  *     itemis - Initial API and implementation
- *  
+ *
  * </copyright>
- * 
+ *
  */
 package org.eclipse.eatop.serialization.internal;
 
@@ -28,9 +28,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
@@ -279,7 +281,7 @@ public class ExtendedXMLPersistenceMappingSaveImpl extends XMLPersistenceMapping
 							xsiNoNamespaceSchemaLocation = schemaLocationCatalog.get(null);
 							if (xsiNoNamespaceSchemaLocation == null) {
 								PlatformLogUtil.logAsWarning(Activator.getPlugin(), new RuntimeException(
-										"Schema location catalog entry for no namespace (null) is missing")); //$NON-NLS-1$ 
+										"Schema location catalog entry for no namespace (null) is missing")); //$NON-NLS-1$
 							}
 						} else {
 							xsiNoNamespaceSchemaLocation = helper.getHREF(ePackage);
@@ -442,7 +444,7 @@ public class ExtendedXMLPersistenceMappingSaveImpl extends XMLPersistenceMapping
 	 * Writes out the contents of the special feature ExtendedResourceConstants.OUTER_CONTENT_ATTRIBUTE_NAME of the
 	 * passed in object. This method is used to write out such comment before the starting tag of the actual root
 	 * element.
-	 * 
+	 *
 	 * @param top
 	 *            The {@link EObject root object} whose mixed outer content (text, comments, CDATA and processing
 	 *            instructions) is to be saved.
@@ -455,6 +457,460 @@ public class ExtendedXMLPersistenceMappingSaveImpl extends XMLPersistenceMapping
 				saveElementFeatureMap(top, attribute);
 			}
 		}
+	}
+
+	@Override
+	protected boolean saveFeatures(EObject o, SerializationType serializationType, boolean suppressClosingElement) {
+		EClass eClass = o.eClass();
+		int contentKind = extendedMetaData.getContentKind(eClass);
+		if (!toDOM) {
+			switch (contentKind) {
+			case ExtendedMetaData.MIXED_CONTENT:
+			case ExtendedMetaData.SIMPLE_CONTENT: {
+				doc.setMixed(true);
+				break;
+			}
+			}
+		}
+
+		if (o == root) {
+			writeTopAttributes(root);
+		}
+
+		EStructuralFeature[] features = featureTable.getFeatures(eClass);
+		int[] featureKinds = featureTable.getKinds(eClass, features);
+		int[] elementFeatures = null;
+		int elementCount = 0;
+
+		String content = null;
+
+		// Process XML attributes
+		if (SerializationType.elementsOnly == serializationType) {
+			LOOP:
+			for (int i = 0; i < features.length; i++) {
+
+				if (elementFeatures == null) {
+					elementFeatures = new int[features.length];
+				}
+				elementFeatures[elementCount++] = i;
+
+				int kind = featureKinds[i];
+				EStructuralFeature f = features[i];
+				if (kind != TRANSIENT && shouldSaveFeature(o, f)) {
+					switch (kind) {
+					case DATATYPE_ELEMENT_SINGLE: {
+						if (contentKind == ExtendedMetaData.SIMPLE_CONTENT) {
+							content = getDataTypeElementSingleSimple(o, f);
+							continue LOOP; // next feature, no element required
+						}
+						break;
+					}
+					case DATATYPE_SINGLE: {
+						continue LOOP; // next feature, no element required
+					}
+					case DATATYPE_SINGLE_NILLABLE: {
+						if (!isNil(o, f)) {
+							continue LOOP; // next feature, no element required
+						}
+						break;
+					}
+					case OBJECT_ATTRIBUTE_SINGLE: {
+						continue LOOP; // next feature, no element required
+					}
+					case OBJECT_ATTRIBUTE_MANY: {
+						continue LOOP; // next feature, no element required
+					}
+					case OBJECT_ATTRIBUTE_IDREF_SINGLE: {
+						continue LOOP; // next feature, no element required
+					}
+					case OBJECT_ATTRIBUTE_IDREF_MANY: {
+						continue LOOP; // next feature, no element required
+					}
+					case OBJECT_HREF_SINGLE_UNSETTABLE: {
+						if (isNil(o, f)) {
+							break;
+						}
+						// it's intentional to keep going
+					}
+					case OBJECT_HREF_SINGLE: {
+						if (useEncodedAttributeStyle) {
+							continue LOOP; // next feature, no element required
+						} else {
+							switch (sameDocSingle(o, f)) {
+							case SAME_DOC: {
+								continue LOOP; // next feature, no element required
+							}
+							case CROSS_DOC: {
+								break;
+							}
+							default: {
+								continue LOOP; // next feature, no element required
+							}
+							}
+						}
+						break;
+					}
+					case OBJECT_HREF_MANY_UNSETTABLE: {
+						if (isEmpty(o, f) && !isXMLPersistenceMappingEnabled(f)) {
+							continue LOOP; // next feature, no element required
+						}
+						// It's intentional to keep going.
+					}
+					case OBJECT_HREF_MANY: {
+						if (useEncodedAttributeStyle) {
+							continue LOOP; // next feature, no element required
+						} else {
+							switch (sameDocMany(o, f)) {
+							case SAME_DOC: {
+								continue LOOP; // next feature, no element required
+							}
+							case CROSS_DOC: {
+								break;
+							}
+							default: {
+								continue LOOP; // next feature, no element required
+							}
+							}
+						}
+						break;
+					}
+					case OBJECT_ELEMENT_SINGLE_UNSETTABLE:
+					case OBJECT_ELEMENT_SINGLE: {
+						if (contentKind == ExtendedMetaData.SIMPLE_CONTENT) {
+							content = getElementReferenceSingleSimple(o, f);
+							continue LOOP; // next feature, no element required
+						}
+						break;
+					}
+					case OBJECT_ELEMENT_MANY: {
+						if (contentKind == ExtendedMetaData.SIMPLE_CONTENT) {
+							content = getElementReferenceManySimple(o, f);
+							continue LOOP; // next feature, no element required
+						}
+						break;
+					}
+					case OBJECT_ELEMENT_IDREF_SINGLE_UNSETTABLE:
+					case OBJECT_ELEMENT_IDREF_SINGLE: {
+						if (contentKind == ExtendedMetaData.SIMPLE_CONTENT) {
+							content = getElementIDRefSingleSimple(o, f);
+							continue LOOP; // next feature, no element required
+						}
+						break;
+					}
+					case OBJECT_ELEMENT_IDREF_MANY: {
+						if (contentKind == ExtendedMetaData.SIMPLE_CONTENT) {
+							content = getElementIDRefManySimple(o, f);
+							continue LOOP; // next feature, no element required
+						}
+						break;
+					}
+					case DATATYPE_ATTRIBUTE_MANY: {
+						break;
+					}
+					case OBJECT_CONTAIN_MANY_UNSETTABLE:
+					case DATATYPE_MANY: {
+						if (isEmpty(o, f) && !isXMLPersistenceMappingEnabled(f)) {
+							continue LOOP; // next feature, no element required
+						}
+						break;
+					}
+					case OBJECT_CONTAIN_SINGLE_UNSETTABLE:
+					case OBJECT_CONTAIN_SINGLE:
+					case OBJECT_CONTAIN_MANY:
+					case ELEMENT_FEATURE_MAP: {
+						break;
+					}
+					case ATTRIBUTE_FEATURE_MAP: {
+						continue LOOP; // next feature, no element required
+					}
+					default: {
+						continue LOOP; // next feature, no element required
+					}
+
+					} // end switch
+				} // end if
+			} // end for
+		} else {
+
+			LOOP:
+			for (int i = 0; i < features.length; i++) {
+				// store body of comment - BUG FIXED
+				if (elementFeatures == null) {
+					elementFeatures = new int[features.length];
+				}
+				elementFeatures[elementCount++] = i;
+
+				int kind = featureKinds[i];
+				EStructuralFeature f = features[i];
+				if (kind != TRANSIENT && shouldSaveFeature(o, f)) {
+					switch (kind) {
+					case DATATYPE_ELEMENT_SINGLE: {
+						if (contentKind == ExtendedMetaData.SIMPLE_CONTENT) {
+							content = getDataTypeElementSingleSimple(o, f);
+							continue LOOP; // next feature, no element required
+						}
+						break;
+					}
+					case DATATYPE_SINGLE: {
+						saveDataTypeSingle(o, f);
+						continue LOOP; // next feature, no element required
+					}
+					case DATATYPE_SINGLE_NILLABLE: {
+						if (!isNil(o, f)) {
+							saveDataTypeSingle(o, f);
+							continue LOOP; // next feature, no element required
+						}
+						break;
+					}
+					case OBJECT_ATTRIBUTE_SINGLE: {
+						saveEObjectSingle(o, f);
+						continue LOOP; // next feature, no element required
+					}
+					case OBJECT_ATTRIBUTE_MANY: {
+						saveEObjectMany(o, f);
+						continue LOOP; // next feature, no element required
+					}
+					case OBJECT_ATTRIBUTE_IDREF_SINGLE: {
+						saveIDRefSingle(o, f);
+						continue LOOP; // next feature, no element required
+					}
+					case OBJECT_ATTRIBUTE_IDREF_MANY: {
+						saveIDRefMany(o, f);
+						continue LOOP; // next feature, no element required
+					}
+					case OBJECT_HREF_SINGLE_UNSETTABLE: {
+						if (isNil(o, f)) {
+							break;
+						}
+						// it's intentional to keep going
+					}
+					case OBJECT_HREF_SINGLE: {
+						if (useEncodedAttributeStyle) {
+							saveEObjectSingle(o, f);
+							continue LOOP; // next feature, no element required
+						} else {
+							switch (sameDocSingle(o, f)) {
+							case SAME_DOC: {
+								saveIDRefSingle(o, f);
+								continue LOOP; // next feature, no element required
+							}
+							case CROSS_DOC: {
+								break;
+							}
+							default: {
+								continue LOOP; // next feature, no element required
+							}
+							}
+						}
+						break;
+					}
+					case OBJECT_HREF_MANY_UNSETTABLE: {
+						if (isEmpty(o, f) && !isXMLPersistenceMappingEnabled(f)) {
+							saveManyEmpty(o, f);
+							continue LOOP; // next feature, no element required
+						}
+						// It's intentional to keep going.
+					}
+					case OBJECT_HREF_MANY: {
+						if (useEncodedAttributeStyle) {
+							saveEObjectMany(o, f);
+							continue LOOP; // next feature, no element required
+						} else {
+							switch (sameDocMany(o, f)) {
+							case SAME_DOC: {
+								saveIDRefMany(o, f);
+								continue LOOP; // next feature, no element required
+							}
+							case CROSS_DOC: {
+								break;
+							}
+							default: {
+								continue LOOP; // next feature, no element required
+							}
+							}
+						}
+						break;
+					}
+					case OBJECT_ELEMENT_SINGLE_UNSETTABLE:
+					case OBJECT_ELEMENT_SINGLE: {
+						if (contentKind == ExtendedMetaData.SIMPLE_CONTENT) {
+							content = getElementReferenceSingleSimple(o, f);
+							continue LOOP; // next feature, no element required
+						}
+						break;
+					}
+					case OBJECT_ELEMENT_MANY: {
+						if (contentKind == ExtendedMetaData.SIMPLE_CONTENT) {
+							content = getElementReferenceManySimple(o, f);
+							continue LOOP; // next feature, no element required
+						}
+						break;
+					}
+					case OBJECT_ELEMENT_IDREF_SINGLE_UNSETTABLE:
+					case OBJECT_ELEMENT_IDREF_SINGLE: {
+						if (contentKind == ExtendedMetaData.SIMPLE_CONTENT) {
+							content = getElementIDRefSingleSimple(o, f);
+							continue LOOP; // next feature, no element required
+						}
+						break;
+					}
+					case OBJECT_ELEMENT_IDREF_MANY: {
+						if (contentKind == ExtendedMetaData.SIMPLE_CONTENT) {
+							content = getElementIDRefManySimple(o, f);
+							continue LOOP; // next feature, no element required
+						}
+						break;
+					}
+					case DATATYPE_ATTRIBUTE_MANY: {
+						break;
+					}
+					case OBJECT_CONTAIN_MANY_UNSETTABLE:
+					case DATATYPE_MANY: {
+						if (isEmpty(o, f) && !isXMLPersistenceMappingEnabled(f)) {
+							saveManyEmpty(o, f);
+							continue LOOP; // next feature, no element required
+						}
+						break;
+					}
+					case OBJECT_CONTAIN_SINGLE_UNSETTABLE:
+					case OBJECT_CONTAIN_SINGLE:
+					case OBJECT_CONTAIN_MANY:
+					case ELEMENT_FEATURE_MAP: {
+						break;
+					}
+					case ATTRIBUTE_FEATURE_MAP: {
+						saveAttributeFeatureMap(o, f);
+						continue LOOP; // next feature, no element required
+					}
+					default: {
+						continue LOOP; // next feature, no element required
+					}
+					}
+
+					if (SerializationType.attributesOnly == serializationType) {
+						continue LOOP; // next feature, no element required
+					}
+
+				}
+			}
+			processAttributeExtensions(o);
+			if (elementFeatures == null) {
+				if (content == null) {
+					content = getContent(o, features);
+				}
+
+				if (content == null) {
+					if (o == root && writeTopElements(root)) {
+						endSaveFeatures(o, 0, null);
+						return true;
+					} else {
+						endSaveFeatures(o, EMPTY_ELEMENT, null);
+						return false;
+					}
+				} else {
+					endSaveFeatures(o, CONTENT_ELEMENT, content);
+					return true;
+				}
+			}
+		}
+
+		if (o == root) {
+			writeTopElements(root);
+		}
+
+		// Process XML elements
+		for (int i = 0; i < elementCount; i++) {
+			int kind = featureKinds[elementFeatures[i]];
+			EStructuralFeature f = features[elementFeatures[i]];
+			switch (kind) {
+			case DATATYPE_SINGLE_NILLABLE: {
+				saveNil(o, f);
+				break;
+			}
+			case ELEMENT_FEATURE_MAP: {
+				saveElementFeatureMap(o, f);
+				break;
+			}
+			case DATATYPE_MANY: {
+				saveDataTypeMany(o, f);
+				break;
+			}
+			case DATATYPE_ATTRIBUTE_MANY: {
+				saveDataTypeAttributeMany(o, f);
+				break;
+			}
+			case DATATYPE_ELEMENT_SINGLE: {
+				saveDataTypeElementSingle(o, f);
+				break;
+			}
+			case OBJECT_CONTAIN_SINGLE_UNSETTABLE: {
+				if (isNil(o, f)) {
+					saveNil(o, f);
+					break;
+				}
+				// it's intentional to keep going
+			}
+			case OBJECT_CONTAIN_SINGLE: {
+				saveContainedSingle(o, f);
+				break;
+			}
+			case OBJECT_CONTAIN_MANY_UNSETTABLE:
+			case OBJECT_CONTAIN_MANY: {
+				saveContainedMany(o, f);
+				break;
+			}
+			case OBJECT_HREF_SINGLE_UNSETTABLE: {
+				if (isNil(o, f)) {
+					saveNil(o, f);
+					break;
+				}
+				// it's intentional to keep going
+			}
+			case OBJECT_HREF_SINGLE: {
+				saveHRefSingle(o, f);
+				break;
+			}
+			case OBJECT_HREF_MANY_UNSETTABLE:
+			case OBJECT_HREF_MANY: {
+				saveHRefMany(o, f);
+				break;
+			}
+			case OBJECT_ELEMENT_SINGLE_UNSETTABLE: {
+				if (isNil(o, f)) {
+					saveNil(o, f);
+					break;
+				}
+				// it's intentional to keep going
+			}
+			case OBJECT_ELEMENT_SINGLE: {
+				saveElementReferenceSingle(o, f);
+				break;
+			}
+			case OBJECT_ELEMENT_MANY: {
+				saveElementReferenceMany(o, f);
+				break;
+			}
+			case OBJECT_ELEMENT_IDREF_SINGLE_UNSETTABLE: {
+				if (isNil(o, f)) {
+					saveNil(o, f);
+					break;
+				}
+				// it's intentional to keep going
+			}
+			case OBJECT_ELEMENT_IDREF_SINGLE: {
+				saveElementIDRefSingle(o, f);
+				break;
+			}
+			case OBJECT_ELEMENT_IDREF_MANY: {
+				saveElementIDRefMany(o, f);
+				break;
+			}
+			} // end switch
+		} // end for
+		if (!suppressClosingElement) {
+			endSaveFeatures(o, 0, null);
+		}
+		return true;
 	}
 
 }

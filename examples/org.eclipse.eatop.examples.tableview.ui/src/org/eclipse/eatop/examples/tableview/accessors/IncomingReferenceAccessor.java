@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.sphinx.emf.ecore.ECrossReferenceAdapterFactory;
 
-public class AllocationAccessor extends CustomEatopPropertyAccessor {
+public class IncomingReferenceAccessor extends CustomEatopPropertyAccessor {
 
 	@Override
 	public Object getDataValue(EObject rowObject) {
