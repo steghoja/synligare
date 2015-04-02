@@ -6,10 +6,12 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.eclipse.eatop.eastadl21.DesignFunctionType;
+import org.eclipse.eatop.eastadl21.FunctionConnector;
+import org.eclipse.eatop.eastadl21.FunctionConnector_port;
 import org.eclipse.eatop.eastadl21.HardwareComponentPrototype;
 import org.eclipse.eatop.eastadl21.Node;
 import org.eclipse.eatop.examples.tableview.accessorfactories.impl.GenericEObjectAccessorFactory;
-import org.eclipse.eatop.examples.tableview.accessors.AllocationAccessor;
+import org.eclipse.eatop.examples.tableview.accessors.IncomingReferenceAccessor;
 import org.eclipse.eatop.examples.tableview.accessors.EATopEStructuralFeatureAccessor;
 import org.eclipse.eatop.examples.tableview.accessors.FunctionAllocationAccessor;
 import org.eclipse.eatop.examples.tableview.accessors.IEObjectPropertyAccessor;
@@ -39,14 +41,14 @@ public class EObjectAccessorFactory extends GenericEObjectAccessorFactory {
 	protected List<IEObjectPropertyAccessor> createAccessors(List<? extends EObject> data) {
 		List<IEObjectPropertyAccessor> accessors = super.createAccessors(data);
 		Collections.addAll(accessors, new RequirementAccessor(),
-				new AllocationAccessor());
+				new IncomingReferenceAccessor());
 		for (EObject eo : data) {
 			if (eo instanceof DesignFunctionType) {
 				accessors.add(new TraceableSpecificationAccessor());
 				break;
 			}
-			if (eo instanceof HardwareComponentPrototype) {
-				accessors.add(new FunctionAllocationAccessor());
+			if (eo instanceof HardwareComponentPrototype || eo instanceof FunctionConnector) {
+				accessors.add(new FunctionAllocationAccessor(eo));
 				break;
 			}
 		}
