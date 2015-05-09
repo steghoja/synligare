@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2014 Arccore and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors: 
+ *
+ * Contributors:
  *     Arccore - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.eatop.common.ui.util;
@@ -80,7 +80,7 @@ public class ModelSearcher {
 
 	/**
 	 * Calculate the path of the given EObject
-	 * 
+	 *
 	 * @param e
 	 *            The EObject to calculate the path for
 	 * @return The path of the given EObject
@@ -98,7 +98,7 @@ public class ModelSearcher {
 
 	/**
 	 * Searching for reference values referring to target. All resources in the resource set are searched.
-	 * 
+	 *
 	 * @param target
 	 *            The object referred to.
 	 * @return A list of all objects found.
@@ -133,7 +133,7 @@ public class ModelSearcher {
 
 	/**
 	 * Searching for reference values referring to target. All resources in the resource set are searched.
-	 * 
+	 *
 	 * @param target
 	 *            The object referred to.
 	 * @return A list of all objects found.
@@ -285,7 +285,8 @@ public class ModelSearcher {
 			Deque<EObject> path = searcher.findPathToTarget();
 			EObject eo;
 			String s = "/"; //$NON-NLS-1$
-			while ((eo = path.pollLast()) != null) {
+			for (int count = path.size() - 1; count > 0; count--) {
+				eo = path.pollLast();
 				if (eo instanceof GReferrable) {
 					s += ((GReferrable) eo).gGetShortName() + "/"; //$NON-NLS-1$
 				}
@@ -338,7 +339,7 @@ public class ModelSearcher {
 	/**
 	 * Checks whether an object is the ancestor of another object, taking into account "virtual" containment caused by
 	 * type-protoype relationships
-	 * 
+	 *
 	 * @param root
 	 *            The root object from which the search begins
 	 * @param target
@@ -383,7 +384,7 @@ public class ModelSearcher {
 	/**
 	 * Checks whether an object is the ancestor, but not the direct parent, of another object, taking into account
 	 * virtual containment
-	 * 
+	 *
 	 * @param root
 	 *            The root object from which the search begins
 	 * @param target
