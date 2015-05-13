@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.eclipse.eatop.volvo.errormodelgenerator.createErrorModel"
+            objectClass="org.eclipse.eatop.eastadl21.DesignFunctionType">
+         <action
+               class="action.ActionCreateErrorTypeModel"
+               id="org.eclipse.eatop.volvo.errormodelgenerator.createErrorModel.action"
+               label="CreateErrorModel">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.eclipse.eatop.volvo.errormodelgenerator.objectContributionAnalysis"
+            objectClass="org.eclipse.eatop.eastadl21.AnalysisFunctionType">
+         <action
+               class="action.ActionCreateErrorModel"
+               id="org.eclipse.eatop.volvo.errormodelgenerator.afp"
+               label="CreateErrorModel">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.eclipse.eatop.volvo.errormodelgenerator.objectContribution1"
+            objectClass="org.eclipse.eatop.eastadl21.ErrorModelPrototype">
+         <action
+               class="action.ActionCollapseErrorModelPrototypes"
+               id="org.eclipse.eatop.volvo.errormodelgenerator.action1"
+               label="Collapse ErrorModelPrototypes">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.eclipse.eatop.volvo.errormodelgenerator.FaultFailurePort"
+            objectClass="org.eclipse.eatop.eastadl21.FaultFailurePort">
+         <action
+               class="action.ActionCollapseFaultFailurePorts"
+               id="org.eclipse.eatop.volvo.errormodelgenerator.action1"
+               label="CollapseFaultFailurePorts">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
