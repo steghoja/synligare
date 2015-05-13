@@ -16,9 +16,11 @@ package org.eclipse.eatop.examples.explorer;
 
 import java.net.URL;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.eatop.examples.common.ui.providers.TypeNameLabelDecorator;
 import org.eclipse.eatop.examples.explorer.internal.Activator;
 import org.eclipse.eatop.examples.explorer.internal.messages.Messages;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.jface.viewers.IFontProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -70,13 +72,33 @@ public class AppearanceExampleExplorerLabelProvider extends BasicExplorerLabelPr
 		}
 	}
 
-	@Override
-	public StyledString getStyledText(Object element) {
-		return new StyledString(getText(element));
-	}
-
 	private boolean isShowTypeName() {
 		return Activator.getPlugin().getDialogSettings().getBoolean(AppearanceExampleActionProvider.MODEL_ELEMENT_APPEARANCE_PROPERTY);
+	}
+
+	@Override
+	public StyledString getStyledText(Object element) {
+		if (!(element instanceof IFile)) {
+			AdapterFactoryLabelProvider labelProvider = getModelLabelProvider(element);
+			// FIXME Remove try/catch once we don't need to support Eclipse 4.3 (and EMF 2.9) any longer
+			try {
+				if (labelProvider != null) {
+					String text = labelProvider.getText(element);
+					if (isShowTypeName()) {
+						String decoratedText = typeNameLabelDecorator.decorateText(text, element);
+						return new StyledString(decoratedText);
+					} else {
+						return new StyledString(text);
+					}
+				}
+			} catch (NoSuchMethodError ex) {
+				String text = labelProvider.getText(element);
+				if (text != null && text.length() > 0) {
+					return new StyledString(text);
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override

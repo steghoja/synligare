@@ -174,7 +174,7 @@
          <actionProvider
                class="org.eclipse.eatop.examples.explorer.AppearanceExampleActionProvider"
                id="org.eclipse.eatop.examples.explorer.ExampleAppearanceActionProvider">
-            <enablement></enablement>
+         <enablement></enablement>
          </actionProvider>
          <actionProvider
                class="org.eclipse.eatop.examples.explorer.ModelExampleActionProvider"

@@ -282,7 +282,8 @@ public class ModelSearcher {
 			Deque<EObject> path = searcher.findPathToTarget();
 			EObject eo;
 			String s = "/"; //$NON-NLS-1$
-			while ((eo = path.pollLast()) != null) {
+			for (int count = path.size() - 1; count > 0; count--) {
+				eo = path.pollLast();
 				if (eo instanceof GReferrable) {
 					s += ((GReferrable) eo).gGetShortName() + "/"; //$NON-NLS-1$
 				}
