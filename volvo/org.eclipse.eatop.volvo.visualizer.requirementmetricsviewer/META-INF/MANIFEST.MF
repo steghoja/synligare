@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: RequirementCharts
+Bundle-SymbolicName: org.eclipse.eatop.volvo.visualizer.requirementmetricsviewer;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.eatop.volvo.requirementmetricsviewer.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.eatop.volvo.visualizer.modelprocessor;bundle-version="1.0.0",
+ org.eclipse.gef,
+ org.eclipse.eatop.eastadl21;bundle-version="0.5.0",
+ org.eclipse.eatop.eastadl21.edit;bundle-version="0.5.0",
+ org.eclipse.eatop.eastadl2112;bundle-version="0.5.0",
+ org.eclipse.eatop.eastadl2112.edit;bundle-version="0.5.0",
+ org.eclipse.eatop.volvo.visualizer.common;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy

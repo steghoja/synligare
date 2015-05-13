@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Representation>
+	<Background>
+		<Category name = "EnvironmentModel">
+			<ToolTip>true</ToolTip>
+			<Box>
+				<xPos>20</xPos>
+				<yPos>45</yPos>
+				<zPos>1</zPos>
+				<Size x = "40" y = "200" />
+				<Color r = "204" g = "230" b = "255" />
+				<Outline>true</Outline>
+			</Box>
+		</Category>
+		<Category name = "SystemModel">
+			<ToolTip>true</ToolTip>
+			<Title>true</Title>
+			<Box>
+				<xPos>80</xPos>
+				<yPos>20</yPos>
+				<zPos>1</zPos>
+				<Size x = "220" y = "225" />
+				<Outline>true</Outline>
+			</Box>
+		</Category>
+		<Category name = "Requirements">
+			<ToolTip>true</ToolTip>
+			<Box>
+				<xPos>320</xPos>
+				<yPos>45</yPos>
+				<zPos>1</zPos>
+				<Size x = "40" y = "200" />
+				<Color r = "255" g = "255" b = "255" />
+				<Outline>true</Outline>
+			</Box>
+		</Category>
+		<Category name = "Variability">
+			<ToolTip>true</ToolTip>
+			<Box>
+				<xPos>370</xPos>
+				<yPos>45</yPos>
+				<zPos>1</zPos>
+				<Size x = "40" y = "200" />
+				<Color r = "255" g = "255" b = "255" />
+				<Outline>true</Outline>
+			</Box>
+		</Category>
+		<Category name = "Timing">
+			<ToolTip>true</ToolTip>
+			<Box>
+				<xPos>420</xPos>
+				<yPos>45</yPos>
+				<zPos>1</zPos>
+				<Size x = "40" y = "200" />
+				<Color r = "255" g = "255" b = "255" />
+				<Outline>true</Outline>
+			</Box>
+		</Category>
+		<Category name = "Dependability">
+			<ToolTip>true</ToolTip>
+			<Box>
+				<xPos>470</xPos>
+				<yPos>45</yPos>
+				<zPos>1</zPos>
+				<Size x = "40" y = "200" />
+				<Color r = "255" g = "255" b = "255" />
+				<Outline>true</Outline>
+			</Box>
+		</Category>
+		<Level name = "VehicleLevel">
+			<ToolTip>true</ToolTip>
+			<Box>
+				<xPos>15</xPos>
+				<yPos>45</yPos>
+				<zPos>0</zPos>
+				<Size x = "500" y = "45" />
+				<Color r = "102" g = "255" b = "204" />
+				<Outline>false</Outline>
+			</Box>
+		</Level>
+		<Level name = "AnalysisLevel">
+			<ToolTip>true</ToolTip>
+			<Box>
+				<xPos>15</xPos>
+				<yPos>95</yPos>
+				<zPos>0</zPos>
+				<Size x = "500" y = "45" />
+				<Color r = "102" g = "230" b = "255" />
+				<Outline>false</Outline>
+			</Box>
+		</Level>
+		<Level name = "DesignLevel">
+			<ToolTip>true</ToolTip>
+			<Box>
+				<xPos>15</xPos>
+				<yPos>145</yPos>
+				<zPos>0</zPos>
+				<Size x = "500" y = "45" />
+				<Color r = "102" g = "153" b = "255" />
+				<Outline>false</Outline>
+			</Box>
+		</Level>
+		<Level name = "ImplementationLevel">
+			<ToolTip>true</ToolTip>
+			<Box>
+				<xPos>15</xPos>
+				<yPos>195</yPos>
+				<zPos>0</zPos>
+				<Size x = "500" y = "45" />
+				<Color r = "255" g = "127" b = "102" />
+				<Outline>false</Outline>
+			</Box>
+		</Level>
+	</Background>
+	<Element>
+		<Type>default</Type>
+		<Label>false</Label>
+		<ToolTip>true</ToolTip>
+		<Box>
+			<zPos>1</zPos>
+			<Size x = "15" y = "15" />
+			<Color r = "224" g = "224" b = "224" />
+			<Outline>true</Outline>
+		</Box>
+	</Element>
+	<Element>
+		<Type>VehicleLevel</Type>
+		<Type>AnalysisLevel</Type>
+		<Type>DesignLevel</Type>
+		<Type>ImplementationLevel</Type>
+		<Label>true</Label>
+		<ToolTip>false</ToolTip>
+		<Box>
+			<zPos>0</zPos>
+			<Outline>true</Outline>
+		</Box>
+	</Element>
+	<Element>
+		<Type>Allocation</Type>
+		<Type>DesignFunctionPrototype</Type>
+		<Type>HardwareComponentPrototype</Type>
+		<Alignment placement = "BottomLeft" direction = "Right" overlapping = "false" />
+		<Label>false</Label>
+		<ToolTip>true</ToolTip>
+		<Box>
+			<zPos>1</zPos>
+			<Size x = "15" y = "15" />
+			<Color r = "153" g = "187" b = "255" />
+			<Outline>true</Outline>
+		</Box>
+	</Element>
+	<Element>
+		<Type>FeatureModel</Type>
+		<Alignment placement = "Bottom" direction = "down" overlapping = "false" />
+		<Label>true</Label>
+		<ToolTip>true</ToolTip>
+		<Box>
+			<zPos>1</zPos>
+			<Size x = "160" y = "20" />
+			<Color r = "153" g = "255" b = "221" />
+			<Outline>false</Outline>
+		</Box>
+	</Element>
+	<Element>
+		<Type>AnalysisFunctionPrototype</Type>
+		<Alignment placement = "Bottom" direction = "down" overlapping = "false" />
+		<Label>true</Label>
+		<ToolTip>true</ToolTip>
+		<Box>
+			<zPos>1</zPos>
+			<Size x = "160" y = "20" />
+			<Color r = "153" g = "238" b = "255" />			
+			<Outline>false</Outline>
+		</Box>
+	</Element>
+</Representation>

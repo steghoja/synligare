@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Model Processor
+Bundle-SymbolicName: org.eclipse.eatop.volvo.visualizer.modelprocessor
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.eatop.volvo.modelprocessor.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.eatop.eastadl2112,
+ org.eclipse.jface,
+ org.eclipse.ui
+Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipse.eatop.volvo.modelprocessor
