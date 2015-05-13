@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.eclipse.eatop.volvo.sgraphml.gefeditor.SGraphMLGraphicalEditor"
+            contributorClass="org.eclipse.eatop.volvo.sgraphml.gefeditor.SGraphMLGraphicalEditorActionBarContributor"
+            default="true"
+            icon="icons/GEFEditor.png"
+            extensions="sgraphml"
+            id="org.eclipse.eatop.examples.sgraphml.gefeditor.editorID"
+            name="SGraphML GEF Editor">
+      </editor>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+
+      <wizard
+            canFinishEarly="false"
+            category="org.eclipse.eatop.examples.common.ui.eatopExampleWizards"
+            class="org.eclipse.eatop.volvo.sgraphml.gefeditor.wizards.NewSGraphMLDiagramWizard"
+            finalPerspective="org.eclipse.eatop.examples.common.ui.perspectives.eatop"
+            hasPages="true"
+            icon="icons/GEFEditor.png"
+            id="org.eclipse.eatop.volvo.sgraphml.gefeditor.wizards.newSGraphMLDiagramWizard"
+            name="SGraphML diagram"
+            preferredPerspectives="org.eclipse.eatop.examples.common.ui.perspectives.eatop"
+            project="true">
+      </wizard>
+      
+   </extension>
+
+ <!-- Add our new diagram wizard to the menu File/New --> 
+<extension point="org.eclipse.ui.perspectiveExtensions"> 
+        <perspectiveExtension 
+            targetID="org.eclipse.eatop.examples.common.ui.perspectives.eatop"> 
+            <newWizardShortcut id="org.eclipse.eatop.volvo.sgraphml.gefeditor.wizards.newSGraphMLDiagramWizard"/> 
+        </perspectiveExtension> 
+    </extension>
+
+ <!-- Add our new diagram wizard to the navigator popup menu --> 
+   <extension
+         point="org.eclipse.ui.navigator.navigatorContent">
+      <commonWizard
+            type="new"
+            wizardId="org.eclipse.eatop.volvo.sgraphml.gefeditor.wizards.newSGraphMLDiagramWizard">
+         <enablement></enablement>
+      </commonWizard>
+   </extension>
+
+
+
+   <extension
+         id="org.eclipse.eatop.volvo.sgraphml.gefeditor.Convert"
+         name="Convert"
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.eclipse.eatop.volvo.sgraphml.gefeditor.sgraphmlObjectContribution1"
+            nameFilter="*.sgraphml"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               class="org.eclipse.eatop.volvo.sgraphml.gefeditor.popup.actions.Convert2GraphmlAction"
+               icon="icons/GEFEditor.png"
+               id="org.eclipse.eatop.volvo.sgraphml.gefeditor.converttoyedformat"
+               label="Convert to yed (*.graphml)"
+               menubarPath="additions">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.eclipse.eatop.volvo.sgraphml.gefeditor.graphmlObjectContribution1"
+            nameFilter="*.graphml"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               class="org.eclipse.eatop.volvo.sgraphml.gefeditor.popup.actions.Convert2SGraphmlAction"
+               enablesFor="1"
+               icon="icons/GEFEditor.png"
+               id="org.eclipse.eatop.volvo.sgraphml.gefeditor.converttogefeditor"
+               label="Convert to GEF Editor (*.sgraphml)"
+               menubarPath="additions">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

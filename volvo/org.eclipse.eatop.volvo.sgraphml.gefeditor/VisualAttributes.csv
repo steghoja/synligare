@@ -1,0 +1,40 @@
+MetaClass;Shape;BackgroundColor;BackgroundColor2;BorderWitdh;BorderColor
+;;;;;
+DesignFunctionPrototype;rectangle;as type;as type;as type;as type
+Hazard;triangle;#ffff00;none;4.0;#000000
+EAPackage;roundrectangle;#E2C85D;#fdfac5;1.0;#000000
+DesignFunctionType;cutrectangle;#dfefff;#ffffff;1.0;#000000
+Actuator;cutrectangle;#d4d4ff;#ffffff;2.0;#9999ff
+Dependability;roundrectangle;#ffffff;none;1.0;#ff0000
+ErrorModelPrototype;rectangle;#ffffff;none;2.0;#ff0000
+ErrorModelType;cutrectangle;#ffffff;none;2.0;#ff0000
+HardwareComponentPrototype;rectangle;as type;as type;as type;as type
+HazardousEvent;roundrectangle;#ffff00;#ffffff;2.0;#000000
+LocalDeviceManager;cutrectangle;#eaf4ff;#ffffff;1.0;#000000
+Node;cutrectangle;#e1ffe1;#ffffff;2.0;#008000
+Sensor;cutrectangle;#FFb56c;#ffffff;2.0;#ffa142
+HardwareComponentType;cutrectangle;#eaf4ff;#ffffff;1.0;#000000
+BasicSoftwareFunctionType;cutrectangle;#eaf4ff;#ffffff;1.0;#000000
+HardwareFunctionType;cutrectangle;#eaf4ff;#ffffff;1.0;#000000
+Item;rectangle;#eddfe2;#ffffff;1.0;#000000
+AnalysisLevel;roundrectangle;#fbfbdc;#ffffff;1.0;#000000
+ImplementationLevel;roundrectangle;#79ff79;#ffffff;1.0;#000000
+DesignLevel;roundrectangle;#c9e3e3;#ffffff;1.0;#000000
+VehicleLevel;roundrectangle;#f9dcbe;#ffffff;1.0;#000000
+FaultFailure;roundrectangle;#ffffff;none;1.0;#ff0000
+ProcessFault;roundrectangle;#ffffff;none;1.0;#ff0000
+InternalFaultPrototype;roundrectangle;#ffffff;none;1.0;#ff0000
+ProcessFaultPrototype;roundrectangle;#ffffff;none;1.0;#ff0000
+Feature;roundrectangle;#cbcbcb;#ffffff;2.0;#000000
+VehicleFeature;roundrectangle;#c4e7c4;#ffffff;1.0;#000000
+UseCase;ellipse;#d9ecff;#ffffff;1.0;#9cb1ff
+Timing;roundrectangle;#e6ceff;#ffffff;2.0;#000000
+FunctionTrigger;rectangle;#ffffff;none;1.0;#000000
+Requirement;rectangle;#d2d2ff;#ffffff;1.0;#000000
+RangeableValueType;rectangle;#ffffdf;none;1.0;#000000
+SafetyGoal;roundrectangle;#bfffbf;#ffffff;1.0;#000000
+EABoolean;rectangle;#e6e6e6;none;1.0;#000000
+EANumerical;rectangle;#dfefff;none;1.0;#000000
+EAString;rectangle;#efffdf;none;1.0;#000000
+AnalysisFunctionType;cutrectangle;#F5DEB3;#ffffff;1.0;#000000
+AnalysisFunctionPrototype;rectangle;as type;as type;1.0;as type
