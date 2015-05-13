@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.eatop.volvo.versionmanager.feature"
+      label="Version Manager"
+      version="1.0.0.qualifier">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.eatop.eastadl21"/>
+      <import plugin="org.eclipse.eatop.eastadl21.edit"/>
+      <import plugin="org.eclipse.eatop.common.ui"/>
+      <import plugin="org.eclipse.eatop.examples.explorer"/>
+      <import plugin="org.eclipse.sphinx.emf.workspace"/>
+      <import plugin="org.eclipse.sphinx.platform.ui"/>
+      <import plugin="org.eclipse.emf.query"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.eatop.volvo.versionmanager"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
