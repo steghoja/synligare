@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.emf.ecore.EObject"
+            id="org.eclipse.eatop.volvo.linearpropertyanalyzer.contribution1">
+         <menu
+               label="Linear Property Analyzer"
+               path="additions"
+               id="org.eclipse.eatop.volvo.linearpropertyanalyzer.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Analyze"
+               class="org.eclipse.eatop.volvo.linearpropertyanalyzer.popup.actions.Analyzer"
+               menubarPath="org.eclipse.eatop.volvo.linearpropertyanalyzer.menu1/group1"
+               enablesFor="1"
+               id="org.eclipse.eatop.volvo.linearpropertyanalyzer.newAction">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
