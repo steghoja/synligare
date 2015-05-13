@@ -16,3 +16,4 @@
 /tests/*/target
 /tests/*/working-dir
 /tools/*/bin
+/volvo/*/bin
