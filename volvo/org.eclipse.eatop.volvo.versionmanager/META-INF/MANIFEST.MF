@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Version_control
+Bundle-SymbolicName: org.eclipse.eatop.volvo.versionmanager;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.eatop.volvo.versionmanager.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.eatop.eastadl21;bundle-version="0.0.0",
+ org.eclipse.eatop.eastadl21.edit;bundle-version="0.0.0",
+ org.eclipse.eatop.common.ui,
+ org.eclipse.sphinx.platform.ui,
+ org.eclipse.eatop.examples.explorer,
+ org.eclipse.sphinx.emf.workspace
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

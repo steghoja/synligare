@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.eclipse.eatop.volvo.versionmanager.objectContribution2"
+            objectClass="org.eclipse.eatop.eastadl21.EAXML">
+         <action
+               class="action.ActionSetVersion"
+               id="org.eclipse.eatop.volvo.versionmanager.action2"
+               label="Initialize Version"
+               menubarPath="org.eclipse.eatop.volvo.versionmanager.menu/separator">
+         </action>
+         <menu
+               id="org.eclipse.eatop.volvo.versionmanager.menu"
+               label="Version Control">
+            <separator
+                  name="separator">
+            </separator>
+         </menu>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.eclipse.eatop.volvo.versionmanager.objectContribution1"
+            objectClass="org.eclipse.eatop.eastadl21.EAPackage">
+         <action
+               class="action.ActionSetTargetVersion"
+               id="org.eclipse.eatop.volvo.versionmanager.action1"
+               label="VersionControl - Set Target Version">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.eclipse.eatop.volvo.versionmanager.objectContribution2"
+            objectClass="org.eclipse.eatop.eastadl21.EAXML">
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.eclipse.eatop.volvo.versionmanager.objectContribution1"
+            objectClass="org.eclipse.eatop.eastadl21.FunctionType">
+          <action
+               class="action.VersionPropertyAction"
+               id="org.eclipse.eatop.volvo.versionmanager.action5"
+               label="Version Property"
+               menubarPath="org.eclipse.eatop.volvo.versionmanager.menu1/group2">
+         </action>
+         <action
+               class="action.MajorIncreaseVersionAction"
+               id="org.eclipse.eatop.volvo.versionmanager.action1"
+               label="Version+1 (Major Increase)"
+               menubarPath="org.eclipse.eatop.volvo.versionmanager.menu1/group1">
+         </action>
+         <action
+               class="action.MinorIncreaseVersionAction"
+               id="org.eclipse.eatop.volvo.versionmanager.action2"
+               label="Version+0.1 (Minor Increase)"
+               menubarPath="org.eclipse.eatop.volvo.versionmanager.menu1/group1">
+         </action>
+         <action
+               class="action.ActionCheckConsistencyEMT"
+               id="org.eclipse.eatop.volvo.versionmanager.action6"
+               label="Check Version Consistency"
+               menubarPath="org.eclipse.eatop.volvo.versionmanager.menu1/group3">
+         </action>
+         <menu
+               id="org.eclipse.eatop.volvo.versionmanager.menu1"
+               label="VersionControl">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.eclipse.eatop.volvo.versionmanager.objectContribution2"
+            objectClass="org.eclipse.eatop.eastadl21.ErrorModelType">
+         <action
+               class="action.VersionPropertyAction"
+               id="org.eclipse.eatop.volvo.versionmanager.action5"
+               label="Version Property"
+               menubarPath="org.eclipse.eatop.volvo.versionmanager.menu3/separator2">
+         </action>
+         <action
+               class="action.MinorIncreaseVersionAction"
+               id="org.eclipse.eatop.volvo.versionmanager.action4"
+               label="Version+0.1 (Minor Increase)"
+               menubarPath="org.eclipse.eatop.volvo.versionmanager.menu3/separator3">
+         </action>
+         <action
+               class="action.MajorIncreaseVersionAction"
+               id="org.eclipse.eatop.volvo.versionmanager.action3"
+               label="Version+1 (Major Increase)"
+               menubarPath="org.eclipse.eatop.volvo.versionmanager.menu3/separator3">
+         </action>
+         <action
+               class="action.FinalizeTargetVersionAction"
+               id="org.eclipse.eatop.volvo.versionmanager.action5"
+               label="Synchronize Target Version"
+               menubarPath="org.eclipse.eatop.volvo.versionmanager.menu3/separator1">
+         </action>
+         <action
+               class="action.ActionCheckConsistencyEMT"
+               id="org.eclipse.eatop.volvo.versionmanager.action6"
+               label="Check Version Consistency"
+               menubarPath="org.eclipse.eatop.volvo.versionmanager.menu3/separator1">
+         </action>
+         <menu
+               id="org.eclipse.eatop.volvo.versionmanager.menu3"
+               label="Version Control"
+               path="additions">
+            <separator
+                  name="separator3">
+            </separator>
+         </menu>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.decorators">
+
+      <decorator
+            adaptable="true"
+            class="command.VersionInconsistencyDecorator"
+            icon="icon/inconsistency.png"
+            id="org.eclipse.eatop.volvo.versionmanager.decorator1"
+            label="VersionInconsistency"
+            lightweight="true"
+            location="BOTTOM_RIGHT"
+            state="true">
+         <enablement>
+            <objectClass
+                  name="org.eclipse.emf.ecore.EObject">
+            </objectClass>
+         </enablement>
+      </decorator>
+   </extension>
+
+</plugin>
