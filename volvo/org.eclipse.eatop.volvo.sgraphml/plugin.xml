@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated sgraphml -->
+      <package
+            uri="http://graphml.graphdrawing.org/xmlns"
+            class="org.graphdrawing.graphml.xmlns.XmlnsPackage"
+            genModel="model/sgraphml.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated sgraphml -->
+      <parser
+            type="xmlns"
+            class="org.graphdrawing.graphml.xmlns.util.XmlnsResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated sgraphml -->
+      <package
+            uri="http://www.w3.org/1999/xlink"
+            class="org.w3._1999.xlink.XlinkPackage"
+            genModel="model/sgraphml.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated sgraphml -->
+      <parser
+            type="xlink"
+            class="org.w3._1999.xlink.util.XlinkResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated sgraphml -->
+      <package
+            uri="http://www.synligare.eu/sgraphml"
+            class="eu.synligare.sgraphml.SgraphmlPackage"
+            genModel="model/sgraphml.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated sgraphml -->
+      <parser
+            type="sgraphml"
+            class="eu.synligare.sgraphml.util.SgraphmlResourceFactoryImpl"/>
+   </extension>
+
+</plugin>

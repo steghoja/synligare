@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated sgraphml -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.graphdrawing.graphml.xmlns.presentation.XmlnsModelWizardID"
+            name="%_UI_XmlnsModelWizard_label"
+            class="org.graphdrawing.graphml.xmlns.presentation.XmlnsModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/XmlnsModelFile.gif">
+         <description>%_UI_XmlnsModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated sgraphml -->
+      <editor
+            id="org.graphdrawing.graphml.xmlns.presentation.XmlnsEditorID"
+            name="%_UI_XmlnsEditor_label"
+            icon="icons/full/obj16/XmlnsModelFile.gif"
+            extensions="xmlns"
+            class="org.graphdrawing.graphml.xmlns.presentation.XmlnsEditor"
+            contributorClass="org.graphdrawing.graphml.xmlns.presentation.XmlnsActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated sgraphml -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="eu.synligare.sgraphml.presentation.SgraphmlModelWizardID"
+            name="%_UI_SgraphmlModelWizard_label"
+            class="eu.synligare.sgraphml.presentation.SgraphmlModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/SgraphmlModelFile.gif">
+         <description>%_UI_SgraphmlModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated sgraphml -->
+      <editor
+            id="eu.synligare.sgraphml.presentation.SgraphmlEditorID"
+            name="%_UI_SgraphmlEditor_label"
+            icon="icons/full/obj16/SgraphmlModelFile.gif"
+            extensions="sgraphml"
+            class="eu.synligare.sgraphml.presentation.SgraphmlEditor"
+            contributorClass="eu.synligare.sgraphml.presentation.SgraphmlActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

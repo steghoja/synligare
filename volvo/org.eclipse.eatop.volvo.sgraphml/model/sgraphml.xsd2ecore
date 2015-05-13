@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd2ecore:XSD2EcoreMappingRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsd2ecore="http://www.eclipse.org/emf/2002/XSD2Ecore" inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphml.xsd#/ file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1 file:/C:/Synligare/synligare_xsd/sgraphml%200.6/xlink.xsd#/ file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#/"
+    outputs="xmlns.ecore#/ xlink.ecore#/ sgraphml.ecore#/" topToBottom="true">
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/data-extension.type;XSDComplexTypeDefinition"
+      outputs="xmlns.ecore#//DataExtensionType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphml.xsd#//XSDRedefine/data-extension.type;XSDComplexTypeDefinition"
+      outputs="xmlns.ecore#//DataExtensionType1">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphml.xsd#//XSDRedefine/data-extension.type;XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//DataExtensionType1/any"/>
+  </nested>
+  <nested inputs="bundleentry://730.fwk1389123609/cache/www.w3.org/2001/XMLSchema.xsd#//NMTOKEN;XSDSimpleTypeDefinition=33"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//NMTOKEN"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/data.type;XSDComplexTypeDefinition=1"
+      outputs="xmlns.ecore#//DataType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/data.type;XSDComplexTypeDefinition=1/XSDAttributeUse=1"
+        outputs="xmlns.ecore#//DataType/id"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/data.type;XSDComplexTypeDefinition=1/XSDAttributeUse"
+        outputs="xmlns.ecore#//DataType/key"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/data;XSDElementDeclaration=2"
+      outputs="xmlns.ecore#//DocumentRoot/data"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/default.type;XSDComplexTypeDefinition=2"
+      outputs="xmlns.ecore#//DefaultType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/default;XSDElementDeclaration=4"
+      outputs="xmlns.ecore#//DocumentRoot/default"/>
+  <nested inputs="bundleentry://730.fwk1389123609/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//String"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/desc;XSDElementDeclaration"
+      outputs="xmlns.ecore#//DocumentRoot/desc"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/port.type;XSDComplexTypeDefinition=7"
+      outputs="xmlns.ecore#//PortType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/port.type;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//PortType/desc"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/port.type;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="xmlns.ecore#//PortType/group"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/port.type;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//PortType/data"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/port.type;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle=1"
+        outputs="xmlns.ecore#//PortType/port"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/port.type;XSDComplexTypeDefinition=7/XSDAttributeUse"
+        outputs="xmlns.ecore#//PortType/name"/>
+  </nested>
+  <nested inputs="bundleentry://730.fwk1389123609/cache/www.w3.org/2001/XMLSchema.xsd#//anyURI;XSDSimpleTypeDefinition=25"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//AnyURI"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/xlink.xsd#//type;XSDAttributeDeclaration/XSDSimpleTypeDefinition"
+      outputs="xlink.ecore#//TypeType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/xlink.xsd#//type;XSDAttributeDeclaration/XSDSimpleTypeDefinition/XSDEnumerationFacet"
+        outputs="xlink.ecore#//TypeType/simple"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/xlink.xsd#//type;XSDAttributeDeclaration/XSDSimpleTypeDefinition/XSDEnumerationFacet=1"
+        outputs="xlink.ecore#//TypeType/extended"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/xlink.xsd#//type;XSDAttributeDeclaration/XSDSimpleTypeDefinition/XSDEnumerationFacet=2"
+        outputs="xlink.ecore#//TypeType/locator"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/xlink.xsd#//type;XSDAttributeDeclaration/XSDSimpleTypeDefinition/XSDEnumerationFacet=3"
+        outputs="xlink.ecore#//TypeType/arc"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/locator.type;XSDComplexTypeDefinition=11"
+      outputs="xmlns.ecore#//LocatorType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/locator.type;XSDComplexTypeDefinition=11/XSDAttributeUse"
+        outputs="xmlns.ecore#//LocatorType/href"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/locator.type;XSDComplexTypeDefinition=11/XSDAttributeUse=1"
+        outputs="xmlns.ecore#//LocatorType/type"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphml.xsd#//XSDRedefine/node.extra.attrib;XSDAttributeGroupDefinition=1/XSDAttributeUse"
+      outputs="xmlns.ecore#//NodeType/elementType"/>
+  <nested inputs="bundleentry://730.fwk1389123609/cache/www.w3.org/2001/XMLSchema.xsd#//nonNegativeInteger;XSDSimpleTypeDefinition=47"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//NonNegativeInteger"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/node.indegree.type;XSDSimpleTypeDefinition=9"
+      outputs="xmlns.ecore#//NodeIndegreeType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/node.parseinfo.attrib;XSDAttributeGroupDefinition=2/XSDAttributeUse"
+      outputs="xmlns.ecore#//NodeType/parseIndegree"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/node.outdegree.type;XSDSimpleTypeDefinition=10"
+      outputs="xmlns.ecore#//NodeOutdegreeType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/node.parseinfo.attrib;XSDAttributeGroupDefinition=2/XSDAttributeUse=1"
+      outputs="xmlns.ecore#//NodeType/parseOutdegree"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/node.type;XSDComplexTypeDefinition=6"
+      outputs="xmlns.ecore#//NodeType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/node.type;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//NodeType/desc"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/node.type;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//NodeType/group"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/node.type;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//NodeType/data"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/node.type;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="xmlns.ecore#//NodeType/port"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/node.type;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="xmlns.ecore#//NodeType/graph"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/node.type;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle=1"
+        outputs="xmlns.ecore#//NodeType/locator"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/node.type;XSDComplexTypeDefinition=6/XSDAttributeUse"
+        outputs="xmlns.ecore#//NodeType/id"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/endpoint.type.type;XSDSimpleTypeDefinition=2"
+      outputs="xmlns.ecore#//EndpointTypeType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/endpoint.type.type;XSDSimpleTypeDefinition=2/XSDEnumerationFacet"
+        outputs="xmlns.ecore#//EndpointTypeType/in"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/endpoint.type.type;XSDSimpleTypeDefinition=2/XSDEnumerationFacet=1"
+        outputs="xmlns.ecore#//EndpointTypeType/out"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/endpoint.type.type;XSDSimpleTypeDefinition=2/XSDEnumerationFacet=2"
+        outputs="xmlns.ecore#//EndpointTypeType/undir"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/endpoint.type;XSDComplexTypeDefinition=10"
+      outputs="xmlns.ecore#//EndpointType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/endpoint.type;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//EndpointType/desc"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/endpoint.type;XSDComplexTypeDefinition=10/XSDAttributeUse"
+        outputs="xmlns.ecore#//EndpointType/id"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/endpoint.type;XSDComplexTypeDefinition=10/XSDAttributeUse=2"
+        outputs="xmlns.ecore#//EndpointType/node"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/endpoint.type;XSDComplexTypeDefinition=10/XSDAttributeUse=1"
+        outputs="xmlns.ecore#//EndpointType/port"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/endpoint.type;XSDComplexTypeDefinition=10/XSDAttributeUse=3"
+        outputs="xmlns.ecore#//EndpointType/type"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/hyperedge.type;XSDComplexTypeDefinition=9"
+      outputs="xmlns.ecore#//HyperedgeType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/hyperedge.type;XSDComplexTypeDefinition=9/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//HyperedgeType/desc"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/hyperedge.type;XSDComplexTypeDefinition=9/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="xmlns.ecore#//HyperedgeType/group"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/hyperedge.type;XSDComplexTypeDefinition=9/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//HyperedgeType/data"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/hyperedge.type;XSDComplexTypeDefinition=9/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle=1"
+        outputs="xmlns.ecore#//HyperedgeType/endpoint"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/hyperedge.type;XSDComplexTypeDefinition=9/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="xmlns.ecore#//HyperedgeType/graph"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/hyperedge.type;XSDComplexTypeDefinition=9/XSDAttributeUse"
+        outputs="xmlns.ecore#//HyperedgeType/id"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graph.edgedefault.type;XSDSimpleTypeDefinition=1"
+      outputs="xmlns.ecore#//GraphEdgedefaultType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graph.edgedefault.type;XSDSimpleTypeDefinition=1/XSDEnumerationFacet"
+        outputs="xmlns.ecore#//GraphEdgedefaultType/directed"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graph.edgedefault.type;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=1"
+        outputs="xmlns.ecore#//GraphEdgedefaultType/undirected"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.edgeids.type;XSDSimpleTypeDefinition=8"
+      outputs="xmlns.ecore#//GraphEdgeidsType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.edgeids.type;XSDSimpleTypeDefinition=8/XSDEnumerationFacet"
+        outputs="xmlns.ecore#//GraphEdgeidsType/canonical"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.edgeids.type;XSDSimpleTypeDefinition=8/XSDEnumerationFacet=1"
+        outputs="xmlns.ecore#//GraphEdgeidsType/free"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.parseinfo.attrib;XSDAttributeGroupDefinition=1/XSDAttributeUse=1"
+      outputs="xmlns.ecore#//GraphType/parseEdgeids"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.edges.type;XSDSimpleTypeDefinition=4"
+      outputs="xmlns.ecore#//GraphEdgesType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.parseinfo.attrib;XSDAttributeGroupDefinition=1/XSDAttributeUse=4"
+      outputs="xmlns.ecore#//GraphType/parseEdges"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.maxindegree.type;XSDSimpleTypeDefinition=5"
+      outputs="xmlns.ecore#//GraphMaxindegreeType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.parseinfo.attrib;XSDAttributeGroupDefinition=1/XSDAttributeUse=5"
+      outputs="xmlns.ecore#//GraphType/parseMaxindegree"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.maxoutdegree.type;XSDSimpleTypeDefinition=6"
+      outputs="xmlns.ecore#//GraphMaxoutdegreeType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.parseinfo.attrib;XSDAttributeGroupDefinition=1/XSDAttributeUse=6"
+      outputs="xmlns.ecore#//GraphType/parseMaxoutdegree"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.nodeids.type;XSDSimpleTypeDefinition=7"
+      outputs="xmlns.ecore#//GraphNodeidsType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.nodeids.type;XSDSimpleTypeDefinition=7/XSDEnumerationFacet"
+        outputs="xmlns.ecore#//GraphNodeidsType/canonical"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.nodeids.type;XSDSimpleTypeDefinition=7/XSDEnumerationFacet=1"
+        outputs="xmlns.ecore#//GraphNodeidsType/free"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.parseinfo.attrib;XSDAttributeGroupDefinition=1/XSDAttributeUse"
+      outputs="xmlns.ecore#//GraphType/parseNodeids"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.nodes.type;XSDSimpleTypeDefinition=3"
+      outputs="xmlns.ecore#//GraphNodesType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.parseinfo.attrib;XSDAttributeGroupDefinition=1/XSDAttributeUse=3"
+      outputs="xmlns.ecore#//GraphType/parseNodes"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.order.type;XSDSimpleTypeDefinition=2"
+      outputs="xmlns.ecore#//GraphOrderType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.order.type;XSDSimpleTypeDefinition=2/XSDEnumerationFacet"
+        outputs="xmlns.ecore#//GraphOrderType/free"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.order.type;XSDSimpleTypeDefinition=2/XSDEnumerationFacet=1"
+        outputs="xmlns.ecore#//GraphOrderType/nodesfirst"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.order.type;XSDSimpleTypeDefinition=2/XSDEnumerationFacet=2"
+        outputs="xmlns.ecore#//GraphOrderType/adjacencylist"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/graph.parseinfo.attrib;XSDAttributeGroupDefinition=1/XSDAttributeUse=2"
+      outputs="xmlns.ecore#//GraphType/parseOrder"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graph.type;XSDComplexTypeDefinition=5"
+      outputs="xmlns.ecore#//GraphType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graph.type;XSDComplexTypeDefinition=5/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//GraphType/desc"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graph.type;XSDComplexTypeDefinition=5/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//GraphType/group"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graph.type;XSDComplexTypeDefinition=5/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//GraphType/data"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graph.type;XSDComplexTypeDefinition=5/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="xmlns.ecore#//GraphType/node"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graph.type;XSDComplexTypeDefinition=5/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="xmlns.ecore#//GraphType/edge"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graph.type;XSDComplexTypeDefinition=5/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=3"
+        outputs="xmlns.ecore#//GraphType/hyperedge"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graph.type;XSDComplexTypeDefinition=5/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle=1"
+        outputs="xmlns.ecore#//GraphType/locator"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graph.type;XSDComplexTypeDefinition=5/XSDAttributeUse=1"
+        outputs="xmlns.ecore#//GraphType/edgedefault"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graph.type;XSDComplexTypeDefinition=5/XSDAttributeUse"
+        outputs="xmlns.ecore#//GraphType/id"/>
+  </nested>
+  <nested inputs="bundleentry://730.fwk1389123609/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphml.xsd#//XSDRedefine/edge.extra.attrib;XSDAttributeGroupDefinition=2/XSDAttributeUse"
+      outputs="xmlns.ecore#//EdgeType/elementType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/edge.type;XSDComplexTypeDefinition=8"
+      outputs="xmlns.ecore#//EdgeType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/edge.type;XSDComplexTypeDefinition=8/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//EdgeType/desc"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/edge.type;XSDComplexTypeDefinition=8/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="xmlns.ecore#//EdgeType/data"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/edge.type;XSDComplexTypeDefinition=8/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="xmlns.ecore#//EdgeType/graph"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/edge.type;XSDComplexTypeDefinition=8/XSDAttributeUse=1"
+        outputs="xmlns.ecore#//EdgeType/directed"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/edge.type;XSDComplexTypeDefinition=8/XSDAttributeUse"
+        outputs="xmlns.ecore#//EdgeType/id"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/edge.type;XSDComplexTypeDefinition=8/XSDAttributeUse=2"
+        outputs="xmlns.ecore#//EdgeType/source"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/edge.type;XSDComplexTypeDefinition=8/XSDAttributeUse=4"
+        outputs="xmlns.ecore#//EdgeType/sourceport"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/edge.type;XSDComplexTypeDefinition=8/XSDAttributeUse=3"
+        outputs="xmlns.ecore#//EdgeType/target"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/edge.type;XSDComplexTypeDefinition=8/XSDAttributeUse=5"
+        outputs="xmlns.ecore#//EdgeType/targetport"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/edge;XSDElementDeclaration=9"
+      outputs="xmlns.ecore#//DocumentRoot/edge"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/endpoint;XSDElementDeclaration=11"
+      outputs="xmlns.ecore#//DocumentRoot/endpoint"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graph;XSDElementDeclaration=6"
+      outputs="xmlns.ecore#//DocumentRoot/graph"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/key.name.type;XSDSimpleTypeDefinition"
+      outputs="xmlns.ecore#//KeyNameType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/key.attributes.attrib;XSDAttributeGroupDefinition/XSDAttributeUse"
+      outputs="xmlns.ecore#//KeyType/attrName"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/key.type.type;XSDSimpleTypeDefinition=1"
+      outputs="xmlns.ecore#//KeyTypeType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/key.type.type;XSDSimpleTypeDefinition=1/XSDEnumerationFacet"
+        outputs="xmlns.ecore#//KeyTypeType/boolean"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/key.type.type;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=1"
+        outputs="xmlns.ecore#//KeyTypeType/int"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/key.type.type;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=2"
+        outputs="xmlns.ecore#//KeyTypeType/long"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/key.type.type;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=3"
+        outputs="xmlns.ecore#//KeyTypeType/float"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/key.type.type;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=4"
+        outputs="xmlns.ecore#//KeyTypeType/double"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/key.type.type;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=5"
+        outputs="xmlns.ecore#//KeyTypeType/string"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/key.type.type;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=6"
+        outputs="xmlns.ecore#//KeyTypeType/complex"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml.xsd#//XSDSchema/key.attributes.attrib;XSDAttributeGroupDefinition/XSDAttributeUse=1"
+      outputs="xmlns.ecore#//KeyType/attrType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/key.for.type;XSDSimpleTypeDefinition"
+      outputs="xmlns.ecore#//KeyForType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/key.for.type;XSDSimpleTypeDefinition/XSDEnumerationFacet"
+        outputs="xmlns.ecore#//KeyForType/all"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/key.for.type;XSDSimpleTypeDefinition/XSDEnumerationFacet=1"
+        outputs="xmlns.ecore#//KeyForType/graph"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/key.for.type;XSDSimpleTypeDefinition/XSDEnumerationFacet=2"
+        outputs="xmlns.ecore#//KeyForType/node"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/key.for.type;XSDSimpleTypeDefinition/XSDEnumerationFacet=3"
+        outputs="xmlns.ecore#//KeyForType/edge"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/key.for.type;XSDSimpleTypeDefinition/XSDEnumerationFacet=4"
+        outputs="xmlns.ecore#//KeyForType/hyperedge"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/key.for.type;XSDSimpleTypeDefinition/XSDEnumerationFacet=5"
+        outputs="xmlns.ecore#//KeyForType/port"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/key.for.type;XSDSimpleTypeDefinition/XSDEnumerationFacet=6"
+        outputs="xmlns.ecore#//KeyForType/endpoint"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/key.for.type;XSDSimpleTypeDefinition/XSDEnumerationFacet=7"
+        outputs="xmlns.ecore#//KeyForType/graphml"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphml.xsd#//XSDRedefine/key.extra.attrib;XSDAttributeGroupDefinition/XSDAttributeUse"
+      outputs="xmlns.ecore#//KeyType/sgraphmlType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/key.type;XSDComplexTypeDefinition=3"
+      outputs="xmlns.ecore#//KeyType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/key.type;XSDComplexTypeDefinition=3/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//KeyType/desc"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/key.type;XSDComplexTypeDefinition=3/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="xmlns.ecore#//KeyType/default"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/key.type;XSDComplexTypeDefinition=3/XSDAttributeUse=1"
+        outputs="xmlns.ecore#//KeyType/for"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/key.type;XSDComplexTypeDefinition=3/XSDAttributeUse"
+        outputs="xmlns.ecore#//KeyType/id"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graphml.type;XSDComplexTypeDefinition=4"
+      outputs="xmlns.ecore#//GraphmlType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graphml.type;XSDComplexTypeDefinition=4/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//GraphmlType/desc"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graphml.type;XSDComplexTypeDefinition=4/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="xmlns.ecore#//GraphmlType/key"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graphml.type;XSDComplexTypeDefinition=4/XSDParticle/XSDModelGroup/XSDParticle=2/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//GraphmlType/group"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graphml.type;XSDComplexTypeDefinition=4/XSDParticle/XSDModelGroup/XSDParticle=2/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="xmlns.ecore#//GraphmlType/graph"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graphml.type;XSDComplexTypeDefinition=4/XSDParticle/XSDModelGroup/XSDParticle=2/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="xmlns.ecore#//GraphmlType/data"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/graphml;XSDElementDeclaration=5"
+      outputs="xmlns.ecore#//DocumentRoot/graphml"/>
+  <nested inputs="bundleentry://730.fwk1389123609/cache/www.w3.org/2001/XMLSchema.xsd#//double;XSDSimpleTypeDefinition=12"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//Double"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Rectangle.group;XSDAttributeGroupDefinition=1/XSDAttributeUse=3"
+      outputs="sgraphml.ecore#//GeometryType/height"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Rectangle.group;XSDAttributeGroupDefinition=1/XSDAttributeUse=2"
+      outputs="sgraphml.ecore#//GeometryType/width"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Rectangle.group;XSDAttributeGroupDefinition=1/XSDAttributeUse"
+      outputs="sgraphml.ecore#//GeometryType/x"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Rectangle.group;XSDAttributeGroupDefinition=1/XSDAttributeUse=1"
+      outputs="sgraphml.ecore#//GeometryType/y"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Geometry.type;XSDComplexTypeDefinition=5"
+      outputs="sgraphml.ecore#//GeometryType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseNode.type;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle=1/Fill;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="sgraphml.ecore#//FillType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseNode.type;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle=1/Fill;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="sgraphml.ecore#//FillType/color"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseNode.type;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle=1/Fill;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="sgraphml.ecore#//FillType/color2"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//color.type;XSDSimpleTypeDefinition=6"
+      outputs="sgraphml.ecore#//ColorType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//lineType.type;XSDSimpleTypeDefinition"
+      outputs="sgraphml.ecore#//LineTypeType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//lineType.type;XSDSimpleTypeDefinition/XSDEnumerationFacet"
+        outputs="sgraphml.ecore#//LineTypeType/line"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//lineType.type;XSDSimpleTypeDefinition/XSDEnumerationFacet=1"
+        outputs="sgraphml.ecore#//LineTypeType/dashed"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//lineType.type;XSDSimpleTypeDefinition/XSDEnumerationFacet=2"
+        outputs="sgraphml.ecore#//LineTypeType/dotted"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//lineType.type;XSDSimpleTypeDefinition/XSDEnumerationFacet=3"
+        outputs="sgraphml.ecore#//LineTypeType/dashedDotted"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//LineStyle.type;XSDComplexTypeDefinition=1"
+      outputs="sgraphml.ecore#//LineStyleType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//LineStyle.type;XSDComplexTypeDefinition=1/XSDAttributeUse"
+        outputs="sgraphml.ecore#//LineStyleType/color"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//LineStyle.type;XSDComplexTypeDefinition=1/XSDAttributeUse=1"
+        outputs="sgraphml.ecore#//LineStyleType/type"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//LineStyle.type;XSDComplexTypeDefinition=1/XSDAttributeUse=2"
+        outputs="sgraphml.ecore#//LineStyleType/width"/>
+  </nested>
+  <nested inputs="bundleentry://730.fwk1389123609/cache/www.w3.org/2001/XMLSchema.xsd#//unsignedByte;XSDSimpleTypeDefinition=51"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//UnsignedByte"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//OptionalRectangle.group;XSDAttributeGroupDefinition=2/XSDAttributeUse=3"
+      outputs="sgraphml.ecore#//LabelType/height"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//OptionalRectangle.group;XSDAttributeGroupDefinition=2/XSDAttributeUse=2"
+      outputs="sgraphml.ecore#//LabelType/width"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//OptionalRectangle.group;XSDAttributeGroupDefinition=2/XSDAttributeUse"
+      outputs="sgraphml.ecore#//LabelType/x"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//OptionalRectangle.group;XSDAttributeGroupDefinition=2/XSDAttributeUse=1"
+      outputs="sgraphml.ecore#//LabelType/y"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Label.type;XSDComplexTypeDefinition=2"
+      outputs="sgraphml.ecore#//LabelType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Label.type;XSDComplexTypeDefinition=2/XSDAttributeUse=2"
+        outputs="sgraphml.ecore#//LabelType/fontFamily"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Label.type;XSDComplexTypeDefinition=2/XSDAttributeUse=3"
+        outputs="sgraphml.ecore#//LabelType/fontSize"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Label.type;XSDComplexTypeDefinition=2/XSDAttributeUse=1"
+        outputs="sgraphml.ecore#//LabelType/textColor"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Label.type;XSDComplexTypeDefinition=2/XSDAttributeUse"
+        outputs="sgraphml.ecore#//LabelType/visible"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//horizontalTextPosition.type;XSDSimpleTypeDefinition=4"
+      outputs="sgraphml.ecore#//HorizontalTextPositionType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//horizontalTextPosition.type;XSDSimpleTypeDefinition=4/XSDEnumerationFacet"
+        outputs="sgraphml.ecore#//HorizontalTextPositionType/left"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//horizontalTextPosition.type;XSDSimpleTypeDefinition=4/XSDEnumerationFacet=1"
+        outputs="sgraphml.ecore#//HorizontalTextPositionType/right"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//horizontalTextPosition.type;XSDSimpleTypeDefinition=4/XSDEnumerationFacet=2"
+        outputs="sgraphml.ecore#//HorizontalTextPositionType/center"/>
+  </nested>
+  <nested inputs="bundleentry://730.fwk1389123609/cache/www.w3.org/2001/XMLSchema.xsd#//byte;XSDSimpleTypeDefinition=46"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//Byte"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//placement.type;XSDSimpleTypeDefinition=3"
+      outputs="sgraphml.ecore#//PlacementType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//placement.type;XSDSimpleTypeDefinition=3/XSDEnumerationFacet"
+        outputs="sgraphml.ecore#//PlacementType/top"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//placement.type;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=1"
+        outputs="sgraphml.ecore#//PlacementType/bottom"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//placement.type;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=2"
+        outputs="sgraphml.ecore#//PlacementType/center"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//placement.type;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=3"
+        outputs="sgraphml.ecore#//PlacementType/left"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//placement.type;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=4"
+        outputs="sgraphml.ecore#//PlacementType/right"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//verticalTextPosition.type;XSDSimpleTypeDefinition=5"
+      outputs="sgraphml.ecore#//VerticalTextPositionType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//verticalTextPosition.type;XSDSimpleTypeDefinition=5/XSDEnumerationFacet"
+        outputs="sgraphml.ecore#//VerticalTextPositionType/top"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//verticalTextPosition.type;XSDSimpleTypeDefinition=5/XSDEnumerationFacet=1"
+        outputs="sgraphml.ecore#//VerticalTextPositionType/bottom"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//verticalTextPosition.type;XSDSimpleTypeDefinition=5/XSDEnumerationFacet=2"
+        outputs="sgraphml.ecore#//VerticalTextPositionType/center"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//NodeLabel.type;XSDComplexTypeDefinition=3"
+      outputs="sgraphml.ecore#//NodeLabelType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//NodeLabel.type;XSDComplexTypeDefinition=3/XSDAttributeUse=2"
+        outputs="sgraphml.ecore#//NodeLabelType/horizontalTextPosition"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//NodeLabel.type;XSDComplexTypeDefinition=3/XSDAttributeUse=1"
+        outputs="sgraphml.ecore#//NodeLabelType/iconData"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//NodeLabel.type;XSDComplexTypeDefinition=3/XSDAttributeUse=4"
+        outputs="sgraphml.ecore#//NodeLabelType/iconTextGap"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//NodeLabel.type;XSDComplexTypeDefinition=3/XSDAttributeUse"
+        outputs="sgraphml.ecore#//NodeLabelType/placement"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//NodeLabel.type;XSDComplexTypeDefinition=3/XSDAttributeUse=3"
+        outputs="sgraphml.ecore#//NodeLabelType/verticalTextPosition"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseNode.type;XSDComplexTypeDefinition=6"
+      outputs="sgraphml.ecore#//BaseNodeType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseNode.type;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="sgraphml.ecore#//BaseNodeType/geometry"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseNode.type;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="sgraphml.ecore#//BaseNodeType/fill"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseNode.type;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="sgraphml.ecore#//BaseNodeType/borderStyle"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseNode.type;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle=3"
+        outputs="sgraphml.ecore#//BaseNodeType/nodeLabel"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//shapeType.type;XSDSimpleTypeDefinition=1"
+      outputs="sgraphml.ecore#//ShapeTypeType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//shapeType.type;XSDSimpleTypeDefinition=1/XSDEnumerationFacet"
+        outputs="sgraphml.ecore#//ShapeTypeType/rectangle"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//shapeType.type;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=1"
+        outputs="sgraphml.ecore#//ShapeTypeType/roundrectangle"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//shapeType.type;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=2"
+        outputs="sgraphml.ecore#//ShapeTypeType/cutrectangle"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//shapeType.type;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=3"
+        outputs="sgraphml.ecore#//ShapeTypeType/ellipse"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//shapeType.type;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=4"
+        outputs="sgraphml.ecore#//ShapeTypeType/triangle"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//ShapeNode.type;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle/Shape;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="sgraphml.ecore#//ShapeType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//ShapeNode.type;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle/Shape;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="sgraphml.ecore#//ShapeType/type"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//ShapeNode.type;XSDComplexTypeDefinition=7"
+      outputs="sgraphml.ecore#//ShapeNodeType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//ShapeNode.type;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="sgraphml.ecore#//ShapeNodeType/shape"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//GroupNode.type;XSDComplexTypeDefinition=8"
+      outputs="sgraphml.ecore#//GroupNodeType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//GroupNode;XSDElementDeclaration=1"
+      outputs="sgraphml.ecore#//DocumentRoot/groupNode"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/hyperedge;XSDElementDeclaration=10"
+      outputs="xmlns.ecore#//DocumentRoot/hyperedge"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/key;XSDElementDeclaration=3"
+      outputs="xmlns.ecore#//DocumentRoot/key"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/locator;XSDElementDeclaration=1"
+      outputs="xmlns.ecore#//DocumentRoot/locator"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/node;XSDElementDeclaration=7"
+      outputs="xmlns.ecore#//DocumentRoot/node"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Location.group;XSDAttributeGroupDefinition/XSDAttributeUse"
+      outputs="sgraphml.ecore#//PointType/x"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Location.group;XSDAttributeGroupDefinition/XSDAttributeUse=1"
+      outputs="sgraphml.ecore#//PointType/y"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Path.type;XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/Point;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="sgraphml.ecore#//PointType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Path.type;XSDComplexTypeDefinition"
+      outputs="sgraphml.ecore#//PathType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Path.type;XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="sgraphml.ecore#//PathType/point"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Path.type;XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="sgraphml.ecore#//PathType/sx"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Path.type;XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="sgraphml.ecore#//PathType/sy"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Path.type;XSDComplexTypeDefinition/XSDAttributeUse=2"
+        outputs="sgraphml.ecore#//PathType/tx"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Path.type;XSDComplexTypeDefinition/XSDAttributeUse=3"
+        outputs="sgraphml.ecore#//PathType/ty"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//arrowType.type;XSDSimpleTypeDefinition=2"
+      outputs="sgraphml.ecore#//ArrowTypeType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//arrowType.type;XSDSimpleTypeDefinition=2/XSDEnumerationFacet"
+        outputs="sgraphml.ecore#//ArrowTypeType/none"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//arrowType.type;XSDSimpleTypeDefinition=2/XSDEnumerationFacet=1"
+        outputs="sgraphml.ecore#//ArrowTypeType/plain"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//arrowType.type;XSDSimpleTypeDefinition=2/XSDEnumerationFacet=2"
+        outputs="sgraphml.ecore#//ArrowTypeType/diamond"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseEdge.type;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=2/Arrows;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="sgraphml.ecore#//ArrowsType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseEdge.type;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=2/Arrows;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="sgraphml.ecore#//ArrowsType/source"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseEdge.type;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=2/Arrows;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="sgraphml.ecore#//ArrowsType/target"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//EdgeLabel.type;XSDComplexTypeDefinition=4"
+      outputs="sgraphml.ecore#//EdgeLabelType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseEdge.type;XSDComplexTypeDefinition=10"
+      outputs="sgraphml.ecore#//BaseEdgeType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseEdge.type;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="sgraphml.ecore#//BaseEdgeType/path"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseEdge.type;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="sgraphml.ecore#//BaseEdgeType/lineStyle"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseEdge.type;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="sgraphml.ecore#//BaseEdgeType/arrows"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//BaseEdge.type;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=3"
+        outputs="sgraphml.ecore#//BaseEdgeType/edgeLabel"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//PolyLineEdge.type;XSDComplexTypeDefinition=11"
+      outputs="sgraphml.ecore#//PolyLineEdgeType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//PolyLineEdge;XSDElementDeclaration=4"
+      outputs="sgraphml.ecore#//DocumentRoot/polyLineEdge"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/graphml-structure.xsd#//XSDSchema=1/port;XSDElementDeclaration=8"
+      outputs="xmlns.ecore#//DocumentRoot/port"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//PortNode.type;XSDComplexTypeDefinition=9"
+      outputs="sgraphml.ecore#//PortNodeType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//PortNode;XSDElementDeclaration=2"
+      outputs="sgraphml.ecore#//DocumentRoot/portNode"/>
+  <nested inputs="bundleentry://730.fwk1389123609/cache/www.w3.org/2001/MagicXMLSchema.xsd#//anySimpleType;XSDSimpleTypeDefinition=1"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//AnySimpleType"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Resource.type;XSDComplexTypeDefinition=14"
+      outputs="sgraphml.ecore#//ResourceType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Resource.type;XSDComplexTypeDefinition=14/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="sgraphml.ecore#//ResourceType/any"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Resource.type;XSDComplexTypeDefinition=14/XSDAttributeUse=2"
+        outputs="sgraphml.ecore#//ResourceType/format"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Resource.type;XSDComplexTypeDefinition=14/XSDAttributeUse"
+        outputs="sgraphml.ecore#//ResourceType/id"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Resource.type;XSDComplexTypeDefinition=14/XSDAttributeUse=1"
+        outputs="sgraphml.ecore#//ResourceType/type"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//ResourceBlock.type;XSDComplexTypeDefinition=15"
+      outputs="sgraphml.ecore#//ResourceBlockType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//ResourceBlock.type;XSDComplexTypeDefinition=15/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="sgraphml.ecore#//ResourceBlockType/resource"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//Resources;XSDElementDeclaration=5"
+      outputs="sgraphml.ecore#//DocumentRoot/resources"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//ImageIcon.type;XSDComplexTypeDefinition=12"
+      outputs="sgraphml.ecore#//ImageIconType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//ImageIcon.type;XSDComplexTypeDefinition=12/XSDAttributeUse"
+        outputs="sgraphml.ecore#//ImageIconType/image"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//ScaledIcon.type;XSDComplexTypeDefinition=13"
+      outputs="sgraphml.ecore#//ScaledIconType">
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//ScaledIcon.type;XSDComplexTypeDefinition=13/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="sgraphml.ecore#//ScaledIconType/imageIcon"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//ScaledIcon.type;XSDComplexTypeDefinition=13/XSDAttributeUse"
+        outputs="sgraphml.ecore#//ScaledIconType/xScale"/>
+    <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//ScaledIcon.type;XSDComplexTypeDefinition=13/XSDAttributeUse=1"
+        outputs="sgraphml.ecore#//ScaledIconType/yScale"/>
+  </nested>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//ScaledIcon;XSDElementDeclaration=3"
+      outputs="sgraphml.ecore#//DocumentRoot/scaledIcon"/>
+  <nested inputs="file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphics.xsd#//ShapeNode;XSDElementDeclaration"
+      outputs="sgraphml.ecore#//DocumentRoot/shapeNode"/>
+</xsd2ecore:XSD2EcoreMappingRoot>
