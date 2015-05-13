@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.eatop.eastadl21.EAPackage"
+            id="org.eclipse.eatop.volvo.fmuImport.contribution1">
+         <menu
+               label="Import FMU..."
+               path="additions"
+               id="org.eclipse.eatop.volvo.fmuImport.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="org.eclipse.eatop.volvo.fmuimport.popup.actions.ImportFromFMUAction"
+               enablesFor="1"
+               icon="platform:/plugin/org.eclipse.eatop.eastadl2112.edit/icons/full/ctool16/CreateEAPackage_element_AnalysisFunctionType.gif"
+               id="org.eclipse.eatop.volvo.fmuImport.analysisfunctiontypeaction"
+               label="AnalysisFunctionType"
+               menubarPath="org.eclipse.eatop.volvo.fmuImport.menu1/group1">
+         </action>
+         <action
+               class="org.eclipse.eatop.volvo.fmuimport.popup.actions.ImportFromFMUAction"
+               enablesFor="1"
+               icon="platform:/plugin/org.eclipse.eatop.eastadl2112.edit/icons/full/ctool16/CreateEAPackage_element_DesignFunctionType.gif"
+               id="org.eclipse.eatop.volvo.fmuImport.designfunctiontypeaction"
+               label="DesignFunctionType"
+               menubarPath="org.eclipse.eatop.volvo.fmuImport.menu1/group1">
+         </action>
+         <action
+               class="org.eclipse.eatop.volvo.fmuimport.popup.actions.ImportFromFMUAction"
+               enablesFor="1"
+               icon="platform:/plugin/org.eclipse.eatop.eastadl2112.edit/icons/full/ctool16/CreateEAPackage_element_BasicSoftwareFunctionType.gif"
+               id="org.eclipse.eatop.volvo.fmuImport.basicsoftwarefunctiontypeaction"
+               label="BasicSoftwareFunctionType"
+               menubarPath="org.eclipse.eatop.volvo.fmuImport.menu1/group1">
+         </action>
+         <action
+               class="org.eclipse.eatop.volvo.fmuimport.popup.actions.ImportFromFMUAction"
+               enablesFor="1"
+               icon="platform:/plugin/org.eclipse.eatop.eastadl2112.edit/icons/full/ctool16/CreateEAPackage_element_DesignFunctionType.gif"
+               id="org.eclipse.eatop.volvo.fmuImport.localdevicemanageraction"
+               label="LocalDeviceManager"
+               menubarPath="org.eclipse.eatop.volvo.fmuImport.menu1/group1">
+         </action>
+         <action
+               class="org.eclipse.eatop.volvo.fmuimport.popup.actions.ImportFromFMUAction"
+               enablesFor="1"
+               icon="platform:/plugin/org.eclipse.eatop.eastadl2112.edit/icons/full/ctool16/CreateEAPackage_element_HardwareFunctionType.gif"
+               id="org.eclipse.eatop.volvo.fmuImport.hardwarefunctiontypeaction"
+               label="HardwareFunctionType"
+               menubarPath="org.eclipse.eatop.volvo.fmuImport.menu1/group1">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
