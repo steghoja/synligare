@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EAXML xmlns="http://east-adl.info/2.1.12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://east-adl.info/2.1.12 eastadl_2-1-12.xsd">
+  <TOP-LEVEL-PACKAGES>
+    <EA-PACKAGE>
+      <SHORT-NAME>DesignLevelElements</SHORT-NAME>
+      <SUB-PACKAGES>
+        <EA-PACKAGE>
+          <SHORT-NAME>CollapseTest</SHORT-NAME>
+          <ELEMENTS>
+            <DESIGN-FUNCTION-TYPE>
+              <SHORT-NAME>A_FT</SHORT-NAME>
+              <PORTS>
+                <FUNCTION-FLOW-PORT>
+                  <SHORT-NAME>ap1</SHORT-NAME>
+                  <NAME></NAME>
+                  <DIRECTION>IN</DIRECTION>
+                </FUNCTION-FLOW-PORT>
+                <FUNCTION-FLOW-PORT>
+                  <SHORT-NAME>ap2</SHORT-NAME>
+                  <DIRECTION>OUT</DIRECTION>
+                </FUNCTION-FLOW-PORT>
+                <FUNCTION-FLOW-PORT>
+                  <SHORT-NAME>ap3</SHORT-NAME>
+                  <DIRECTION>OUT</DIRECTION>
+                </FUNCTION-FLOW-PORT>
+              </PORTS>
+            </DESIGN-FUNCTION-TYPE>
+            <DESIGN-FUNCTION-TYPE>
+              <SHORT-NAME>B_FT</SHORT-NAME>
+              <PORTS>
+                <FUNCTION-FLOW-PORT>
+                  <SHORT-NAME>bp1</SHORT-NAME>
+                  <DIRECTION>IN</DIRECTION>
+                </FUNCTION-FLOW-PORT>
+              </PORTS>
+            </DESIGN-FUNCTION-TYPE>
+            <DESIGN-FUNCTION-TYPE>
+              <SHORT-NAME>Top_FT</SHORT-NAME>
+              <PORTS>
+                <FUNCTION-FLOW-PORT>
+                  <SHORT-NAME>tp1</SHORT-NAME>
+                  <DIRECTION>IN</DIRECTION>
+                </FUNCTION-FLOW-PORT>
+                <FUNCTION-FLOW-PORT>
+                  <SHORT-NAME>tp2</SHORT-NAME>
+                  <DIRECTION>OUT</DIRECTION>
+                </FUNCTION-FLOW-PORT>
+              </PORTS>
+              <CONNECTORS>
+                <FUNCTION-CONNECTOR>
+                  <SHORT-NAME>tc2</SHORT-NAME>
+                  <PORT-IREFS>
+                    <PORT-IREF>
+                      <FUNCTION-PROTOTYPE-REF TYPE="DESIGN-FUNCTION-PROTOTYPE">/DesignLevelElements/CollapseTest/Top_FT/A_FP</FUNCTION-PROTOTYPE-REF>
+                      <FUNCTION-PORT-REF TYPE="FUNCTION-FLOW-PORT">/DesignLevelElements/CollapseTest/A_FT/ap2</FUNCTION-PORT-REF>
+                    </PORT-IREF>
+                    <PORT-IREF>
+                      <FUNCTION-PORT-REF TYPE="FUNCTION-FLOW-PORT">/DesignLevelElements/CollapseTest/Top_FT/tp2</FUNCTION-PORT-REF>
+                    </PORT-IREF>
+                  </PORT-IREFS>
+                </FUNCTION-CONNECTOR>
+                <FUNCTION-CONNECTOR>
+                  <SHORT-NAME>tc3</SHORT-NAME>
+                  <PORT-IREFS>
+                    <PORT-IREF>
+                      <FUNCTION-PROTOTYPE-REF TYPE="DESIGN-FUNCTION-PROTOTYPE">/DesignLevelElements/CollapseTest/Top_FT/A_FP</FUNCTION-PROTOTYPE-REF>
+                      <FUNCTION-PORT-REF TYPE="FUNCTION-FLOW-PORT">/DesignLevelElements/CollapseTest/A_FT/ap3</FUNCTION-PORT-REF>
+                    </PORT-IREF>
+                    <PORT-IREF>
+                      <FUNCTION-PROTOTYPE-REF TYPE="DESIGN-FUNCTION-PROTOTYPE">/DesignLevelElements/CollapseTest/Top_FT/B_FP</FUNCTION-PROTOTYPE-REF>
+                      <FUNCTION-PORT-REF TYPE="FUNCTION-FLOW-PORT">/DesignLevelElements/CollapseTest/B_FT/bp1</FUNCTION-PORT-REF>
+                    </PORT-IREF>
+                  </PORT-IREFS>
+                </FUNCTION-CONNECTOR>
+                <FUNCTION-CONNECTOR>
+                  <SHORT-NAME>tc1</SHORT-NAME>
+                  <PORT-IREFS>
+                    <PORT-IREF>
+                      <FUNCTION-PORT-REF TYPE="FUNCTION-FLOW-PORT">/DesignLevelElements/CollapseTest/Top_FT/tp1</FUNCTION-PORT-REF>
+                    </PORT-IREF>
+                    <PORT-IREF>
+                      <FUNCTION-PROTOTYPE-REF TYPE="DESIGN-FUNCTION-PROTOTYPE">/DesignLevelElements/CollapseTest/Top_FT/A_FP</FUNCTION-PROTOTYPE-REF>
+                      <FUNCTION-PORT-REF TYPE="FUNCTION-FLOW-PORT">/DesignLevelElements/CollapseTest/A_FT/ap1</FUNCTION-PORT-REF>
+                    </PORT-IREF>
+                  </PORT-IREFS>
+                </FUNCTION-CONNECTOR>
+              </CONNECTORS>
+              <PARTS>
+                <DESIGN-FUNCTION-PROTOTYPE>
+                  <SHORT-NAME>A_FP</SHORT-NAME>
+                  <TYPE-TREF TYPE="DESIGN-FUNCTION-TYPE">/DesignLevelElements/CollapseTest/A_FT</TYPE-TREF>
+                </DESIGN-FUNCTION-PROTOTYPE>
+                <DESIGN-FUNCTION-PROTOTYPE>
+                  <SHORT-NAME>B_FP</SHORT-NAME>
+                  <TYPE-TREF TYPE="DESIGN-FUNCTION-TYPE">/DesignLevelElements/CollapseTest/B_FT</TYPE-TREF>
+                </DESIGN-FUNCTION-PROTOTYPE>
+              </PARTS>
+            </DESIGN-FUNCTION-TYPE>
+          </ELEMENTS>
+        </EA-PACKAGE>
+      </SUB-PACKAGES>
+    </EA-PACKAGE>
+    <EA-PACKAGE>
+      <SHORT-NAME>EASTADLExtensionElements</SHORT-NAME>
+      <SUB-PACKAGES>
+        <EA-PACKAGE>
+          <SHORT-NAME>DependabilityPackage</SHORT-NAME>
+          <ELEMENTS>
+            <DEPENDABILITY>
+              <SHORT-NAME>Dependability2</SHORT-NAME>
+              <ERROR-MODEL-TYPES>
+                <ERROR-MODEL-TYPE UUID="3def155e-078e-46be-8b6e-3c475aac5ba9-1401973420606">
+                  <SHORT-NAME>Top_FT_EMT</SHORT-NAME>
+                  <ERROR-BEHAVIOR-DESCRIPTIONS>
+                    <ERROR-BEHAVIOR UUID="816972ac-da42-4e6a-bba7-ea93be08c2f9-1401973420647">
+                      <SHORT-NAME>Top_FT_EMT_ErrorBehavior</SHORT-NAME>
+                      <FAILURE-LOGIC>Failure-tp2_fop = Failure-tp1_fip; </FAILURE-LOGIC>
+                      <TYPE>HIP_HOPS</TYPE>
+                    </ERROR-BEHAVIOR>
+                  </ERROR-BEHAVIOR-DESCRIPTIONS>
+                  <TARGET-REFS>
+                    <TARGET-REF TYPE="DESIGN-FUNCTION-TYPE">/DesignLevelElements/CollapseTest/Top_FT</TARGET-REF>
+                  </TARGET-REFS>
+                  <FAULT-FAILURE-CONNECTORS>
+                    <FAULT-FAILURE-PROPAGATION-LINK UUID="5ffdf14c-19c5-4a6f-89fe-97320fa5ad58-1401973420636">
+                      <SHORT-NAME>tc2_ffpl</SHORT-NAME>
+                      <FROM-PORT-IREF>
+                        <FAULT-FAILURE-PORT-REF TYPE="FAILURE-OUT-PORT">/EASTADLExtensionElements/DependabilityPackage/Dependability2/A_FT_EMT/ap2_fop</FAULT-FAILURE-PORT-REF>
+                        <ERROR-MODEL-PROTOTYPE-REF>/EASTADLExtensionElements/DependabilityPackage/Dependability2/Top_FT_EMT/A_FP_EMp</ERROR-MODEL-PROTOTYPE-REF>
+                      </FROM-PORT-IREF>
+                      <TO-PORT-IREF>
+                        <FAULT-FAILURE-PORT-REF TYPE="FAILURE-OUT-PORT">/EASTADLExtensionElements/DependabilityPackage/Dependability2/Top_FT_EMT/tp2_fop</FAULT-FAILURE-PORT-REF>
+                      </TO-PORT-IREF>
+                    </FAULT-FAILURE-PROPAGATION-LINK>
+                    <FAULT-FAILURE-PROPAGATION-LINK UUID="ad009d22-6061-4396-92c7-3a39fd9f5bc1-1401973420641">
+                      <SHORT-NAME>tc3_ffpl</SHORT-NAME>
+                      <FROM-PORT-IREF>
+                        <FAULT-FAILURE-PORT-REF TYPE="FAILURE-OUT-PORT">/EASTADLExtensionElements/DependabilityPackage/Dependability2/A_FT_EMT/ap3_fop</FAULT-FAILURE-PORT-REF>
+                        <ERROR-MODEL-PROTOTYPE-REF>/EASTADLExtensionElements/DependabilityPackage/Dependability2/Top_FT_EMT/A_FP_EMp</ERROR-MODEL-PROTOTYPE-REF>
+                      </FROM-PORT-IREF>
+                      <TO-PORT-IREF>
+                        <FAULT-FAILURE-PORT-REF TYPE="FAULT-IN-PORT">/EASTADLExtensionElements/DependabilityPackage/Dependability2/B_FT_EMT/bp1_fip</FAULT-FAILURE-PORT-REF>
+                        <ERROR-MODEL-PROTOTYPE-REF>/EASTADLExtensionElements/DependabilityPackage/Dependability2/Top_FT_EMT/B_FP_EMp</ERROR-MODEL-PROTOTYPE-REF>
+                      </TO-PORT-IREF>
+                    </FAULT-FAILURE-PROPAGATION-LINK>
+                    <FAULT-FAILURE-PROPAGATION-LINK UUID="de257c85-6890-476b-996b-94eda92f64e2-1401973420644">
+                      <SHORT-NAME>tc1_ffpl</SHORT-NAME>
+                      <FROM-PORT-IREF>
+                        <FAULT-FAILURE-PORT-REF TYPE="FAULT-IN-PORT">/EASTADLExtensionElements/DependabilityPackage/Dependability2/A_FT_EMT/ap1_fip</FAULT-FAILURE-PORT-REF>
+                        <ERROR-MODEL-PROTOTYPE-REF>/EASTADLExtensionElements/DependabilityPackage/Dependability2/Top_FT_EMT/A_FP_EMp</ERROR-MODEL-PROTOTYPE-REF>
+                      </FROM-PORT-IREF>
+                      <TO-PORT-IREF>
+                        <FAULT-FAILURE-PORT-REF TYPE="FAULT-IN-PORT">/EASTADLExtensionElements/DependabilityPackage/Dependability2/Top_FT_EMT/tp1_fip</FAULT-FAILURE-PORT-REF>
+                      </TO-PORT-IREF>
+                    </FAULT-FAILURE-PROPAGATION-LINK>
+                  </FAULT-FAILURE-CONNECTORS>
+                  <EXTERNAL-FAULTS>
+                    <FAULT-IN-PORT UUID="94ef78bd-81e2-41a5-81e0-1b8bb5d8da68-1401973420629">
+                      <SHORT-NAME>tp1_fip</SHORT-NAME>
+                      <FUNCTION-TARGET-IREFS>
+                        <FUNCTION-TARGET-IREF>
+                          <FUNCTION-PORT-REF TYPE="FUNCTION-FLOW-PORT">/DesignLevelElements/CollapseTest/Top_FT/tp1</FUNCTION-PORT-REF>
+                        </FUNCTION-TARGET-IREF>
+                      </FUNCTION-TARGET-IREFS>
+                    </FAULT-IN-PORT>
+                  </EXTERNAL-FAULTS>
+                  <PARTS>
+                    <ERROR-MODEL-PROTOTYPE UUID="9f748442-69c6-4dd6-a7f7-8de30cb35092-1401973420609">
+                      <SHORT-NAME>A_FP_EMp</SHORT-NAME>
+                      <TARGET-REF TYPE="DESIGN-FUNCTION-PROTOTYPE">/DesignLevelElements/CollapseTest/Top_FT/A_FP</TARGET-REF>
+                      <TYPE-TREF TYPE="ERROR-MODEL-TYPE">/EASTADLExtensionElements/DependabilityPackage/Dependability2/A_FT_EMT</TYPE-TREF>
+                    </ERROR-MODEL-PROTOTYPE>
+                    <ERROR-MODEL-PROTOTYPE UUID="bdd37256-9473-4ae4-93c2-e754879eed53-1401973420623">
+                      <SHORT-NAME>B_FP_EMp</SHORT-NAME>
+                      <TARGET-REF TYPE="DESIGN-FUNCTION-PROTOTYPE">/DesignLevelElements/CollapseTest/Top_FT/B_FP</TARGET-REF>
+                      <TYPE-TREF TYPE="ERROR-MODEL-TYPE">/EASTADLExtensionElements/DependabilityPackage/Dependability2/B_FT_EMT</TYPE-TREF>
+                    </ERROR-MODEL-PROTOTYPE>
+                  </PARTS>
+                  <FAILURES>
+                    <FAILURE-OUT-PORT UUID="68342e46-3642-401f-b8f5-a4aab4f96a07-1401973420632">
+                      <SHORT-NAME>tp2_fop</SHORT-NAME>
+                      <FUNCTION-TARGET-IREFS>
+                        <FUNCTION-TARGET-IREF>
+                          <FUNCTION-PORT-REF TYPE="FUNCTION-FLOW-PORT">/DesignLevelElements/CollapseTest/Top_FT/tp2</FUNCTION-PORT-REF>
+                        </FUNCTION-TARGET-IREF>
+                      </FUNCTION-TARGET-IREFS>
+                    </FAILURE-OUT-PORT>
+                  </FAILURES>
+                </ERROR-MODEL-TYPE>
+                <ERROR-MODEL-TYPE UUID="fee7c044-422f-4fc8-a2c0-b4e53c52f7f5-1401973420611">
+                  <SHORT-NAME>A_FT_EMT</SHORT-NAME>
+                  <ERROR-BEHAVIOR-DESCRIPTIONS>
+                    <ERROR-BEHAVIOR UUID="71c36e6c-a819-4372-8527-a4e3711a8394-1401973420621">
+                      <SHORT-NAME>A_FT_EMT_ErrorBehavior</SHORT-NAME>
+                      <FAILURE-LOGIC>Failure-ap2_fop = Failure-ap1_fip; Failure-ap3_fop = Failure-ap1_fip; </FAILURE-LOGIC>
+                      <TYPE>HIP_HOPS</TYPE>
+                    </ERROR-BEHAVIOR>
+                  </ERROR-BEHAVIOR-DESCRIPTIONS>
+                  <TARGET-REFS>
+                    <TARGET-REF TYPE="DESIGN-FUNCTION-TYPE">/DesignLevelElements/CollapseTest/A_FT</TARGET-REF>
+                  </TARGET-REFS>
+                  <EXTERNAL-FAULTS>
+                    <FAULT-IN-PORT UUID="c8aee5fe-51ab-4c01-9caf-4be7acd8999a-1401973420613">
+                      <SHORT-NAME>ap1_fip</SHORT-NAME>
+                      <FUNCTION-TARGET-IREFS>
+                        <FUNCTION-TARGET-IREF>
+                          <FUNCTION-PORT-REF TYPE="FUNCTION-FLOW-PORT">/DesignLevelElements/CollapseTest/A_FT/ap1</FUNCTION-PORT-REF>
+                        </FUNCTION-TARGET-IREF>
+                      </FUNCTION-TARGET-IREFS>
+                    </FAULT-IN-PORT>
+                  </EXTERNAL-FAULTS>
+                  <FAILURES>
+                    <FAILURE-OUT-PORT UUID="8e3ac338-bc33-4384-8c7c-8a903f095a4b-1401973420616">
+                      <SHORT-NAME>ap2_fop</SHORT-NAME>
+                      <FUNCTION-TARGET-IREFS>
+                        <FUNCTION-TARGET-IREF>
+                          <FUNCTION-PORT-REF TYPE="FUNCTION-FLOW-PORT">/DesignLevelElements/CollapseTest/A_FT/ap2</FUNCTION-PORT-REF>
+                        </FUNCTION-TARGET-IREF>
+                      </FUNCTION-TARGET-IREFS>
+                    </FAILURE-OUT-PORT>
+                    <FAILURE-OUT-PORT UUID="239924ac-04d6-4c10-8605-675d19ffc86d-1401973420619">
+                      <SHORT-NAME>ap3_fop</SHORT-NAME>
+                      <FUNCTION-TARGET-IREFS>
+                        <FUNCTION-TARGET-IREF>
+                          <FUNCTION-PORT-REF TYPE="FUNCTION-FLOW-PORT">/DesignLevelElements/CollapseTest/A_FT/ap3</FUNCTION-PORT-REF>
+                        </FUNCTION-TARGET-IREF>
+                      </FUNCTION-TARGET-IREFS>
+                    </FAILURE-OUT-PORT>
+                  </FAILURES>
+                </ERROR-MODEL-TYPE>
+                <ERROR-MODEL-TYPE UUID="defa1b6b-6e2a-49e9-bbb6-0b65f13f48fb-1401973420625">
+                  <SHORT-NAME>B_FT_EMT</SHORT-NAME>
+                  <TARGET-REFS>
+                    <TARGET-REF TYPE="DESIGN-FUNCTION-TYPE">/DesignLevelElements/CollapseTest/B_FT</TARGET-REF>
+                  </TARGET-REFS>
+                  <EXTERNAL-FAULTS>
+                    <FAULT-IN-PORT UUID="ba198fd8-703f-451b-b46b-01359589539f-1401973420626">
+                      <SHORT-NAME>bp1_fip</SHORT-NAME>
+                      <FUNCTION-TARGET-IREFS>
+                        <FUNCTION-TARGET-IREF>
+                          <FUNCTION-PORT-REF TYPE="FUNCTION-FLOW-PORT">/DesignLevelElements/CollapseTest/B_FT/bp1</FUNCTION-PORT-REF>
+                        </FUNCTION-TARGET-IREF>
+                      </FUNCTION-TARGET-IREFS>
+                    </FAULT-IN-PORT>
+                  </EXTERNAL-FAULTS>
+                </ERROR-MODEL-TYPE>
+              </ERROR-MODEL-TYPES>
+            </DEPENDABILITY>
+          </ELEMENTS>
+        </EA-PACKAGE>
+      </SUB-PACKAGES>
+    </EA-PACKAGE>
+  </TOP-LEVEL-PACKAGES>
+</EAXML>
