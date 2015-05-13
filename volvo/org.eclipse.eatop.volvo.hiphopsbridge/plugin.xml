@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.eclipse.eatop.volvo.hiphopsbridge.objectContribution1"
+            objectClass="org.eclipse.eatop.eastadl21.ErrorModelType">
+         <action
+               class="action.GetInterpreterArgsAction"
+               id="org.eclipse.eatop.volvo.hiphopsbridge.action1"
+               label="HiP-HOPS analysis"
+               menubarPath="org.eclipse.eatop.volvo.hiphopsbridge.menu1/separator">
+         </action>
+         <action
+               class="action.HideCutSetDecorationAction"
+               id="org.eclipse.eatop.volvo.hiphopsbridge.action2"
+               label="Remove CutSet visualizations"
+               menubarPath="org.eclipse.eatop.volvo.hiphopsbridge.menu1/separator">
+         </action>
+         <menu
+               id="org.eclipse.eatop.volvo.hiphopsbridge.menu1"
+               label="Fault Tree Analysis">
+            <separator
+                  name="separator">
+            </separator>
+         </menu>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.decorators">
+      <decorator
+            adaptable="true"
+            class="command.CutSetDecorator"
+            icon="icon/cutset.png"
+            id="org.eclipse.eatop.volvo.hiphopsbridge.decorator1"
+            label="CutSet"
+            lightweight="true"
+            location="TOP_RIGHT"
+            state="true">
+         <enablement>
+            <objectClass
+                  name="org.eclipse.emf.ecore.EObject">
+            </objectClass>
+         </enablement>
+      </decorator>
+   </extension>
+
+</plugin>
