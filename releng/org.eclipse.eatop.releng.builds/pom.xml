@@ -37,6 +37,23 @@
 		<module>../../examples/org.eclipse.eatop.examples.tableview.ui</module>
 		<module>../../examples/org.eclipse.eatop.examples.tableview</module>
 		<module>../../examples/org.eclipse.eatop.examples.emf.compare</module>
+		
+		<module>../../volvo/org.eclipse.eatop.volvo.errormodelgenerator</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.fmuimport</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.fmusim</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.hiphopsbridge</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.linearpropertyanalyzer</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.sgraphml</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.sgraphml.edit</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.sgraphml.editor</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.sgraphml.gefeditor</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.versionmanager</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.common</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.modeloverview</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.modelprocessor</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.requirementmetricsviewer</module>
+		
+		
 
 		<!-- Tests -->
 		<module>../../tests/org.eclipse.eatop.serialization.tests</module>
@@ -59,6 +76,15 @@
 		<module>../../features/org.eclipse.eatop.examples.tableview.feature</module>
 		<module>../../features/org.eclipse.eatop.examples.emf.compare.feature</module>
 		<module>../../features/org.eclipse.eatop.demonstrator-feature</module>
+		
+		<module>../../volvo/org.eclipse.eatop.volvo.errormodelgenerator.feature</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.fmuimport.feature</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.fmusim.feature</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.hiphopsbridge.feature</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.linearpropertyanalyzer.feature</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.sgraphml.gefeditor.feature</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.versionmanager.feature</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.feature</module>
 
 		<module>./repository</module>
 		<module>./product</module>

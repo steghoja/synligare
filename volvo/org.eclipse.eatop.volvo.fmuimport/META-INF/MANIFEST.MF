@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: FmuImport
-Bundle-SymbolicName: org.eclipse.eatop.volvo.fmuImport;singleton:=true
+Bundle-SymbolicName: org.eclipse.eatop.volvo.fmuimport;singleton:=true
 Bundle-Version: 1.0.1.qualifier
 Bundle-Activator: org.eclipse.eatop.volvo.fmuimport.Activator
 Require-Bundle: org.eclipse.ui,
