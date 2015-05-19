@@ -159,23 +159,23 @@ public class ImportFromFMUAction implements IObjectActionDelegate {
 
 	private String actionToTypename(IAction action) {
 		String target;
-		if (action.getId().equals("org.eclipse.eatop.fmuImport.designfunctiontypeaction"))
-		{
+		if (action.getId().equals("org.eclipse.eatop.volvo.fmuImport.designfunctiontypeaction"))
+		{                          
 			target = "DesignFunctionType";
 		}
-		else if (action.getId().equals("org.eclipse.eatop.fmuImport.basicsoftwarefunctiontypeaction"))
+		else if (action.getId().equals("org.eclipse.eatop.volvo.fmuImport.basicsoftwarefunctiontypeaction"))
 		{
 			target = "BasicSoftwareFunctionType";
 		}
-		else if (action.getId().equals("org.eclipse.eatop.fmuImport.localdevicemanageraction"))
+		else if (action.getId().equals("org.eclipse.eatop.volvo.fmuImport.localdevicemanageraction"))
 		{
 			target = "LocalDeviceManager";
 		}
-		else if (action.getId().equals("org.eclipse.eatop.fmuImport.hardwarefunctiontypeaction"))
+		else if (action.getId().equals("org.eclipse.eatop.volvo.fmuImport.hardwarefunctiontypeaction"))
 		{
 			target = "HardwareFunctionType";
 		}
-		else if (action.getId().equals("org.eclipse.eatop.fmuImport.analysisfunctiontypeaction"))
+		else if (action.getId().equals("org.eclipse.eatop.volvo.fmuImport.analysisfunctiontypeaction"))
 		{
 			target = "AnalysisFunctionType";
 		}
