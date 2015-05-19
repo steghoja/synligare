@@ -107,11 +107,11 @@ public class XMLTransformAction implements IObjectActionDelegate {
 	     IFile selectedXMLFile = (IFile)selections[0].getLastSegment();
 
 	     //Obtain xslt transform file from plugin directory
-	     String xsltPath = getTransformFilePath(); 
-		 if (xsltPath == null) return;	
+	     InputStream xsltStream = getTransformFileStream(); 
+		 if (xsltStream == null) return;	
 
 		 
-		 //Create a transformer based on the xslt file
+		 //Create a transformer based on the xslt stream
 
 
 		 //This one does not work for borderInsets calculation: com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl
@@ -125,8 +125,9 @@ public class XMLTransformAction implements IObjectActionDelegate {
 			return;
 		}
 
-	     
-	     Source xslt = new StreamSource(new File(xsltPath));
+	 
+//	     Source xslt = new StreamSource(new File(xsltPath));
+	     Source xslt = new StreamSource(xsltStream);
 	        Transformer transformer;
 			try {
 				transformer = factory.newTransformer(xslt);
@@ -190,7 +191,7 @@ public class XMLTransformAction implements IObjectActionDelegate {
 	        try {
 				transformer.transform(text, new StreamResult(new File(tempTargetFilePath)));
 			} catch (TransformerException e) {
-				Utils.showErrorMessage("Failed to transform file");
+				Utils.showErrorMessage("Failed to transform file, exception: " + e.getMessage());
 				e.printStackTrace();
 				return;
 			}
@@ -243,9 +244,11 @@ public class XMLTransformAction implements IObjectActionDelegate {
 		return graphmlFile;
 	}
 */
-	protected String getTransformFilePath() {
+	protected InputStream getTransformFileStream() {
+
+		//This solution using FileLocator.resolve requires jar to be unpacked. Better solution below.
 		//bundleentry://930.fwk487819219/xslt/s2y.xslt
-		URL bundleRootURL = null;
+/*		URL bundleRootURL = null;
 		try {
 			bundleRootURL = new URL(Activator.getDefault().getBundle().getEntry("/xslt"), xsltFileName);
 		} catch (Exception e) {
@@ -267,6 +270,18 @@ public class XMLTransformAction implements IObjectActionDelegate {
 		}
 		String xsltPath = pluginUrl.getPath();
 		return xsltPath;
+*/
+		InputStream inputStream;
+		try {
+	        URL url = new URL("platform:/plugin/org.eclipse.eatop.volvo.sgraphml.gefeditor/xslt/" + xsltFileName);
+	        inputStream = url.openConnection().getInputStream();
+	      }
+		catch (IOException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	
+		return inputStream;
 	}
 
 	@Override

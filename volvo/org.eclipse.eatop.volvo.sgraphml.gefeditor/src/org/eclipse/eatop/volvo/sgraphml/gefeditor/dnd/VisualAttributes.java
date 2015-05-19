@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -62,28 +64,17 @@ public class VisualAttributes {
 		if (!mapMetaClass2Attributes.isEmpty()){
 			return true;
 		}
-		
-		//bundleentry://930.fwk487819219/visualattributes.csv
-		URL bundleRootURL = null;
+			
+		InputStream inputStream;
 		try {
-			bundleRootURL = new URL(Activator.getDefault().getBundle().getEntry("/"), "visualattributes.csv");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+			//Note: The filename is case-sensitive on windows, when the plugin is unpacked, i.e. distributed as a *.jar
+	        URL url = new URL("platform:/plugin/org.eclipse.eatop.volvo.sgraphml.gefeditor/VisualAttributes.csv");
+	        inputStream = url.openConnection().getInputStream();
 		}
-		
-		// get URL = file:/C:/Synligare/.../org.eclipse.eatop.volvo.sgraphml.gefeditor/visualattributes.csv
-		// Note: For FileLocator.resolve to work, the file must be unpacked from the jar-archive. See seeting in feature.xml.
-		URL pluginUrl = null;
-		try {
-			pluginUrl = FileLocator.resolve(bundleRootURL); 
-
-		} catch (IOException ex) {
+		catch (IOException ex) {
 			ex.printStackTrace();
 			return false;
 		}
-		String path = pluginUrl.getPath(); 
-		
 		
 		BufferedReader br = null;
 		String line = "";
@@ -93,7 +84,8 @@ public class VisualAttributes {
 		
 		try {
 	 
-			br = new BufferedReader(new FileReader(path));
+//			br = new BufferedReader(new FileReader(path));
+			br = new BufferedReader(new InputStreamReader(inputStream));
 			
 			//skip header line
 			br.readLine();

@@ -62,6 +62,7 @@
          id="org.eclipse.eatop.volvo.sgraphml.gefeditor"
          download-size="0"
          install-size="0"
-         version="0.6.0.qualifier"/>
+         version="0.6.0.qualifier"
+         unpack="false"/>
 
 </feature>
