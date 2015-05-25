@@ -19,8 +19,11 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.eatop.common.ui.util.ModelSearcher;
+import org.eclipse.eatop.eastadl21.AnalysisFunctionPrototype;
+import org.eclipse.eatop.eastadl21.DesignFunctionPrototype;
 import org.eclipse.eatop.eastadl21.EAConnector;
 import org.eclipse.eatop.eastadl21.EADirectionKind;
+import org.eclipse.eatop.eastadl21.EAElement;
 import org.eclipse.eatop.eastadl21.EAPort;
 import org.eclipse.eatop.eastadl21.EAPrototype;
 import org.eclipse.eatop.eastadl21.EAType;
@@ -799,8 +802,26 @@ public class SgraphMLObjectFactory implements CreationFactory {
 
 	private Dimension addGroupNode(EObjectWithDotPath groupNodeWithPath) {
 
-		boolean bMayHavePorts = (groupNodeWithPath.eObject instanceof EAType) || (groupNodeWithPath.eObject instanceof EAPrototype);
+			boolean bMayHavePorts = (groupNodeWithPath.eObject instanceof EAType) || (groupNodeWithPath.eObject instanceof EAPrototype);
 
+			//For a prototype, make sure there is a type defined 
+			if (groupNodeWithPath.eObject instanceof EAPrototype){
+				EAType type = null;
+			
+				if (groupNodeWithPath.eObject instanceof AnalysisFunctionPrototype){
+					type = ((AnalysisFunctionPrototype)(groupNodeWithPath.eObject)).getType();
+				}
+				else if (groupNodeWithPath.eObject instanceof DesignFunctionPrototype){
+					type = ((DesignFunctionPrototype)(groupNodeWithPath.eObject)).getType();
+					
+				}
+				if (type == null){
+					Utils.showErrorMessage("The prototype " + ((EAElement)groupNodeWithPath.eObject).getShortName() + " has no type defined.");
+					return new Dimension(0,0);
+				}
+			}
+			
+		
 		List<EAPort> inports = new ArrayList<EAPort>();
 		List<EAPort> outports = new ArrayList<EAPort>();
 		List<EAPort> inoutports = new ArrayList<EAPort>();
