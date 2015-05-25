@@ -79,37 +79,6 @@ public class ModelProcessor {
 		}
 	}
 
-	/**
-	 * Search the provided EAElement and all of its children for requirements that are satisfied 
-	 * (requirements with a satisfy relation to it)
-	 * 
-	 * @param selectedElement The root element of the search
-	 * @return A list with all the satisfied requirements found in the provided element
-	 */
-	public static List<Requirement> findSatisfiedRequirements(EAElement selectedElement) {
-
-		List<Requirement> reqList;
-
-		reqList = findAllRequirements(selectedElement);
-
-		Set<EObject> incoming = new HashSet<EObject>();
-		for (Requirement r : reqList) {
-			incoming.addAll(findIncomingReferences(r));
-		}
-
-		// Find the Satisfy-references and then add the satisfied requirement to list
-		ArrayList<Requirement> satisfiedReqs = new ArrayList<Requirement>();
-
-		for (EObject eObject : incoming) {
-			if (eObject instanceof Satisfy) {
-				Satisfy sat = (Satisfy) eObject;
-				satisfiedReqs.addAll(sat.getSatisfiedRequirement());
-			}
-
-		}
-		return satisfiedReqs;
-
-	}
 
 	/**
 	 * Find the satisfied requirements in the provided list of requirements
@@ -118,7 +87,9 @@ public class ModelProcessor {
 	 * @return A list of the satisfied requirements from <code>reqs</code>
 	 */
 	public static List<Requirement> findSatisfiedRequirements(List<Requirement> reqs) {
-		Set<EObject> incoming = new HashSet<EObject>();
+	/*
+	  	Set<EObject> incoming = new HashSet<EObject>();
+
 		for (Requirement r : reqs) {
 			incoming.addAll(findIncomingReferences(r));
 		}
@@ -132,6 +103,22 @@ public class ModelProcessor {
 			}
 
 		}
+	 */
+		
+		//Buggfix, avoid including additional Reqs, when there is a Satisfy element with multiple Reqs - Henrik Kaijser 25/5 2015
+		ArrayList<Requirement> satisfiedReqs = new ArrayList<Requirement>();
+		for (Requirement r : reqs) {
+			Set<EObject> incoming = new HashSet<EObject>();
+			incoming.addAll(findIncomingReferences(r));
+		
+			// Find the Satisfy-references and then add the satisfied requirement to list
+			for (EObject eObject : incoming) {
+				if (eObject instanceof Satisfy) {
+					satisfiedReqs.add(r);
+				}
+			}
+		}
+		
 		return satisfiedReqs;
 	}
 
@@ -157,36 +144,7 @@ public class ModelProcessor {
 		return null;
 	}*/
 
-	/**
-	 * Returns the requirements found under <code>selectedElement</code> that has a derived relation
-	 * 
-	 * @param selectedElement
-	 * @return The requirements found under <code>selectedElement</code> that has a derived relation
-	 */
-	public static List<Requirement> findDerivedRequirements(EAElement selectedElement) {
-		
-		List<Requirement> reqList;
-
-		reqList = findAllRequirements(selectedElement);
-
-		Set<EObject> incoming = new HashSet<EObject>();
-		for (Requirement r : reqList) {
-			incoming.addAll(findIncomingReferences(r));
-		}
-
-		// Find the Derive-references and then add the derived requirement to list
-		ArrayList<Requirement> derivedReqs = new ArrayList<Requirement>();
-
-		for (EObject eObject : incoming) {
-			if (eObject instanceof DeriveRequirement) {
-				DeriveRequirement der = (DeriveRequirement) eObject;
-				derivedReqs.addAll(der.getDerived());
-			}
-
-		}
-		return derivedReqs;
-	}
-
+	
 	/**
 	 * Finds all derive relationships for the given requirement
 	 * 
