@@ -22,6 +22,8 @@ public class GridLayout {
 	public void calculateNextGridPosition(Dimension size) {
 		//currentgridLocation;
 
+		if (size.equals(0, 0)) return;
+		
 		if ((nGridPositionX + 1) == nMaxGridColumns){
 			//step down
 			bottomRight.x = Math.max(bottomRight.x, currentLocation.x + size.width);
