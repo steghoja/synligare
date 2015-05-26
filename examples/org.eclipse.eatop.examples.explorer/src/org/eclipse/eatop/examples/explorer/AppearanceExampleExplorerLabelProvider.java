@@ -72,6 +72,9 @@ public class AppearanceExampleExplorerLabelProvider extends BasicExplorerLabelPr
 	@Override
 	public StyledString getStyledText(Object element) {
 		if (!(element instanceof IFile)) {
+			if (element instanceof ChildWrapper) {
+				element = ((ChildWrapper) element).getObject();
+			}
 			AdapterFactoryLabelProvider labelProvider = getModelLabelProvider(element);
 			// FIXME Remove try/catch once we don't need to support Eclipse 4.3 (and EMF 2.9) any longer
 			try {
