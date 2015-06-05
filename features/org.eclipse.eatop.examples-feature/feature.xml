@@ -21,43 +21,53 @@
 
    <includes
          id="org.eclipse.eatop.examples.tableview.feature"
-         version="0.0.0"/>
+         version="0.0.0"
+         optional="true"/>
 
    <includes
          id="org.eclipse.eatop.examples.emf.compare.feature"
-         version="0.0.0"/>
+         version="0.0.0"
+         optional="true"/>
 
    <includes
          id="org.eclipse.eatop.volvo.errormodelgenerator.feature"
-         version="0.0.0"/>
+         version="0.0.0"
+         optional="true"/>
 
    <includes
          id="org.eclipse.eatop.volvo.fmuimport.feature"
-         version="0.0.0"/>
+         version="0.0.0"
+         optional="true"/>
 
    <includes
          id="org.eclipse.eatop.volvo.fmusim.feature"
-         version="0.0.0"/>
+         version="0.0.0"
+         optional="true"/>
 
    <includes
          id="org.eclipse.eatop.volvo.hiphopsbridge.feature"
-         version="0.0.0"/>
+         version="0.0.0"
+         optional="true"/>
 
    <includes
          id="org.eclipse.eatop.volvo.linearpropertyanalyzer.feature"
-         version="0.0.0"/>
+         version="0.0.0"
+         optional="true"/>
 
    <includes
          id="org.eclipse.eatop.volvo.sgraphml.gefeditor.feature"
-         version="0.0.0"/>
+         version="0.0.0"
+         optional="true"/>
 
    <includes
          id="org.eclipse.eatop.volvo.versionmanager.feature"
-         version="0.0.0"/>
+         version="0.0.0"
+         optional="true"/>
 
    <includes
          id="org.eclipse.eatop.volvo.visualizer.feature"
-         version="0.0.0"/>
+         version="0.0.0"
+         optional="true"/>
 
    <plugin
          id="org.eclipse.eatop.examples.actions"
