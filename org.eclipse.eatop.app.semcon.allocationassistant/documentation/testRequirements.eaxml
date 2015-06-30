@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EAXML xmlns="http://east-adl.info/2.1.12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://east-adl.info/2.1.12 eastadl_2-1-12.xsd">
+  <TOP-LEVEL-PACKAGES>
+    <EA-PACKAGE UUID="x1500000000AEB4C4">
+      <SHORT-NAME>MockUpModelForTraceabilityAndAllocation</SHORT-NAME>
+      <CATEGORY></CATEGORY>
+      <NAME>MockUpModelForTraceabilityAndAllocation</NAME>
+      <OWNED-COMMENTS/>
+      <SUB-PACKAGES/>
+      <ELEMENTS>
+        <REQUIREMENTS-MODEL UUID="x0400000000AEB384">
+          <SHORT-NAME>VehicleLevelRequirements</SHORT-NAME>
+          <CATEGORY></CATEGORY>
+          <NAME>VehicleLevelRequirements</NAME>
+          <OWNED-COMMENTS/>
+          <TRACEABLE-SPECIFICATION-REFS/>
+          <OWNED-RELATIONSHIPS>
+            <SATISFY UUID="x0400000000AEB479">
+              <SHORT-NAME>req1vehicleFeature2</SHORT-NAME>
+              <CATEGORY></CATEGORY>
+              <NAME>req1vehicleFeature2</NAME>
+              <OWNED-COMMENTS/>
+              <SATISFIED-REQUIREMENT-REFS>
+                <SATISFIED-REQUIREMENT-REF TYPE="REQUIREMENT">/MockUpModelForTraceabilityAndAllocation/VehicleLevelRequirements/req1</SATISFIED-REQUIREMENT-REF>
+              </SATISFIED-REQUIREMENT-REFS>
+              <SATISFIED-USE-CASE-REFS/>
+              <SATISFIED-BY-IREFS>
+                <SATISFIED-BY-IREF>
+                  <IDENTIFIABLE-TARGET-REF TYPE="VEHICLE-FEATURE">/MockUpModelForTraceabilityAndAllocation/SystemModel2/VL/tfm/vehicleFeature2</IDENTIFIABLE-TARGET-REF>
+                </SATISFIED-BY-IREF>
+              </SATISFIED-BY-IREFS>
+            </SATISFY>
+            <DERIVE-REQUIREMENT UUID="x0400000000AEB4B9">
+              <SHORT-NAME>req1req2</SHORT-NAME>
+              <CATEGORY></CATEGORY>
+              <NAME>req1req2</NAME>
+              <OWNED-COMMENTS/>
+              <DERIVED-REFS>
+                <DERIVED-REF TYPE="REQUIREMENT">/MockUpModelForTraceabilityAndAllocation/AnalysisLevelRequirements/req2</DERIVED-REF>
+              </DERIVED-REFS>
+              <DERIVED-FROM-REFS>
+                <DERIVED-FROM-REF TYPE="REQUIREMENT">/MockUpModelForTraceabilityAndAllocation/VehicleLevelRequirements/req1</DERIVED-FROM-REF>
+              </DERIVED-FROM-REFS>
+            </DERIVE-REQUIREMENT>
+          </OWNED-RELATIONSHIPS>
+          <OPERATIONAL-SITUATIONS/>
+          <REQUIREMENTS>
+            <REQUIREMENT UUID="x0400000000AEB492">
+              <SHORT-NAME>req1</SHORT-NAME>
+              <CATEGORY></CATEGORY>
+              <NAME>req1</NAME>
+              <OWNED-COMMENTS/>
+              <TEXT></TEXT>
+              <FORMALISM></FORMALISM>
+              <URL></URL>
+              <MODE-REFS/>
+            </REQUIREMENT>
+          </REQUIREMENTS>
+          <REQUIREMENTS-RELATIONSHIP-GROUPS/>
+          <REQUIREMENTS-HIERARCHYS/>
+          <USE-CASES/>
+          <REQUIREMENT-TYPES/>
+        </REQUIREMENTS-MODEL>
+        <REQUIREMENTS-MODEL UUID="x0400000000AEB48A">
+          <SHORT-NAME>AnalysisLevelRequirements</SHORT-NAME>
+          <CATEGORY></CATEGORY>
+          <NAME>AnalysisLevelRequirements</NAME>
+          <OWNED-COMMENTS/>
+          <TRACEABLE-SPECIFICATION-REFS/>
+          <OWNED-RELATIONSHIPS>
+            <SATISFY UUID="x0400000000AEB4AB">
+              <SHORT-NAME>req2AnalysisFunction4</SHORT-NAME>
+              <CATEGORY></CATEGORY>
+              <NAME>req2AnalysisFunction4</NAME>
+              <OWNED-COMMENTS/>
+              <SATISFIED-REQUIREMENT-REFS>
+                <SATISFIED-REQUIREMENT-REF TYPE="REQUIREMENT">/MockUpModelForTraceabilityAndAllocation/AnalysisLevelRequirements/req2</SATISFIED-REQUIREMENT-REF>
+              </SATISFIED-REQUIREMENT-REFS>
+              <SATISFIED-USE-CASE-REFS/>
+              <SATISFIED-BY-IREFS>
+                <SATISFIED-BY-IREF>
+                  <IDENTIFIABLE-TARGET-REF TYPE="FEATURE-MODEL">/MockUpModelForTraceabilityAndAllocation/AnalysisLevelElements/AnalysisFunction4</IDENTIFIABLE-TARGET-REF>
+                </SATISFIED-BY-IREF>
+                <SATISFIED-BY-IREF>
+                  <IDENTIFIABLE-TARGET-REF TYPE="FEATURE-MODEL">/MockUpModelForTraceabilityAndAllocation/AnalysisLevelElements/AnalysisFunction3</IDENTIFIABLE-TARGET-REF>
+                </SATISFIED-BY-IREF>
+              </SATISFIED-BY-IREFS>
+            </SATISFY>
+            <DERIVE-REQUIREMENT UUID="x0400000000AEB4B2">
+              <SHORT-NAME>req2req4</SHORT-NAME>
+              <CATEGORY></CATEGORY>
+              <NAME>req2req4</NAME>
+              <OWNED-COMMENTS/>
+              <DERIVED-REFS>
+                <DERIVED-REF TYPE="REQUIREMENT">/MockUpModelForTraceabilityAndAllocation/DesignLevelRequirements/req4</DERIVED-REF>
+              </DERIVED-REFS>
+              <DERIVED-FROM-REFS>
+                <DERIVED-FROM-REF TYPE="REQUIREMENT">/MockUpModelForTraceabilityAndAllocation/AnalysisLevelRequirements/req2</DERIVED-FROM-REF>
+              </DERIVED-FROM-REFS>
+            </DERIVE-REQUIREMENT>
+            <DERIVE-REQUIREMENT>
+              <SHORT-NAME>req3req4</SHORT-NAME>
+              <CATEGORY></CATEGORY>
+              <NAME></NAME>
+              <OWNED-COMMENTS/>
+              <DERIVED-REFS>
+                <DERIVED-REF TYPE="REQUIREMENT">/MockUpModelForTraceabilityAndAllocation/DesignLevelRequirements/req4</DERIVED-REF>
+              </DERIVED-REFS>
+              <DERIVED-FROM-REFS>
+                <DERIVED-FROM-REF TYPE="REQUIREMENT">/MockUpModelForTraceabilityAndAllocation/AnalysisLevelRequirements/req3</DERIVED-FROM-REF>
+                <DERIVED-FROM-REF TYPE="REQUIREMENT">/MockUpModelForTraceabilityAndAllocation/AnalysisLevelRequirements/req5</DERIVED-FROM-REF>
+              </DERIVED-FROM-REFS>
+            </DERIVE-REQUIREMENT>
+            <SATISFY>
+              <SHORT-NAME></SHORT-NAME>
+              <CATEGORY></CATEGORY>
+              <NAME></NAME>
+              <OWNED-COMMENTS/>
+              <SATISFIED-REQUIREMENT-REFS>
+                <SATISFIED-REQUIREMENT-REF TYPE="REQUIREMENT">/MockUpModelForTraceabilityAndAllocation/AnalysisLevelRequirements/req3</SATISFIED-REQUIREMENT-REF>
+              </SATISFIED-REQUIREMENT-REFS>
+              <SATISFIED-USE-CASE-REFS/>
+              <SATISFIED-BY-IREFS>
+                <SATISFIED-BY-IREF>
+                  <IDENTIFIABLE-TARGET-REF TYPE="FEATURE-MODEL">/MockUpModelForTraceabilityAndAllocation/AnalysisLevelElements/AnalysisFunction1</IDENTIFIABLE-TARGET-REF>
+                </SATISFIED-BY-IREF>
+              </SATISFIED-BY-IREFS>
+            </SATISFY>
+            <SATISFY>
+              <SHORT-NAME></SHORT-NAME>
+              <CATEGORY></CATEGORY>
+              <NAME></NAME>
+              <OWNED-COMMENTS/>
+              <SATISFIED-REQUIREMENT-REFS>
+                <SATISFIED-REQUIREMENT-REF TYPE="REQUIREMENT">/MockUpModelForTraceabilityAndAllocation/AnalysisLevelRequirements/req5</SATISFIED-REQUIREMENT-REF>
+              </SATISFIED-REQUIREMENT-REFS>
+              <SATISFIED-USE-CASE-REFS/>
+              <SATISFIED-BY-IREFS>
+                <SATISFIED-BY-IREF>
+                  <IDENTIFIABLE-TARGET-REF TYPE="DESIGN-FUNCTION-PROTOTYPE">/MockUpModelForTraceabilityAndAllocation/DesignLevelElements/fda_type/df2</IDENTIFIABLE-TARGET-REF>
+                </SATISFIED-BY-IREF>
+              </SATISFIED-BY-IREFS>
+            </SATISFY>
+          </OWNED-RELATIONSHIPS>
+          <OPERATIONAL-SITUATIONS/>
+          <REQUIREMENTS>
+            <REQUIREMENT UUID="x0400000000AEB498">
+              <SHORT-NAME>req3</SHORT-NAME>
+              <CATEGORY></CATEGORY>
+              <NAME>req3</NAME>
+              <OWNED-COMMENTS/>
+              <TEXT></TEXT>
+              <FORMALISM></FORMALISM>
+              <URL></URL>
+              <MODE-REFS/>
+            </REQUIREMENT>
+            <REQUIREMENT UUID="x0400000000AEB49E">
+              <SHORT-NAME>req2</SHORT-NAME>
+              <CATEGORY></CATEGORY>
+              <NAME>req2</NAME>
+              <OWNED-COMMENTS/>
+              <TEXT></TEXT>
+              <FORMALISM></FORMALISM>
+              <URL></URL>
+              <MODE-REFS/>
+            </REQUIREMENT>
+            <REQUIREMENT>
+              <SHORT-NAME>req5</SHORT-NAME>
+              <CATEGORY></CATEGORY>
+              <NAME></NAME>
+              <OWNED-COMMENTS/>
+              <TEXT></TEXT>
+              <FORMALISM></FORMALISM>
+              <URL></URL>
+              <MODE-REFS/>
+            </REQUIREMENT>
+          </REQUIREMENTS>
+          <REQUIREMENTS-RELATIONSHIP-GROUPS/>
+          <REQUIREMENTS-HIERARCHYS/>
+          <USE-CASES/>
+          <REQUIREMENT-TYPES/>
+        </REQUIREMENTS-MODEL>
+        <REQUIREMENTS-MODEL UUID="x0400000000AEB48E">
+          <SHORT-NAME>DesignLevelRequirements</SHORT-NAME>
+          <CATEGORY></CATEGORY>
+          <NAME>DesignLevelRequirements</NAME>
+          <OWNED-COMMENTS/>
+          <TRACEABLE-SPECIFICATION-REFS/>
+          <OWNED-RELATIONSHIPS>
+            <SATISFY UUID="x0400000000AEB4A2">
+              <SHORT-NAME>req4df4</SHORT-NAME>
+              <CATEGORY></CATEGORY>
+              <NAME>req4df4</NAME>
+              <OWNED-COMMENTS/>
+              <SATISFIED-REQUIREMENT-REFS/>
+              <SATISFIED-USE-CASE-REFS/>
+              <SATISFIED-BY-IREFS/>
+            </SATISFY>
+          </OWNED-RELATIONSHIPS>
+          <OPERATIONAL-SITUATIONS/>
+          <REQUIREMENTS>
+            <REQUIREMENT UUID="x0400000000AEB49B">
+              <SHORT-NAME>req4</SHORT-NAME>
+              <CATEGORY></CATEGORY>
+              <NAME>req4</NAME>
+              <OWNED-COMMENTS/>
+              <TEXT></TEXT>
+              <FORMALISM></FORMALISM>
+              <URL></URL>
+              <MODE-REFS/>
+            </REQUIREMENT>
+          </REQUIREMENTS>
+          <REQUIREMENTS-RELATIONSHIP-GROUPS/>
+          <REQUIREMENTS-HIERARCHYS/>
+          <USE-CASES/>
+          <REQUIREMENT-TYPES/>
+        </REQUIREMENTS-MODEL>
+      </ELEMENTS>
+    </EA-PACKAGE>
+  </TOP-LEVEL-PACKAGES>
+</EAXML>
