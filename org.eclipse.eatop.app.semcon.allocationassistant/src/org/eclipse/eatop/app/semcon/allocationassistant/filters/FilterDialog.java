@@ -86,7 +86,6 @@ public class FilterDialog extends Dialog {
 		Composite searchAndFilterContainer = new Composite(tabFolder, SWT.NULL);
 		searchAndFilterContainer.setLayout(new GridLayout(1, false));
 		searchAndFilterContainer.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-
 		selectAndFilterTab.setControl(searchAndFilterContainer);
 		int searchAndFilterApproach = 2;
 		populateTab(searchAndFilterContainer, "but exclude those that have the attribute", searchAndFilterApproach);

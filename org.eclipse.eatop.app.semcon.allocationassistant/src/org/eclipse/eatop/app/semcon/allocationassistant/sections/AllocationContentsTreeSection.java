@@ -1,6 +1,7 @@
 package org.eclipse.eatop.app.semcon.allocationassistant.sections;
 
 
+import org.eclipse.eatop.app.semcon.allocationassistant.allocationsuggestions.AllocationSuggestionsAction;
 import org.eclipse.eatop.app.semcon.allocationassistant.editor.AllocationFormEditor;
 import org.eclipse.eatop.app.semcon.allocationassistant.filters.FilterAction;
 import org.eclipse.eatop.app.semcon.allocationassistant.pages.AllocationContentsTreePage;
@@ -13,13 +14,13 @@ import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.SectionPart;
 
 public class AllocationContentsTreeSection extends GenericContentsTreeSection {
-
+	boolean addSuggestionAction = false;
 	public AllocationContentsTreeSection(AllocationContentsTreePage formPage,
 			Object sectionInput) {
 		super(formPage, sectionInput);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see
