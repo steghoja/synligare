@@ -199,7 +199,8 @@ public class GetInterpreterArgsAction implements IObjectActionDelegate{
 	}
 	
 	private void createFTA(String hipFileName) throws IOException{
-		String HipFTA_CMD = "Hipop "+ hipFileName +" outputtype=XML -openiex";
+		//idevns=false => treat hanging input deviations as basic events
+		String HipFTA_CMD = "Hipop "+ hipFileName +" idevns=false outputtype=XML -openiex";
 		Runtime rt = Runtime.getRuntime();
 
 		// Delete html file if exists
