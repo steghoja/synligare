@@ -199,7 +199,7 @@ public class AllocationContentsTreePage extends GenericContentsTreePage{
 				newFilterList.add(vf);
 		}
 		viewer.resetFilters();
-		viewer.setFilters((ViewerFilter[]) newFilterList.toArray());
+		viewer.setFilters( newFilterList.toArray(new ViewerFilter[newFilterList.size()]));
 		viewer.refresh();
 	}
 	

@@ -13,6 +13,7 @@ import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
+import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.sphinx.emf.editors.forms.BasicTransactionalFormEditor;
 import org.eclipse.sphinx.emf.ui.util.EcoreUIUtil;
@@ -54,6 +55,14 @@ public class AllocationFormEditor extends BasicTransactionalFormEditor implement
 			getSite().getPage().removePartListener(partListener);
 	}
 	
+	
+		@Override
+	public void menuAboutToShow(IMenuManager menuManager) {
+		// TODO future work to support right click menu for editing and creating objects
+		//For now: Do nothing to avoid Unhandled event loop exception
+	}
+
+
 		/*
 		 * (non-Javadoc)
 		 * @see org.eclipse.sphinx.emf.editors.forms.BasicTransactionalFormEditor#getEditorInputName()
