@@ -18,6 +18,7 @@ import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Pattern;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IEditorPart;
 
 public class Utils {
 
@@ -28,6 +29,7 @@ public class Utils {
 	
 	static private Shell shell;
 	static private GraphicalViewer graphicalViewer;
+	static private IEditorPart editorPart;
 	
 	protected ResourceManager resourceManager;
 	
@@ -55,6 +57,15 @@ public class Utils {
 	public static void setGraphicalViewer(GraphicalViewer graphicalViewer) {
 		Utils.graphicalViewer = graphicalViewer;
 	}
+	
+	public static IEditorPart getEditorPart() {
+		return editorPart;
+	}
+
+	public static void setEditorPart(IEditorPart editorPart) {
+		Utils.editorPart = editorPart;
+	}
+	
 
 	static public void showInformationMessage(final String message){
           	MessageDialog.openInformation(shell, "GEF Editor", message);

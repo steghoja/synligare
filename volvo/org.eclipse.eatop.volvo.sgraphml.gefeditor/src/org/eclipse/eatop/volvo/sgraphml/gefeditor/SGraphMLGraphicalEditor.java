@@ -8,6 +8,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.contextmenu.GEFEditorContextMenuProvider;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.contextmenu.GotoModelElementAction;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.contextmenu.SaveImageAction;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.GraphMLTypeEditPart;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.SGraphMLEditPartFactory;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.dnd.EAObjectTransferDropTargetListener;
@@ -28,6 +29,7 @@ import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.tools.MarqueeDragTracker;
 import org.eclipse.gef.tools.MarqueeSelectionTool;
+import org.eclipse.gef.ui.actions.SelectionAction;
 import org.eclipse.gef.ui.actions.ToggleGridAction;
 import org.eclipse.gef.ui.actions.ToggleSnapToGeometryAction;
 import org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette;
@@ -45,6 +47,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IPartListener2;
@@ -142,7 +145,7 @@ public class SGraphMLGraphicalEditor extends GraphicalEditorWithFlyoutPalette {
 
 		getGraphicalViewer().addDropTargetListener(new EAObjectTransferDropTargetListener(getGraphicalViewer()));
 		Utils.setGraphicalViewer(getGraphicalViewer());
-
+		Utils.setEditorPart(this);
 	}
 
 	
@@ -265,10 +268,13 @@ public class SGraphMLGraphicalEditor extends GraphicalEditorWithFlyoutPalette {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void createActions() {
-	    GotoModelElementAction action = new GotoModelElementAction(this);
+		SelectionAction action = new GotoModelElementAction(this);
 	    getActionRegistry().registerAction(action);
 	    getSelectionActions().add(action.getId());
-	 
+
+	    action  = new SaveImageAction(this);
+	    getActionRegistry().registerAction(action);
+	    
 	    super.createActions();
 	}
 	
