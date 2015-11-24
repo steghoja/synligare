@@ -104,6 +104,8 @@ public class GraphMLTypeXYLayoutPolicy extends XYLayoutEditPolicy {
 	 *
 	 * Note that constraint is in the model coordinate system (ie before zoom), and ChangeBoundsRequest is screen absolute. 
 	 * 
+	 * Note: While performing a drag operation of an element, there will be multiple calls here each one reporting one or several pixels move depending
+	 * 	     on mouse speed.
 	 */
 
 	@Override 
@@ -116,6 +118,7 @@ public class GraphMLTypeXYLayoutPolicy extends XYLayoutEditPolicy {
 			command.setModel((BaseNodeType) child.getModel());
 			command.setNewConstraint((Rectangle) constraint); //Ok to use constraint even if zoomed since in model coordinates.
 		    //TODO: update the rectangle attributes of the port label (now we update them upon save instead)
+			
 			return command;
 		}
 		else if (child instanceof GroupNodeEditPart){
@@ -140,14 +143,8 @@ public class GraphMLTypeXYLayoutPolicy extends XYLayoutEditPolicy {
 				
 				//TODO: update the rectangle attributes of the port label (now we update them upon save instead)
 				
-/*
- TODO: Fix code below. Note that we get resize calls now and then even before mouse has been clicked.
-				//calculate resize scale from resize
-				Dimension sd = request.getSizeDelta();
-				Rectangle r1 = (Rectangle)constraint;
-				double resizeScaleX = ((double)(r1.width)) / (r1.width - sd.width);
-				double resizeScaleY = ((double)(r1.height)) / (r1.height - sd.height);
-				ChangeBoundsRequest cbr = new ChangeBoundsRequest();
+
+
 				
 				//move ports due to the groupnode resize 
 				for (Object p : child.getChildren()){
@@ -156,14 +153,25 @@ public class GraphMLTypeXYLayoutPolicy extends XYLayoutEditPolicy {
 						PortNodeType node = (PortNodeType)nodeEditPart.getModel();
 						MoveChildNodeCommand moveChildCommand = new MoveChildNodeCommand();
 						moveChildCommand.setModel(node);
-						moveChildCommand.setSelected(true);
-						Point moveDelta = calculateMovePortDelta(groupNode.getGeometry(), node.getGeometry(), request, resizeScaleX, resizeScaleY);
-						cbr.setMoveDelta(moveDelta);
-						moveChildCommand.setChange(cbr); 
+						Point moveDelta = calculateMovePortDelta(groupNode.getGeometry(), node.getGeometry(), request, (Rectangle)constraint);
+						moveChildCommand.setChange(moveDelta); 
 						cc.add(moveChildCommand);
+						
+						
+						UpdateNodeLabelTypeCommand touchLabel = new UpdateNodeLabelTypeCommand();
+						touchLabel.setModel(node);
+						NodeLabelType currentLabel = node.getNodeLabel().get(0);
+						touchLabel.setNewNodeLabel(currentLabel);
+						cc.add(touchLabel);
+						
 					}
 				}
-*/				
+				
+				//Use case: expand to the right. But label is not updated (reload is needed). How force update of label - relative coordinate is the same.
+				//Test by touching the nodelabel - what about ordering - this has to be done after move
+				
+				
+				
 				return cc;
 			}
 		}
@@ -200,9 +208,20 @@ public class GraphMLTypeXYLayoutPolicy extends XYLayoutEditPolicy {
 
 		    }
 		 }
-	protected Point calculateMovePortDelta(GeometryType groupnode, GeometryType port, ChangeBoundsRequest request, double resizeScaleX, double resizeScaleY  ){
+	protected Point calculateMovePortDelta(GeometryType groupnode, GeometryType port, ChangeBoundsRequest request, Rectangle constraint){
 
 		Point moveDelta = new Point(0,0);
+
+		//The request has screen coords
+		Point screenCordsDelta = new Point(request.getSizeDelta().width, request.getSizeDelta().height);//new Point(request.getSizeDelta());
+		Point modelCordsDelta = Utils.screenDelta2ModelDelta(screenCordsDelta);
+		
+		//calculate resize scale
+		//sd is positive when rectangle has expanded, so subtracting the change gives the old size
+		Rectangle r1 = constraint;
+		double resizeScaleX = ((double)(r1.width)) / (r1.width - modelCordsDelta.x);
+		double resizeScaleY = ((double)(r1.height)) / (r1.height - modelCordsDelta.y);
+		
 		
 		//Which side is the port attached to?
 		int dxW = (int)(port.getX() - groupnode.getX());
@@ -230,33 +249,44 @@ public class GraphMLTypeXYLayoutPolicy extends XYLayoutEditPolicy {
 		}
 		
 		//Is "my" edge moved due to resize? Then move port in same way.
+		
+		
+		//Note: Positive size delta => side is moved in the direction that expands the rectangle.
 		if ((request.getResizeDirection() & side) > 0){
-			if ((side == PositionConstants.WEST) || (side == PositionConstants.EAST)){
-				moveDelta.x = request.getSizeDelta().width;
-			}
-			else{
-				moveDelta.y = request.getSizeDelta().height;
-			}
+			
+			switch (side)
+			{
+				case PositionConstants.WEST:
+					moveDelta.x = -modelCordsDelta.x;
+					break;
+				case PositionConstants.EAST:
+					moveDelta.x = modelCordsDelta.x;
+					break;
+				case PositionConstants.NORTH:
+					moveDelta.y = modelCordsDelta.y;
+					break;
+				case PositionConstants.SOUTH:
+					moveDelta.y = -modelCordsDelta.y;
+					break;
+				}
 		}
 
 		//Is the groupnode resized in the dimension opposite to my edge? Then rescale.
 	
 		if ((side == PositionConstants.WEST) || (side == PositionConstants.EAST)){
-			if (request.getSizeDelta().height != 0){
+			if (modelCordsDelta.y != 0){
 				moveDelta.y = (int) Math.round((resizeScaleY - 1.0)* (port.getY() - groupnode.getY()));
 			}
 		}
 		if ((side == PositionConstants.NORTH) || (side == PositionConstants.SOUTH)){
-			if (request.getSizeDelta().width != 0){
+			if (modelCordsDelta.x != 0){
 				moveDelta.x = (int) Math.round((resizeScaleX - 1.0) * (port.getX() - groupnode.getX()));
 			}
 		}
-/*
- * DEBUG		
+		
 		System.out.println("resizeScaleX = " + resizeScaleX);
 		System.out.println("resizeScaleY = " + resizeScaleY);
-		System.out.println("moveDelta = " + moveDelta);
-*/		
+		System.out.println("moveDelta = " + moveDelta);		
 		
 		return moveDelta;
 	}

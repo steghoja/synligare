@@ -112,6 +112,10 @@ public class EAXMLprocessor {
 						//For values, return the first and only child, i.e..../MaxPowerGC/@value 
 						return referrable.eContents().get(0);
 					}
+					else if (lastSegment.equals("@selectionCriterion")){
+						//For selectionCriterion, return the first and only child .../F3_CD/@selectionCriterion
+						return referrable.eContents().get(0); 
+					}
 					else {
 						Utils.showErrorMessage("Not implemented lookup of EObject with last path segment = " + lastSegment);
 					}
@@ -264,15 +268,22 @@ public class EAXMLprocessor {
 			String lastSegment = absQualifiedNameString.substring(lastSegmentIndex + 1);
 		
 			if (object instanceof EAValue){
-				///Qualified Name = ASL_workshop/Structure/AnalysisLevelelements/DataTypes/MaxPower/@value
 
 				String featureName = lastSegment.substring(1);
 				
 				EStructuralFeature feature = object.eClass().getEStructuralFeature(featureName);
+
+				if (feature == null){
+					//Qualified Name = ....F3_CD/@selectionCriterion => there is no feature for selectionCriterion use that string instead. 
+					return featureName;
+				}
+				else
+				{
+					///Qualified Name = ASL_workshop/Structure/AnalysisLevelelements/DataTypes/MaxPower/@value => value is a true property
 				
-				String typeValue = (object.eGet(feature)).toString();
-				return typeValue;
-				
+					String typeValue = (object.eGet(feature)).toString();
+					return typeValue;
+				}
 			}
 			else{
 				//Assume instance ref, return "satisfiedBy.2"
