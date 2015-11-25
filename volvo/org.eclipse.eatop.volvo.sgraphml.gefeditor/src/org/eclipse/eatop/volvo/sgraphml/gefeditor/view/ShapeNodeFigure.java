@@ -123,15 +123,18 @@ public class ShapeNodeFigure extends Figure {
 	//sets the layout of this figure in the parent
 	public void setParentLayout(Rectangle rect) {
 
+		//gives null if there is no parent, i.e. for root figure
 		Figure contents = (Figure)getParent();
 
-		Point pRel = ViewHelpers.absToRel(contents, rect.getLocation()); 
-
-		//Calculate width of total portfigure, port + label 
-		int w = rect.width;
-		int h = rect.height;
-
-		contents.setConstraint(this, new Rectangle(pRel.x, pRel.y, w, h));
+		if (contents != null){
+			Point pRel = ViewHelpers.absToRel(contents, rect.getLocation()); 
+	
+			//Calculate width of total portfigure, port + label 
+			int w = rect.width;
+			int h = rect.height;
+	
+			contents.setConstraint(this, new Rectangle(pRel.x, pRel.y, w, h));
+		}
 	}
 
 	public void setShapeLayout(Rectangle rect) {

@@ -12,6 +12,8 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.draw2d.AbsoluteBendpoint;
 import org.eclipse.eatop.common.resource.EastADLURIFactory;
 import org.eclipse.eatop.common.ui.util.ModelSearcher;
+import org.eclipse.eatop.eastadl21.ClampConnector;
+import org.eclipse.eatop.eastadl21.ClampConnector_port;
 import org.eclipse.eatop.eastadl21.EAConnector;
 import org.eclipse.eatop.eastadl21.EAElement;
 import org.eclipse.eatop.eastadl21.EAPackage;
@@ -224,22 +226,22 @@ public class EAXMLprocessor {
 		return path;
 	}
 		
-		//assumes eo is not instance ref or value, i.e. gives no @ in getAbsoluteRequired
-		static protected String safePath(EObject eo){
-			String path = "";
-			while (!(eo instanceof EAXML)){
-				if (path.isEmpty()){
-					path = elementName(eo); 
-				}
-				else{
-					path = elementName(eo) + "/" + path;
-				}
-				eo = eo.eContainer();
+	//assumes eo is not instance ref or value, i.e. gives no @ in getAbsoluteRequired
+	static protected String safePath(EObject eo){
+		String path = "";
+		while (!(eo instanceof EAXML)){
+			if (path.isEmpty()){
+				path = elementName(eo); 
 			}
-			path = "/" + path;
-			return path;
+			else{
+				path = elementName(eo) + "/" + path;
+			}
+			eo = eo.eContainer();
 		}
-		
+		path = "/" + path;
+		return path;
+	}
+	
 		
 	/***
 	 * Default is shortName, but if that is empty then the metaclass is used instead.
@@ -324,7 +326,7 @@ public class EAXMLprocessor {
 	 */
 	public static String eastADLPath2dotPath(String eastadlPath){
 	
-		String changeAt= eastadlPath.replace("@", ":");
+		String changeAt = eastadlPath.replace("@", ":");
 		String noDotString = changeAt.replace(".", "-");
 		return (noDotString.substring(1).replace('/', '.'));	
 	}
@@ -332,9 +334,12 @@ public class EAXMLprocessor {
 	
 	/**
 	 *
-	 * Standard pattern for instance Ref path
+	 * Standard pattern for instance Ref path, where context has j prototype members
+	 * Note that context is assumed to be specified in reverse, since that is how the EATOP instance ref editor works. 
 	 * 
-	 * path = full real path to context(0) + "." + shortName(context(1)) + ... + "." + shortName(context(2)) + "." + shortName(target)
+	 * path = full real path to context(j-1) + "." + shortName(context(j-2)) + ... + "." + shortName(context(0)) + "." + shortName(target)
+	 
+	 * Used by ClampConnectors etc, i.e. when context can be a prototype list
 	 */
 	
 	public static String instRef2DotPath(EObject instanceRef){ 
@@ -347,10 +352,11 @@ public class EAXMLprocessor {
 			String eastadlPath = EAXMLprocessor.getSafeAbsoluteQualifiedName(target);
 			return EAXMLprocessor.eastADLPath2dotPath(eastadlPath);		
 		}
+		int last = context.size() - 1;
 		
-		String eastadlPathFirstContext = EAXMLprocessor.getSafeAbsoluteQualifiedName(context.get(0));
-		String path = EAXMLprocessor.eastADLPath2dotPath(eastadlPathFirstContext);		
-		for (int i=1; i <context.size(); i++){
+		String eastadlPathStartContext = EAXMLprocessor.getSafeAbsoluteQualifiedName(context.get(last));
+		String path = EAXMLprocessor.eastADLPath2dotPath(eastadlPathStartContext);		
+		for (int i=last-1; i >= 0; i--){
 				path += "." + elementName(context.get(i));
 		}
 		path += "." + elementName(target);
@@ -358,7 +364,8 @@ public class EAXMLprocessor {
 		return path;
 	}
 
-	//The instance ref applies to a FunctionConnector, HardwareConnector or FaultFailurePropagationLink 
+	//The instance ref applies to an EAConnector = FunctionConnector, HardwareConnector or FaultFailurePropagationLink
+	//                         
 	//We do not use the standard pattern instref = prototypepath + "/" + shortname(port) since that
 	//is not unique when having nested prototypes.
 	public static String instRef2DotPath(String connectorDotPath, EObject connector_instanceRef){
@@ -366,23 +373,28 @@ public class EAXMLprocessor {
 		EObject port = getInstanceRefTarget(connector_instanceRef);
 		List<EObject> prototypes = getInstanceRefContext(connector_instanceRef);
 		
-		if (prototypes.size() > 1){
-			Utils.showErrorMessage("Expected max one prototype for EAConnector instanceRef");
+		if (!(connector_instanceRef.eContainer() instanceof EAConnector)){
+			Utils.showErrorMessage("Expected instance of EAConnector in instRef2DotPath");
+			return null;
 		}
+		
 		if (prototypes.isEmpty()){
 			//If the instance ref has no context defined, the target must be a real element (i.e. port in a type)
 			String eastadlPath = EAXMLprocessor.getSafeAbsoluteQualifiedName(port);
 			return EAXMLprocessor.eastADLPath2dotPath(eastadlPath);
 		}
-		
-		//Base instref path on (virtual) path of father = type or prototype that contains the connector = group node
+
+		if ((prototypes.size() > 1)){
+			Utils.showErrorMessage("Expected max one prototype for EAConnector instanceRef");
+			return null;
+		}
+			
+		//EAConnector  - Base instref path on (virtual) path of father = type or prototype that contains the connector = group node
 		EObject prototype = prototypes.get(0);
-		String dotPAth = connectorDotPath;
-		String fatherDotPath = toFatherPath(dotPAth);
+		String dotPath = connectorDotPath;
+		String fatherDotPath = toFatherPath(dotPath);
 		return fatherDotPath + "." + EAXMLprocessor.elementName((Referrable)prototype) + "." + EAXMLprocessor.elementName((Referrable)port);
 	}
-	
-
 	
 	public static String toFatherPath(String dotPath){
 		

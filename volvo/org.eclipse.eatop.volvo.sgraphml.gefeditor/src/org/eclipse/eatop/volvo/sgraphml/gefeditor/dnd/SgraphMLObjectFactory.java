@@ -20,6 +20,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.eatop.common.ui.util.ModelSearcher;
 import org.eclipse.eatop.eastadl21.AnalysisFunctionPrototype;
+import org.eclipse.eatop.eastadl21.ClampConnector;
 import org.eclipse.eatop.eastadl21.DesignFunctionPrototype;
 import org.eclipse.eatop.eastadl21.EAConnector;
 import org.eclipse.eatop.eastadl21.EADirectionKind;
@@ -313,7 +314,7 @@ public class SgraphMLObjectFactory implements CreationFactory {
 	//Which elements? Satisfy_SatisfiedBy, Refine_refinedBy, VVCase_vvSubject, (VVTarget_element), 
 	//FunctionModelling; FunctionConnector_port - already handled, FunctionAllocatgion_target, FunctionAllocation_allocatedElement
 	//Dependability: ErrorModel_Protoype_functionTarget, ErrorModel_Prototype_hwTarget, ...
-	//Infrastructure elements: Realizatiom_realized, Realization_RealizedBy
+	//Infrastructure elements: Realization_realized, Realization_RealizedBy
 
 	private void addAssociations() {
 
@@ -349,7 +350,7 @@ public class SgraphMLObjectFactory implements CreationFactory {
 			for (EObject instRefChild : instRefChildren) {
 
 				String instRefPath;
-				if (eo instanceof EAConnector){
+ 				if (eo instanceof EAConnector || eo instanceof ClampConnector){
 					//connectors are handled elsewhere
 					continue;
 				}
@@ -582,7 +583,7 @@ public class SgraphMLObjectFactory implements CreationFactory {
 		DataType dataEdgeGraphics = createAndAttachEdgeGraphicsKey(graphmlEdge);
 
 		//add source and target attribute...
-		EAConnector connector = (EAConnector)edgeWithPath.eObject;
+		EObject connector = edgeWithPath.eObject;
 
 		IConnectionInstRefsProvider pathsProvider = (IConnectionInstRefsProvider)connectionAdapterFactory.getAdapter(connector, IConnectionInstRefsProvider.class);
 
@@ -594,7 +595,24 @@ public class SgraphMLObjectFactory implements CreationFactory {
 		boolean bTargetOk = true;
 
 		EObject sourceRef = pathsProvider.getSourceInstancRef();
-		String sourcePath = EAXMLprocessor.instRef2DotPath(edgeWithPath.dotPath, sourceRef);
+		EObject targetRef = pathsProvider.getTargetInstanceRef();
+		
+		String sourcePath;
+		String targetPath;
+		String color;
+
+		if (connector instanceof EAConnector){
+			sourcePath = EAXMLprocessor.instRef2DotPath(edgeWithPath.dotPath, sourceRef);
+			targetPath = EAXMLprocessor.instRef2DotPath(edgeWithPath.dotPath, targetRef);
+			color = "#000000";
+		}
+		else //ClampConnector
+		{
+			sourcePath = EAXMLprocessor.instRef2DotPath(sourceRef);
+			targetPath = EAXMLprocessor.instRef2DotPath(targetRef);
+			color = "#c3c3c3"; //grey
+		}
+
 		NodeType sourceNode = ModelProcessor.INSTANCE.findNode(sourcePath);
 		if (sourceNode == null)	{
 			if (!actualDroppedEObjects.contains(new EObjectWithDotPath(sourcePath, null)))	{
@@ -602,8 +620,6 @@ public class SgraphMLObjectFactory implements CreationFactory {
 			}
 		}
 
-		EObject targetRef = pathsProvider.getTargetInstanceRef();
-		String targetPath = EAXMLprocessor.instRef2DotPath(edgeWithPath.dotPath, targetRef);
 		NodeType targetNode = ModelProcessor.INSTANCE.findNode(targetPath);
 		if (targetNode == null)	{
 			if (!actualDroppedEObjects.contains(new EObjectWithDotPath(targetPath, null))) {
@@ -621,11 +637,11 @@ public class SgraphMLObjectFactory implements CreationFactory {
 			return;
 		}
 		else if (!bSourceOk && !bTargetOk) {
-			Utils.showInformationMessage("Element: " + edgeWithPath.dotPath + "\n\nThe Nodes\n\n" + sourcePath + targetPath + "\n\nare not on Canvas.");
+			Utils.showInformationMessage("Element: " + edgeWithPath.dotPath + "\n\nThe Nodes\n\n" + sourcePath + " and\n\n" + targetPath + "\n\nare not on Canvas.");
 			return;
 		}
 
-		setEdgeAttributes(graphmlEdge, sourcePath, targetPath, "", ArrowTypeType.NONE, ArrowTypeType.NONE, LineTypeType.LINE);
+		setEdgeAttributes(graphmlEdge, sourcePath, targetPath, "", ArrowTypeType.NONE, ArrowTypeType.NONE, LineTypeType.LINE, color);
 		actualDroppedEObjects.add(edgeWithPath);
 	}
 
@@ -647,12 +663,13 @@ public class SgraphMLObjectFactory implements CreationFactory {
 
 		DataType dataEdgeGraphics = createAndAttachEdgeGraphicsKey(graphmlEdge);
 
-		setEdgeAttributes(graphmlEdge, sourcePath, targetPath, label, sourceArrow, targetArrow, pattern);
+		String color = "#000000";
+		setEdgeAttributes(graphmlEdge, sourcePath, targetPath, label, sourceArrow, targetArrow, pattern, color);
 	}
 
 
 	protected void setEdgeAttributes(EdgeType graphmlEdge, String sourcePath, String targetPath,
-			String label, ArrowTypeType sourceArrow, ArrowTypeType targetArrow, LineTypeType pattern) {
+			String label, ArrowTypeType sourceArrow, ArrowTypeType targetArrow, LineTypeType pattern, String color) {
 
 		DataType dataEdgeGraphics = graphmlEdge.getData().get(0);
 
@@ -674,7 +691,7 @@ public class SgraphMLObjectFactory implements CreationFactory {
 
 		//LineStyle
 		LineStyleType lineStyle = SgraphmlFactory.eINSTANCE.createLineStyleType();
-		lineStyle.setColor("#000000");
+		lineStyle.setColor(color);
 		lineStyle.setType(pattern);
 		lineStyle.setWidth(1);
 		polyLineEdge.setLineStyle(lineStyle);
@@ -1452,7 +1469,7 @@ public class SgraphMLObjectFactory implements CreationFactory {
 
 		if ((eo instanceof EAPrototype) || (eo instanceof EAType)) return true;
 
-		if ((eo instanceof EAConnector) || (eo instanceof EAPort)) return false;
+		if ((eo instanceof EAConnector) || (eo instanceof EAPort) || (eo instanceof ClampConnector)) return false;
 
 		EList<EReference> references = eo.eClass().getEAllReferences();
 		for (EReference eReference : references) {
@@ -1480,11 +1497,15 @@ public class SgraphMLObjectFactory implements CreationFactory {
 	}
 
 	protected boolean isRepresentedByEdge (EObject eo){
-		//FunctionConnector
-		//HardwareConnector
-		//HardwarePortConnector
-		//FaultFailurePropagationLink
-		return eo instanceof EAConnector; 
+		//EAConnector:
+		//  FunctionConnector
+		//  HardwareConnector
+		//  HardwarePortConnector
+		//  FaultFailurePropagationLink
+
+		//ClampConnector
+		
+		return (eo instanceof EAConnector) || (eo instanceof ClampConnector); 
 	}
 
 
