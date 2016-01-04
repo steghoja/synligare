@@ -34,7 +34,11 @@ import org.eclipse.emf.common.util.Enumerator;
  *             <li>
  *               <b>right</b>: internal right placement
  *             </li>
- *           </ul>
+ *             <li>
+ *               <b>free</b>: any placement specified by x and y attributes
+ *             </li>
+ * 
+ *         </ul>
  *         </p>
  *       
  * <!-- end-model-doc -->
@@ -91,7 +95,17 @@ public enum PlacementType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	RIGHT(4, "right", "right");
+	RIGHT(4, "right", "right"),
+
+	/**
+	 * The '<em><b>Free</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FREE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	FREE(5, "free", "free");
 
 	/**
 	 * The '<em><b>Top</b></em>' literal value.
@@ -169,6 +183,21 @@ public enum PlacementType implements Enumerator {
 	public static final int RIGHT_VALUE = 4;
 
 	/**
+	 * The '<em><b>Free</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Free</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #FREE
+	 * @model name="free"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FREE_VALUE = 5;
+
+	/**
 	 * An array of all the '<em><b>Placement Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -181,6 +210,7 @@ public enum PlacementType implements Enumerator {
 			CENTER,
 			LEFT,
 			RIGHT,
+			FREE,
 		};
 
 	/**
@@ -236,6 +266,7 @@ public enum PlacementType implements Enumerator {
 			case CENTER_VALUE: return CENTER;
 			case LEFT_VALUE: return LEFT;
 			case RIGHT_VALUE: return RIGHT;
+			case FREE_VALUE: return FREE;
 		}
 		return null;
 	}

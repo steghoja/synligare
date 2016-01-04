@@ -26,7 +26,8 @@ public class NodeTypeComponentEditPolicy extends ComponentEditPolicy {
 
 	 @Override 
 	 protected Command createDeleteCommand(GroupRequest deleteRequest) {
-		    DeleteNodeTypeCommand nodeDeleteCommand = new DeleteNodeTypeCommand();
+		   
+		 DeleteNodeTypeCommand nodeDeleteCommand = new DeleteNodeTypeCommand();
 		    
 		    NodeType graphMLnode = (NodeType)((BaseNodeType)getHost().getModel()).eContainer().eContainer();
 		    nodeDeleteCommand.setNode(graphMLnode);

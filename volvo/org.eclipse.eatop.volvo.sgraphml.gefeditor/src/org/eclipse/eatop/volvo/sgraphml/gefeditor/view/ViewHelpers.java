@@ -12,6 +12,10 @@ public class ViewHelpers {
 		Point point = new Point(pAbs);
 
 		while (!(fig instanceof GraphMLTypeFigure)) {
+			if (fig.getParent() == null){
+				//father figure may just have been deleted
+				return new Point(0,0);
+			}
 			Rectangle r = (Rectangle)fig.getParent().getLayoutManager().getConstraint(fig);
 			Point dP = r.getLocation().negate();
 			point.translate(dP);

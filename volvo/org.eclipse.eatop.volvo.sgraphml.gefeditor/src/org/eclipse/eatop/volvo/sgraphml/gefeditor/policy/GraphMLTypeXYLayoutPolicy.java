@@ -8,13 +8,16 @@ import org.eclipse.eatop.volvo.sgraphml.gefeditor.commands.CreateNodeCommand;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.commands.CreateResourceCommand;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.commands.MoveChildNodeCommand;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.commands.NodeTypeChangeConstraintCommand;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.commands.TouchNodeLabelCommand;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.commands.UpdateLabelRectangleCommand;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.commands.UpdateNodeLabelTypeCommand;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.GraphMLTypeEditPart;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.GroupNodeEditPart;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.NodeLabelEditPart;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.PortNodeEditPart;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.PortNodeLabelEditPart;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.ShapeNodeEditPart;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.dnd.EAXMLprocessor;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.model.ModelProcessor;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.requests.UpdateLabelRectanglesRequest;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.view.GroupNodeFigure;
@@ -75,6 +78,13 @@ public class GraphMLTypeXYLayoutPolicy extends XYLayoutEditPolicy {
 		    	CreateNodeCommand command = new CreateNodeCommand();
 		    	command.setNode((NodeType)sgmlObject);
 		    	command.setParentGraph(ModelProcessor.INSTANCE.getRootGraph());
+		    	EObject eaEObject = EAXMLprocessor.getEObjectbyDotPath(((NodeType)sgmlObject).getId());
+		    	
+		    	if (eaEObject == null){
+		    		Utils.showErrorMessage("Failed to find EObject with dotPath = " + ((NodeType)sgmlObject).getId());;
+		    	}
+		    	
+		    	command.setEaEObject(eaEObject);
 		    	compCommand.add(command);
 		    }
 	    	
@@ -114,12 +124,29 @@ public class GraphMLTypeXYLayoutPolicy extends XYLayoutEditPolicy {
 
 		//request has some delta information, movedelta, resize delta etc.
 		if (child instanceof ShapeNodeEditPart) {
+			CompoundCommand cc = new CompoundCommand();
+			
 			NodeTypeChangeConstraintCommand command = new NodeTypeChangeConstraintCommand();
 			command.setModel((BaseNodeType) child.getModel());
 			command.setNewConstraint((Rectangle) constraint); //Ok to use constraint even if zoomed since in model coordinates.
 		    //TODO: update the rectangle attributes of the port label (now we update them upon save instead)
 			
-			return command;
+			cc.add(command);
+			
+			if (!request.getSizeDelta().equals(0,0))
+			{
+				//move labels due to shapenode resize 
+				for (Object p : child.getChildren()){
+					EditPart nodeEditPart = (EditPart)p;
+					if (nodeEditPart instanceof NodeLabelEditPart){ 
+						//touch label child editparts to get them updated 
+							TouchNodeLabelCommand touchCommand = new TouchNodeLabelCommand();
+							touchCommand.setNodeLabel((NodeLabelType)nodeEditPart.getModel());
+							cc.add(touchCommand);
+					}
+				}					
+			}
+			return cc;
 		}
 		else if (child instanceof GroupNodeEditPart){
 			if (request.getSizeDelta().equals(0,0))
@@ -142,18 +169,15 @@ public class GraphMLTypeXYLayoutPolicy extends XYLayoutEditPolicy {
 				cc.add(groupNodeCommand);
 				
 				//TODO: update the rectangle attributes of the port label (now we update them upon save instead)
-				
-
-
-				
-				//move ports due to the groupnode resize 
+						
+				//move labels and ports due to the groupnode resize 
 				for (Object p : child.getChildren()){
 					EditPart nodeEditPart = (EditPart)p;
-					if (nodeEditPart.getModel() instanceof PortNodeType){
+					if (nodeEditPart instanceof PortNodeEditPart){
 						PortNodeType node = (PortNodeType)nodeEditPart.getModel();
 						MoveChildNodeCommand moveChildCommand = new MoveChildNodeCommand();
 						moveChildCommand.setModel(node);
-						Point moveDelta = calculateMovePortDelta(groupNode.getGeometry(), node.getGeometry(), request, (Rectangle)constraint);
+						Point moveDelta = PolicyHelpers.calculateMovePortDelta(groupNode.getGeometry(), node.getGeometry(), request, (Rectangle)constraint);
 						moveChildCommand.setChange(moveDelta); 
 						cc.add(moveChildCommand);
 						
@@ -163,15 +187,20 @@ public class GraphMLTypeXYLayoutPolicy extends XYLayoutEditPolicy {
 						NodeLabelType currentLabel = node.getNodeLabel().get(0);
 						touchLabel.setNewNodeLabel(currentLabel);
 						cc.add(touchLabel);
-						
 					}
+					else if (nodeEditPart instanceof NodeLabelEditPart){ 
+						//touch label child editparts to get them updated 
+							TouchNodeLabelCommand touchCommand = new TouchNodeLabelCommand();
+							touchCommand.setNodeLabel((NodeLabelType)nodeEditPart.getModel());
+							cc.add(touchCommand);
+					}
+						
 				}
+				
 				
 				//Use case: expand to the right. But label is not updated (reload is needed). How force update of label - relative coordinate is the same.
 				//Test by touching the nodelabel - what about ordering - this has to be done after move
-				
-				
-				
+					
 				return cc;
 			}
 		}
@@ -208,88 +237,7 @@ public class GraphMLTypeXYLayoutPolicy extends XYLayoutEditPolicy {
 
 		    }
 		 }
-	protected Point calculateMovePortDelta(GeometryType groupnode, GeometryType port, ChangeBoundsRequest request, Rectangle constraint){
-
-		Point moveDelta = new Point(0,0);
-
-		//The request has screen coords
-		Point screenCordsDelta = new Point(request.getSizeDelta().width, request.getSizeDelta().height);//new Point(request.getSizeDelta());
-		Point modelCordsDelta = Utils.screenDelta2ModelDelta(screenCordsDelta);
-		
-		//calculate resize scale
-		//sd is positive when rectangle has expanded, so subtracting the change gives the old size
-		Rectangle r1 = constraint;
-		double resizeScaleX = ((double)(r1.width)) / (r1.width - modelCordsDelta.x);
-		double resizeScaleY = ((double)(r1.height)) / (r1.height - modelCordsDelta.y);
-		
-		
-		//Which side is the port attached to?
-		int dxW = (int)(port.getX() - groupnode.getX());
-		int dxE = (int)(groupnode.getX() + groupnode.getWidth() - (port.getX() + port.getWidth()));
-		int dyN = (int)(port.getY() - groupnode.getY());
-		int dyS = (int)(port.getY() + groupnode.getHeight() - (groupnode.getY() + groupnode.getHeight()));
-		
 	
-		int side;
-		if (Math.abs(dxW) <= 2) {
-	   		side = PositionConstants.WEST;
-		}
-		else if (Math.abs(dxE) <= 2) {
-	   		side = PositionConstants.EAST;
-		}
-		else if (Math.abs(dyN) <= 2) {
-	   		side = PositionConstants.NORTH;
-		}
-		else if (Math.abs(dyS) <= 2) {
-			side = PositionConstants.SOUTH;
-		}
-		else{
-			//This port is not attached to any side - don't move it
-			return moveDelta;
-		}
-		
-		//Is "my" edge moved due to resize? Then move port in same way.
-		
-		
-		//Note: Positive size delta => side is moved in the direction that expands the rectangle.
-		if ((request.getResizeDirection() & side) > 0){
-			
-			switch (side)
-			{
-				case PositionConstants.WEST:
-					moveDelta.x = -modelCordsDelta.x;
-					break;
-				case PositionConstants.EAST:
-					moveDelta.x = modelCordsDelta.x;
-					break;
-				case PositionConstants.NORTH:
-					moveDelta.y = modelCordsDelta.y;
-					break;
-				case PositionConstants.SOUTH:
-					moveDelta.y = -modelCordsDelta.y;
-					break;
-				}
-		}
-
-		//Is the groupnode resized in the dimension opposite to my edge? Then rescale.
-	
-		if ((side == PositionConstants.WEST) || (side == PositionConstants.EAST)){
-			if (modelCordsDelta.y != 0){
-				moveDelta.y = (int) Math.round((resizeScaleY - 1.0)* (port.getY() - groupnode.getY()));
-			}
-		}
-		if ((side == PositionConstants.NORTH) || (side == PositionConstants.SOUTH)){
-			if (modelCordsDelta.x != 0){
-				moveDelta.x = (int) Math.round((resizeScaleX - 1.0) * (port.getX() - groupnode.getX()));
-			}
-		}
-		
-		System.out.println("resizeScaleX = " + resizeScaleX);
-		System.out.println("resizeScaleY = " + resizeScaleY);
-		System.out.println("moveDelta = " + moveDelta);		
-		
-		return moveDelta;
-	}
 	
 	
 	@Override
@@ -321,6 +269,8 @@ public class GraphMLTypeXYLayoutPolicy extends XYLayoutEditPolicy {
 		{
 			BaseNodeType node = (BaseNodeType)(editPart.getModel());
 			IFigure fig = ((AbstractGraphicalEditPart)editPart).getFigure();
+
+/*		TODO	
 			Rectangle pr = ((ShapeNodeFigure)fig).getLabelRectangle();
 
 			//only update if the rectangles differ
@@ -329,7 +279,7 @@ public class GraphMLTypeXYLayoutPolicy extends XYLayoutEditPolicy {
 				updateCommand.setNewRectangle(pr);
 				cc.add(updateCommand);		
 			}
-		
+	*/	
 		}
 		else if (editPart instanceof PortNodeEditPart) {
 			//do nothing - no nodelabel, no children

@@ -25,8 +25,8 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  *   <li>{@link eu.synligare.sgraphml.LabelType#getFontSize <em>Font Size</em>}</li>
  *   <li>{@link eu.synligare.sgraphml.LabelType#getHeight <em>Height</em>}</li>
  *   <li>{@link eu.synligare.sgraphml.LabelType#getTextColor <em>Text Color</em>}</li>
- *   <li>{@link eu.synligare.sgraphml.LabelType#getWidth <em>Width</em>}</li>
  *   <li>{@link eu.synligare.sgraphml.LabelType#isVisible <em>Visible</em>}</li>
+ *   <li>{@link eu.synligare.sgraphml.LabelType#getWidth <em>Width</em>}</li>
  *   <li>{@link eu.synligare.sgraphml.LabelType#getX <em>X</em>}</li>
  *   <li>{@link eu.synligare.sgraphml.LabelType#getY <em>Y</em>}</li>
  * </ul>
@@ -221,61 +221,6 @@ public interface LabelType extends EObject {
 	void setTextColor(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Width</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * 
-	 *           The width of the rectangle.
-	 *         
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Width</em>' attribute.
-	 * @see #isSetWidth()
-	 * @see #unsetWidth()
-	 * @see #setWidth(double)
-	 * @see eu.synligare.sgraphml.SgraphmlPackage#getLabelType_Width()
-	 * @model unsettable="true" dataType="org.eclipse.emf.ecore.xml.type.Double"
-	 *        extendedMetaData="kind='attribute' name='width'"
-	 * @generated
-	 */
-	double getWidth();
-
-	/**
-	 * Sets the value of the '{@link eu.synligare.sgraphml.LabelType#getWidth <em>Width</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Width</em>' attribute.
-	 * @see #isSetWidth()
-	 * @see #unsetWidth()
-	 * @see #getWidth()
-	 * @generated
-	 */
-	void setWidth(double value);
-
-	/**
-	 * Unsets the value of the '{@link eu.synligare.sgraphml.LabelType#getWidth <em>Width</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSetWidth()
-	 * @see #getWidth()
-	 * @see #setWidth(double)
-	 * @generated
-	 */
-	void unsetWidth();
-
-	/**
-	 * Returns whether the value of the '{@link eu.synligare.sgraphml.LabelType#getWidth <em>Width</em>}' attribute is set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Width</em>' attribute is set.
-	 * @see #unsetWidth()
-	 * @see #getWidth()
-	 * @see #setWidth(double)
-	 * @generated
-	 */
-	boolean isSetWidth();
-
-	/**
 	 * Returns the value of the '<em><b>Visible</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -329,6 +274,61 @@ public interface LabelType extends EObject {
 	 * @generated
 	 */
 	boolean isSetVisible();
+
+	/**
+	 * Returns the value of the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 *           The width of the rectangle.
+	 *         
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Width</em>' attribute.
+	 * @see #isSetWidth()
+	 * @see #unsetWidth()
+	 * @see #setWidth(double)
+	 * @see eu.synligare.sgraphml.SgraphmlPackage#getLabelType_Width()
+	 * @model unsettable="true" dataType="org.eclipse.emf.ecore.xml.type.Double"
+	 *        extendedMetaData="kind='attribute' name='width'"
+	 * @generated
+	 */
+	double getWidth();
+
+	/**
+	 * Sets the value of the '{@link eu.synligare.sgraphml.LabelType#getWidth <em>Width</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Width</em>' attribute.
+	 * @see #isSetWidth()
+	 * @see #unsetWidth()
+	 * @see #getWidth()
+	 * @generated
+	 */
+	void setWidth(double value);
+
+	/**
+	 * Unsets the value of the '{@link eu.synligare.sgraphml.LabelType#getWidth <em>Width</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSetWidth()
+	 * @see #getWidth()
+	 * @see #setWidth(double)
+	 * @generated
+	 */
+	void unsetWidth();
+
+	/**
+	 * Returns whether the value of the '{@link eu.synligare.sgraphml.LabelType#getWidth <em>Width</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>Width</em>' attribute is set.
+	 * @see #unsetWidth()
+	 * @see #getWidth()
+	 * @see #setWidth(double)
+	 * @generated
+	 */
+	boolean isSetWidth();
 
 	/**
 	 * Returns the value of the '<em><b>X</b></em>' attribute.

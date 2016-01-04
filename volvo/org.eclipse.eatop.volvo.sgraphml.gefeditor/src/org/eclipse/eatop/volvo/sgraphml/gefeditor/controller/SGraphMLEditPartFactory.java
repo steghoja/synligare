@@ -33,7 +33,15 @@ public class SGraphMLEditPartFactory implements EditPartFactory {
 	    	part = new PortNodeEditPart();
 	    }
 	    else if (model instanceof NodeLabelType){
-	    	part = new PortNodeLabelEditPart();
+
+	    	NodeLabelType nodeLabel = (NodeLabelType)model;
+	    	if (nodeLabel.eContainer() instanceof ShapeNodeType)
+	    	{
+	    		part = new NodeLabelEditPart();   		
+	    	}
+	    	else if (nodeLabel.eContainer() instanceof PortNodeType){
+	    		part = new PortNodeLabelEditPart();
+	    	}
 	    }
 
 	    else if (model instanceof PolyLineEdgeType){

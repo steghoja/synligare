@@ -7,7 +7,7 @@
   <genAnnotations source="http://www.eclipse.org/emf/2002/GenModel/importer/org.eclipse.xsd.ecore.importer">
     <details key="createMap" value="true"/>
   </genAnnotations>
-  <foreignModel>file:/C:/Synligare/synligare_xsd/sgraphml%200.6/sgraphml.xsd</foreignModel>
+  <foreignModel>file:/C:/Synligare/synligare_xsd/sgraphml%200.7/sgraphml.xsd</foreignModel>
   <genPackages prefix="Xmlns" basePackage="org.graphdrawing.graphml" resource="XML"
       disposableProviderFactory="true" ecorePackage="xmlns.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="xmlns.ecore#//EndpointTypeType">
@@ -212,6 +212,7 @@
       <genEnumLiterals ecoreEnumLiteral="sgraphml.ecore#//PlacementType/center"/>
       <genEnumLiterals ecoreEnumLiteral="sgraphml.ecore#//PlacementType/left"/>
       <genEnumLiterals ecoreEnumLiteral="sgraphml.ecore#//PlacementType/right"/>
+      <genEnumLiterals ecoreEnumLiteral="sgraphml.ecore#//PlacementType/free"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="sgraphml.ecore#//ShapeTypeType">
       <genEnumLiterals ecoreEnumLiteral="sgraphml.ecore#//ShapeTypeType/rectangle"/>
@@ -280,8 +281,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraphml.ecore#//LabelType/fontSize"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraphml.ecore#//LabelType/height"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraphml.ecore#//LabelType/textColor"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraphml.ecore#//LabelType/width"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraphml.ecore#//LabelType/visible"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraphml.ecore#//LabelType/width"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraphml.ecore#//LabelType/x"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraphml.ecore#//LabelType/y"/>
     </genClasses>

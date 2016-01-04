@@ -496,7 +496,7 @@ public class SgraphMLObjectFactory implements CreationFactory {
 
 	protected boolean validateDropLocation(EObjectWithDotPath eoWithPath) {
 		//Is the drop location valid? dropped on the right groupnode or directly on the canvas
-		GraphicalViewer viewer = Utils.getGraphicalViewer();
+		GraphicalViewer viewer = Utils.INSTANCE.getGraphicalViewer();
 
 		
 		//IFigure contentPane=((GraphicalEditPart)getHost()).getContentPane();
@@ -610,7 +610,7 @@ public class SgraphMLObjectFactory implements CreationFactory {
 		{
 			sourcePath = EAXMLprocessor.instRef2DotPath(sourceRef);
 			targetPath = EAXMLprocessor.instRef2DotPath(targetRef);
-			color = "#c3c3c3"; //grey
+			color = "#C3C3C3"; //grey
 		}
 
 		NodeType sourceNode = ModelProcessor.INSTANCE.findNode(sourcePath);
