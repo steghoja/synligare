@@ -441,16 +441,6 @@
         <details key="name" value="textColor"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Double"
-        unsettable="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&#xA;          The width of the rectangle.&#xA;        "/>
-      </eAnnotations>
-      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-        <details key="kind" value="attribute"/>
-        <details key="name" value="width"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visible" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"
         unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -459,6 +449,16 @@
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="attribute"/>
         <details key="name" value="visible"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Double"
+        unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#xA;          The width of the rectangle.&#xA;        "/>
+      </eAnnotations>
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="attribute"/>
+        <details key="name" value="width"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Double"
@@ -658,7 +658,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="PlacementType">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&#xD;&#xA;        The valid placements for labels.&#xD;&#xA;        &lt;p xmlns=&quot;http://www.synligare.eu/sgraphml&quot;>&#xD;&#xA;          Valid values are:&#xD;&#xA;          &lt;ul>&#xD;&#xA;            &lt;li>&#xD;&#xA;              &lt;b>top&lt;/b>: internal top placement &#xD;&#xA;            &lt;/li>&#xD;&#xA;            &lt;li>&#xD;&#xA;              &lt;b>bottom&lt;/b>: internal bottom placement &#xD;&#xA;            &lt;/li>&#xD;&#xA;            &lt;li>&#xD;&#xA;              &lt;b>center&lt;/b>: internal centered placement&#xD;&#xA;            &lt;/li>&#xD;&#xA;            &lt;li>&#xD;&#xA;              &lt;b>left&lt;/b>: internal left placement&#xD;&#xA;            &lt;/li>&#xD;&#xA;            &lt;li>&#xD;&#xA;              &lt;b>right&lt;/b>: internal right placement&#xD;&#xA;            &lt;/li>&#xD;&#xA;          &lt;/ul>&#xD;&#xA;        &lt;/p>&#xD;&#xA;      "/>
+      <details key="documentation" value="&#xD;&#xA;        The valid placements for labels.&#xD;&#xA;        &lt;p xmlns=&quot;http://www.synligare.eu/sgraphml&quot;>&#xD;&#xA;          Valid values are:&#xD;&#xA;          &lt;ul>&#xD;&#xA;            &lt;li>&#xD;&#xA;              &lt;b>top&lt;/b>: internal top placement &#xD;&#xA;            &lt;/li>&#xD;&#xA;            &lt;li>&#xD;&#xA;              &lt;b>bottom&lt;/b>: internal bottom placement &#xD;&#xA;            &lt;/li>&#xD;&#xA;            &lt;li>&#xD;&#xA;              &lt;b>center&lt;/b>: internal centered placement&#xD;&#xA;            &lt;/li>&#xD;&#xA;            &lt;li>&#xD;&#xA;              &lt;b>left&lt;/b>: internal left placement&#xD;&#xA;            &lt;/li>&#xD;&#xA;            &lt;li>&#xD;&#xA;              &lt;b>right&lt;/b>: internal right placement&#xD;&#xA;            &lt;/li>&#xD;&#xA;            &lt;li>&#xD;&#xA;              &lt;b>free&lt;/b>: any placement specified by x and y attributes&#xD;&#xA;            &lt;/li>&#xD;&#xA;&#xD;&#xA;        &lt;/ul>&#xD;&#xA;        &lt;/p>&#xD;&#xA;      "/>
     </eAnnotations>
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
       <details key="name" value="placement.type"/>
@@ -668,6 +668,7 @@
     <eLiterals name="center" value="2"/>
     <eLiterals name="left" value="3"/>
     <eLiterals name="right" value="4"/>
+    <eLiterals name="free" value="5"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="PlacementTypeObject" instanceClassName="org.eclipse.emf.common.util.Enumerator">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">

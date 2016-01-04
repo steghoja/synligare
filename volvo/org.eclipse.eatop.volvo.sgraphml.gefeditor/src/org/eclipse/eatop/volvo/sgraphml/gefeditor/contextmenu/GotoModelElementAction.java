@@ -18,6 +18,10 @@ import java.util.List;
 
 
 
+
+
+
+
 import org.eclipse.core.internal.registry.OffsetTable;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -29,13 +33,17 @@ import org.eclipse.eatop.examples.explorer.ChildWrapper;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.Activator;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.Utils;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.GraphMLTypeEditPart;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.NodeLabelEditPart;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.PolyLineEdgeEditPart;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.PortNodeLabelEditPart;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.dnd.EAXMLprocessor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.Request;
@@ -66,7 +74,12 @@ import org.graphdrawing.graphml.xmlns.NodeType;
 
 
 
+
+
+
+
 import eu.synligare.sgraphml.BaseNodeType;
+import eu.synligare.sgraphml.NodeLabelType;
 import eu.synligare.sgraphml.PolyLineEdgeType;
 
 public class GotoModelElementAction extends SelectionAction {
@@ -106,7 +119,7 @@ public class GotoModelElementAction extends SelectionAction {
 	        @SuppressWarnings("unchecked") List<EditPart> editParts = getSelectedObjects();
 
 	        EditPart editPart = editParts.get(0);
-	        String dotPath;	        
+	        String dotPath = null;        
 	        
 	        if (editPart instanceof PortNodeLabelEditPart){
 	        	//Move from portlabel to groupnode
@@ -118,13 +131,30 @@ public class GotoModelElementAction extends SelectionAction {
 	        	EdgeType e = (EdgeType)p.eContainer().eContainer();
 	        	dotPath = e.getId();
 	        }
+	        else if (editPart instanceof NodeLabelEditPart){
+	        	NodeLabelType nodeLabel = (NodeLabelType)editPart.getModel();
+	        	
+	        	String sLabel = Utils.getLabelText(nodeLabel);
+	    		if (sLabel.contains("@")){
+					//label contains an attribute of some object
+					int index = sLabel.indexOf('@');
+					int colonindex = sLabel.indexOf(':', index);
+					dotPath = sLabel.substring(index + 1, colonindex);
+				}	    					
+				else{
+			        BaseNodeType snode = (BaseNodeType)nodeLabel.eContainer();
+					NodeType gnode = (NodeType)snode.eContainer().eContainer();
+			        dotPath = gnode.getId();        	    			
+				
+	        	}
+	        }
 	        else{
 		        BaseNodeType snode = (BaseNodeType)editPart.getModel();
 		        NodeType gnode = (NodeType)snode.eContainer().eContainer();
 		        dotPath = gnode.getId();        	
 	        }
 	        
-	         List<Object> path = new ArrayList<Object>();
+            List<Object> path = new ArrayList<Object>();
 	        
 	        
 	        EObject eObject = EAXMLprocessor.getEObjectbyDotPath(dotPath);

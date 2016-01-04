@@ -1,24 +1,39 @@
 package org.eclipse.eatop.volvo.sgraphml.gefeditor;
 
+import org.eclipse.core.commands.Command;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.dnd.EAXMLprocessor;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.model.resources.ResourceManager;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.util.FeatureMap.Entry;
+import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.RootEditPart;
+import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.editparts.ScalableRootEditPart;
 import org.eclipse.gef.editparts.ZoomManager;
+import org.eclipse.gef.ui.parts.GraphicalEditor;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Pattern;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.part.Page;
+
+import eu.synligare.sgraphml.NodeLabelType;
 
 public class Utils {
 
@@ -30,7 +45,35 @@ public class Utils {
 	static private Shell shell;
 	static private GraphicalViewer graphicalViewer;
 	static private IEditorPart editorPart;
+	static private IWorkbenchWindow workbenchWindow;
+	static private EastAdlSgraphmlSynchronizer modelSynchronizer;
+
+	public EastAdlSgraphmlSynchronizer getModelSynchronizer() {
+		return modelSynchronizer;
+	}
+
+
+	public void setModelSynchronizer(
+			EastAdlSgraphmlSynchronizer modelSynchronizer) {
+		Utils.modelSynchronizer = modelSynchronizer;
+	}
+
+
+	public static ISelection getExplorerSelection(){
+		return workbenchWindow.getSelectionService().getSelection("org.eclipse.eatop.examples.explorer.views.eastadlExplorer");
+	}
 	
+	
+	public  IWorkbenchWindow getWorkbenchWindow() {
+		return workbenchWindow;
+	}
+
+	public  void setWorkbenchWindow(IWorkbenchWindow workbenchWindow) {
+		Utils.workbenchWindow = workbenchWindow;
+	}
+
+	
+
 	protected ResourceManager resourceManager;
 	
 	public ResourceManager getResourceManager() {
@@ -50,19 +93,19 @@ public class Utils {
 	}
 	
 	
-	public static GraphicalViewer getGraphicalViewer() {
+	public GraphicalViewer getGraphicalViewer() {
 		return graphicalViewer;
 	}
 
-	public static void setGraphicalViewer(GraphicalViewer graphicalViewer) {
+	public void setGraphicalViewer(GraphicalViewer graphicalViewer) {
 		Utils.graphicalViewer = graphicalViewer;
 	}
 	
-	public static IEditorPart getEditorPart() {
+	public  IEditorPart getEditorPart() {
 		return editorPart;
 	}
 
-	public static void setEditorPart(IEditorPart editorPart) {
+	public void setEditorPart(IEditorPart editorPart) {
 		Utils.editorPart = editorPart;
 	}
 	
@@ -188,5 +231,49 @@ public class Utils {
 		return newFile;
 	}
 	
+	static public String getLabelText(NodeLabelType nodeLabel){
+
+		FeatureMap fm = nodeLabel.getMixed();
+		for (FeatureMap.Entry entry : fm){
+			EStructuralFeature feature = entry.getEStructuralFeature();
+			if (feature.getName().equals("text")) {
+				String sLabel = (String)entry.getValue();
+				return sLabel;
+				}
+		}
+		return null;
+	}  
+
+	static public String setLabelText(NodeLabelType nodeLabel, String text){
+
+		FeatureMap fm = nodeLabel.getMixed();
+
+		for (int i=0; i<fm.size(); i++){
+			Entry entry = fm.get(i); 
+			if (entry.getEStructuralFeature().getName().equals("text")){
+				fm.setValue(i, text);
+			}
+		}
+		return null;
+	}  
+
+	public void executeGEFCommand (org.eclipse.gef.commands.Command command){
+		graphicalViewer.getEditDomain().getCommandStack().execute(command);
+	}
+
 	
+	public EObject getLabelContainer(NodeLabelType nodeLabel){
+		String sLabel = Utils.getLabelText(nodeLabel);
+
+		if (sLabel.contains("@")){
+			//This is a referenced attribute label
+			int index = sLabel.indexOf('@');
+			int colonindex = sLabel.indexOf(':', index); 
+			String dotPath = sLabel.substring(index + 1, colonindex);
+
+			EObject eaObject = EAXMLprocessor.getEObjectbyDotPath(dotPath);
+			return eaObject;
+		}
+		return null;
+	}	
 }

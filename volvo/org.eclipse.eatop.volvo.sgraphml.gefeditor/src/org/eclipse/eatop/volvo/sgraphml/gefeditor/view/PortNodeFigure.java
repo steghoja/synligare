@@ -39,6 +39,8 @@ public class PortNodeFigure extends RectangleShapeNodeFigure {
 		setConstraint(shape, new Rectangle(0,0,port.width, port.height));
 	}
 
+	/* TODO FIX THIS LATER
+	
 	@Override			
 	//rect = the rectangle of the groupnode label rectangel, useless
 	public void setLabelLayout(Rectangle rect) {
@@ -49,6 +51,6 @@ public class PortNodeFigure extends RectangleShapeNodeFigure {
 	public void setNodeLabel(NodeLabelType nodeLabel){
 		//do nothing
 	}
-
+*/
 }
 

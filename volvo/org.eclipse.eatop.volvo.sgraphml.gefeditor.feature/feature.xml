@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.eatop.volvo.sgraphml.gefeditor.feature"
       label="SGraphmL GEF Editor Feature"
-      version="0.6.0.qualifier"
+      version="0.7.0.qualifier"
       provider-name="Volvo">
 
    <description url="http://www.example.com/description">
@@ -41,28 +41,27 @@
          id="org.eclipse.eatop.volvo.sgraphml"
          download-size="0"
          install-size="0"
-         version="0.6.0.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.eatop.volvo.sgraphml.edit"
          download-size="0"
          install-size="0"
-         version="0.6.0.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.eatop.volvo.sgraphml.editor"
          download-size="0"
          install-size="0"
-         version="0.6.0.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.eatop.volvo.sgraphml.gefeditor"
          download-size="0"
          install-size="0"
-         version="0.6.0.qualifier"
-         unpack="false"/>
-
+         unpack="false"
+         version="0.7.0"/>
 </feature>

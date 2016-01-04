@@ -73,8 +73,8 @@ public class LabelTypeItemProvider
 			addFontSizePropertyDescriptor(object);
 			addHeightPropertyDescriptor(object);
 			addTextColorPropertyDescriptor(object);
-			addWidthPropertyDescriptor(object);
 			addVisiblePropertyDescriptor(object);
+			addWidthPropertyDescriptor(object);
 			addXPropertyDescriptor(object);
 			addYPropertyDescriptor(object);
 		}
@@ -329,8 +329,8 @@ public class LabelTypeItemProvider
 			case SgraphmlPackage.LABEL_TYPE__FONT_SIZE:
 			case SgraphmlPackage.LABEL_TYPE__HEIGHT:
 			case SgraphmlPackage.LABEL_TYPE__TEXT_COLOR:
-			case SgraphmlPackage.LABEL_TYPE__WIDTH:
 			case SgraphmlPackage.LABEL_TYPE__VISIBLE:
+			case SgraphmlPackage.LABEL_TYPE__WIDTH:
 			case SgraphmlPackage.LABEL_TYPE__X:
 			case SgraphmlPackage.LABEL_TYPE__Y:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

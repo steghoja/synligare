@@ -3,13 +3,16 @@ package org.eclipse.eatop.volvo.sgraphml.gefeditor.dnd;
 import java.lang.ref.Reference;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.naming.Context;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.draw2d.AbsoluteBendpoint;
+import org.eclipse.eatop.common.metamodel.EastADLReleaseDescriptor;
 import org.eclipse.eatop.common.resource.EastADLURIFactory;
 import org.eclipse.eatop.common.ui.util.ModelSearcher;
 import org.eclipse.eatop.eastadl21.ClampConnector;
@@ -23,15 +26,22 @@ import org.eclipse.eatop.eastadl21.EAValue;
 import org.eclipse.eatop.eastadl21.EAXML;
 import org.eclipse.eatop.eastadl21.Feature;
 import org.eclipse.eatop.eastadl21.Referrable;
+import org.eclipse.eatop.eastadl21.impl.EAPackageImpl;
+import org.eclipse.eatop.examples.explorer.ChildWrapper;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.Utils;
 import org.eclipse.eatop.workspace.natures.EastADLNature;
+import org.eclipse.eatop.workspace.preferences.IEastADLWorkspacePreferences;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.jface.viewers.ITreeSelection;
+import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.sphinx.emf.util.EcorePlatformUtil;
 import org.eclipse.sphinx.platform.util.ExtendedPlatform;
 import org.osgi.framework.PrototypeServiceFactory;
@@ -40,14 +50,17 @@ public class EAXMLprocessor {
 
 	/**
 	 * Returns the EObject with the given path. Takes virtual containment into account. 
-	 *  
+	 *
+	 * Note that the same toppackage (and subpackages) may be in several loaded EAXML files
+	 * It's only the full path that is required to be unique.
+	 * 
 	 * @param path The path in the model where we expect to find the element. Format "/toppack/a/b/c"
 	 * @return The EAElement in the model (always real) or null if the element wasn't found
 	 */
 	public static EObject getEObjectbyEastADLPath(String virtualpath) {
 		String pathNonitialSlash = virtualpath.substring(1);
-		EAPackage topPackage = findTopPackage(pathNonitialSlash);
-		if (topPackage == null) return null;
+		List<EAPackage> topPackages = findTopPackages(pathNonitialSlash);
+		if (topPackages.size() == 0) return null;
 
 		String[] parts = pathNonitialSlash.split("/");
 	
@@ -56,12 +69,24 @@ public class EAXMLprocessor {
 			partsList.add(parts[i]);
 		}
 
-		return recursiveGetEObject(topPackage, partsList);
+		for (EAPackage top : topPackages){
+			EObject theEObject = recursiveGetEObject(top, partsList);
+			if (theEObject != null){
+				return theEObject;
+			}
+		}
+
+		//Not found in any toppackage
+		return null;
 	}
 
+	//Finds all possible EAPackage objects corresponding to the right toppack.
+	//We don't now yet in which eaxml file our object is located.
 	//Format "toppack/a/b"
-	public static EAPackage findTopPackage(String pathNoInitialSlash){
+	public static List<EAPackage> findTopPackages(String pathNoInitialSlash){
 	
+		List<EAPackage>  topPacks  = new ArrayList<EAPackage>();
+		
 		String packageName;
 		int firstSlash = pathNoInitialSlash.indexOf("/");
 		
@@ -86,12 +111,12 @@ public class EAXMLprocessor {
 
 					for (EAPackage p : topPackages) {
 						if (p.getShortName().equals(packageName))
-							return p;
+							topPacks.add(p);
 					}
 				}
 			}
 		}
-		return null;
+		return topPacks;
 	}
 
 	//EAPackages are always in the top only - i.e. the parent of an EAPackage is always an EAPackage
@@ -453,4 +478,122 @@ public class EAXMLprocessor {
 		}
 		return roleName;
 	}
+	
+	
+	/***
+	 * Convert all selected treenodes to a list of eobjects with dotPaths
+	 * 
+	 * @param selectedTreeNodes
+	 * @return
+	 */
+	 public static List<EObjectWithDotPath> findDotPaths(ITreeSelection selectedTreeNodes){
+		
+		List<EObjectWithDotPath> list = new ArrayList<EObjectWithDotPath>();
+		
+		@SuppressWarnings("rawtypes")
+		Iterator iterSelectedNodes = selectedTreeNodes.iterator();
+		while(iterSelectedNodes.hasNext())
+		{
+			Object object = iterSelectedNodes.next(); 
+		
+			String pathWithSlashes = null;
+			String pathWithDots = null;
+			
+			if (object instanceof EObject){
+				//a non-virtual EObject selected
+				EObject eo = (EObject)object;
+				pathWithSlashes = EAXMLprocessor.getSafeAbsoluteQualifiedName(eo);
+				pathWithDots = EAXMLprocessor.eastADLPath2dotPath(pathWithSlashes);
+				list.add(new EObjectWithDotPath(pathWithDots, eo));
+			}
+			else if (object instanceof ChildWrapper){
+				// a virtual object selected
+				TreePath[] treePaths = selectedTreeNodes.getPathsFor(object);
+			
+				TreePath path = treePaths[0];
+				
+				list.add(prototypePath(path));
+			}
+		}	
+		return list;
+	}
+
+	
+	/***
+	 * Builds the virtual dotPath from a TreePath
+
+	 * @param path
+	 * @return
+	 */
+	protected static EObjectWithDotPath prototypePath(TreePath path) {
+		//Skip first segments File
+		String virtualPath = "";
+		EObject eObj = null;
+		for (int s = 3;  s < path.getSegmentCount(); s++){
+			Object element = path.getSegment(s);
+			
+			if (element instanceof EObject){
+				eObj = (EObject)element;
+			}
+			
+			else if (element instanceof ChildWrapper){
+				ChildWrapper wrapper = (ChildWrapper)element;
+				eObj = wrapper.getObject();
+			}
+
+			if (!virtualPath.isEmpty())
+			{
+				virtualPath += ".";
+			}
+			virtualPath += ((EAElement)eObj).getShortName();
+		}
+		return new EObjectWithDotPath(virtualPath, eObj);
+	}
+	
+	
+	//assume dotPath ends with :attribute
+	public static String getAttributeValue (String dotPath){
+	
+		int colon = dotPath.indexOf(':');
+		String attribute = dotPath.substring(colon + 1);
+		
+		
+		//Convert property text format "Is Elementary" to feature name "isElementary"
+		//This is a simple approach, if it does not work out well maybe can use plugin.properties of east-adl.edit
+		String attributeNoSpace = attribute.replaceAll(" ", "");
+		String featureName = Character.toLowerCase(attributeNoSpace.charAt(0)) + attributeNoSpace.substring(1);
+
+		String objPath = dotPath.substring(0,colon);
+		EObject eObject = getEObjectbyDotPath(objPath);
+		
+	
+		//Get attribute in eObject
+		EStructuralFeature feature = eObject.eClass().getEStructuralFeature(featureName);
+		
+		if (feature == null){
+			Utils.showErrorMessage("Unknown attribute " + attribute + ", can not find corresponding feature.");
+		}
+		
+		String elementName = elementName(eObject);
+		if (feature instanceof EAttribute){
+			
+			Object attributeValue = eObject.eGet(feature);
+			
+			if (attributeValue != null){
+				return attributeValue.toString();
+			}
+			
+			//For an attribute with no value, it will actually be null
+			return "";	
+		}
+		else if (feature instanceof EReference){
+			String absoluteQualifiedName = EastADLURIFactory.getAbsoluteQualifiedName(eObject);
+			if (absoluteQualifiedName.length() > 0) {
+				return elementName + " [" + absoluteQualifiedName + "]"; 
+			}
+		}
+		
+		return elementName; 
+	}
+	
 }

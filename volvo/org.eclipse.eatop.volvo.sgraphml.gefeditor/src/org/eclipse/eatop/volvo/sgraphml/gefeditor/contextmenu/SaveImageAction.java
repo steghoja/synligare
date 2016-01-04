@@ -33,9 +33,8 @@ public class SaveImageAction extends SelectionAction {
 	  
     @Override
     public void run() {
-        ImageSaveUtil.save(Utils.getEditorPart(), Utils.getGraphicalViewer());
-        
-        
+        ImageSaveUtil.save(Utils.INSTANCE.getEditorPart(), Utils.INSTANCE.getGraphicalViewer());
         
     }	
 }
+

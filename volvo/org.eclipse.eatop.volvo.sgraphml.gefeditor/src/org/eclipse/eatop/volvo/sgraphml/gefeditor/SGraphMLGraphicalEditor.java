@@ -6,12 +6,14 @@ import java.util.EventObject;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.eatop.common.ui.util.ModelSearcher;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.contextmenu.GEFEditorContextMenuProvider;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.contextmenu.GotoModelElementAction;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.contextmenu.SaveImageAction;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.GraphMLTypeEditPart;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.SGraphMLEditPartFactory;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.dnd.EAObjectTransferDropTargetListener;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.dnd.TextTransferDropTargetListener;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.dnd.VisualAttributes;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.model.ModelIO;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.model.ModelProcessor;
@@ -22,6 +24,7 @@ import org.eclipse.eatop.volvo.sgraphml.testcode.ToggleGridVisibilityAction;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor.PropertyValueWrapper;
+import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.editparts.ScalableRootEditPart;
@@ -44,6 +47,8 @@ import org.eclipse.gef.MouseWheelZoomHandler;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.dnd.TextTransfer;
+import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
@@ -74,6 +79,7 @@ public class SGraphMLGraphicalEditor extends GraphicalEditorWithFlyoutPalette {
 	protected GraphmlType theModel;
 	PropertySheetPage propertyPage;
 	ResourceManager resourceManager;
+	EastAdlSgraphmlSynchronizer modelSynchronizer;
 	
 	
 	public SGraphMLGraphicalEditor() {
@@ -142,10 +148,18 @@ public class SGraphMLGraphicalEditor extends GraphicalEditorWithFlyoutPalette {
 		getGraphicalViewer().setContents(theModel);
 
 		updateLabelRectangles();
-
+		
+		//one listener for dropping treeview objects
 		getGraphicalViewer().addDropTargetListener(new EAObjectTransferDropTargetListener(getGraphicalViewer()));
-		Utils.setGraphicalViewer(getGraphicalViewer());
-		Utils.setEditorPart(this);
+		
+		//one listener for dropping property sheet attributes
+		getGraphicalViewer().addDropTargetListener(new TextTransferDropTargetListener(getGraphicalViewer()));
+		
+		
+		Utils.INSTANCE.setGraphicalViewer(getGraphicalViewer());
+		Utils.INSTANCE.setEditorPart(this);
+		Utils.INSTANCE.setWorkbenchWindow(getSite().getWorkbenchWindow());
+		
 	}
 
 	
@@ -173,6 +187,12 @@ public class SGraphMLGraphicalEditor extends GraphicalEditorWithFlyoutPalette {
 				resourceManager.init();
 				Utils.INSTANCE.setResourceManager(resourceManager);
 
+				modelSynchronizer = new EastAdlSgraphmlSynchronizer();
+				modelSynchronizer.CreateAdapters();
+				Utils.INSTANCE.setModelSynchronizer(modelSynchronizer);
+				
+				
+				
 				//Use IListener2 to detect user switching to another GEF Editor.
 				//We need to update the singleton helper classes with the proper objects owned by this editor.
 				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPartService().addPartListener(new IPartListener2() {
@@ -222,6 +242,9 @@ public class SGraphMLGraphicalEditor extends GraphicalEditorWithFlyoutPalette {
 		Utils.INSTANCE.setResourceManager(resourceManager);
 		ModelProcessor.INSTANCE.setTheModel(theModel);
 		Utils.INSTANCE.setGraphicalViewer(getGraphicalViewer());
+		Utils.INSTANCE.setModelSynchronizer(modelSynchronizer);
+		Utils.INSTANCE.setEditorPart(this);
+		
 	}
 
 	

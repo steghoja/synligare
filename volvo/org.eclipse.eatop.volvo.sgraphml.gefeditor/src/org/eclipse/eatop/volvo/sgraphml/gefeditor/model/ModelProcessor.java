@@ -7,11 +7,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.eatop.eastadl21.DesignFunctionPrototype;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.commands.UpdateNodeIDReferenceCommand;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMap.Entry;
+import org.eclipse.gef.commands.CompoundCommand;
 import org.graphdrawing.graphml.xmlns.DataType;
 import org.graphdrawing.graphml.xmlns.KeyType;
 import org.graphdrawing.graphml.xmlns.EdgeType;
@@ -19,6 +21,7 @@ import org.graphdrawing.graphml.xmlns.GraphType;
 import org.graphdrawing.graphml.xmlns.GraphmlType;
 import org.graphdrawing.graphml.xmlns.NodeType;
 
+import eu.synligare.sgraphml.BaseNodeType;
 import eu.synligare.sgraphml.PolyLineEdgeType;
 import eu.synligare.sgraphml.PortNodeType;
 import eu.synligare.sgraphml.ResourceBlockType;
@@ -151,6 +154,18 @@ public class ModelProcessor {
 		return null;
 	}	
 
+	//Finds the contained Port/Group/ShapeNode in a graphML node
+	public BaseNodeType getSgraphmlNode (NodeType graphmlNode){
+		FeatureMap fm = graphmlNode.getData().get(0).getMixed();
+		Object object = fm.getValue(0);
+		
+		if (object instanceof BaseNodeType){
+			return (BaseNodeType)object;
+		}
+		return null;	
+	}
+	
+	
 	/***
 	 * Slow implementation that traverses the whole model. It would be faster to 
 	 * keep a hash map of dotPath vs Node.
@@ -212,7 +227,34 @@ public class ModelProcessor {
 		return null;
 	}
 
-	
+	public CompoundCommand getRenameIDCommand(String oldDotPathBase, String newDotPathBase){
 
+		CompoundCommand cc = new CompoundCommand();
+		
+		for (Iterator iter =  
+				EcoreUtil.getAllContents(Collections.singleton(getRootGraph()));
+			     iter.hasNext(); ) {
+			  EObject eObject = (EObject)iter.next();
+			  
+			  if (eObject instanceof NodeType){
+				  NodeType node = (NodeType)eObject;
+				  String oldId = node.getId();
+				  if (oldId.startsWith(oldDotPathBase)) {  	
+					  String newId = newDotPathBase;		  
+					  String remainder = oldId.substring(oldDotPathBase.length());
+					  if (remainder.length() > 0){
+						  newId += "." + oldId.substring((oldDotPathBase.length() + 1)); 
+					  }
+					  UpdateNodeIDReferenceCommand updateIdCommand = new UpdateNodeIDReferenceCommand();
+					  updateIdCommand.setDotPath(newId);
+					  updateIdCommand.setNode(node);
+					  cc.add(updateIdCommand);
+				  }					  
+			  }
+		}
+		return cc;	
+	}
+
+	
 	
 }

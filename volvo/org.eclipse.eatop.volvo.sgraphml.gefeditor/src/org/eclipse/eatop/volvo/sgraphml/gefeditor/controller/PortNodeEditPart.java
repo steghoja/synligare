@@ -13,7 +13,7 @@ import org.eclipse.eatop.volvo.sgraphml.gefeditor.commands.MoveChildNodeCommand;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.GroupNodeEditPart.GroupNodeTypeAdapter;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.ShapeNodeEditPart.GraphTypeAdapter;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.model.ModelProcessor;
-import org.eclipse.eatop.volvo.sgraphml.gefeditor.policy.GroupNodeTypeXYLayoutPolicy;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.policy.GroupNodeXYLayoutPolicy;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.policy.NodeTypeComponentEditPolicy;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.view.PortNodeFigure;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.view.ShapeNodeFigure;
@@ -75,7 +75,7 @@ public class PortNodeEditPart extends AbstractGraphicalEditPart implements NodeE
 	    figure.setGeometry(model.getGeometry());
 	    figure.setFill(model.getFill());
 	    figure.setBorderStyle(model.getBorderStyle());
-	    figure.setNodeLabel(model.getNodeLabel().get(0));
+	//    figure.setNodeLabel(model.getNodeLabel().get(0));
 		 
 	    figure.setLayouts();
 		 

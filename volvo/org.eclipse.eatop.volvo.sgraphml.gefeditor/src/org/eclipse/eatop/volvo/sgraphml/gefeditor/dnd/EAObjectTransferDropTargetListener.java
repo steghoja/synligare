@@ -30,11 +30,16 @@ import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.part.ResourceTransfer;
 
+
+
+
 public class EAObjectTransferDropTargetListener extends
 		AbstractTransferDropTargetListener {
 
 	public EAObjectTransferDropTargetListener(EditPartViewer viewer, Transfer xfer) {
 		super(viewer, xfer);
+
+	
 	}
 
 	public EAObjectTransferDropTargetListener(EditPartViewer viewer) {
@@ -70,7 +75,7 @@ public class EAObjectTransferDropTargetListener extends
 
 	   factory.setLocation(getDropLocation());		
 	   
-	   List<EObjectWithDotPath> list = findDotPaths(selection);
+	   List<EObjectWithDotPath> list = EAXMLprocessor.findDotPaths(selection);
 	   factory.setSelectedTreeNodes(list);
 	  
 	   super.handleDrop();
@@ -78,75 +83,7 @@ public class EAObjectTransferDropTargetListener extends
 
 	}
   
-	/***
-	 * Convert all selected treenodes to a list of eobjects with dotPaths
-	 * 
-	 * @param selectedTreeNodes
-	 * @return
-	 */
-	protected List<EObjectWithDotPath> findDotPaths(ITreeSelection selectedTreeNodes){
-		
-		List<EObjectWithDotPath> list = new ArrayList<EObjectWithDotPath>();
-		
-		Iterator iterSelectedNodes = selectedTreeNodes.iterator();
-		while(iterSelectedNodes.hasNext())
-		{
-			Object object = iterSelectedNodes.next(); 
-		
-			String pathWithSlashes = null;
-			String pathWithDots = null;
-			
-			if (object instanceof EObject){
-				//a non-virtual EObject selected
-				EObject eo = (EObject)object;
-				pathWithSlashes = EAXMLprocessor.getSafeAbsoluteQualifiedName(eo);
-				pathWithDots = EAXMLprocessor.eastADLPath2dotPath(pathWithSlashes);
-				list.add(new EObjectWithDotPath(pathWithDots, eo));
-			}
-			else if (object instanceof ChildWrapper){
-				// a virtual object selected
-				ChildWrapper childWrapper = (ChildWrapper)object;
-				TreePath[] treePaths = selectedTreeNodes.getPathsFor(object);
-			
-				TreePath path = treePaths[0];
-				
-				list.add(prototypePath(path));
-			}
-		}	
-		return list;
-	}
-
 	
-	/***
-	 * Builds the virtual dotPath from a TreePath
-
-	 * @param path
-	 * @return
-	 */
-	protected EObjectWithDotPath prototypePath(TreePath path) {
-		//Skip first segments File
-		String virtualPath = "";
-		EObject eObj = null;
-		for (int s = 3;  s < path.getSegmentCount(); s++){
-			Object element = path.getSegment(s);
-			
-			if (element instanceof EObject){
-				eObj = (EObject)element;
-			}
-			
-			else if (element instanceof ChildWrapper){
-				ChildWrapper wrapper = (ChildWrapper)element;
-				eObj = wrapper.getObject();
-			}
-
-			if (!virtualPath.isEmpty())
-			{
-				virtualPath += ".";
-			}
-			virtualPath += ((EAElement)eObj).getShortName();
-		}
-		return new EObjectWithDotPath(virtualPath, eObj);
-	}
 	
 	
 }

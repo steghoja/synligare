@@ -754,7 +754,7 @@ public class SgraphmlPackageImpl extends EPackageImpl implements SgraphmlPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLabelType_Width() {
+	public EAttribute getLabelType_Visible() {
 		return (EAttribute)labelTypeEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -763,7 +763,7 @@ public class SgraphmlPackageImpl extends EPackageImpl implements SgraphmlPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLabelType_Visible() {
+	public EAttribute getLabelType_Width() {
 		return (EAttribute)labelTypeEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -1313,8 +1313,8 @@ public class SgraphmlPackageImpl extends EPackageImpl implements SgraphmlPackage
 		createEAttribute(labelTypeEClass, LABEL_TYPE__FONT_SIZE);
 		createEAttribute(labelTypeEClass, LABEL_TYPE__HEIGHT);
 		createEAttribute(labelTypeEClass, LABEL_TYPE__TEXT_COLOR);
-		createEAttribute(labelTypeEClass, LABEL_TYPE__WIDTH);
 		createEAttribute(labelTypeEClass, LABEL_TYPE__VISIBLE);
+		createEAttribute(labelTypeEClass, LABEL_TYPE__WIDTH);
 		createEAttribute(labelTypeEClass, LABEL_TYPE__X);
 		createEAttribute(labelTypeEClass, LABEL_TYPE__Y);
 
@@ -1473,8 +1473,8 @@ public class SgraphmlPackageImpl extends EPackageImpl implements SgraphmlPackage
 		initEAttribute(getLabelType_FontSize(), theXMLTypePackage.getUnsignedByte(), "fontSize", null, 0, 1, LabelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabelType_Height(), theXMLTypePackage.getDouble(), "height", null, 0, 1, LabelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabelType_TextColor(), this.getColorType(), "textColor", null, 0, 1, LabelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLabelType_Width(), theXMLTypePackage.getDouble(), "width", null, 0, 1, LabelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabelType_Visible(), theXMLTypePackage.getBoolean(), "visible", null, 0, 1, LabelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLabelType_Width(), theXMLTypePackage.getDouble(), "width", null, 0, 1, LabelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabelType_X(), theXMLTypePackage.getDouble(), "x", null, 0, 1, LabelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabelType_Y(), theXMLTypePackage.getDouble(), "y", null, 0, 1, LabelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1549,6 +1549,7 @@ public class SgraphmlPackageImpl extends EPackageImpl implements SgraphmlPackage
 		addEEnumLiteral(placementTypeEEnum, PlacementType.CENTER);
 		addEEnumLiteral(placementTypeEEnum, PlacementType.LEFT);
 		addEEnumLiteral(placementTypeEEnum, PlacementType.RIGHT);
+		addEEnumLiteral(placementTypeEEnum, PlacementType.FREE);
 
 		initEEnum(shapeTypeTypeEEnum, ShapeTypeType.class, "ShapeTypeType");
 		addEEnumLiteral(shapeTypeTypeEEnum, ShapeTypeType.RECTANGLE);
@@ -1923,18 +1924,18 @@ public class SgraphmlPackageImpl extends EPackageImpl implements SgraphmlPackage
 			 "name", "textColor"
 		   });	
 		addAnnotation
-		  (getLabelType_Width(), 
-		   source, 
-		   new String[] {
-			 "kind", "attribute",
-			 "name", "width"
-		   });	
-		addAnnotation
 		  (getLabelType_Visible(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute",
 			 "name", "visible"
+		   });	
+		addAnnotation
+		  (getLabelType_Width(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute",
+			 "name", "width"
 		   });	
 		addAnnotation
 		  (getLabelType_X(), 

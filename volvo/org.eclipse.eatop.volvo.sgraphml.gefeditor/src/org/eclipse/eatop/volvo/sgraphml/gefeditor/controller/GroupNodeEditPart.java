@@ -9,7 +9,8 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.eatop.eastadl21.Eastadl21Factory;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.ShapeNodeEditPart.ShapeNodeTypeAdapter;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.model.ModelProcessor;
-import org.eclipse.eatop.volvo.sgraphml.gefeditor.policy.GroupNodeTypeXYLayoutPolicy;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.policy.CreateAttributeEditPolicy;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.policy.GroupNodeXYLayoutPolicy;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.policy.NodeTypeComponentEditPolicy;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.view.CutRectangleGroupNodeFigure;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.view.EllipseGroupNodeFigure;
@@ -25,12 +26,17 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.gef.CompoundSnapToHelper;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.NodeEditPart;
 import org.eclipse.gef.Request;
+import org.eclipse.gef.SnapToGeometry;
+import org.eclipse.gef.SnapToGrid;
+import org.eclipse.gef.SnapToHelper;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
+import org.eclipse.gef.editpolicies.SnapFeedbackPolicy;
 import org.eclipse.gef.tools.MarqueeDragTracker;
 import org.eclipse.gef.tools.MarqueeSelectionTool;
 import org.graphdrawing.graphml.xmlns.DataType;
@@ -39,6 +45,7 @@ import org.graphdrawing.graphml.xmlns.GraphmlType;
 import org.graphdrawing.graphml.xmlns.NodeType;
 
 import eu.synligare.sgraphml.GroupNodeType;
+import eu.synligare.sgraphml.NodeLabelType;
 import eu.synligare.sgraphml.PolyLineEdgeType;
 import eu.synligare.sgraphml.PortNodeType;
 import eu.synligare.sgraphml.SgraphmlPackage;
@@ -83,10 +90,33 @@ public class GroupNodeEditPart extends AbstractGraphicalEditPart implements Node
 
 	@Override
 	protected void createEditPolicies() {
-		installEditPolicy(EditPolicy.LAYOUT_ROLE, new GroupNodeTypeXYLayoutPolicy());
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new GroupNodeXYLayoutPolicy());
 	    installEditPolicy(EditPolicy.COMPONENT_ROLE, new NodeTypeComponentEditPolicy()); //Delete  
-
+		 installEditPolicy("Snap Feedback", new SnapFeedbackPolicy());
+	    installEditPolicy(EditPolicy.CONTAINER_ROLE, new CreateAttributeEditPolicy());
 	}
+	/**
+	 * Currently the class only adapts to create a {@link SnapToHelper}
+	 * when the editor is in snapping mode (either to grid or to shapes).
+	 */
+	@Override 
+	public Object getAdapter(Class key) {
+	    if (key == SnapToHelper.class) {
+	        List<SnapToHelper> helpers = new ArrayList<SnapToHelper>();
+	        if (Boolean.TRUE.equals(getViewer().getProperty(SnapToGeometry.PROPERTY_SNAP_ENABLED))) {
+	            helpers.add(new SnapToGeometry(this));
+	        }
+	        if (Boolean.TRUE.equals(getViewer().getProperty(SnapToGrid.PROPERTY_GRID_ENABLED))) {
+	         helpers.add(new SnapToGrid(this));
+	        }
+	        if(helpers.size()==0) {
+	            return null;
+	        } else {
+	            return new CompoundSnapToHelper(helpers.toArray(new SnapToHelper[0]));
+	        }
+	    }
+	    return super.getAdapter(key);
+	} 
 	
 	 @Override 
 	 protected void refreshVisuals() {
@@ -96,14 +126,16 @@ public class GroupNodeEditPart extends AbstractGraphicalEditPart implements Node
 		    figure.setGeometry(model.getGeometry());
 		    figure.setFill(model.getFill());
 		    figure.setBorderStyle(model.getBorderStyle());
-		    figure.setNodeLabel(model.getNodeLabel().get(0));
+//		    figure.setNodeLabel(model.getNodeLabel().get(0));
 		    figure.setLayouts(); 
 	    
 	 }
 	 
 	 	 
 		@Override 
-		//returns the portnodes and labels, i. "Pnode1, PNodeLabel 1, Pnode 2, PNodeLabel 2, ..."
+		//returns NodeLabels, ShapeNodes, GroupNodes, then the portnodes and their labels, i. 
+		// "NodeLabel1, NodeLabel2, ... NodeLabel n, PNodeLabel 1, Pnode1, PnodeLabel 2, PNode ..."
+
 		protected List<EObject> getModelChildren() {
 			 
 				GroupNodeType groupNode = (GroupNodeType) getModel();
@@ -123,6 +155,15 @@ public class GroupNodeEditPart extends AbstractGraphicalEditPart implements Node
 			    	System.out.println ("Does not support more than one graph for each GroupNode");
 			    }
 			    
+			    
+			    //Add GroupNode own labels first
+			    if (groupNode.getNodeLabel().size() > 0){
+				    for (NodeLabelType nodeLabel : groupNode.getNodeLabel()){
+				    	children.add(nodeLabel);	
+				    }
+			    }
+			    
+			    //Then add stuff in its internal graph
 			    GraphType graph = graphs.get(0);
 			    
 			    EList<NodeType> graphmlNodes = graph.getNode();
@@ -210,7 +251,18 @@ public class GroupNodeEditPart extends AbstractGraphicalEditPart implements Node
 			 
 			    @Override 
 			    public void notifyChanged(Notification notification) {
-			      refreshVisuals();
+
+			    	if (((notification.getEventType() == notification.ADD) || 
+			    			(notification.getEventType() == notification.REMOVE)) &&
+			    			(notification.getFeatureID(ShapeNodeType.class) == SgraphmlPackage.GROUP_NODE_TYPE__NODE_LABEL))
+			    	{
+			    		//New label dropped
+			    		refresh();
+			    	}
+			    	else{
+			    		//Groupnopde changed, Label moved, ...
+				    	refreshVisuals();
+			    	}
 			    }
 			 
 			    @Override 

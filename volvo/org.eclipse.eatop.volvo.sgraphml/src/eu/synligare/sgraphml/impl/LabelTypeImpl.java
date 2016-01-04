@@ -30,8 +30,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link eu.synligare.sgraphml.impl.LabelTypeImpl#getFontSize <em>Font Size</em>}</li>
  *   <li>{@link eu.synligare.sgraphml.impl.LabelTypeImpl#getHeight <em>Height</em>}</li>
  *   <li>{@link eu.synligare.sgraphml.impl.LabelTypeImpl#getTextColor <em>Text Color</em>}</li>
- *   <li>{@link eu.synligare.sgraphml.impl.LabelTypeImpl#getWidth <em>Width</em>}</li>
  *   <li>{@link eu.synligare.sgraphml.impl.LabelTypeImpl#isVisible <em>Visible</em>}</li>
+ *   <li>{@link eu.synligare.sgraphml.impl.LabelTypeImpl#getWidth <em>Width</em>}</li>
  *   <li>{@link eu.synligare.sgraphml.impl.LabelTypeImpl#getX <em>X</em>}</li>
  *   <li>{@link eu.synligare.sgraphml.impl.LabelTypeImpl#getY <em>Y</em>}</li>
  * </ul>
@@ -149,35 +149,6 @@ public class LabelTypeImpl extends MinimalEObjectImpl.Container implements Label
 	protected String textColor = TEXT_COLOR_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getWidth() <em>Width</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getWidth()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final double WIDTH_EDEFAULT = 0.0;
-
-	/**
-	 * The cached value of the '{@link #getWidth() <em>Width</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getWidth()
-	 * @generated
-	 * @ordered
-	 */
-	protected double width = WIDTH_EDEFAULT;
-
-	/**
-	 * This is true if the Width attribute has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean widthESet;
-
-	/**
 	 * The default value of the '{@link #isVisible() <em>Visible</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -205,6 +176,35 @@ public class LabelTypeImpl extends MinimalEObjectImpl.Container implements Label
 	 * @ordered
 	 */
 	protected boolean visibleESet;
+
+	/**
+	 * The default value of the '{@link #getWidth() <em>Width</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWidth()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double WIDTH_EDEFAULT = 0.0;
+
+	/**
+	 * The cached value of the '{@link #getWidth() <em>Width</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWidth()
+	 * @generated
+	 * @ordered
+	 */
+	protected double width = WIDTH_EDEFAULT;
+
+	/**
+	 * This is true if the Width attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean widthESet;
 
 	/**
 	 * The default value of the '{@link #getX() <em>X</em>}' attribute.
@@ -434,52 +434,6 @@ public class LabelTypeImpl extends MinimalEObjectImpl.Container implements Label
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public double getWidth() {
-		return width;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setWidth(double newWidth) {
-		double oldWidth = width;
-		width = newWidth;
-		boolean oldWidthESet = widthESet;
-		widthESet = true;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SgraphmlPackage.LABEL_TYPE__WIDTH, oldWidth, width, !oldWidthESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void unsetWidth() {
-		double oldWidth = width;
-		boolean oldWidthESet = widthESet;
-		width = WIDTH_EDEFAULT;
-		widthESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, SgraphmlPackage.LABEL_TYPE__WIDTH, oldWidth, WIDTH_EDEFAULT, oldWidthESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetWidth() {
-		return widthESet;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isVisible() {
 		return visible;
 	}
@@ -519,6 +473,52 @@ public class LabelTypeImpl extends MinimalEObjectImpl.Container implements Label
 	 */
 	public boolean isSetVisible() {
 		return visibleESet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public double getWidth() {
+		return width;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWidth(double newWidth) {
+		double oldWidth = width;
+		width = newWidth;
+		boolean oldWidthESet = widthESet;
+		widthESet = true;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SgraphmlPackage.LABEL_TYPE__WIDTH, oldWidth, width, !oldWidthESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void unsetWidth() {
+		double oldWidth = width;
+		boolean oldWidthESet = widthESet;
+		width = WIDTH_EDEFAULT;
+		widthESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, SgraphmlPackage.LABEL_TYPE__WIDTH, oldWidth, WIDTH_EDEFAULT, oldWidthESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSetWidth() {
+		return widthESet;
 	}
 
 	/**
@@ -646,10 +646,10 @@ public class LabelTypeImpl extends MinimalEObjectImpl.Container implements Label
 				return getHeight();
 			case SgraphmlPackage.LABEL_TYPE__TEXT_COLOR:
 				return getTextColor();
-			case SgraphmlPackage.LABEL_TYPE__WIDTH:
-				return getWidth();
 			case SgraphmlPackage.LABEL_TYPE__VISIBLE:
 				return isVisible();
+			case SgraphmlPackage.LABEL_TYPE__WIDTH:
+				return getWidth();
 			case SgraphmlPackage.LABEL_TYPE__X:
 				return getX();
 			case SgraphmlPackage.LABEL_TYPE__Y:
@@ -681,11 +681,11 @@ public class LabelTypeImpl extends MinimalEObjectImpl.Container implements Label
 			case SgraphmlPackage.LABEL_TYPE__TEXT_COLOR:
 				setTextColor((String)newValue);
 				return;
-			case SgraphmlPackage.LABEL_TYPE__WIDTH:
-				setWidth((Double)newValue);
-				return;
 			case SgraphmlPackage.LABEL_TYPE__VISIBLE:
 				setVisible((Boolean)newValue);
+				return;
+			case SgraphmlPackage.LABEL_TYPE__WIDTH:
+				setWidth((Double)newValue);
 				return;
 			case SgraphmlPackage.LABEL_TYPE__X:
 				setX((Double)newValue);
@@ -720,11 +720,11 @@ public class LabelTypeImpl extends MinimalEObjectImpl.Container implements Label
 			case SgraphmlPackage.LABEL_TYPE__TEXT_COLOR:
 				setTextColor(TEXT_COLOR_EDEFAULT);
 				return;
-			case SgraphmlPackage.LABEL_TYPE__WIDTH:
-				unsetWidth();
-				return;
 			case SgraphmlPackage.LABEL_TYPE__VISIBLE:
 				unsetVisible();
+				return;
+			case SgraphmlPackage.LABEL_TYPE__WIDTH:
+				unsetWidth();
 				return;
 			case SgraphmlPackage.LABEL_TYPE__X:
 				unsetX();
@@ -754,10 +754,10 @@ public class LabelTypeImpl extends MinimalEObjectImpl.Container implements Label
 				return isSetHeight();
 			case SgraphmlPackage.LABEL_TYPE__TEXT_COLOR:
 				return TEXT_COLOR_EDEFAULT == null ? textColor != null : !TEXT_COLOR_EDEFAULT.equals(textColor);
-			case SgraphmlPackage.LABEL_TYPE__WIDTH:
-				return isSetWidth();
 			case SgraphmlPackage.LABEL_TYPE__VISIBLE:
 				return isSetVisible();
+			case SgraphmlPackage.LABEL_TYPE__WIDTH:
+				return isSetWidth();
 			case SgraphmlPackage.LABEL_TYPE__X:
 				return isSetX();
 			case SgraphmlPackage.LABEL_TYPE__Y:
@@ -786,10 +786,10 @@ public class LabelTypeImpl extends MinimalEObjectImpl.Container implements Label
 		if (heightESet) result.append(height); else result.append("<unset>");
 		result.append(", textColor: ");
 		result.append(textColor);
-		result.append(", width: ");
-		if (widthESet) result.append(width); else result.append("<unset>");
 		result.append(", visible: ");
 		if (visibleESet) result.append(visible); else result.append("<unset>");
+		result.append(", width: ");
+		if (widthESet) result.append(width); else result.append("<unset>");
 		result.append(", x: ");
 		if (xESet) result.append(x); else result.append("<unset>");
 		result.append(", y: ");

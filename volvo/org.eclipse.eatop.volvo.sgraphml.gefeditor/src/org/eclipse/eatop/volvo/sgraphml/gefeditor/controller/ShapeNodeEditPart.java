@@ -1,6 +1,7 @@
 package org.eclipse.eatop.volvo.sgraphml.gefeditor.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.draw2d.ConnectionAnchor;
@@ -10,8 +11,11 @@ import org.eclipse.draw2d.MouseListener;
 import org.eclipse.eatop.eastadl21.EAXML;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.Utils;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.model.ModelProcessor;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.policy.CreateAttributeEditPolicy;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.policy.NodeTypeComponentEditPolicy;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.policy.ShapeNodeXYLayoutPolicy;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.view.EllipseShapeNodeFigure;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.view.GroupNodeFigure;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.view.RectangleShapeNodeFigure;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.view.RoundRectangleShapeNodeFigure;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.view.ShapeNodeFigure;
@@ -21,6 +25,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.gef.CompoundSnapToHelper;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.EditPolicy;
@@ -37,7 +42,11 @@ import org.graphdrawing.graphml.xmlns.GraphType;
 import org.graphdrawing.graphml.xmlns.GraphmlType;
 import org.graphdrawing.graphml.xmlns.NodeType;
 import org.graphdrawing.graphml.xmlns.XmlnsPackage;
+
+import eu.synligare.sgraphml.GroupNodeType;
 import eu.synligare.sgraphml.PolyLineEdgeType;
+import eu.synligare.sgraphml.PortNodeType;
+import eu.synligare.sgraphml.SgraphmlPackage;
 import eu.synligare.sgraphml.ShapeNodeType;
 import eu.synligare.sgraphml.ShapeTypeType;
 
@@ -106,7 +115,9 @@ public class ShapeNodeEditPart extends AbstractGraphicalEditPart implements Node
 	@Override
 	protected void createEditPolicies() {
 		 installEditPolicy(EditPolicy.COMPONENT_ROLE, new NodeTypeComponentEditPolicy()); //Delete  
+		 installEditPolicy(EditPolicy.LAYOUT_ROLE, new ShapeNodeXYLayoutPolicy()); //Move label  
 		 installEditPolicy("Snap Feedback", new SnapFeedbackPolicy());
+		 installEditPolicy(EditPolicy.CONTAINER_ROLE, new CreateAttributeEditPolicy());
 	}
 	
 	/**
@@ -140,14 +151,21 @@ public class ShapeNodeEditPart extends AbstractGraphicalEditPart implements Node
 	    figure.setGeometry(model.getGeometry());
 	    figure.setFill(model.getFill());
 	    figure.setBorderStyle(model.getBorderStyle());
-	    figure.setNodeLabel(model.getNodeLabel().get(0));
+	   // figure.setNodeLabels(model.getNodeLabel());
+	    
+	    
 	    figure.setLayouts(); 
 		 
 	 }
 	 
+	//Default implementation is to return the root figure
+			//we need to return the rectangle to make sure the rectangle doesn't overwrite the ports
+			 @Override
+				 public IFigure getContentPane(){
+				 ShapeNodeFigure figure = (ShapeNodeFigure)getFigure();
+				 return figure.getContentsPane();
+			    } 
 	 
-	 
-	 //ShapeNodes have no children so getModelChildren not overriden.
 	 	 
 		@Override
 		//All editParts are activated, so this is called for all ShapeNodeEditPart, i.e.
@@ -198,12 +216,31 @@ public class ShapeNodeEditPart extends AbstractGraphicalEditPart implements Node
 		    super.deactivate();
 		  }
 		 
-		 //observer for change of ShapeNodeType model objects, i.e. position change
+		 //observer for change of ShapeNodeType model objects
 		  public class ShapeNodeTypeAdapter implements Adapter {
 		 
 		    @Override 
 		    public void notifyChanged(Notification notification) {
-		    	refreshVisuals();
+		    	
+		    	int eventType = notification.getEventType();
+		    	int featureID = notification.getFeatureID(ShapeNodeType.class);
+		    	
+		    	
+		    	
+		    	if ((((eventType== notification.ADD) || 
+		    			(eventType == notification.REMOVE)) &&
+		    			(featureID  == SgraphmlPackage.SHAPE_NODE_TYPE__NODE_LABEL)))
+/*		    		||
+		    		((eventType == notification.SET) && (featureID == SgraphmlPackage.SHAPE_NODE_TYPE__GEOMETRY))) //resize shapnode
+*/
+		    	{
+		    		//New label dropped
+		    		refresh();
+		    	}
+		    	else{
+		    		//shapenode changed, Label moved, ...
+			    	refreshVisuals();
+		    	}
 		    }
 		 
 		    @Override 
@@ -382,7 +419,16 @@ public class ShapeNodeEditPart extends AbstractGraphicalEditPart implements Node
 			return ((ShapeNodeFigure)getFigure()).getConnectionAnchor();
 		}
 
+		@SuppressWarnings("rawtypes")
+		@Override
+		protected List getModelChildren() {
+
+			//return all nodelabels
+			ShapeNodeType shapeNode = (ShapeNodeType) getModel();
+		    List<EObject> children = new ArrayList<EObject>();
+
+		    return shapeNode.getNodeLabel();
 		
-		
+		}
 		
 }

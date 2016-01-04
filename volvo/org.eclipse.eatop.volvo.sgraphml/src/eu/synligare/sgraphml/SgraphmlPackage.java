@@ -397,22 +397,22 @@ public interface SgraphmlPackage extends EPackage {
 	int LABEL_TYPE__TEXT_COLOR = 4;
 
 	/**
-	 * The feature id for the '<em><b>Width</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LABEL_TYPE__WIDTH = 5;
-
-	/**
 	 * The feature id for the '<em><b>Visible</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LABEL_TYPE__VISIBLE = 6;
+	int LABEL_TYPE__VISIBLE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL_TYPE__WIDTH = 6;
 
 	/**
 	 * The feature id for the '<em><b>X</b></em>' attribute.
@@ -506,15 +506,6 @@ public interface SgraphmlPackage extends EPackage {
 	int EDGE_LABEL_TYPE__TEXT_COLOR = LABEL_TYPE__TEXT_COLOR;
 
 	/**
-	 * The feature id for the '<em><b>Width</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGE_LABEL_TYPE__WIDTH = LABEL_TYPE__WIDTH;
-
-	/**
 	 * The feature id for the '<em><b>Visible</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -522,6 +513,15 @@ public interface SgraphmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int EDGE_LABEL_TYPE__VISIBLE = LABEL_TYPE__VISIBLE;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE_LABEL_TYPE__WIDTH = LABEL_TYPE__WIDTH;
 
 	/**
 	 * The feature id for the '<em><b>X</b></em>' attribute.
@@ -963,15 +963,6 @@ public interface SgraphmlPackage extends EPackage {
 	int NODE_LABEL_TYPE__TEXT_COLOR = LABEL_TYPE__TEXT_COLOR;
 
 	/**
-	 * The feature id for the '<em><b>Width</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE_LABEL_TYPE__WIDTH = LABEL_TYPE__WIDTH;
-
-	/**
 	 * The feature id for the '<em><b>Visible</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -979,6 +970,15 @@ public interface SgraphmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int NODE_LABEL_TYPE__VISIBLE = LABEL_TYPE__VISIBLE;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_LABEL_TYPE__WIDTH = LABEL_TYPE__WIDTH;
 
 	/**
 	 * The feature id for the '<em><b>X</b></em>' attribute.
@@ -2083,17 +2083,6 @@ public interface SgraphmlPackage extends EPackage {
 	EAttribute getLabelType_TextColor();
 
 	/**
-	 * Returns the meta object for the attribute '{@link eu.synligare.sgraphml.LabelType#getWidth <em>Width</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Width</em>'.
-	 * @see eu.synligare.sgraphml.LabelType#getWidth()
-	 * @see #getLabelType()
-	 * @generated
-	 */
-	EAttribute getLabelType_Width();
-
-	/**
 	 * Returns the meta object for the attribute '{@link eu.synligare.sgraphml.LabelType#isVisible <em>Visible</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2103,6 +2092,17 @@ public interface SgraphmlPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getLabelType_Visible();
+
+	/**
+	 * Returns the meta object for the attribute '{@link eu.synligare.sgraphml.LabelType#getWidth <em>Width</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Width</em>'.
+	 * @see eu.synligare.sgraphml.LabelType#getWidth()
+	 * @see #getLabelType()
+	 * @generated
+	 */
+	EAttribute getLabelType_Width();
 
 	/**
 	 * Returns the meta object for the attribute '{@link eu.synligare.sgraphml.LabelType#getX <em>X</em>}'.
@@ -3038,20 +3038,20 @@ public interface SgraphmlPackage extends EPackage {
 		EAttribute LABEL_TYPE__TEXT_COLOR = eINSTANCE.getLabelType_TextColor();
 
 		/**
-		 * The meta object literal for the '<em><b>Width</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LABEL_TYPE__WIDTH = eINSTANCE.getLabelType_Width();
-
-		/**
 		 * The meta object literal for the '<em><b>Visible</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute LABEL_TYPE__VISIBLE = eINSTANCE.getLabelType_Visible();
+
+		/**
+		 * The meta object literal for the '<em><b>Width</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LABEL_TYPE__WIDTH = eINSTANCE.getLabelType_Width();
 
 		/**
 		 * The meta object literal for the '<em><b>X</b></em>' attribute feature.
