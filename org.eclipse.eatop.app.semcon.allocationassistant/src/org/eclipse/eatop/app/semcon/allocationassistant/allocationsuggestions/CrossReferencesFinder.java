@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.sphinx.emf.ecore.ECrossReferenceAdapterFactory;
 
+
 /**
  * This class contains methods to find relationships and referenced elements in relationships.
  *  
@@ -149,6 +150,9 @@ public class CrossReferencesFinder {
 			// not work.
 			// A solution would be to write own contains (or compare) function that disregards the memory-address of the elements
 			// and just compares their attributes!
+			List<Requirement> derivedRequitement = deriveRel.getDerived();
+			Boolean contains1 = derivedFromReq.contains(requirement);
+			Boolean contains2 = derivedRequitement.contains(requirement);
 			if ((!derivedFromReq.contains(requirement)) && (deriveRel.getDerived().contains(requirement))){
 				for (Requirement req : derivedFromReq)
 					result.add(req);

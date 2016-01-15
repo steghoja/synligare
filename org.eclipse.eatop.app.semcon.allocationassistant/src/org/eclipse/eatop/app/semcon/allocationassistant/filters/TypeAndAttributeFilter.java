@@ -2,6 +2,7 @@ package org.eclipse.eatop.app.semcon.allocationassistant.filters;
 
 import java.util.HashSet;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -46,9 +47,12 @@ public class TypeAndAttributeFilter extends ViewerFilter {
 
 	@Override
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
-		
+			TreeIterator<EObject> currentSubElement;
 			if (isSelectedElement(element)){
-				((EObject)element).eAllContents().forEachRemaining(elem -> elementsToInclude.add((Object)elem));
+				currentSubElement = ((EObject)element).eAllContents();
+				while (currentSubElement.hasNext()){
+					elementsToInclude.add((Object)currentSubElement.next());
+			    }
 				return true;
 			}else if(elementsToInclude.contains(element)){
 				return true;

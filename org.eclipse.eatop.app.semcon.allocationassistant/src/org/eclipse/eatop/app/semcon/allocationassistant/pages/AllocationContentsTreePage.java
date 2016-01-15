@@ -67,7 +67,7 @@ public class AllocationContentsTreePage extends GenericContentsTreePage{
 		
 		// Create 3-columned page layout, for requirements treeview, allocation button 
 		// and model treeview
-		Composite body = managedForm.getForm().getBody();
+		final Composite body = managedForm.getForm().getBody();
 		body.setLayout(LayoutFactory.createFormBodyGridLayout(false, 3));
 		
 		/*suggestionTip = new ToolTip(body.getShell(), SWT.BALLOON | SWT.ICON_INFORMATION);
@@ -97,11 +97,11 @@ public class AllocationContentsTreePage extends GenericContentsTreePage{
 				IFile iFile = getIFileFromFile( (String) filesDroped[0]);
 				String iFileExtension = iFile.getFileExtension();
 				if (iFileExtension!=null && iFileExtension.equals("eaxml")){
-					Object root = EcorePlatformUtil.loadModelRoot(iFile);
+					final Object root = EcorePlatformUtil.loadModelRoot(iFile);
 					dropRequirements.setText(root.toString());
 
 					//Create REQUIREMENTS tree viewer
-					StructuredViewer reqViewer = loadModelsContent(managedForm, body, root, "REQUIREMENTS: "+iFile.getName());
+					final StructuredViewer reqViewer = loadModelsContent(managedForm, body, root, "REQUIREMENTS: "+iFile.getName());
 					selectRequirementElements((TreeViewer) reqViewer);
 					
 					//create 
@@ -119,7 +119,7 @@ public class AllocationContentsTreePage extends GenericContentsTreePage{
 
 
 					//Create MODEL tree viewer
-					StructuredViewer modelViewer;
+					final StructuredViewer modelViewer;
 					if (pageInput instanceof Eastadl21ResourceImpl){
 						modelViewer = loadModelsContent(managedForm, body, pageInput, "MODEL: "+((Eastadl21ResourceImpl)pageInput).getURI().lastSegment());
 					} else

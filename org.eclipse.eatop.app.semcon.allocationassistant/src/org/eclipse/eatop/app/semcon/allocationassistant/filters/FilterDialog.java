@@ -94,7 +94,7 @@ public class FilterDialog extends Dialog {
 		return parent;
 	}
 
-	private void populateTab(Composite parent, String textAboutAttributes, int searchApproach) {
+	private void populateTab(Composite parent, String textAboutAttributes, final int searchApproach) {
 
 		//Create the label and combo that enable choosing an element type
 		Composite compositeWithTypeElements = new Composite(parent, SWT.NONE);
@@ -102,7 +102,7 @@ public class FilterDialog extends Dialog {
 		Label typesLabel = new Label(compositeWithTypeElements, SWT.LEFT);
 		typesLabel.setText("Search elements with type:");
 		typesLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true));
-		Combo typesCombo = new Combo(compositeWithTypeElements, SWT.LEFT);
+		final Combo typesCombo = new Combo(compositeWithTypeElements, SWT.LEFT);
 
 		for (EClass cls : classes){
 			typesCombo.add(cls.getName());
@@ -116,7 +116,7 @@ public class FilterDialog extends Dialog {
 		Label attributesLabel = new Label(compositewithAttributeElements, SWT.LEFT);
 		attributesLabel.setText(textAboutAttributes);
 		attributesLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true));
-		Combo attributesCombo = new Combo(compositewithAttributeElements, SWT.LEFT);
+		final Combo attributesCombo = new Combo(compositewithAttributeElements, SWT.LEFT);
 		
 		//Populate the attribute combo with attributes according to the selected type
 		typesCombo.addSelectionListener(new SelectionAdapter() {
@@ -141,7 +141,7 @@ public class FilterDialog extends Dialog {
 		compositeWithAttributeValueElements.setLayout(new GridLayout(2, false));
 		Label label = new Label(compositeWithAttributeValueElements, SWT.LEFT);
 		label.setText("with the value: ");
-		Text givenValue = new Text(compositeWithAttributeValueElements, SWT.LEFT|SWT.BORDER);	
+		final Text givenValue = new Text(compositeWithAttributeValueElements, SWT.LEFT|SWT.BORDER);	
 
 		//Create the buttons for adding and removing the search/filter
 		Composite buttonsComposite = new Composite(parent, SWT.NONE);

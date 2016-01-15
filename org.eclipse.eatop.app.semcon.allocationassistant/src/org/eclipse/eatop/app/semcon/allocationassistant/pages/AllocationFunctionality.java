@@ -53,7 +53,7 @@ public class AllocationFunctionality {
 	 * @param reqViewer
 	 * @param modelViewer
 	 */
-	public static void allocateRequirements(Object rootOfRequirementsView, StructuredViewer reqViewer, StructuredViewer modelViewer){
+	public static void allocateRequirements(Object rootOfRequirementsView, final StructuredViewer reqViewer, final StructuredViewer modelViewer){
 		try {
 			TransactionalEditingDomain editingDomain = WorkspaceEditingDomainUtil.getEditingDomain(rootOfRequirementsView);
 			WorkspaceTransactionUtil.executeInWriteTransaction(editingDomain, new Runnable() {
