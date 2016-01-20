@@ -30,7 +30,9 @@ import org.eclipse.eatop.eastadl21.EAPrototype;
 import org.eclipse.eatop.eastadl21.EAType;
 import org.eclipse.eatop.eastadl21.FailureOutPort;
 import org.eclipse.eatop.eastadl21.FaultInPort;
+import org.eclipse.eatop.eastadl21.FunctionConnector;
 import org.eclipse.eatop.eastadl21.FunctionFlowPort;
+import org.eclipse.eatop.eastadl21.FunctionPrototype;
 import org.eclipse.eatop.eastadl21.HardwarePin;
 import org.eclipse.eatop.eastadl21.HardwarePort;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.Activator;
@@ -627,6 +629,18 @@ public class SgraphMLObjectFactory implements CreationFactory {
 			}
 		}
 
+		if (!bSourceOk || !bTargetOk){
+			StringBuilder prototypeSourcePath = new StringBuilder();
+			StringBuilder prototypeTargetPath = new StringBuilder();
+
+			if (connectorDroppedOnPrototype(connector, prototypeSourcePath, prototypeTargetPath)){
+				sourcePath = prototypeSourcePath.toString();
+			    targetPath = prototypeTargetPath.toString();
+				bSourceOk = true;
+				bTargetOk = true;
+			}
+			
+		}
 
 		if (!bSourceOk && bTargetOk) {
 			Utils.showInformationMessage("Element: " + edgeWithPath.dotPath + "\n\nThe Node\n\n " + sourcePath + "\n\nis not on Canvas.");
@@ -643,6 +657,75 @@ public class SgraphMLObjectFactory implements CreationFactory {
 
 		setEdgeAttributes(graphmlEdge, sourcePath, targetPath, "", ArrowTypeType.NONE, ArrowTypeType.NONE, LineTypeType.LINE, color);
 		actualDroppedEObjects.add(edgeWithPath);
+	}
+
+	/***
+	 * 
+	 * This function is used to handle a virtual function connector that is dropped on its prototype.
+	 * It's not very general so further improvements to handle other connector types can be done.
+	 * 
+	 * @param connector			  - the dropped connector
+	 * @param prototypeSourcePath - out from this function
+	 * @param prototypeTargetPath - out from this function
+	 * @return
+	 */
+	private boolean connectorDroppedOnPrototype(EObject connector,
+			StringBuilder prototypeSourcePath, StringBuilder prototypeTargetPath) {
+		
+		if (!(connector instanceof FunctionConnector)) {
+			//only EAConnector supported yet
+			return false;
+		}
+		
+		FunctionConnector fc = (FunctionConnector)connector;
+		
+		GraphicalViewer viewer = Utils.INSTANCE.getGraphicalViewer();
+		EditPart targetPart = viewer.findObjectAt(userDropLocationScreenCoords);
+		
+		boolean validDrop = false;
+	
+		if (targetPart instanceof GroupNodeEditPart)
+		{
+			GroupNodeType groupNode = (GroupNodeType)targetPart.getModel();
+			NodeType gmlNode = (NodeType)(groupNode.eContainer().eContainer()); 
+			groupNodeDropTargetDotPath = gmlNode.getId();
+
+			EObject targetEObject = EAXMLprocessor.getEObjectbyDotPath(groupNodeDropTargetDotPath);
+
+			if (targetEObject instanceof DesignFunctionPrototype){
+				DesignFunctionPrototype dfpFather = ((DesignFunctionPrototype)targetEObject);
+				if (dfpFather.getType() == fc.eContainer()){
+					validDrop = true;
+				}
+			}
+			else if (targetEObject instanceof AnalysisFunctionPrototype){
+				AnalysisFunctionPrototype afpFather = ((AnalysisFunctionPrototype)targetEObject);
+				if (afpFather.getType() == fc.eContainer()){
+					validDrop = true;
+				}
+			}
+
+			if (validDrop){
+				//We have dropped a connector on its prototype instance
+				FunctionPrototype fp0 = fc.getPort().get(0).getFunctionPrototype();
+				if (fp0 == null){
+					prototypeSourcePath.append(groupNodeDropTargetDotPath + "." + fc.getPort().get(0).getFunctionPort().getShortName());
+				}
+				else {
+					prototypeSourcePath.append(groupNodeDropTargetDotPath + "." + fp0.getShortName() + "." + fc.getPort().get(0).getFunctionPort().getShortName());
+				}
+				
+				FunctionPrototype fp1 = fc.getPort().get(1).getFunctionPrototype();
+				if (fp1 == null){
+					prototypeTargetPath.append(groupNodeDropTargetDotPath + "." + fc.getPort().get(0).getFunctionPort().getShortName());
+				}
+				else {
+					prototypeTargetPath.append(groupNodeDropTargetDotPath + "." + fp1.getShortName() + "." + fc.getPort().get(1).getFunctionPort().getShortName());
+				}
+			}
+		}
+		
+		return validDrop;
 	}
 
 	/***
