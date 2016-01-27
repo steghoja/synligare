@@ -1,0 +1,61 @@
+<%@ jet package="org.eclipse.eatop.metamodelgen.emf.codegen.ecore.templates.edit" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.eclipse.eatop.metamodelgen.templates.internal.util.GenModels" class="ReleaseDescriptorItemLabelProvider" %>
+<%
+/**
+ * <copyright>
+ * 
+ * Copyright (c) Continental AG and others.
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 
+ * which accompanies this distribution, and is
+ * available at http://www.eclipse.org/org/documents/epl-v10.php
+ * 
+ * Contributors: 
+ *     Continental AG - Initial API and implementation
+ * 
+ * </copyright>
+ */
+%>
+<%GenPackage genPackage = (GenPackage)argument; GenModel genModel=genPackage.getGenModel();%>
+<%@ include file="../Header.javajetinc"%>
+package <%=genModel.getEditPluginPackageName()%>;
+
+<%genModel.addImport("org.eclipse.core.runtime.IAdapterFactory");%>
+<%genModel.addImport("org.eclipse.emf.edit.provider.IItemLabelProvider");%>
+<%genModel.markImportLocation(stringBuffer);%>
+
+/**
+ * <!-- begin-user-doc -->
+ * <!-- end-user-doc -->
+ * @generated
+ */
+public class <%=GenModels.getUtilityClassSimpleName(genModel,"ReleaseDescriptorItemLabelProvider" )%> implements IItemLabelProvider {
+
+	private static String IMG_OVR_<%=genModel.getModelName().toUpperCase()%> = "full/ovr16/<%=genModel.getModelName()%>_ovr";
+	
+	/**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.emf.edit.provider.IItemLabelProvider#getImage(java.lang.Object)
+     * @generated
+     */
+	public Object getImage(Object object) {
+		if (object instanceof <%=genModel.getImportedName(GenModels.getUtilityClassName(genModel, "ReleaseDescriptor"))%>) {
+			return Activator.INSTANCE.getImage(IMG_OVR_<%=genModel.getModelName().toUpperCase()%>);
+		}
+		return null;
+	}
+
+	/**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.edit.provider.IItemLabelProvider#getText(java.lang.Object)
+	 * @generated
+	 */
+	public String getText(Object object) {
+		if (object instanceof <%=GenModels.getUtilityClassSimpleName(genModel,"ReleaseDescriptor" )%>) {
+			return ((<%=GenModels.getUtilityClassSimpleName(genModel,"ReleaseDescriptor" )%>) object).getName();
+		}
+		return null;
+	}
+}
+<%genModel.emitSortedImports();%>

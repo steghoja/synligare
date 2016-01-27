@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: East-adl-editor-afp
+Bundle-SymbolicName: org.eclipse.eatop.examples.graphicaleditor.afp;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.eatop.examples.graphicaleditor.afp.Activator
+Require-Bundle: org.eclipse.graphiti.pattern;bundle-version="0.9.1",
+ org.eclipse.eatop.eastadl2112.edit;bundle-version="0.5.0",
+ org.eclipse.sphinx.graphiti.workspace.ui;bundle-version="0.7.0",
+ org.eclipse.graphiti.examples.common;bundle-version="0.9.1",
+ org.eclipse.eatop.examples.graphicaleditor.reqd
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.eclipse.eatop.examples.graphicaleditor.afp,
+ org.eclipse.eatop.examples.graphicaleditor.afp.pattern.features,
+ org.eclipse.eatop.examples.graphicaleditor.afp.pattern.provider

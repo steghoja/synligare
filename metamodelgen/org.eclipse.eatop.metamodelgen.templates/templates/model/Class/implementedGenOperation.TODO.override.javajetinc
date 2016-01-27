@@ -1,0 +1,13 @@
+<% GOperation gOp = GOperationFactory.INSTANCE.createGOperation(genOperation);%>
+<% if(gOp != null) { %>
+	<%@ include file="GEastadl/gOperationImplementation.insert.javajetinc" fail="alternative" %>
+	<%@ start %>
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	<%@ end %>
+<% } else { %>
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+<% } %>

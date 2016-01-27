@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypeProviders">
+      <diagramTypeProvider
+            class="org.eclipse.eatop.examples.graphicaleditor.afp.pattern.provider.AFPDDiagramTypeProvider"
+            description="AFPD Diagram"
+            id="org.eclipse.eatop.examples.graphicaleditor.afp.diagramTypeProvider"
+            name="org.eclipse.eatop.examples.graphicaleditor.afp">
+         <diagramType
+               id="org.eclipse.eatop.examples.graphicaleditor.afp.diagramType">
+         </diagramType>
+      </diagramTypeProvider>
+   </extension>
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypes">
+      <diagramType
+            id="org.eclipse.eatop.examples.graphicaleditor.afp.diagramType"
+            name="org.eclipse.eatop.examples.graphicaleditor.afp"
+            type="org.eclipse.eatop.examples.graphicaleditor.afp">
+      </diagramType>
+   </extension>
+
+</plugin>

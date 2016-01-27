@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EAXML xmlns="http://east-adl.info/2.1.12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://east-adl.info/2.1.12 eastadl_2-1-12.xsd">
+  <TOP-LEVEL-PACKAGES>
+    <EA-PACKAGE UUID="396e6728-6f03-4ab3-b834-eeb6628ffb77">
+      <SHORT-NAME>packageA</SHORT-NAME>
+      <ELEMENTS>
+        <BEHAVIOR UUID="70bd8014-6cd2-4737-9ff2-d0400d4c7a5c">
+          <SHORT-NAME>behaviorA</SHORT-NAME>
+          <BEHAVIORS>
+            <FUNCTION-BEHAVIOR UUID="d7154ccf-ff91-45bf-b897-463fd4aad211">
+              <SHORT-NAME>behaviorFunctionBehaviorA</SHORT-NAME>
+              <PATH>pathA</PATH>
+              <REPRESENTATION>SIMULINK</REPRESENTATION>
+            </FUNCTION-BEHAVIOR>
+            <FUNCTION-BEHAVIOR UUID="c2d79b60-2bc4-4ec3-b3b1-8d4819a2521a">
+              <SHORT-NAME>behaviorFunctionBehaviorB</SHORT-NAME>
+              <PATH>pathB</PATH>
+              <REPRESENTATION>SIMULINK</REPRESENTATION>
+            </FUNCTION-BEHAVIOR>
+          </BEHAVIORS>
+        </BEHAVIOR>
+      </ELEMENTS>
+    </EA-PACKAGE>
+  </TOP-LEVEL-PACKAGES>
+</EAXML>

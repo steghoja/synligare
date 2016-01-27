@@ -1,0 +1,6 @@
+<% if(tgtFeature.isListType() && !tgtFeature.isFeatureMapType()) { %>
+		<%=genOperation.getRawImportedType()%> untypedList = <%=tgtFeature.getGetAccessor()%>();
+		return untypedList;
+<% } else { %>
+		return <%=tgtFeature.getGetAccessor()%>();
+<% } %>	

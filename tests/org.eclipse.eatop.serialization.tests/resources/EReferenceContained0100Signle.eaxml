@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EAXML xmlns="http://east-adl.info/2.1.12" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://east-adl.info/2.1.12 eastadl_2-1-12.xsd">
+  <TOP-LEVEL-PACKAGES>
+    <EA-PACKAGE UUID="543aea13-ff83-429c-914a-6f18a1066c88">
+      <SHORT-NAME>packageA</SHORT-NAME>
+      <ELEMENTS> 
+        <EA-STRING UUID="b44357ad-50e0-4fbf-8a1c-3a1d190e9dc8">
+          <SHORT-NAME>strA</SHORT-NAME>
+        </EA-STRING>
+        <EA-STRING UUID="efa009d5-fa8e-4d6b-b26f-7f01591fe912">
+          <SHORT-NAME>strB</SHORT-NAME>
+        </EA-STRING>
+        <TIMING UUID="1064686e-7906-4da8-8c25-805c99457b88">
+          <SHORT-NAME>timingA</SHORT-NAME>
+          <DESCRIPTIONS>
+            <MODE-EVENT UUID="28c269a6-d49a-4f2f-ba3d-57e7ca8078db">
+              <SHORT-NAME>modeEventA</SHORT-NAME>
+            </MODE-EVENT>
+            <MODE-EVENT UUID="07af02a6-c06b-439d-998e-99358de67359">
+              <SHORT-NAME>modeEventB</SHORT-NAME>
+            </MODE-EVENT>
+          </DESCRIPTIONS>
+        </TIMING>
+        <TIMING UUID="27756c6b-e12f-44f7-b94b-101d240f5ee6">
+          <SHORT-NAME>timingB</SHORT-NAME>
+          <DESCRIPTIONS>
+            <EVENT-CHAIN UUID="d7505f8e-6f2a-401e-a596-894070cf7c64">
+              <SHORT-NAME>eventChainA</SHORT-NAME>
+              <STIMULUS-REF TYPE="MODE-EVENT">/packageA/timingA/modeEventB</STIMULUS-REF>
+              <RESPONSE-REF TYPE="MODE-EVENT">/packageA/timingA/modeEventA</RESPONSE-REF>
+            </EVENT-CHAIN>
+          </DESCRIPTIONS>
+          <CONSTRAINTS>
+            <AGE-CONSTRAINT UUID="f688c4d7-9e06-4de9-8a44-1b7cf7937c53">
+              <SHORT-NAME>ageConstraintA</SHORT-NAME>
+              <MINIMUM>
+                <TYPE-TREF TYPE="EA-STRING">/packageA/strA</TYPE-TREF>
+              </MINIMUM>
+              <MAXIMUM>
+                <TYPE-TREF TYPE="EA-STRING">/packageA/strB</TYPE-TREF>
+              </MAXIMUM>
+              <SCOPE-REF TYPE="EVENT-CHAIN">/packageA/timingB/eventChainA</SCOPE-REF>
+            </AGE-CONSTRAINT>
+          </CONSTRAINTS>
+        </TIMING>
+      </ELEMENTS>
+    </EA-PACKAGE>
+  </TOP-LEVEL-PACKAGES>
+</EAXML>

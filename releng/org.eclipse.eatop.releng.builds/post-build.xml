@@ -1,0 +1,225 @@
+<project name="org.eclipse.eatop.releng.builds" default="all">
+
+	<property environment="env" />
+
+	<property name="env.BUILD_ID" value="20140528-1842" />
+
+	<property file="./ant-config/${user.name}.build.properties" />
+	<property file="./ant-config/default.build.properties" />
+
+	<condition property="runs.under.windows">
+		<os family="windows" />
+	</condition>
+
+	<condition property="runs.under.unix">
+		<os family="unix" />
+	</condition>
+
+	<condition property="build.eclipse.available">
+		<available file="./eclipse" />
+	</condition>
+
+	<target name="detect-eclipse-downloads-drops-folder-name">
+		<condition property="eclipse.downloads.drops.folder.name" value="drops4" else="drops">
+			<matches string="${build.eclipse.version}" pattern="4\.\d" />
+		</condition>
+	</target>
+				
+	<target name="detect-arch-suffix" depends="detect-arch-suffix-under-windows, detect-arch-suffix-under-unix" />
+
+	<!-- Test under MS/Windows -->
+	<target name="detect-arch-suffix-under-windows" if="runs.under.windows">
+		<!-- 64 bit Windows versions have the variable "ProgramFiles(x86)" -->
+		<exec dir="." executable="cmd" outputproperty="result">
+			<arg line="/c SET ProgramFiles(x86)" />
+		</exec>
+
+		<!-- String ends in "Program Files (x86)" -->
+		<condition property="x64">
+			<matches string="${result}" pattern="^.*=.*Program Files \(x86\)" />
+		</condition>
+
+		<condition property="arch.suffix" value="-x86_64" else="">
+			<isset property="x64" />
+		</condition>
+	</target>
+
+	<!-- Test under GNU/Linux -->
+	<target name="detect-arch-suffix-under-unix" if="runs.under.unix">
+		<exec dir="." executable="uname" outputproperty="result">
+			<arg line="-m" />
+		</exec>
+
+		<!-- String ends in 64 -->
+		<condition property="x64">
+			<matches string="${result}" pattern="^.*64$" />
+		</condition>
+
+		<condition property="arch.suffix" value="-x86_64" else="">
+			<isset property="x64" />
+		</condition>
+	</target>
+
+	<target name="detect-eatop-version">
+		<!-- EATOP version to be build -->
+		<loadfile srcFile="./pom.xml" property="eatop.version">
+			<filterchain>
+				<headfilter lines="10" />
+				<linecontainsregexp>
+					<regexp pattern="&lt;version&gt;\d+\.\d+\.\d+(-SNAPSHOT)?&lt;/version&gt;" />
+				</linecontainsregexp>
+				<tokenfilter>
+					<replaceregex pattern="\s*&lt;version&gt;(\d+\.\d+\.\d+)(-SNAPSHOT)?&lt;/version&gt;" replace="\1" />
+				</tokenfilter>
+				<striplinebreaks/>
+			</filterchain>
+		</loadfile>
+	</target>
+
+	<target name="detect-mvn-build-type-suffix">
+		<!-- Maven build type dependent postfix for build artifact file names -->
+		<loadfile srcFile="./pom.xml" property="mvn.snapshot.suffix">
+			<filterchain>
+				<headfilter lines="10" />
+				<linecontainsregexp>
+					<regexp pattern="&lt;version&gt;\d+\.\d+\.\d+(-SNAPSHOT)?&lt;/version&gt;" />
+				</linecontainsregexp>
+				<tokenfilter>
+					<replaceregex pattern="\s*&lt;version&gt;\d+\.\d+\.\d+(-SNAPSHOT)?&lt;/version&gt;" replace="\1" />
+				</tokenfilter>
+				<striplinebreaks/>
+			</filterchain>
+		</loadfile>
+		
+		<condition property="mvn.build.type.suffix" value="${mvn.snapshot.suffix}" else="">
+			<isset property="mvn.snapshot.suffix" />
+		</condition>
+	</target>
+
+	<target name="echoprops" description="Echos configuration properties to console" depends="detect-eclipse-downloads-drops-folder-name, detect-arch-suffix, detect-eatop-version, detect-mvn-build-type-suffix">
+		<echo>ant.version=${ant.version}</echo>
+		<echo>ant.home=${ant.home}</echo>
+		
+		<echo>build.eclipse.version=${build.eclipse.version}</echo>
+		<echo>build.eclipse.version.name=${build.eclipse.version.name}</echo>
+		<echo>ant.project.name=${ant.project.name}</echo>
+		<echo>basedir=${basedir}</echo>
+		<echo>user.name=${user.name}</echo>
+		<echo>user.home=${user.home}</echo>
+
+		<echo>build.eclipse.revision=${build.eclipse.revision}</echo>
+		<echo>build.eclipse.timestamp=${build.eclipse.timestamp}</echo>
+
+		<echo>runs.under.windows=${runs.under.windows}</echo>
+		<echo>runs.under.unix=${runs.under.unix}</echo>
+		
+		<echo>eclipse.downloads.drops.folder.name=${eclipse.downloads.drops.folder.name}</echo>
+
+		<echo>arch.suffix=${arch.suffix}</echo>
+		<echo>eatop.version=${eatop.version}</echo>
+		<echo>mvn.build.type.suffix=${mvn.build.type.suffix}</echo>
+	</target>
+
+	<target name="all" depends="echoprops, build-downloads" />
+
+	<target name="download-eclipse-platform" depends="download-eclipse-platform-under-windows, download-eclipse-platform-under-unix" />
+
+	<target name="download-eclipse-platform-under-windows" if="runs.under.windows">
+		<mkdir dir="./downloads" />
+		<get src="http://artfiles.org/eclipse.org//eclipse/downloads/${eclipse.downloads.drops.folder.name}/R-${build.eclipse.revision}-${build.eclipse.timestamp}/eclipse-platform-${build.eclipse.revision}-win32${arch.suffix}.zip" dest="./downloads" usetimestamp="true" />
+		<unzip src="./downloads/eclipse-platform-${build.eclipse.revision}-win32${arch.suffix}.zip" dest="." />
+	</target>
+
+	<target name="download-eclipse-platform-under-unix" if="runs.under.unix">
+		<mkdir dir="./downloads" />
+		<get src="http://artfiles.org/eclipse.org//eclipse/downloads/${eclipse.downloads.drops.folder.name}/R-${build.eclipse.revision}-${build.eclipse.timestamp}/eclipse-platform-${build.eclipse.revision}-linux-gtk${arch.suffix}.tar.gz" dest="./downloads" usetimestamp="true" />
+		<untar src="./downloads/eclipse-platform-${build.eclipse.revision}-linux-gtk${arch.suffix}.tar.gz" dest="." compression="gzip" />
+		<chmod file="./eclipse/eclipse" perm="a+x" />
+		<chmod dir="./eclipse" includes="**/*.so" perm="a+x" />
+	</target>
+
+	<target name="setup-build-eclipse" unless="build.eclipse.available">
+		<antcall target="download-eclipse-platform" />
+	</target>
+
+	<target name="build-downloads" depends="setup-build-eclipse">
+		<!-- Invoke do-build-downloads target using Eclipse Ant runner 
+			 so as to have access to Ant tasks that are provided by or contributed to Eclipse -->
+		<exec executable="./eclipse/eclipse" failonerror="true" timeout="900000" taskname="eclipse">
+			<arg line="-noSplash" />
+			<arg line="-application org.eclipse.ant.core.antRunner" />
+			<arg line="-buildfile ${ant.file}" />
+			<arg line="do-build-downloads" />
+		</exec>
+	</target>
+
+	<target name="do-build-downloads" depends="detect-eatop-version, detect-mvn-build-type-suffix">
+		<delete dir="./target/downloads" />
+
+		<echo message="Packaging downloadable archived Eatop Update Site" />
+		<move file="./repository/target/org.eclipse.eatop.updates-${eatop.version}${mvn.build.type.suffix}.zip" tofile="./target/downloads/eatop-Update-${eatop.version}.v${env.BUILD_ID}.zip" />
+		
+		<echo message="Packaging downloadable Eatop SDK" />
+		<p2.mirror source="./repository/target/repository" destination="file:${basedir}/target/downloads/eatop.sdk">
+			<iu id="org.eclipse.eatop.sdk.feature.group" />			
+			<slicingOptions followStrict="true" />
+		</p2.mirror>
+		<p2.repo2runnable source="file:${basedir}/target/downloads/eatop.sdk" destination="file:${basedir}/target/downloads/eatop.sdk.runnable/eclipse" />
+		<zip destfile="./target/downloads/eatop-SDK-${eatop.version}.v${env.BUILD_ID}.zip">
+			<zipfileset dir="./target/downloads/eatop.sdk.runnable" excludes="eclipse/*.jar" />
+		</zip>
+
+		
+		<echo message="Packaging downloadable Eatop Runtime" />
+		<p2.mirror source="./repository/target/repository" destination="file:${basedir}/target/downloads/eatop.runtime">
+			<iu id="org.eclipse.eatop.feature.group" />
+			<slicingOptions followStrict="true" />
+		</p2.mirror>
+		<p2.repo2runnable source="file:${basedir}/target/downloads/eatop.runtime" destination="file:${basedir}/target/downloads/eatop.runtime.runnable/eclipse" />
+		<zip destfile="./target/downloads/eatop-runtime-${eatop.version}.v${env.BUILD_ID}.zip">
+			<zipfileset dir="./target/downloads/eatop.runtime.runnable" excludes="eclipse/*.jar" />
+		</zip>
+		
+		<echo message="Packaging downloadable Eatop Examples" />
+		<p2.mirror source="./repository/target/repository" destination="file:${basedir}/target/downloads/eatop.examples">
+			<iu id="org.eclipse.eatop.examples.feature.group" />
+			<slicingOptions followStrict="true" />
+		</p2.mirror>
+		<p2.repo2runnable source="file:${basedir}/target/downloads/eatop.examples" destination="file:${basedir}/target/downloads/eatop.examples.runnable/eclipse" />
+		<zip destfile="./target/downloads/eatop-examples-${eatop.version}.v${env.BUILD_ID}.zip">
+			<zipfileset dir="./target/downloads/eatop.examples.runnable" excludes="eclipse/*.jar" />
+		</zip>
+		
+		<!--
+		<echo message="Packaging downloadable Eatop Demonstrator" />
+				<p2.mirror source="file:${basedir}/repository/target/repository" destination="file:${basedir}/target/downloads/eatop.demonstrator">
+					<iu id="org.eclipse.eatop.demonstrator.feature.group" />
+					<slicingOptions followStrict="true" />
+				</p2.mirror>
+				<p2.repo2runnable source="file:${basedir}/target/downloads/eatop.demonstrator" destination="file:${basedir}/target/downloads/eatop.demonstrator.runnable/eclipse" />
+				<zip destfile="./target/downloads/org-eatop-demonstrator-${eatop.version}.${env.BUILD_ID}.zip">
+					<zipfileset dir="./target/downloads/eatop.demonstrator.runnable" excludes="eclipse/*.jar" />
+				</zip>
+				-->
+		
+		<echo message="Packaging downloadable Eatop Technology Demonstrator" />
+			<move todir="./target/downloads">
+					<fileset dir="./product/target/products" />
+					<globmapper from="org.eclipse.eatop.demonstrator.ide-*.zip" to="eatop-demonstrator-${eatop.version}.v${env.BUILD_ID}-*.zip" />
+			</move>
+		
+		<!--
+		<echo message="Packaging downloadable Eatop Technology Demonstrator" />
+		<p2.mirror source="file:${basedir}/repository/target/repository" destination="file:${basedir}/target/downloads/eatop.demonstrator">
+				   <iu id="org.eclipse.eatop.demonstrator.feature.group" />
+				   <slicingOptions followStrict="true" />
+		</p2.mirror>
+		<p2.repo2runnable source="file:${basedir}/target/downloads/eatop.demonstrator" destination="file:${basedir}/target/downloads/eatop.demonstrator.runnable/eclipse" />
+				<zip destfile="./target/downloads/eatop-demonstrator-${sphinx.version}.v${env.BUILD_ID}.zip">
+					<zipfileset dir="./target/downloads/eatop.demonstrator.runnable" excludes="eclipse/*.jar" />
+				</zip>
+		-->
+
+	</target>
+	
+</project>

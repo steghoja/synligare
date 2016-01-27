@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1356015108021_2" label="Docs" name="Docs">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.eatop.doc.design" type="4"/>
+</workingSets>
+
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1356015160783_5" label="Examples" name="Examples">
+<item elementID="=org.eclipse.eatop.demonstrator" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.examples.actions" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.examples.common.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.examples.editor" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.examples.explorer" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1356015152759_4" label="Features" name="Features">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.eatop-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.eatop.base-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.eatop.base.sdk-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.eatop.demonstrator-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.eatop.eastadl2112.sdk-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.eatop.examples-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.eatop.license-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.eatop.metamodel2112-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.eatop.metamodels-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.eatop.sdk-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.eatop.workspace-feature" type="4"/>
+</workingSets>
+
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1356015143286_3" label="Plug-ins" name="Plug-ins">
+<item elementID="=org.eclipse.eatop.common" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.common.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.eastadl21" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.eastadl21.edit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.eastadl2112" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.eastadl2112.edit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.geastadl" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.geastadl.edit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.sdk" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.serialization" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.workspace" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.workspace.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1356016337812_6" label="Releng" name="Releng">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.eatop.releng.builds" type="4"/>
+</workingSets>
+
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1356016354599_7" label="Tests" name="Tests">
+<item elementID="=org.eclipse.eatop.serialization.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.eatop.testutils" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1356016385366_8" label="Tools" name="Tools">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.eatop.psf" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.eatop.targets" type="4"/>
+</workingSets>
+
+</psf>

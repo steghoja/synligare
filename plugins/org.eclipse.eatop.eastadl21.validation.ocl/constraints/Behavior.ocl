@@ -1,0 +1,33 @@
+/*******************************************************************************
+ * Copyright (c) 10, 2014 Continental AG and others.
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 
+ * which accompanies this distribution, and is
+ * available at http://www.eclipse.org/org/documents/epl-v10.php
+ *
+ * Contributors: 
+ * Continental AG - Initial API and implementation
+ *******************************************************************************/
+
+import 'platform:/resource/org.eclipse.eatop.eastadl2112/model/eastadl2112.ecore'
+
+package eastadl21
+
+context FunctionTrigger
+
+inv SPEC_27: 
+	self.triggerPolicy=TriggerPolicyKind::EVENT 
+	implies self.port->notEmpty()
+	
+inv SPEC_28: 
+	self.triggerPolicy=TriggerPolicyKind::TIME 
+	implies self.port->isEmpty()
+	
+inv SPEC_29: 
+	self.function->notEmpty() 
+	implies self.functionPrototype->isEmpty()
+	
+inv SPEC_30: 
+	self.port->forAll(oclAsType(FunctionFlowPort).direction = EADirectionKind::_in)
+
+endpackage

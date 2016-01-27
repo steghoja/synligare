@@ -1,0 +1,179 @@
+<%@ jet package="org.eclipse.eatop.metamodelgen.emf.codegen.ecore.templates.model" class="TraversalHelper" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.eclipse.eatop.metamodelgen.templates.internal.util.* " %>
+<%
+/**
+ * <copyright>
+ * 
+ * Copyright (c) Continental AG and others.
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 
+ * which accompanies this distribution, and is
+ * available at http://www.eclipse.org/org/documents/epl-v10.php
+ * 
+ * Contributors: 
+ *     Continental AG - Initial API and implementation
+ * 
+ * </copyright>
+ */
+%>
+<%GenPackage genPackage = (GenPackage)argument; GenModel genModel=genPackage.getGenModel();%>
+<%@ include file="../Header.javajetinc"%>
+package <%=GenModels.getRootGenPackage(genModel).getUtilitiesPackageName()%>;
+
+<%genModel.addImport("org.eclipse.emf.ecore.EObject");%>
+<%genModel.addImport("org.eclipse.emf.ecore.EReference");%>
+<%genModel.markImportLocation(stringBuffer);%>
+
+
+public class <%=GenModels.getUtilityClassSimpleName(genModel, "TraversalHelper")%> extends <%=genModel.getImportedName("org.eclipse.sphinx.emf.ecore.DefaultEcoreTraversalHelper")%> {
+	
+	protected class <%=GenModels.getUtilityClassSimpleName(genModel, "TraveralSwitch")%> extends <%=genModel.getImportedName(GenModels.getUtilityClassName(genModel, "Switch"))%><<%=genModel.getImportedName("java.util.List")%><<%=genModel.getImportedName("org.eclipse.emf.ecore.EStructuralFeature")%>>> {
+
+		protected <%=genModel.getImportedName("org.eclipse.emf.ecore.EClassifier")%> type;
+
+		public <%=GenModels.getUtilityClassSimpleName(genModel, "TraveralSwitch")%> (EClassifier type) {
+			<%=genModel.getImportedName("org.eclipse.core.runtime.Assert")%>.isNotNull(type);
+			this.type = type;
+		}
+
+<%GenClass packageableElementGenClass = GenModels.findGenClass(genModel, "EAPackageableElement");%>
+<%GenClass eaElementGenClass = GenModels.findGenClass(genModel, "EAElement");%>
+<%GenClass eaxmlGenClass = GenModels.findGenClass(genModel, "EAXML");%>
+<%GenClass eaPackageGenClass = GenModels.findGenClass(genModel, "EAPackage");%>
+
+ <%if(eaPackageGenClass != null && eaxmlGenClass != null){%>
+  <%GenFeature eaPackagePackagesGenFeature = GenClasses.getGenFeature(eaPackageGenClass, "subPackage");%>
+  <%GenFeature eaPackageElementsGenFeature = GenClasses.getGenFeature(eaPackageGenClass, "element");%>
+   <%GenFeature eaxmlPackagesGenFeature = GenClasses.getGenFeature(eaxmlGenClass, "topLevelPackage");%>
+   <%if(genModel.useClassOverrideAnnotation())%>
+    @Override
+   <%%>
+		public List<EStructuralFeature> caseEAXML(<%=eaxmlGenClass.getImportedInterfaceName()%> anEAXML) {
+			if (type instanceof <%=genModel.getImportedName("org.eclipse.emf.ecore.EClass")%>) {
+				if (<%=genModel.getImportedName(eaPackageGenClass.getGenPackage().getInterfacePackageName()+"."+eaPackageGenClass.getGenPackage().getImportedPackageInterfaceName())%>.eINSTANCE.getEAPackage().isSuperTypeOf(
+						(EClass) type)) {
+					return <%=genModel.getImportedName("java.util.Arrays")%>
+							.asList((EStructuralFeature) <%=eaxmlPackagesGenFeature.getQualifiedFeatureAccessor()%>);
+				}
+				<%if(packageableElementGenClass != null){%>
+				if (<%=genModel.getImportedName(packageableElementGenClass.getGenPackage().getInterfacePackageName()+"."+packageableElementGenClass.getGenPackage().getImportedPackageInterfaceName())%>.eINSTANCE.getEAPackageableElement()
+						.isSuperTypeOf((EClass) type)) {
+					return Arrays
+							.asList((EStructuralFeature) <%=eaxmlPackagesGenFeature.getQualifiedFeatureAccessor()%>);
+				}
+				<%}%>
+			}
+			return null;
+		}
+		
+   <%if(genModel.useClassOverrideAnnotation())%>
+    @Override
+   <%%>
+		public List<EStructuralFeature> caseEAPackage(<%=eaPackageGenClass.getImportedInterfaceName()%> anEAPackage) {
+			if (type instanceof EClass) {
+				if (<%=genModel.getImportedName(eaPackageGenClass.getGenPackage().getInterfacePackageName()+"."+eaPackageGenClass.getGenPackage().getImportedPackageInterfaceName())%>.eINSTANCE.getEAPackage().isSuperTypeOf(
+						(EClass) type)) {
+					return <%=genModel.getImportedName("java.util.Arrays")%>
+							.asList((EStructuralFeature) <%=eaPackagePackagesGenFeature.getQualifiedFeatureAccessor()%>);
+				}
+				<%if(packageableElementGenClass != null){%>
+				if (<%=genModel.getImportedName(packageableElementGenClass.getGenPackage().getInterfacePackageName()+"."+packageableElementGenClass.getGenPackage().getImportedPackageInterfaceName())%>.eINSTANCE.getEAPackageableElement()
+						.isSuperTypeOf((EClass) type)) {
+					List<EStructuralFeature> relevantStructuralFeatures = new ArrayList<EStructuralFeature>(
+							2);
+					relevantStructuralFeatures.add(<%=eaPackageElementsGenFeature.getQualifiedFeatureAccessor()%>); 
+					relevantStructuralFeatures.add(<%=eaPackagePackagesGenFeature.getQualifiedFeatureAccessor()%>);
+					return relevantStructuralFeatures;
+				}
+				<%}%>
+			}
+			return null;
+		}
+ <%}%>
+
+ <%if(packageableElementGenClass != null){%>
+  <%if(genModel.useClassOverrideAnnotation())%>
+   @Override
+  <%%>
+		public List<EStructuralFeature> caseEAPackageableElement(<%=packageableElementGenClass.getImportedInterfaceName()%> packageableElement) {
+			if (type instanceof EClass) {
+				if (<%=genModel.getImportedName(packageableElementGenClass.getGenPackage().getInterfacePackageName()+"."+packageableElementGenClass.getGenPackage().getImportedPackageInterfaceName())%>.eINSTANCE.getEAPackageableElement()
+						.isSuperTypeOf((EClass) type)) {
+					return <%=genModel.getImportedName("java.util.Collections")%>.emptyList();
+				}
+			}
+			return null;
+		}
+ <%}%>
+	} // <%=GenModels.getUtilityClassSimpleName(genModel, "TraveralSwitch")%>
+		
+ <%if(genModel.useClassOverrideAnnotation())%>
+  @Override
+ <%%>
+	public List<EStructuralFeature> getFeaturesToTraverseFor(<%=genModel.getImportedName("org.eclipse.emf.ecore.EObject")%> object,
+			EClassifier type) {
+		<%=GenModels.getRootGenPackage(genModel).getPrefix()%>TraveralSwitch traversalSwitch = new <%=GenModels.getRootGenPackage(genModel).getPrefix()%>TraveralSwitch(
+				type);
+		List<EStructuralFeature> features = traversalSwitch.doSwitch(object);
+		if (features != null) {
+			return features;
+		}
+		return super.getFeaturesToTraverseFor(object, type);
+	}
+	
+ <%if(genModel.useClassOverrideAnnotation())%>
+  @Override
+ <%%>
+	public boolean collectReachableObjectsOfTypeUnderObject(
+			<%=genModel.getImportedName("java.util.Collection")%><EObject> result, EObject object, EClassifier type) {
+
+		// Perform efficient direct search for instances of frequently used types
+		if (type instanceof EClass && object instanceof EAXML) {
+			EAXML eaxml = (EAXML) object;
+			<%if(packageableElementGenClass != null){%>
+			// PackageableElements
+			if (<%=genModel.getImportedName(packageableElementGenClass.getGenPackage().getInterfacePackageName()+"."+packageableElementGenClass.getGenPackage().getImportedPackageInterfaceName())%>.eINSTANCE.getEAPackageableElement()
+					.isSuperTypeOf((EClass) type)) {
+				result.addAll(getAllElementsOfTypeUnderEAXML(eaxml, type));
+				return true;
+			}
+			<%}%>
+		}
+		return false;
+	}
+ <%if(eaxmlGenClass != null && eaPackageGenClass != null){%>
+ <%GenFeature eaxmlPackagesGenFeature = GenClasses.getGenFeature(eaxmlGenClass, "topLevelPackage");%>
+ <%GenFeature eaPackagePackagesGenFeature = GenClasses.getGenFeature(eaPackageGenClass, "subPackage");%>
+ <%GenFeature eaPackageElementsGenFeature = GenClasses.getGenFeature(eaPackageGenClass, "element");%>
+	private <%=genModel.getImportedName("java.util.Collection")%><EObject> getAllElementsOfTypeUnderEAXML(
+			EAXML eaxml, EClassifier type) {
+		Collection<EObject> result = new <%=genModel.getImportedName("java.util.ArrayList")%><EObject>();
+		for (EAPackage eaPackage : eaxml.<%=eaxmlPackagesGenFeature.getGetAccessor()%>()) {
+			result.addAll(getAllElementsOfTypeInPackage(eaPackage, type));
+		}
+		return result;
+	}
+
+	private <%=genModel.getImportedName("java.util.Collection")%><EObject> getAllElementsOfTypeInPackage(
+			EAPackage eaPackage, EClassifier type) {
+		Collection<EObject> result = new ArrayList<EObject>();
+	<%if(packageableElementGenClass != null){%>
+		for (EAPackageableElement packageableElement : eaPackage.<%=eaPackageElementsGenFeature.getGetAccessor()%>()) {
+			if (type.isInstance(packageableElement)) {
+				result.add(packageableElement);
+			}
+		}
+	<%} else if(eaElementGenClass != null) {%>
+	   for (<%=eaElementGenClass.getImportedInterfaceName()%> eaElement : eaPackage.<%=eaPackageElementsGenFeature.getGetAccessor()%>()) {
+			if (type.isInstance(eaElement)) {
+				result.add(eaElement);
+			}
+		}
+	<%}%>
+		for (EAPackage subPackage : eaPackage.<%=eaPackagePackagesGenFeature.getGetAccessor()%>()) {
+			result.addAll(getAllElementsOfTypeInPackage(subPackage, type));
+		}
+		return result;
+	}
+ <%}%>
+}
+<%genModel.emitSortedImports();%>

@@ -1,0 +1,9 @@
+<%if (genClass.getProviderBaseClassName().equals(genModel.getProviderRootExtendsClass().substring(genModel.getProviderRootExtendsClass().lastIndexOf(".")+1))){%>
+  <%if(genModel.useClassOverrideAnnotation())%>
+  @Override
+  <%%>
+  protected <%=genModel.getImportedName("org.eclipse.sphinx.emf.ecore.EcoreTraversalHelper")%> getTraversalHelper()
+  {
+       return new <%=genModel.getImportedName(GenModels.getUtilityClassName(genModel, "TraversalHelper"))%>();
+  }
+<%}%>

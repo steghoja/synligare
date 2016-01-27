@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.east-adl.info/constraint-description" elementFormDefault="qualified" xmlns="http://www.east-adl.info/constraint-description" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+    
+    
+    
+
+    
+    
+    
+    
+
+
+    <xs:complexType name="ocl-meta-information">
+    	
+        
+        
+        <xs:sequence>
+    		
+            
+            
+            
+            <xs:element name="constraint" type="constraint" minOccurs="0" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="constraint">
+    	
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <xs:sequence>
+    		
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <xs:element name="mode" type="mode"></xs:element>
+            
+            
+            
+            <xs:element name="severity" type="severity"></xs:element>
+            
+            
+            <xs:element name="message" type="message"></xs:element>
+            
+            <xs:element name="description" type="description"></xs:element>
+        </xs:sequence>
+        
+        
+        
+        <xs:attribute name="oclName" type="xs:string" use="required"></xs:attribute>
+        
+        
+        <xs:attribute name="code" type="xs:string" use="required"></xs:attribute>
+        
+        <xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+    </xs:complexType>
+    
+    
+    
+
+    <xs:simpleType name="message">
+    	<xs:restriction base="xs:string"></xs:restriction>
+    </xs:simpleType>
+    
+    
+    
+    
+
+
+    <xs:simpleType name="description">
+    	<xs:restriction base="xs:string"></xs:restriction>
+    </xs:simpleType>
+    
+    
+    
+
+
+    <xs:complexType name="mode">
+    	
+        
+        
+        
+        
+        
+        
+        <xs:sequence>
+    		
+            
+            
+            
+            <xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+        
+        <xs:attribute name="value">
+    		
+            
+            
+            
+            <xs:simpleType>
+    			<xs:restriction base="xs:string">
+    				
+                    
+                    
+                    
+                    
+                    
+                    
+                    <xs:enumeration value="Live"></xs:enumeration>
+                    
+                    <xs:enumeration value="Batch"></xs:enumeration>
+                </xs:restriction>
+    		</xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="severity">
+    	
+        
+        
+        
+        <xs:attribute name="value">
+    		
+            
+            
+            
+            <xs:simpleType>
+    			<xs:restriction base="xs:string">
+    				
+                    
+                    
+                    
+                    
+                    
+                    
+                    <xs:enumeration value="Warning"></xs:enumeration>
+                    
+                    <xs:enumeration value="Error"></xs:enumeration>
+                </xs:restriction>
+    		</xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    
+    <xs:complexType name="event">
+    	
+        
+        
+        
+        
+        
+        
+        
+        <xs:attribute name="value">
+    		
+            
+            
+            
+            <xs:simpleType>
+    			<xs:restriction base="xs:string">
+    				
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <xs:xs:enumeration value="SET"></xs:enumeration>
+                    
+                    
+                    <xs:xs:enumeration value="ADD"></xs:enumeration>
+                    
+                    <xs:xs:enumeration value="REMOVE"></xs:enumeration>
+                </xs:xs:restriction>
+    		</xs:xs:simpleType>
+        </xs:xs:attribute>
+    </xs:xs:complexType>
+</xs:xs:schema>

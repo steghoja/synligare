@@ -1,0 +1,5 @@
+<%if (GenModels.getRootGenPackage(genModel).equals(genPackage)) {%>
+public class <%=genPackage.getResourceFactoryClassName()%> extends <%=genModel.getImportedName("org.eclipse.eatop.common.resource.impl.EastADLResourceFactoryImpl")%>
+<%} else {%>
+public class <%=genPackage.getResourceFactoryClassName()%> extends <%=genPackage.getImportedResourceFactoryBaseClassName()%>
+<%}%>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+
+<!--
+
+   <copyright>
+  
+  Copyright (c) 2014 Continental AG and others.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Public License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/legal/epl-v10.html
+  
+  Contributors: 
+      Continental AG - Initial API and implementation
+  
+  </copyright>
+-->
+
+<plugin>
+
+   <!-- Client context definition and binding-->
+
+   <extension point="org.eclipse.emf.validation.constraintBindings">
+      <clientContext id="org.eclipse.eatop.eastadl21.validation.ocl">
+         <enablement>
+            <and>
+               <instanceof
+                     value="org.eclipse.emf.ecore.EObject">
+               </instanceof>
+            </and>
+         </enablement>
+      </clientContext>
+      <binding
+            category="org.eclipse.eatop.eastadl21.validation.ocl.general"
+            context="org.eclipse.eatop.eastadl21.validation.ocl">
+      </binding>
+   </extension>
+   
+   <!-- Constraints -->
+   
+   <extension
+      point="org.eclipse.emf.validation.constraintProviders">
+      
+      <category
+            id="org.eclipse.eatop.eastadl21.validation.ocl.general"
+            name="%eastadl_version">
+      </category>
+      
+      <constraintProvider
+            categoryId="org.eclipse.eatop.eastadl21.validation.ocl.general"
+            class="org.eclipse.eatop.eastadl21.validation.ocl.OCLConstraintProvider"
+            description="constraintMetaInformation/description.xml">
+         
+         <package namespaceUri="%namespaceUri"/>
+
+         <ocl path="constraints/Annexes.ocl"/>
+         <ocl path="constraints/Behavior.ocl"/>
+         <ocl path="constraints/Dependability.ocl"/>
+         <ocl path="constraints/Environment.ocl"/>
+         <ocl path="constraints/GenericConstraints.ocl"/>
+         <ocl path="constraints/Infrastructure.ocl"/>
+         <ocl path="constraints/Requirements/Requirements.ocl"/>
+         <ocl path="constraints/Requirements/VerificationValidation.ocl"/>
+         <ocl path="constraints/Structure/FunctionModeling.ocl"/>
+         <ocl path="constraints/Structure/AnalysisLevel.ocl"/>
+         <ocl path="constraints/Structure/DesignLevel.ocl"/>
+         <ocl path="constraints/Structure/VehicleLevel.ocl"/>
+         <ocl path="constraints/Timing.ocl"/>
+         <ocl path="constraints/Variability.ocl"/>
+      </constraintProvider>
+
+  </extension>
+  
+  <!-- Constraint categories-->
+  
+  
+  
+</plugin>

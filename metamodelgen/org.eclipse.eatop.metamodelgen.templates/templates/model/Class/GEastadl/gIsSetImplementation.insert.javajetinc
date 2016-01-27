@@ -1,0 +1,17 @@
+// Class/GEastadl/gIsSetImplementation.insert.javajetinc
+
+
+<% GAwareGenFeature gGenFeature = (GAwareGenFeature)genFeature; %>
+<% TargetFeaturePath tgtFeaturePath = gGenFeature.getTargetFeaturePath(genClass); %>
+<% if(tgtFeaturePath.getClass().equals(NoMappingTargetFeaturePath.class)){%>
+	<%@ include file="unsupportedGEastadlFeature.insert.javajetinc" %>
+<% } else { %>
+	<% if(tgtFeaturePath.getSegmentCount() == 1) { %>
+		return <%= tgtFeaturePath.getLastFeature().getIsSetAccessorName() %>();		
+	<% } else if(tgtFeaturePath.getSegmentCount() > 1) { %>
+		<%@ include file="gBuildTargetFeaturePath.insert.javajetinc" %>
+		return <%= previousFeature.getName() %>.<%= tgtFeaturePath.getLastFeature().getIsSetAccessorName() %>();
+	<%} else { %>
+		ERROR: An empty TargetFeaturePath was provided to the generator for this Feature!	
+	<% } %>
+<% } %>	

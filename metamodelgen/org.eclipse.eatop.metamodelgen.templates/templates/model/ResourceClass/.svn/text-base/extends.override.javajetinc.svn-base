@@ -1,0 +1,5 @@
+<%if (GenModels.getRootGenPackage(genModel).equals(genPackage)) {%>
+public class <%=genPackage.getResourceClassName()%> extends <%=genModel.getImportedName("org.artop.aal.common.resource.impl.AutosarXMLResourceImpl")%>
+<%} else {%>
+public class <%=genPackage.getResourceClassName()%> extends <%=genPackage.getImportedResourceBaseClassName()%>
+<%}%>

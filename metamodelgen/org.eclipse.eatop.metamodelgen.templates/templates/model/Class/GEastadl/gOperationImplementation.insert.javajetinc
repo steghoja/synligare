@@ -1,0 +1,11 @@
+<% GenFeature tgtFeature = gOp.getTargetFeature(genClass);%>
+<%	if(gOp.getOperationType() == GOperation.GOpType.GET) { %>
+ 		<%@ include file="gGetOperationImplementation.insert.javajetinc" fail="silent" %>
+<%	} else if(gOp.getOperationType() == GOperation.GOpType.SET) { %>
+ 		<%@ include file="gSetOperationImplementation.insert.javajetinc" fail="silent" %> 		
+<%	} else { %>
+ 		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();				
+<%	}%>
+

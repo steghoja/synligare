@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/development/!svn/ver/15449/core/trunk/tools/org.artop.tools.metamodelgen.templates/templates/model/ResourceFactoryClass
+END
+insert.javajetinc
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/development/!svn/ver/15449/core/trunk/tools/org.artop.tools.metamodelgen.templates/templates/model/ResourceFactoryClass/insert.javajetinc
+END
+defaultConstructor.override.javajetinc
+K 25
+svn:wc:ra_dav:version-url
+V 163
+/svn/development/!svn/ver/14541/core/trunk/tools/org.artop.tools.metamodelgen.templates/templates/model/ResourceFactoryClass/defaultConstructor.override.javajetinc
+END
+extends.override.javajetinc
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/svn/development/!svn/ver/14541/core/trunk/tools/org.artop.tools.metamodelgen.templates/templates/model/ResourceFactoryClass/extends.override.javajetinc
+END
+createResource.override.javajetinc
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/svn/development/!svn/ver/14541/core/trunk/tools/org.artop.tools.metamodelgen.templates/templates/model/ResourceFactoryClass/createResource.override.javajetinc
+END
+declaredFields.insert.javajetinc
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/svn/development/!svn/ver/15449/core/trunk/tools/org.artop.tools.metamodelgen.templates/templates/model/ResourceFactoryClass/declaredFields.insert.javajetinc
+END
