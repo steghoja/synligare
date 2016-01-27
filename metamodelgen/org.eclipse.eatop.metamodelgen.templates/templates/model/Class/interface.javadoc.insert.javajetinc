@@ -1,4 +1,0 @@
-<%if(genClass.hasDeprecationJavadoc()) {%>
- * 
- * @deprecated <%=genClass.getDeprecationJavadoc()%>
-<%}%>

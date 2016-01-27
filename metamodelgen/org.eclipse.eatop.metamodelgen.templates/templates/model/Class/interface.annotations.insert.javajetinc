@@ -1,3 +1,0 @@
-<%if(genClass.isDeprecated()) {%>
-@Deprecated
-<%}%>

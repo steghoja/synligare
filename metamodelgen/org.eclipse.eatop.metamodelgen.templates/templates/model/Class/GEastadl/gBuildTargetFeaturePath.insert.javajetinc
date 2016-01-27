@@ -1,8 +1,0 @@
-<% GAwareGenFeature previousFeature = null; %>
-<% for(GAwareGenFeature feature : tgtFeaturePath.getHeadFeatures()) { %>
-	<%=feature.getImportedType(genClass)%> <%=feature.getName()%> = <% if(previousFeature != null) {%><%= previousFeature.getName() %>.<%}%><%= feature.getGetAccessor() %>();
-	if(<%=feature.getName()%> == null) {
-		<%=feature.getName()%> = <%=GenModels.getImportedFactoryName(genModel)%>.eINSTANCE.create<%=feature.getImportedType(genClass)%>();
-	}
-	<% previousFeature = feature; %>
-<% } %>

@@ -1,7 +1,0 @@
-<%if ("CompositionType".equals(genClass.getName())) {%>
-_UI_CompositionType_type = Composition Type
-<%} else if ("CompositionSwComponentType".equals(genClass.getName())) {%>
-_UI_CompositionSwComponentType_type = Composition Sw Component Type
-<%} else {%>
-_UI_<%=genClass.getName()%>_type = <%=genClass.getFormattedName()%>
-<%}%>

@@ -1,9 +1,0 @@
-<%if (GenModels.getRootGenPackage(genModel).equals(genPackage)){%>
-	<%for(AutosarSourceRevision sourceRevision : AutosarSourceRevisions.get(AutosarSourceRevisions.get().major)){%>
-	<%if(sourceRevision.getRevisionOrdinal() < AutosarSourceRevisions.get().getRevisionOrdinal()){%>
-	public static final <%=genModel.getImportedName("org.artop.aal.common.metamodel.AutosarReleaseDescriptor")%> AUTOSAR_<%=sourceRevision.major%>_<%=sourceRevision.minor%>_<%=sourceRevision.revision%>_RESOURCE_DESCRIPTOR = new Autosar<%=sourceRevision.major%><%=sourceRevision.minor%><%=sourceRevision.revision%>ResourceDescriptor();
-	<%}else{%>
-	public static final <%=genModel.getImportedName("org.artop.aal.common.metamodel.AutosarReleaseDescriptor")%> AUTOSAR_<%=sourceRevision.major%>_<%=sourceRevision.minor%>_<%=sourceRevision.revision%>_RESOURCE_DESCRIPTOR = <%=GenModels.getUtilityClassSimpleName(genModel, "ReleaseDescriptor")%>.INSTANCE;	
-	<%}%>
-	<%}%>
-<%}%>
