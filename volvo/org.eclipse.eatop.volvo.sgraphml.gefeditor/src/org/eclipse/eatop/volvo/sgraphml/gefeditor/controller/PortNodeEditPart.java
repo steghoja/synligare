@@ -72,8 +72,17 @@ public class PortNodeEditPart extends AbstractGraphicalEditPart implements NodeE
 	    PortNodeFigure figure = (PortNodeFigure)getFigure();
 	    PortNodeType model = (PortNodeType)getModel();
 	 
+	    boolean useFill = false;
+	    EList<NodeLabelType> nodeLabels = model.getNodeLabel();
+	    if (nodeLabels.size() > 0){
+	    	if (nodeLabels.get(0).getIconData() == null){
+	    		//No icon image, use fill instead
+	    		useFill = true;
+	    	}
+	    }
+	    
 	    figure.setGeometry(model.getGeometry());
-	    figure.setFill(model.getFill());
+	    figure.setFill(model.getFill(), useFill);
 	    figure.setBorderStyle(model.getBorderStyle());
 	//    figure.setNodeLabel(model.getNodeLabel().get(0));
 		 

@@ -55,10 +55,13 @@ public class EastAdlSgraphmlSynchronizer {
 				 	  if (eObject instanceof NodeType){
 					  	NodeType node = (NodeType)eObject;
 					  	String eaDotPath = node.getId();
-					  	EObject eaEObject = EAXMLprocessor.getEObjectbyDotPath(eaDotPath);
-					  	
-					  	if (eaEObject != null){
-					  		addEastAdlObjectAdapter(eaEObject, eaDotPath, node);
+					  
+					  	if (eaDotPath != null){
+						  	EObject eaEObject = EAXMLprocessor.getEObjectbyDotPath(eaDotPath);
+						  	
+						  	if (eaEObject != null){
+						  		addEastAdlObjectAdapter(eaEObject, eaDotPath, node);
+						  	}
 					  	}
 
 			}

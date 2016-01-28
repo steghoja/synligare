@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- XSL transformation from SGraphML v0.6 to ygraphml 1.1 -->
+<!-- XSL transformation from SGraphML v0.7 to ygraphml 1.1 -->
 
 <!-- Xalan 2.7.1 supports only XSLT 1.0 -->
 

@@ -159,20 +159,38 @@ public class NodeLabelFigure extends Label {
 		}
 
 
+		int fontSize = nodeLabel.getFontSize();
+		if (fontSize == 0){
+			fontSize = 10;
+		}
 		//SWT uses points as unit for fontHeight. In sgraphml file we have pixels. points = pixels * 72 / DPI
-		int fontHeightinPoints = nodeLabel.getFontSize() * 72 / Display.getCurrent().getDPI().y;
+		int fontHeightinPoints = fontSize * 72 / Display.getCurrent().getDPI().y;
+		
+		
+		
 		String fontName = nodeLabel.getFontFamily();
+		if (fontName == null){
+			fontName = "Dialog";
+		}
 		int fontStyle = SWT.NORMAL;
 		Font f = FontManager.INSTANCE.getFont(fontName, fontHeightinPoints, fontStyle);
 		setFont(f);
 
 		//Text color
-		Color textColor = ColorUtil.decode(nodeLabel.getTextColor());
+		String color = nodeLabel.getTextColor();
+		if (color == null){
+			color = "#000000";
+		}
+		Color textColor = ColorUtil.decode(color);
 		setForegroundColor(textColor);
 
 
 		//IconTextGap
-		setIconTextGap(nodeLabel.getIconTextGap());
+		Byte iconTextGap = nodeLabel.getIconTextGap();
+	/*	if (iconTextGap == 0){
+			iconTextGap = 4;
+		}*/
+		setIconTextGap(iconTextGap);
 
 		//Visible
 		setVisible(nodeLabel.isVisible());

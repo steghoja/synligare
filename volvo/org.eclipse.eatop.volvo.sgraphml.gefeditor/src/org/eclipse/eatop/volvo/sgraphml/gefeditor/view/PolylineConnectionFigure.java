@@ -41,9 +41,13 @@ public class PolylineConnectionFigure extends PolylineConnection {
 	
 	public void setLineStyle(LineStyleType lineStyle){
 		int style = SWT.LINE_SOLID;
-	
+		
 		setLineWidth((int)lineStyle.getWidth());
-		Color c = ColorUtil.decode(lineStyle.getColor());
+		String color = lineStyle.getColor();
+		if (color == null){
+			color = "#000000";
+		}
+		Color c = ColorUtil.decode(color);
 		setForegroundColor(c);
 	
 		switch (lineStyle.getType())

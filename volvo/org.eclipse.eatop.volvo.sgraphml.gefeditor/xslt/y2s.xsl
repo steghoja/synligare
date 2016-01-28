@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- XSL transformation from ygraphml 1.1 to SGraphML v0.6 -->
+<!-- XSL transformation from ygraphml 1.1 to SGraphML v0.7 -->
 
 <!-- Xalan 2.7.1 supports only XSLT 1.0 -->
 
@@ -16,7 +16,7 @@
 	<xsl:template match="/g:graphml">
 		<xsl:text>&#10;</xsl:text>
 		<graphml
-			xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.synligare.eu/sgraphml/0.6/sgraphml.xsd">
+			xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.synligare.eu/sgraphml/0.7/sgraphml.xsd">
 			<xsl:text>&#10;&#10;</xsl:text>
 			<xsl:call-template name="addKeys" />
 			<xsl:apply-templates />

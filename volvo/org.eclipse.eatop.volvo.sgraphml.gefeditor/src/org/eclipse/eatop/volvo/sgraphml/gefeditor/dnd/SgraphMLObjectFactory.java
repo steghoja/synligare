@@ -778,7 +778,7 @@ public class SgraphMLObjectFactory implements CreationFactory {
 		lineStyle.setType(pattern);
 		lineStyle.setWidth(1);
 		polyLineEdge.setLineStyle(lineStyle);
-
+		
 		//Arrows
 		ArrowsType arrows = SgraphmlFactory.eINSTANCE.createArrowsType();	
 		arrows.setSource(sourceArrow);

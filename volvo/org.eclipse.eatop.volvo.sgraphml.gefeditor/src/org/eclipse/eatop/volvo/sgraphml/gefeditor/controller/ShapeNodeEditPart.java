@@ -44,6 +44,7 @@ import org.graphdrawing.graphml.xmlns.NodeType;
 import org.graphdrawing.graphml.xmlns.XmlnsPackage;
 
 import eu.synligare.sgraphml.GroupNodeType;
+import eu.synligare.sgraphml.NodeLabelType;
 import eu.synligare.sgraphml.PolyLineEdgeType;
 import eu.synligare.sgraphml.PortNodeType;
 import eu.synligare.sgraphml.SgraphmlPackage;
@@ -147,7 +148,7 @@ public class ShapeNodeEditPart extends AbstractGraphicalEditPart implements Node
 	 protected void refreshVisuals() {
 	    ShapeNodeFigure figure = (ShapeNodeFigure)getFigure();
 	    ShapeNodeType model = (ShapeNodeType)getModel();
-	 
+    
 	    figure.setGeometry(model.getGeometry());
 	    figure.setFill(model.getFill());
 	    figure.setBorderStyle(model.getBorderStyle());

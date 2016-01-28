@@ -82,7 +82,11 @@ public class ShapeNodeFigure extends Figure {
 		}
 		shape.setLineStyle(style);
 		shape.setLineWidth((int)borderStyle.getWidth());
-		Color c = ColorUtil.decode(borderStyle.getColor());
+		String color = borderStyle.getColor();
+		if (color == null){
+			color = "#000000";
+		}
+		Color c = ColorUtil.decode(color);
 		shape.setForegroundColor(c);
 		
 		
@@ -124,7 +128,13 @@ public class ShapeNodeFigure extends Figure {
 
 	public void setFill(FillType f){
 		shape.setFill(true);
-		Color c = ColorUtil.decode(f.getColor());
+		
+		String color = f.getColor();
+		if (color == null){
+			color = "#ffffff";
+		}
+		
+		Color c = ColorUtil.decode(color);
 		shape.setBackgroundColor(c);
 		
 		if (shape instanceof IGradient){

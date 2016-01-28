@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.EventObject;
 import java.util.List;
 
+import javax.rmi.CORBA.Util;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.eatop.common.ui.util.ModelSearcher;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.contextmenu.GEFEditorContextMenuProvider;
@@ -180,7 +182,11 @@ public class SGraphMLGraphicalEditor extends GraphicalEditorWithFlyoutPalette {
 			IFileEditorInput fileInput = (IFileEditorInput) input;
 			IFile file = fileInput.getFile();
 			{
-				theModel = ModelIO.INSTANCE.ReadModel(file);
+				try {
+					theModel = ModelIO.INSTANCE.ReadModel(file);
+				} catch (Exception e) {
+					throw new PartInitException("Failed to load diagram " + file.getName() + ".\n\n" + e.getMessage());
+				}
 				ModelProcessor.INSTANCE.setTheModel(theModel);
 				
 				resourceManager = new ResourceManager();

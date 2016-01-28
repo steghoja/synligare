@@ -5,6 +5,7 @@ import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.ColorUtil;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.Utils;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.view.GroupNodeFigure;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
@@ -25,10 +26,21 @@ public class PortNodeFigure extends RectangleShapeNodeFigure {
 	
 }
 	
-	@Override
-	public void setFill(FillType f){
-		//we cannot fill the port since we would hide the label image then
-		shape.setFill(false);
+	public void setFill(FillType f, boolean useFill){
+		
+		shape.setFill(useFill);
+
+		if (useFill){
+			//fill the port with a color, no label image is used so we won't hide it
+			String color = f.getColor();
+
+			if (color == null){
+				color = "#FFFFFF";
+			}
+			Color c = ColorUtil.decode(color);
+			//skip gradients for ports
+			shape.setBackgroundColor(c);
+		}			
 	}
 
 	

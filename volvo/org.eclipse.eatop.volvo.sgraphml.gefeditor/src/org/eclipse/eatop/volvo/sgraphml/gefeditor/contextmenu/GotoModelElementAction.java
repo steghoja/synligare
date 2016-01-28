@@ -154,6 +154,11 @@ public class GotoModelElementAction extends SelectionAction {
 		        dotPath = gnode.getId();        	
 	        }
 	        
+	        if (dotPath == null){
+	        	Utils.showErrorMessage("Element id not set");
+	        	return;
+	        }
+	        
             List<Object> path = new ArrayList<Object>();
 	        
 	        

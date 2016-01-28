@@ -3,6 +3,7 @@ package org.eclipse.eatop.volvo.sgraphml.gefeditor.model;
 import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.Utils;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -26,7 +27,7 @@ public class ModelIO {
 	URI uri;
 
 	
-	public GraphmlType ReadModel(IFile file)  {
+	public GraphmlType ReadModel(IFile file) throws Exception {
 	
 		resourceSet = new ResourceSetImpl();
 		
@@ -51,33 +52,25 @@ public class ModelIO {
 		// Construct the URI for the instance file.
 		uri = URI.createURI(file.getLocationURI().toString());
 		
-		try {
-			// Demand load resource for this file.
-			//
-			resource = resourceSet.getResource(uri, true);
-					
-			
-			// Validate the contents of the loaded resource.
-			//
-			for (EObject eObject : resource.getContents()) {
-				Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject);
-				if (diagnostic.getSeverity() != Diagnostic.OK) {
-					printDiagnostic(diagnostic, "");
-				}
-			}
-
-			//Locate the first graph
-			DocumentRoot docRoot = (DocumentRoot)resource.getContents().get(0); 
-			return docRoot.getGraphml();
-			
-			
+		// Demand load resource for this file.
+		//
+		resource = resourceSet.getResource(uri, true);
+				
 		
+		// Validate the contents of the loaded resource.
+		//
+		for (EObject eObject : resource.getContents()) {
+			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject);
+			if (diagnostic.getSeverity() != Diagnostic.OK) {
+				printDiagnostic(diagnostic, "");
+			}
 		}
-		catch (Exception exception) {
-			System.out.println("Problem loading " + uri);
-			exception.printStackTrace();
-			return null;
-		}
+
+		//Locate the first graph
+		DocumentRoot docRoot = (DocumentRoot)resource.getContents().get(0); 
+		return docRoot.getGraphml();
+			
+		//exception is caught by caller
 	}
 	
 	public boolean WriteModel(){
