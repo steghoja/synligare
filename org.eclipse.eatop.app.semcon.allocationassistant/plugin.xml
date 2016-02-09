@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.eclipse.eatop.app.semcon.allocationassistant.editor.AllocationFormEditor"
+            default="false"
+            extensions="eaxml"
+            id="org.eclipse.eatop.app.semcon.allocationassistant.AllocationAssistant"
+            name="Allocation Assistant">
+         <contentTypeBinding
+               contentTypeId="org.eclipse.eatop.eastadl.eastadlXMLFile">
+         </contentTypeBinding>
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs
+            contributorId="org.eclipse.eatop.app.semcon.allocationassistant.AllocationAssistant">
+         <propertyTab
+               category="advanced"
+               id="org.eclipse.eatop.app.semcon.allocationassistant.propertyTabs.advanced"
+               label="Advanced">
+         </propertyTab>
+      </propertyTabs>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <propertyContributor
+            contributorId="org.eclipse.eatop.app.semcon.allocationassistant.AllocationAssistant"
+            labelProvider="org.eclipse.eatop.examples.common.ui.providers.AppearanceExampleTabbedPropertySheetTitleProvider">
+         <propertyCategory
+               category="advanced">
+         </propertyCategory>
+      </propertyContributor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections
+            contributorId="org.eclipse.eatop.app.semcon.allocationassistant.AllocationAssistant">
+         <propertySection
+               class="org.eclipse.sphinx.emf.ui.properties.BasicTransactionalAdvancedPropertySection"
+               id="org.eclipse.eatop.app.semcon.allocationassistant.propertySections.advanced"
+               tab="org.eclipse.eatop.app.semcon.allocationassistant.propertyTabs.advanced">
+            <input
+                  type="java.lang.Object">
+            </input>
+         </propertySection>
+      </propertySections>
+   </extension>
+
+</plugin>
