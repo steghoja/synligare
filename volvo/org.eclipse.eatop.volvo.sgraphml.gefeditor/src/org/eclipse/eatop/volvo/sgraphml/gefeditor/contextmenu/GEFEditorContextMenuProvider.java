@@ -28,6 +28,9 @@ public class GEFEditorContextMenuProvider extends ContextMenuProvider {
 		        action = getActionRegistry().getAction(GotoModelElementAction.GOTO_MODEL_ELEMENT);
 		        menu.appendToGroup(GEFActionConstants.GROUP_FIND, action);
 
+		        action = getActionRegistry().getAction(ArrangeLayoutAction.ARRANGE_LAYOUT_ACTION);
+		        menu.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
+
 		        action = getActionRegistry().getAction(SaveImageAction.SAVE_IMAGE);
 		        menu.appendToGroup(GEFActionConstants.GROUP_SAVE, action);
 		        

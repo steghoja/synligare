@@ -146,11 +146,10 @@ public class GroupNodeXYLayoutPolicy extends XYLayoutEditPolicy {
 				NodeLabelType nodeLabel = basenode.getNodeLabel().get(0);
 
 				UpdateNodeLabelTypeCommand updateLabelCommand = new UpdateNodeLabelTypeCommand();
-				updateLabelCommand.setModel(basenode);
 				Rectangle rGroupAbs = (Rectangle)getCurrentConstraintFor((GraphicalEditPart)child.getParent()); //absolute (x,y,w,h)
 				Rectangle rGroupRel = new Rectangle(0,0,rGroupAbs.width, rGroupAbs.height);					    //relative (0,0,w,h)
-				CalculatePortNodeLabel(nodeLabel, rGroupRel, r);
-				updateLabelCommand.setNewNodeLabel(nodeLabel);
+				CalculatePortNodeLabel(updateLabelCommand, rGroupRel, r);
+				updateLabelCommand.setNodeLabel(nodeLabel);
 				cc.add(updateLabelCommand);
 
 			}
@@ -187,6 +186,12 @@ public class GroupNodeXYLayoutPolicy extends XYLayoutEditPolicy {
 				double yScale = (double)r.height / (double)(r.height - request.getSizeDelta().height);
 				resizeIconCommand.setNewSize(xScale, yScale);
 				cc.add(resizeIconCommand);
+				
+				//touch label to make new icon visible
+				TouchNodeLabelCommand touchLabelCommand = new TouchNodeLabelCommand();
+				touchLabelCommand.setNodeLabel(nodeLabel);
+				cc.add(touchLabelCommand);
+				
 			}
 
 			//skip resizing contents
@@ -206,12 +211,16 @@ public class GroupNodeXYLayoutPolicy extends XYLayoutEditPolicy {
 					moveChildCommand.setChange(moveDelta); 
 					cc.add(moveChildCommand);
 					
-					
+					/*
 					UpdateNodeLabelTypeCommand touchLabel = new UpdateNodeLabelTypeCommand();
 					touchLabel.setModel(node);
 					NodeLabelType currentLabel = node.getNodeLabel().get(0);
 					touchLabel.setNewNodeLabel(currentLabel);
-					cc.add(touchLabel);
+					cc.add(touchLabel);*/
+					
+					TouchNodeLabelCommand touchLabelCommand = new TouchNodeLabelCommand();
+					touchLabelCommand.setNodeLabel(node.getNodeLabel().get(0));
+					cc.add(touchLabelCommand);
 				}
 				else if (nodeEditPart instanceof NodeLabelEditPart){ 
 					//touch label child editparts to get them updated 
@@ -265,13 +274,13 @@ public class GroupNodeXYLayoutPolicy extends XYLayoutEditPolicy {
 
 	/***
 	 * 
-	 * Updates the nodeLabel attributes for placement, verticalTextPosition & horizontalTextPosition.
+	 * Updates the updateCommand attributes for placement, verticalTextPosition & horizontalTextPosition.
 	 * 
 	 * @param Container = (0,0,w,h)
 	 * @param port = relative coordinates
 	 * 
 	 */
-	protected void CalculatePortNodeLabel(NodeLabelType nodeLabel, Rectangle container, Rectangle port){
+	protected void CalculatePortNodeLabel(UpdateNodeLabelTypeCommand updateCommand, Rectangle container, Rectangle port){
 
 
 		//Calculate the distance between each port side and the container side
@@ -291,27 +300,27 @@ public class GroupNodeXYLayoutPolicy extends XYLayoutEditPolicy {
 		int min = set.first();
 
 		if (min == dLeft){
-			nodeLabel.setPlacement(PlacementType.LEFT);  //Icon to the left in the Label rectangle
-			nodeLabel.setHorizontalTextPosition(HorizontalTextPositionType.RIGHT);
-			nodeLabel.setVerticalTextPosition(VerticalTextPositionType.CENTER);
+			updateCommand.setPlacement(PlacementType.LEFT);  //Icon to the left in the Label rectangle
+			updateCommand.setHorizontalTextPosition(HorizontalTextPositionType.RIGHT);
+			updateCommand.setVerticalTextPosition(VerticalTextPositionType.CENTER);
 
 		}
 		else if (min == dRight){
-			nodeLabel.setPlacement(PlacementType.RIGHT);  //Icon to the right in Label rectangle
-			nodeLabel.setHorizontalTextPosition(HorizontalTextPositionType.LEFT);
-			nodeLabel.setVerticalTextPosition(VerticalTextPositionType.CENTER);
+			updateCommand.setPlacement(PlacementType.RIGHT);  //Icon to the right in Label rectangle
+			updateCommand.setHorizontalTextPosition(HorizontalTextPositionType.LEFT);
+			updateCommand.setVerticalTextPosition(VerticalTextPositionType.CENTER);
 
 		}
 		else if (min == dTop){ //put label below
-			nodeLabel.setPlacement(PlacementType.TOP);  //Icon in the top of the Label rectangle
-			nodeLabel.setHorizontalTextPosition(HorizontalTextPositionType.CENTER);
-			nodeLabel.setVerticalTextPosition(VerticalTextPositionType.BOTTOM);
+			updateCommand.setPlacement(PlacementType.TOP);  //Icon in the top of the Label rectangle
+			updateCommand.setHorizontalTextPosition(HorizontalTextPositionType.CENTER);
+			updateCommand.setVerticalTextPosition(VerticalTextPositionType.BOTTOM);
 		}
 		else {
 			//dBottom //put label above
-			nodeLabel.setPlacement(PlacementType.BOTTOM);  //Icon in the bottom of the Label rectangle
-			nodeLabel.setHorizontalTextPosition(HorizontalTextPositionType.CENTER);
-			nodeLabel.setVerticalTextPosition(VerticalTextPositionType.TOP);
+			updateCommand.setPlacement(PlacementType.BOTTOM);  //Icon in the bottom of the Label rectangle
+			updateCommand.setHorizontalTextPosition(HorizontalTextPositionType.CENTER);
+			updateCommand.setVerticalTextPosition(VerticalTextPositionType.TOP);
 		}
 
 		/*		System.out.println("Container: " + container);

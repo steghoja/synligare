@@ -151,7 +151,7 @@ public class NewSGraphMLDiagramWizard extends Wizard implements INewWizard {
 		String nl = System.getProperty("line.separator");
 		
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + nl +
-			   "<graphml xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:s=\"http://www.synligare.eu/sgraphml\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://www.synligare.eu/sgraphml/0.6/sgraphml.xsd\">" + nl +
+			   "<graphml xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:s=\"http://www.synligare.eu/sgraphml\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://www.synligare.eu/sgraphml/0.7/sgraphml.xsd\">" + nl +
 			   "   <key for=\"node\" id=\"d0\" sgraphml.type=\"nodegraphics\"/>" + nl +
 			   "   <key for=\"edge\" id=\"d1\" sgraphml.type=\"edgegraphics\"/>" + nl +
 			   "   <key for=\"graphml\" id=\"d2\" sgraphml.type=\"resources\"/>" + nl +

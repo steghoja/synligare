@@ -9,6 +9,7 @@ import javax.rmi.CORBA.Util;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.eatop.common.ui.util.ModelSearcher;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.contextmenu.ArrangeLayoutAction;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.contextmenu.GEFEditorContextMenuProvider;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.contextmenu.GotoModelElementAction;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.contextmenu.SaveImageAction;
@@ -301,8 +302,12 @@ public class SGraphMLGraphicalEditor extends GraphicalEditorWithFlyoutPalette {
 	    getActionRegistry().registerAction(action);
 	    getSelectionActions().add(action.getId());
 
+	    action = new ArrangeLayoutAction(this);
+	    getActionRegistry().registerAction(action);
+
 	    action  = new SaveImageAction(this);
 	    getActionRegistry().registerAction(action);
+	    
 	    
 	    super.createActions();
 	}
