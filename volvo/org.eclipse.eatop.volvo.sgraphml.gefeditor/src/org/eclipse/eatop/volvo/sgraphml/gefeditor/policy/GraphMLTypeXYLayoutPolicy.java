@@ -182,11 +182,17 @@ public class GraphMLTypeXYLayoutPolicy extends XYLayoutEditPolicy {
 						cc.add(moveChildCommand);
 						
 						
-						UpdateNodeLabelTypeCommand touchLabel = new UpdateNodeLabelTypeCommand();
+					/*	UpdateNodeLabelTypeCommand touchLabel = new UpdateNodeLabelTypeCommand();
 						touchLabel.setModel(node);
 						NodeLabelType currentLabel = node.getNodeLabel().get(0);
 						touchLabel.setNewNodeLabel(currentLabel);
 						cc.add(touchLabel);
+						*/
+						
+						TouchNodeLabelCommand touchLabel = new TouchNodeLabelCommand();
+						touchLabel.setNodeLabel(node.getNodeLabel().get(0));
+						cc.add(touchLabel);
+						
 					}
 					else if (nodeEditPart instanceof NodeLabelEditPart){ 
 						//touch label child editparts to get them updated 

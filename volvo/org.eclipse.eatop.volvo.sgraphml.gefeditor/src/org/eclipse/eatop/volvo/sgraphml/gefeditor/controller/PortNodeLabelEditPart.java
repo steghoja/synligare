@@ -26,11 +26,12 @@ import eu.synligare.sgraphml.SgraphmlPackage;
 
 public class PortNodeLabelEditPart extends AbstractGraphicalEditPart {
 
-	protected PortNodeTypeAdapter portNodeAdapter;
+//	protected PortNodeTypeAdapter portNodeAdapter;
+	protected PortNodeLabelTypeAdapter portNodeLabelAdapter;
 	
 	  public PortNodeLabelEditPart() {
 		 super();
-		 portNodeAdapter = new PortNodeTypeAdapter();
+		 portNodeLabelAdapter = new PortNodeLabelTypeAdapter();
 	  }
 	
 	@Override
@@ -63,7 +64,9 @@ public class PortNodeLabelEditPart extends AbstractGraphicalEditPart {
 		//we listen to all corresponding PortNodeType objects in the model.
 		public void activate() {
 		    if(!isActive()) {
-		      ((NodeLabelType)getModel()).eContainer().eAdapters().add(portNodeAdapter);
+//		      ((NodeLabelType)getModel()).eContainer().eAdapters().add(portNodeAdapter);
+		      ((NodeLabelType)getModel()).eAdapters().add(portNodeLabelAdapter);
+
 		    }
 		    super.activate();
 		  }
@@ -71,7 +74,8 @@ public class PortNodeLabelEditPart extends AbstractGraphicalEditPart {
 		  @Override 
 		  public void deactivate() {
 		    if(isActive()) {
-		    	((NodeLabelType)getModel()).eContainer().eAdapters().remove(portNodeAdapter);
+//		    	((NodeLabelType)getModel()).eContainer().eAdapters().remove(portNodeAdapter);
+		    	((NodeLabelType)getModel()).eAdapters().remove(portNodeLabelAdapter);
 		    }
 		    super.deactivate();
 		  }
@@ -108,4 +112,36 @@ public class PortNodeLabelEditPart extends AbstractGraphicalEditPart {
 	    }
 	  }  
 
+	  public class PortNodeLabelTypeAdapter implements Adapter {
+			 
+		    @Override 
+		    public void notifyChanged(Notification notification) {
+
+		    	if ((notification.getEventType() == notification.SET) && 
+		    		(notification.getFeatureID(NodeLabelType.class) == SgraphmlPackage.NODE_LABEL_TYPE__PLACEMENT)){
+			    	refreshVisuals();
+		    	}
+
+		    	//skip update of geometry, we will get a label update after the port has been moved anyway
+		    	
+		    }
+		 
+		    @Override 
+		    public Notifier getTarget() {
+		      return (NodeLabelType)((NodeLabelType)getModel()); //.eContainer();
+		      
+		    }
+		 
+		    @Override 
+		    public void setTarget(Notifier newTarget) {
+		      // Do nothing.
+		    }
+		 
+		    @Override 
+		    public boolean isAdapterForType(Object type) {
+		      return type.equals(NodeLabelType.class);
+		    }
+		  }  
+
+	  
 }

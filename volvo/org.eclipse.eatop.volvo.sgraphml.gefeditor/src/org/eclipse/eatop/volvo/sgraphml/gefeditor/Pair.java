@@ -23,5 +23,11 @@ public class Pair<L,R> {
 	    return this.left.equals(pairo.getLeft()) &&
 	           this.right.equals(pairo.getRight());
 	  }
+	  
+	  public static <L,R> Pair<L,R> of(L left, R right){
+	          return new Pair<L,R>(left, right);
+	      }
+	
+	  
 
 	}
