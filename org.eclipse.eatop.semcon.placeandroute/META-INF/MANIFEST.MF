@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PlaceAndRoute
+Bundle-SymbolicName: org.eclipse.eatop.semcon.placeandroute
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.eatop.semcon.placeandroute.Activator
+Bundle-Vendor: Semcon
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipse.eatop.semcon.placeandroute;uses:="org.eclipse.ui.plugin,org.osgi.framework"
