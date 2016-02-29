@@ -30,6 +30,8 @@
 		<module>../../examples/org.eclipse.eatop.examples.explorer</module>
 		<module>../../examples/org.eclipse.eatop.examples.editor</module>
 		<module>../../examples/org.eclipse.eatop.examples.actions</module>
+		<module>../../examples/org.eclipse.eatop.examples.tableview.ui</module>
+		<module>../../examples/org.eclipse.eatop.examples.tableview</module>
 
 		<!-- Tests -->
 		<module>../../tests/org.eclipse.eatop.serialization.tests</module>

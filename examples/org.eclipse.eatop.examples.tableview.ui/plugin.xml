@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.eatop.examples.tableview.accessorfactory">
+      <accessorfactory
+            class="org.eclipse.eatop.examples.tableview.ui.EObjectAccessorFactory"
+            priority="1">
+      </accessorfactory>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="org.eclipse.ui"
+            class="org.eclipse.eatop.examples.tableview.parts.TableView"
+            id="org.eclipse.eatop.examples.tableview.ui.tableView"
+            name="Table View"
+            restorable="true">
+      </view>
+   </extension>
+
+</plugin>
