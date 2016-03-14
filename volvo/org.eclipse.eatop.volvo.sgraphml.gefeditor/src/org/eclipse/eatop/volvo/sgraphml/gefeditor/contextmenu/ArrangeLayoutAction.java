@@ -2,15 +2,22 @@ package org.eclipse.eatop.volvo.sgraphml.gefeditor.contextmenu;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.eatop.eastadl21.CommunicationHardwarePin;
 import org.eclipse.eatop.eastadl21.EADirectionKind;
+import org.eclipse.eatop.eastadl21.FailureOutPort;
+import org.eclipse.eatop.eastadl21.FaultInPort;
 import org.eclipse.eatop.eastadl21.FunctionFlowPort;
+import org.eclipse.eatop.eastadl21.HardwarePort;
 import org.eclipse.eatop.eastadl21.IOHardwarePin;
 import org.eclipse.eatop.semcon.placeandroute.PNREdge;
 import org.eclipse.eatop.semcon.placeandroute.PNRGraph;
@@ -21,19 +28,29 @@ import org.eclipse.eatop.volvo.sgraphml.gefeditor.Utils;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.commands.NodeTypeChangeConstraintCommand;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.commands.PolyLineEdgeSetBendPointsCommand;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.commands.TouchNodeLabelCommand;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.GraphMLTypeEditPart;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.GroupNodeEditPart;
+import org.eclipse.eatop.volvo.sgraphml.gefeditor.controller.PolyLineEdgeEditPart;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.dnd.EAXMLprocessor;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.model.ModelProcessor;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
+import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.commands.CompoundCommand;
+import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
+import org.eclipse.gef.editparts.ScalableRootEditPart;
 import org.eclipse.gef.ui.actions.SelectionAction;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IWorkbenchPart;
 import org.graphdrawing.graphml.xmlns.DataType;
 import org.graphdrawing.graphml.xmlns.EdgeType;
 import org.graphdrawing.graphml.xmlns.GraphType;
+import org.graphdrawing.graphml.xmlns.GraphmlType;
 import org.graphdrawing.graphml.xmlns.NodeType;
 
 import eu.synligare.sgraphml.BaseNodeType;
@@ -59,6 +76,9 @@ public class ArrangeLayoutAction extends SelectionAction {
 
 	Request request;
 
+	
+	
+	
 	/**
 	 * Create a new instance of the class.
 	 * @param part
@@ -70,11 +90,11 @@ public class ArrangeLayoutAction extends SelectionAction {
 		request = new Request(REQ_ARRANGE_LAYOUT_ACTION);
 	}
 
-	//Pair: Left = PNRNode/PNREdge, Right=BaseNodeType/PolyLineEdgeType
-	Map<String, Pair<Object, EObject>> mapEAPath2modelObjs = new HashMap<String, Pair<Object, EObject>>();	    
+	//Pair: Left = PNRNode/PNREdge, Right=BaseNodeType/PolyLineEdgeEditPart
+	Map<String, Pair<Object, Object>> mapEAPath2modelObjs = new HashMap<String, Pair<Object, Object>>();	    
 
 	//Converts contents of one graph and calls it self recursively for subgraphs. 	    
-	protected void ConvertSgraphml2PNR(GraphType sgmlGraph, PNRGraph pnrGraph){
+	protected boolean ConvertSgraphml2PNR(GraphType sgmlGraph, PNRGraph pnrGraph){
 
 		//Nodes
 		EList<NodeType> nodes = sgmlGraph.getNode();
@@ -117,7 +137,12 @@ public class ArrangeLayoutAction extends SelectionAction {
 			pnrNode.setH((int)(geometry.getHeight() + 0.5));
 			pnrNode.setW((int)(geometry.getWidth() + 0.5));
 			pnrGraph.addNode(pnrNode);
-			mapEAPath2modelObjs.put(node.getId(), Pair.of((Object)pnrNode, (EObject)baseNode));
+			
+			if (mapEAPath2modelObjs.containsKey(node.getId())){
+				Utils.showErrorMessage("The path " + node.getId() + " is not unique. Error in EAXML. ");
+				return false;
+			}
+			mapEAPath2modelObjs.put(node.getId(), Pair.of((Object)pnrNode, (Object)baseNode));
 
 			if (baseNode instanceof GroupNodeType){
 				//Children of GroupNode is a new graph 
@@ -130,7 +155,7 @@ public class ArrangeLayoutAction extends SelectionAction {
 
 		}
 
-		//Edges
+		//Edges - there will only be edges in the top graph, so when it's time for edges all nodes are defined
 		EList<EdgeType> edges = sgmlGraph.getEdge();
 		for (EdgeType edge : edges){
 
@@ -169,8 +194,13 @@ public class ArrangeLayoutAction extends SelectionAction {
 						Point2D point2D = new Point2D.Float((float)point.getX(), (float)point.getY());
 						pnrEdge.addPointToRoute(point2D);
 					}
-			
-					mapEAPath2modelObjs.put(edge.getId(), Pair.of((Object)pnrEdge, (EObject)polyLineEdge)); 
+					
+					if (mapEAPath2modelObjs.containsKey(edge.getId())){
+						Utils.showErrorMessage("The path " + edge.getId() + " is not unique. Error in EAXML. ");
+						return false;
+					}
+
+					mapEAPath2modelObjs.put(edge.getId(), Pair.of((Object)pnrEdge, (Object)polyLineEdge)); 
 					break;
 				}
 			}    		
@@ -178,6 +208,7 @@ public class ArrangeLayoutAction extends SelectionAction {
 
 		}
 
+		return true;
 	}
 
 
@@ -204,10 +235,22 @@ public class ArrangeLayoutAction extends SelectionAction {
 					IOHardwarePin pin = (IOHardwarePin)port;
 					dir = pin.getDirection();
 				}
+				else if (port instanceof FaultInPort){
+					dir = EADirectionKind.IN;
+				}
+				else if (port instanceof FailureOutPort){
+					dir = EADirectionKind.OUT;
+				}
 				else if (port instanceof CommunicationHardwarePin){
 					CommunicationHardwarePin pin = (CommunicationHardwarePin)port;
 					dir = pin.getDirection();
 				}
+				else if (port instanceof HardwarePort){
+					HardwarePort pin = (HardwarePort)port;
+					//TODO: Make this more general
+					dir = EADirectionKind.INOUT; 
+				}
+
 				else{
 					Utils.showErrorMessage("Unsupported metaclass " + port.eClass().getName() + " in direction calculations.");
 					dir = EADirectionKind.IN;
@@ -243,7 +286,6 @@ public class ArrangeLayoutAction extends SelectionAction {
 		}
 	}
 
-static int t=0;
 	
 	public void updateSGraphMLModel(PNRGraph gpNR0){
 		CompoundCommand cc = new CompoundCommand();
@@ -253,7 +295,10 @@ static int t=0;
 		while(!s.isEmpty()){
 		    PNRNode n = s.pop();
 		    //Update node geometry
-		    BaseNodeType baseNode = (BaseNodeType)mapEAPath2modelObjs.get(n.getId()).getRight();
+		    BaseNodeType baseNode = null;
+		    baseNode = (BaseNodeType)mapEAPath2modelObjs.get(n.getId()).getRight();
+		    
+		    
 		    NodeTypeChangeConstraintCommand command = new NodeTypeChangeConstraintCommand();
 		    command.setModel(baseNode);
 		    Rectangle r = new Rectangle();
@@ -278,7 +323,8 @@ static int t=0;
 		    	PNREdge e = it2.next();
 		    	if(e.getSource().getId() == n.getId()){
 		    		//Only handle edge for source node
-		    		PolyLineEdgeType polyLineEdge = (PolyLineEdgeType)mapEAPath2modelObjs.get(e.getId()).getRight();
+		    		PolyLineEdgeEditPart polyLineEdgeEditPart = (PolyLineEdgeEditPart)mapEAPath2modelObjs.get(e.getId()).getRight();
+		    		PolyLineEdgeType polyLineEdge = (PolyLineEdgeType)polyLineEdgeEditPart.getModel();
 		    		PolyLineEdgeSetBendPointsCommand pointsCommand = new PolyLineEdgeSetBendPointsCommand();
 		    		
 		    		EList<PointType> pointsSgml = ECollections.newBasicEList();
@@ -317,21 +363,239 @@ static int t=0;
 		Utils.INSTANCE.executeGEFCommand(cc);
 	}
 	
+		Set<PolyLineEdgeEditPart> selectedEdges = new HashSet<PolyLineEdgeEditPart>();
 	
+		//Converts contents of one graph and calls it self recursively for subgraphs. 	    
+		
+		protected boolean convertSgraphml2PNR_(List<EditPart> selectedParts, PNRGraph pnrGraph){
+		
+			List<EditPart> topParts = retrieveTopParts(selectedParts);
+			
+			if (!convertNodes(topParts, pnrGraph))
+			{
+				return false;
+			}
+			
+			//Convert Edges in selectedEdges
+			for (PolyLineEdgeEditPart polyLineEdge : selectedEdges){
+
+				EdgeType gmlEdge = (EdgeType)((EObject)polyLineEdge.getModel()).eContainer().eContainer();
+				
+				String sourceDotPath = gmlEdge.getSource();
+				String targetDotPath = gmlEdge.getTarget();
+
+				//make sure both source and target node is included
+				if (mapEAPath2modelObjs.containsKey(sourceDotPath) && mapEAPath2modelObjs.containsKey(targetDotPath)){
+					PNRNode pnrSourceNode = (PNRNode)mapEAPath2modelObjs.get(sourceDotPath).getLeft();
+					PNRNode pnrTargetNode = (PNRNode)mapEAPath2modelObjs.get(targetDotPath).getLeft();
+
+					PNREdge pnrEdge = new PNREdge(gmlEdge.getId(), pnrSourceNode, pnrTargetNode);
+					pnrSourceNode.addEdge(pnrEdge);
+					pnrTargetNode.addEdge(pnrEdge);
+				
+					
+			/*		
+					DataType d1 = edge.getData().get(0);
+					FeatureMap fm = d1.getMixed();
+
+					for (FeatureMap.Entry entry : fm){
+						if (entry.getEStructuralFeature().getFeatureID() == SgraphmlPackage.DOCUMENT_ROOT__POLY_LINE_EDGE){
+							PolyLineEdgeType polyLineEdge = (PolyLineEdgeType)entry.getValue();
+*/
+							// Skip adding route points - PNR algoritm does not use them
+									
+							if (mapEAPath2modelObjs.containsKey(gmlEdge.getId())){
+								Utils.showErrorMessage("The path " + gmlEdge.getId() + " is not unique. Error in EAXML or sgraphml. ");
+								return false;
+							}
+
+							
+							mapEAPath2modelObjs.put(gmlEdge.getId(), Pair.of((Object)pnrEdge, (Object)polyLineEdge)); 
+						//	break;
+					//	}
+					}    		
+				//}
+					
+				
+			}
+			return true;
+		}
+			
+		//When user selects editparts he may select a GroupNodeEditPart as well as its content EditParts
+		//This function filters away editparts that has a container in the selectedParts
+		private List<EditPart> retrieveTopParts(List<EditPart> selectedParts) {
+
+			List<EditPart> topParts = new ArrayList<EditPart>();
+			
+			//O(n2)
+			for (EditPart selectedPart : selectedParts) {
+				boolean bIsTopPart = true;
+				for (EditPart testPart : selectedParts){
+						if (selectedPart.equals(testPart)){
+							continue;
+						}
+						if (isContainerEditPart(selectedPart, testPart)){
+							bIsTopPart = false;
+							break;
+						}
+				}
+
+				if (bIsTopPart){
+					topParts.add(selectedPart);
+				}
+			} 
+			
+			return topParts;
+		}
+
+		//returns true if part is in the subtree of containerPart
+		private boolean isContainerEditPart(EditPart part, EditPart containerPart) {
+		
+			boolean bFound = false;
+			part = part.getParent();
+			
+			while (!(part instanceof ScalableRootEditPart) && !bFound){
+				bFound = part.equals(containerPart);
+				part = part.getParent();
+			}
+			
+			return bFound;
+		}
+
+
+		protected boolean convertNodes(List<EditPart> selectedParts, PNRGraph pnrGraph){
+		
+			for (EditPart selectedPart : selectedParts) {
+		
+				EObject modelObject = (EObject)selectedPart.getModel();
+				
+				if (modelObject instanceof PolyLineEdgeType){
+					selectedEdges.add((PolyLineEdgeEditPart)selectedPart);
+				}
+
+				else if (modelObject instanceof BaseNodeType){
+					//Nodes
+					BaseNodeType baseNode = (BaseNodeType)modelObject;
+					NodeType node =  (NodeType)baseNode.eContainer().eContainer();
+							
+					String pnrType = "PhonyType";
+					
+					if (baseNode instanceof GroupNodeType){
+						pnrType = "GroupNode";
+						
+					}
+					else if (baseNode instanceof ShapeNodeType){
+						//Actually, a shapenode is not really a groupnode, but we pretend here it's a groupnode without children
+						pnrType = "GroupNode";
+						addEdges(selectedPart);
+					}
+					else if (baseNode instanceof PortNodeType){
+						//"In", "Out" or "InOut"
+						pnrType = getPNRDirection(node, (PortNodeType)baseNode);
+						addEdges(selectedPart);
+					}
+					
+					PNRNode pnrNode = new PNRNode(node.getId(), pnrType, pnrGraph);
+					GeometryType geometry = baseNode.getGeometry();
+					//Note: We lose some resolution here.
+					pnrNode.setX((int)(geometry.getX() + 0.5));
+					pnrNode.setY((int)(geometry.getY() + 0.5));
+					pnrNode.setH((int)(geometry.getHeight() + 0.5));
+					pnrNode.setW((int)(geometry.getWidth() + 0.5));
+					pnrGraph.addNode(pnrNode);
+				
+					if (mapEAPath2modelObjs.containsKey(node.getId())){
+						Utils.showErrorMessage("The path " + node.getId() + " is not unique. Error in EAXML. ");
+						return false;
+					}		
+					mapEAPath2modelObjs.put(node.getId(), Pair.of((Object)pnrNode, (Object)baseNode));
+	
+					if (baseNode instanceof GroupNodeType){
+						
+						//Children of GroupNode is a new graph 
+						GraphType childGraph = node.getGraph().get(0);
+						PNRGraph gPNRchild = new PNRGraph(childGraph.getId(), childGraph.getEdgedefault().toString(), pnrNode);
+						pnrNode.setGraph(gPNRchild);
+						@SuppressWarnings("unchecked")
+						List<EditPart> childParts = selectedPart.getChildren();
+						
+						if (!convertNodes (childParts, gPNRchild)){
+							return false;
+						}
+
+					}
+				}
+				else if (modelObject instanceof GraphmlType){
+					return convertNodes(selectedPart.getChildren(), pnrGraph);
+				}
+			}
+	
+			return true;
+		}
+
+		//Adds incoming and outgoing edges of selectedPart to the selectedEdges Set
+		private void addEdges(EditPart selectedPart) {
+			AbstractGraphicalEditPart part = (AbstractGraphicalEditPart)selectedPart;
+
+	//	System.out.println ("Add edges: " + ((NodeType)((EObject)selectedPart.getModel()).eContainer().eContainer()).getId());	
+	//	System.out.println ("Before: " + selectedEdges.size());
+				
+			@SuppressWarnings("unchecked")
+			List<PolyLineEdgeEditPart> sourceEdges = part.getSourceConnections();
+			selectedEdges.addAll(sourceEdges);
+			
+			@SuppressWarnings("unchecked")
+			List<PolyLineEdgeEditPart> targetEdges = part.getTargetConnections();
+			selectedEdges.addAll(targetEdges);
+	//	System.out.println ("After: " + selectedEdges.size());
+			
+		}
+			
+			
 	@Override
 	public void run() {   	
+		
+		//Seems to be a GEF bug with getSelectedObjects() that often returns null in the run() method. Use this longer but safer approach to get the selection instead.
+		IStructuredSelection currentSelection = (IStructuredSelection)Utils.INSTANCE.getEditorPart().getSite().getSelectionProvider().getSelection();
+		
+	
+		
+	   @SuppressWarnings("unchecked") 
+	   List<EditPart> editParts = (List<EditPart>)currentSelection.toList();
 
+	   if (editParts.size() == 0){
+		   //nothing selected - select all editparts on top level
+		   RootEditPart root = Utils.INSTANCE.getGraphicalViewer().getRootEditPart();
+		   GraphMLTypeEditPart graphMLEditPart = (GraphMLTypeEditPart)root.getChildren().get(0);
+		   
+		   editParts = graphMLEditPart.getChildren();
+	   }
+
+		mapEAPath2modelObjs.clear();
+		selectedEdges.clear();
+		PNRGraph gPNR0 = new PNRGraph("g0", "directed", null);
+		   
+		if (convertSgraphml2PNR_ (editParts, gPNR0)){
+			PlaceAndRoute pnr = new PlaceAndRoute();
+			pnr.doPNR(gPNR0);	
+		
+			updateSGraphMLModel(gPNR0);
+		}
+	        
+		/*
+		
 		//SGraphML -> Semcon PNR format
 		mapEAPath2modelObjs.clear();
 		GraphType rootGraph = ModelProcessor.INSTANCE.getRootGraph();
 		PNRGraph gPNR0 = new PNRGraph(rootGraph.getId(), rootGraph.getEdgedefault().toString(), null);
-		ConvertSgraphml2PNR(rootGraph, gPNR0);
-		 
-		PlaceAndRoute pnr = new PlaceAndRoute();
-		pnr.doPNR(gPNR0);	
-	
-		updateSGraphMLModel(gPNR0);
-	
+
+		if (ConvertSgraphml2PNR(rootGraph, gPNR0)){
+			PlaceAndRoute pnr = new PlaceAndRoute();
+			pnr.doPNR(gPNR0);	
+		
+			updateSGraphMLModel(gPNR0);
+		}
+		*/
 	}
 
 	@Override

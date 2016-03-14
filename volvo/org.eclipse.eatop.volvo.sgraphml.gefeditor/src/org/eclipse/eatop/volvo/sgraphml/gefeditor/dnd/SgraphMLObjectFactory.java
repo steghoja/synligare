@@ -33,6 +33,7 @@ import org.eclipse.eatop.eastadl21.FaultInPort;
 import org.eclipse.eatop.eastadl21.FunctionConnector;
 import org.eclipse.eatop.eastadl21.FunctionFlowPort;
 import org.eclipse.eatop.eastadl21.FunctionPrototype;
+import org.eclipse.eatop.eastadl21.HardwareComponentPrototype;
 import org.eclipse.eatop.eastadl21.HardwarePin;
 import org.eclipse.eatop.eastadl21.HardwarePort;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.Activator;
@@ -717,7 +718,7 @@ public class SgraphMLObjectFactory implements CreationFactory {
 				
 				FunctionPrototype fp1 = fc.getPort().get(1).getFunctionPrototype();
 				if (fp1 == null){
-					prototypeTargetPath.append(groupNodeDropTargetDotPath + "." + fc.getPort().get(0).getFunctionPort().getShortName());
+					prototypeTargetPath.append(groupNodeDropTargetDotPath + "." + fc.getPort().get(1).getFunctionPort().getShortName());
 				}
 				else {
 					prototypeTargetPath.append(groupNodeDropTargetDotPath + "." + fp1.getShortName() + "." + fc.getPort().get(1).getFunctionPort().getShortName());
@@ -915,6 +916,10 @@ public class SgraphMLObjectFactory implements CreationFactory {
 					type = ((DesignFunctionPrototype)(groupNodeWithPath.eObject)).getType();
 					
 				}
+				else if(groupNodeWithPath.eObject instanceof HardwareComponentPrototype){
+					type = ((HardwareComponentPrototype)(groupNodeWithPath.eObject)).getType();
+				}
+				
 				if (type == null){
 					Utils.showErrorMessage("The prototype " + ((EAElement)groupNodeWithPath.eObject).getShortName() + " has no type defined.");
 					return new Dimension(0,0);

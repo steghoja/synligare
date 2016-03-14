@@ -1,8 +1,12 @@
 package org.eclipse.eatop.semcon.placeandroute;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.ArrayDeque;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class PlaceAndRoute{
 
@@ -15,105 +19,53 @@ public class PlaceAndRoute{
 	public void doPNR(PNRGraph g0){		
 		
 		g0.setSeparation();
-		
-		//Handle all subgraphs on top-level 
-		for(Iterator<PNRNode> it2 = g0.getNodes().iterator(); it2.hasNext();){
-			PNRNode myn = it2.next();
-			if (myn.getGraph() != null){
-				PNRGraph myg = myn.getGraph();
-				if (myg.getEdgeDefault() == "directed"){
-
-					//Place directed graph
-					PNRPlace pl = new PNRPlace();
-					System.out.println(" - in applyLeftToRightConcept " + myg.getId());
-					pl.preprocessDirected(myg);
-					System.out.println(" - - preprocess done ");
-					pl.placementDirected(myg);
-					System.out.println(" - - placementDirected done");
-
-
-					pl.moveInputCloserToReciever(myg);
-					pl.moveOutputCloserToSender(myg);
-					pl.moveInputCloserToReciever(myg);
-					pl.moveOutputCloserToSender(myg);
-					System.out.println(" - - moved inputs and outputs 1");
-					for(int binindex = 0; binindex < pl.getBins().size(); binindex = binindex + 1){
-						pl.orderVertically(myg, pl.getBins().get(binindex));
+		g0.setEdgeDefault("undirected");
+		List<PNRGraph> done = new ArrayList<PNRGraph>();
+		Deque<PNRGraph> stack = new ArrayDeque<PNRGraph>();
+		stack.push(g0);
+		while(!stack.isEmpty()){
+		    PNRGraph g = stack.peek();
+		    //System.out.println("stack size " + stack.size());
+		    // has all the child graphs been processed?
+		    boolean foundNotYetProcessed = false;
+		    for(Iterator<PNRNode> it = g.getNodes().iterator(); it.hasNext();){
+				PNRNode n = it.next();
+				if(n.getGraph() != null){
+					if(!done.contains(n.getGraph())){
+						foundNotYetProcessed = true;
 					}
-					System.out.println(" - - ordered vertically 1");
-					for(int binindex = pl.getBins().size() - 1; binindex > -1; binindex = binindex - 1){
-						pl.orderVertically(myg, pl.getBins().get(binindex));
-					}
-					System.out.println(" - - ordered vertically 2");
-					pl.moveInputCloserToReciever(myg);
-					pl.moveOutputCloserToSender(myg);
-					pl.moveInputCloserToReciever(myg);
-					pl.moveOutputCloserToSender(myg);
-					System.out.println(" - - moved inputs and outputs 2");
-
-					List<Integer> specialBins = new ArrayList<Integer>();
-					for(int i = 0; i < pl.getBins().size(); i = i + 1){
-						specialBins.add(i);
-					}
-					pl.applyForceDirectedLayout(myg, specialBins);
-					List<PNRNode> collidingGroupNodes = pl.getGroupNodesWithCollisions(myg);
-					int counter = 0;
-					while(!collidingGroupNodes.isEmpty()){
-						counter = counter + 1;
-						pl.applyForceDirectedLayout(myg, specialBins);
-						collidingGroupNodes = pl.getGroupNodesWithCollisions(myg);
-					}
-					pl.finalizePlacement(myg);
-
-					//Route directed
-					PNRRoute r = new PNRRoute();
-					r.tidyUp(myg);
-					r.XYrouting(myg);
-					r.finalizeRoute(myg);
-
-				}else{
-					//Undirected
-
-					PNRPlace pl = new PNRPlace();
-					pl.preprocessUndirected(myg);
-					pl.applyForceDirectedLayout(myg, null);
-					List<PNRNode> collidingGroupNodes = pl.getGroupNodesWithCollisions(myg);
-					int counter = 0;
-					while (counter < 200){ //(collidingGroupNodes.size() > 0){
-						counter = counter + 1;
-						pl.applyForceDirectedLayout(myg, null);
-						collidingGroupNodes = pl.getGroupNodesWithCollisions(myg);
-					}
-					pl.finalizePlacement(myg);
-
 				}
-			}
-		}
-
-
-		//"Diagram Input Global Placement"
-
-
-		//Handle top-level
-		PNRPlace pl = new PNRPlace();
-		pl.preprocessUndirected(g0);
-		pl.applyForceDirectedLayout(g0, null);
-		List<PNRNode> collidingGroupNodes = pl.getGroupNodesWithCollisions(g0);
-		int counter = 0;
-		while (collidingGroupNodes.size() > 0){
-			counter = counter + 1;
-			pl.applyForceDirectedLayout(g0, null);
-			collidingGroupNodes = pl.getGroupNodesWithCollisions(g0);
-			System.out.println("colliding nodes");
-			for(Iterator<PNRNode> cGN = collidingGroupNodes.iterator(); cGN.hasNext();){
-				System.out.println(cGN.next().getId());
-			}
-
-		}
-		pl.finalizePlacement(g0);
-
-
-		//Diagram Output Global Placement");
+		    }
+		    if(!foundNotYetProcessed){
+		    	// all the child graphs have been processed - this graph can be processed
+		    	if(!done.contains(g)){
+		    		System.out.println(g.getId());
+		    		PNRPlace pl = new PNRPlace();
+		    		if(g.getEdgeDefault() == "directed"){
+		    			pl.applyLeftToRightConcept(g);
+		    			PNRRoute r = new PNRRoute();
+		    			r.tidyUp(g);
+		    			r.XYrouting(g);
+		    			r.finalizeRoute(g);
+		    		}else{
+		    			pl.applyUndirectedLayout(g);
+		    		}    	
+		    		done.add(g);
+		    	}
+		    	stack.pop();
+		    }
+		    // add child nodes to the stack, if they are not already in the stack
+		    for(Iterator<PNRNode> it = g.getNodes().iterator(); it.hasNext();){
+				PNRNode n = it.next();
+				if (n.getGraph() != null){
+					if(!done.contains(n.getGraph())){
+						if(!stack.contains(n.getGraph())){
+							stack.push(n.getGraph());
+						}
+					}
+				}
+		    }
+		    
+		} 
 	}
-
 }

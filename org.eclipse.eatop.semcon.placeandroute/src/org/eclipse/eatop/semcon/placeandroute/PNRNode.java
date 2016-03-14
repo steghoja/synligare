@@ -181,8 +181,10 @@ public class PNRNode{
 	    this.type = _type;
 	}else if(_type == "Out"){
 	    this.type = _type;
+	}else if(_type == "InOut"){
+		this.type = _type;
 	}else{
-	    System.out.println("ERROR: unexpected type " + _type + ". Valid types are GroupNode, In and Out.\n");
+	    System.out.println("ERROR: unexpected type " + _type + ". Valid types are GroupNode, In, Out, and InOut.\n");
 	}
     }
 

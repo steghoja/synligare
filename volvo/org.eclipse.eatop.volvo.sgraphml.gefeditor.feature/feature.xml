@@ -33,8 +33,9 @@
       <import plugin="org.eclipse.eatop.workspace"/>
       <import plugin="org.eclipse.eatop.common.ui"/>
       <import plugin="org.eclipse.eatop.geastadl"/>
-      <import plugin="org.apache.xalan" version="2.7.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.gef" version="3.10.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.eatop.volvo.sgraphml" version="0.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.eatop.semcon.placeandroute" version="1.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -60,6 +61,13 @@
 
    <plugin
          id="org.eclipse.eatop.volvo.sgraphml.gefeditor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.eatop.semcon.placeandroute"
          download-size="0"
          install-size="0"
          version="0.0.0"
