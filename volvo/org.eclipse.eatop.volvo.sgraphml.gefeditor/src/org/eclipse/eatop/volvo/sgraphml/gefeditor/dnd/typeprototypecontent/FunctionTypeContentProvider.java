@@ -14,6 +14,7 @@ import org.eclipse.eatop.eastadl21.EAPrototype;
 import org.eclipse.eatop.eastadl21.EAType;
 import org.eclipse.eatop.eastadl21.FunctionFlowPort;
 import org.eclipse.eatop.eastadl21.FunctionPort;
+import org.eclipse.eatop.eastadl21.FunctionPowerPort;
 import org.eclipse.eatop.eastadl21.FunctionPrototype;
 import org.eclipse.eatop.eastadl21.FunctionType;
 import org.eclipse.eatop.volvo.sgraphml.gefeditor.Utils;
@@ -48,15 +49,22 @@ public class FunctionTypeContentProvider implements
 		List<EAPort> foundports = new ArrayList<EAPort>();
 		
 		for (FunctionPort fp : ports) {
-			if (!(fp instanceof FunctionFlowPort)){
-				Utils.showErrorMessage("Only FunctionFlowPort supported");
-			}
-			else {
+			
+			if (fp instanceof FunctionFlowPort){
 				FunctionFlowPort ffp = (FunctionFlowPort)fp;
 
 				if (ffp.getDirection() == kind){
 					foundports.add(ffp);
 				}
+			}
+			else if (fp instanceof FunctionPowerPort){
+				//Powerports are always inout
+				if (kind == EADirectionKind.INOUT){
+					foundports.add(fp);
+				}
+			}
+			else {
+				Utils.showErrorMessage("Only FunctionFlowPort and FunctionPowerPort supported");
 			}
 		}
 		return foundports;
