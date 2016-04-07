@@ -1,18 +1,17 @@
 package org.eclipse.eatop.examples.contextview.providers;
 
-import java.net.URL;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.eatop.common.ui.util.ModelSearcher;
 import org.eclipse.eatop.examples.common.ui.providers.TypeNameLabelDecorator;
 import org.eclipse.eatop.examples.explorer.AppearanceExampleExplorerLabelProvider;
-import org.eclipse.eatop.examples.explorer.internal.Activator;
+import org.eclipse.eatop.examples.explorer.internal.Activator.Implementation;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.navigator.ICommonContentExtensionSite;
 
 public class ContextViewLabelProvider extends AppearanceExampleExplorerLabelProvider {
 
@@ -21,39 +20,53 @@ public class ContextViewLabelProvider extends AppearanceExampleExplorerLabelProv
 
 	private TypeNameLabelDecorator typeNameLabelDecorator;
 
-	private Image arrowLeft;
-	private Image arrowRight;
-	private Image instRef;
+	private Image arrowLeft = Implementation.getImageDescriptor("icons/full/obj16/arrow_left.gif").createImage();
+	private Image arrowRight = Implementation.getImageDescriptor("icons/full/obj16/arrow_right.gif").createImage();
+	private Image instRef = Implementation.getImageDescriptor("icons/full/obj16/instref.png").createImage();
+
+	private final static Map<String, String> relationshipLabels;
+	static {
+		Map<String, String> aMap = new HashMap<>();
+		aMap.put("Satisfy_satisfiedBy", "Satisfied by");
+		aMap.put("satisfiedRequirement", "Satisfies");
+		aMap.put("Realization_realizedBy", "Realized by");
+		aMap.put("derived", "Derived");
+		aMap.put("derivedFrom", "Derived from");
+		aMap.put("refinedRequirement", "Refines");
+		aMap.put("Refine_refinedBy", "Refined by");
+		aMap.put("verifiedByCase", "Verified by case");
+		aMap.put("verifiedByProcedure", "Verified by procedure");
+		aMap.put("verifiedRequirement", "Verifies");
+		aMap.put("target", "Links to");
+		aMap.put("source", "Links to");
+		relationshipLabels = Collections.unmodifiableMap(aMap);
+	}
 
 	public ContextViewLabelProvider() {
 		typeNameLabelDecorator = new TypeNameLabelDecorator();
 	}
 
 	@Override
-	public void init(ICommonContentExtensionSite aConfig) {
-		URL url = FileLocator.find(Platform.getBundle(Activator.PLUGIN_ID), new Path("icons/full/obj16/arrow_left.gif"), null); //$NON-NLS-1$
-		if (url != null) {
-			arrowLeft = new Image(Display.getDefault(), url.getFile());
-		}
-		url = FileLocator.find(Platform.getBundle(Activator.PLUGIN_ID), new Path("icons/full/obj16/arrow_right.gif"), null); //$NON-NLS-1$
-		if (url != null) {
-			arrowRight = new Image(Display.getDefault(), url.getFile());
-		}
-		url = FileLocator.find(Platform.getBundle(Activator.PLUGIN_ID), new Path("icons/full/obj16/instref.gif"), null); //$NON-NLS-1$
-		if (url != null) {
-			instRef = new Image(Display.getDefault(), url.getFile());
-		}
-
-	}
-
-	@Override
 	public String getText(Object element) {
-		String str = super.getText(element);
+		String str = super.getUndecoratedText(element);
 		if (element instanceof TextOnlyNode) {
-			str = element.toString();
+			if (relationshipLabels.containsKey(element.toString())) {
+				str = relationshipLabels.get(element.toString());
+			} else {
+				str = element.toString();
+			}
 		}
 		if (showTypes) {
 			str = typeNameLabelDecorator.decorateText(str, element);
+		}
+		if (element instanceof EObject) {
+			EReference containmentFeature = ((EObject) element).eContainmentFeature();
+			if (containmentFeature != null) {
+				EStructuralFeature nameFeature = containmentFeature.eClass().getEStructuralFeature("name");
+				if (nameFeature != null) {
+					str += " [" + containmentFeature.eGet(nameFeature) + "]";
+				}
+			}
 		}
 		if (element instanceof EObject && showPaths) {
 			str += " [" + ModelSearcher.getPathTo((EObject) element) + "]"; //$NON-NLS-1$ //$NON-NLS-2$

@@ -48,6 +48,18 @@ public class AppearanceExampleExplorerLabelProvider extends BasicExplorerLabelPr
 
 	@Override
 	public String getText(Object element) {
+		String text = getUndecoratedText(element);
+		if (isShowTypeName()) {
+			if (typeNameLabelDecorator == null) {
+				typeNameLabelDecorator = new TypeNameLabelDecorator();
+			}
+			return typeNameLabelDecorator.decorateText(text, element);
+		} else {
+			return text;
+		}
+	}
+
+	public String getUndecoratedText(Object element) {
 		if (element instanceof ChildWrapper) {
 			return getText(((ChildWrapper) element).getObject());
 		}
@@ -59,15 +71,7 @@ public class AppearanceExampleExplorerLabelProvider extends BasicExplorerLabelPr
 			return ((CategorizationNode) element).getName();
 		}
 
-		String text = super.getText(element);
-		if (isShowTypeName()) {
-			if (typeNameLabelDecorator == null) {
-				typeNameLabelDecorator = new TypeNameLabelDecorator();
-			}
-			return typeNameLabelDecorator.decorateText(text, element);
-		} else {
-			return text;
-		}
+		return super.getText(element);
 	}
 
 	@Override
