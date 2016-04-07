@@ -2,6 +2,7 @@ package org.eclipse.eatop.examples.contextview.providers;
 
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.eatop.eastadl21.FaultFailurePort;
+import org.eclipse.eatop.eastadl21.Identifiable;
 import org.eclipse.eatop.eastadl21.RequirementsModel;
 
 public class ContextProviderFactory implements IAdapterFactory {
@@ -13,6 +14,8 @@ public class ContextProviderFactory implements IAdapterFactory {
 				return new ASILLevelContentProvider();
 			} else if (adaptableObject instanceof RequirementsModel) {
 				return new RequirementHierarchyContentProvider();
+			} else if (adaptableObject instanceof Identifiable) {
+				return new RelationshipContentProvider();
 			}
 		}
 		return null;

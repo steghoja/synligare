@@ -124,7 +124,7 @@
                   </instanceof>
                   <test
                         property="org.eclipse.sphinx.emf.classNameMatches"
-                        value="eastadl\d\w\..*">
+                        value="org.eclipse.eatop.eastadl\d\w\..*">
                   </test>
                </and>
                <and>
@@ -133,7 +133,7 @@
                   </instanceof>
                   <test
                         property="org.eclipse.sphinx.emf.ownerClassNameMatches"
-                        value="eastadl\d\w\..*">
+                        value="org.eclipse.eatop.eastadl\d\w\..*">
                   </test></and>
             </or>
          </possibleChildren>
@@ -190,6 +190,7 @@
             </or>
          </enablement>
          </actionProvider>
+         <enablement></enablement>
       </navigatorContent>
    </extension>
    <extension

@@ -52,7 +52,8 @@ public class ExplorerContextView extends ViewPart implements IViewerProvider, IT
 	static final String SHOW_MODEL_PATHS = "contextview_show_paths"; //$NON-NLS-1$
 	static final String SHOW_TYPES = "contextview_show_object_types"; //$NON-NLS-1$
 
-	private static final String LOCK_ICON_FILE = "full/obj16/lock.png"; //$NON-NLS-1$
+	private static final String LOCK_ICON_FILE = "icons/full/obj16/lock.png"; //$NON-NLS-1$
+	private static final String COLLAPSE_ICON_FILE = "icons/full/obj16/collapseall.gif"; //$NON-NLS-1$
 
 	ISelectionListener listener = new ISelectionListener() {
 		@Override
@@ -71,11 +72,13 @@ public class ExplorerContextView extends ViewPart implements IViewerProvider, IT
 
 				}
 				refresh();
+				viewer.expandAll();
 			}
 		}
 	};
 
 	private Action lockSelection;
+	private Action collapseAll;
 	private Action showInstRefs;
 	private Action showPaths;
 	private Action showTypes;
@@ -102,6 +105,7 @@ public class ExplorerContextView extends ViewPart implements IViewerProvider, IT
 
 		// Fake selection changed to get initial data
 		listener.selectionChanged(this, selectionService.getSelection());
+		viewer.expandAll();
 	}
 
 	@Override
@@ -112,7 +116,6 @@ public class ExplorerContextView extends ViewPart implements IViewerProvider, IT
 	public void refresh() {
 		viewer.setInput(input);
 		viewer.refresh();
-		viewer.expandAll();
 	}
 
 	@Override
@@ -136,6 +139,7 @@ public class ExplorerContextView extends ViewPart implements IViewerProvider, IT
 
 	private void createActions() {
 		lockSelection = new LockSelectionToggleAction();
+		collapseAll = new CollapseAllAction();
 		showInstRefs = new ShowInstanceReferencesAction();
 		showTypes = new ShowTypesAction();
 		showPaths = new ShowModelPathsAction();
@@ -169,6 +173,8 @@ public class ExplorerContextView extends ViewPart implements IViewerProvider, IT
 
 		lockSelection.setChecked(false);
 		toolBar.add(lockSelection);
+
+		toolBar.add(collapseAll);
 
 		IMenuManager manager = actionBars.getMenuManager();
 		manager.add(showInstRefs);
@@ -255,7 +261,28 @@ public class ExplorerContextView extends ViewPart implements IViewerProvider, IT
 					listener.selectionChanged(navigator, selectionService.getSelection("org.eclipse.eatop.examples.explorer.views.eastadlExplorer")); //$NON-NLS-1$
 				}
 				refresh();
+				viewer.expandAll();
 			}
+		}
+	}
+
+	private class CollapseAllAction extends Action {
+
+		private boolean expanded;
+		private ImageDescriptor collapsedDescriptor;
+
+		public CollapseAllAction() {
+			super("Collapse all", IAction.AS_PUSH_BUTTON);
+			collapsedDescriptor = Implementation.getImageDescriptor(COLLAPSE_ICON_FILE);
+			setImageDescriptor(collapsedDescriptor);
+		}
+
+		@Override
+		public void run() {
+			viewer.collapseAll();
+			setImageDescriptor(collapsedDescriptor);
+			expanded = false;
+			refresh();
 		}
 	}
 
@@ -268,6 +295,7 @@ public class ExplorerContextView extends ViewPart implements IViewerProvider, IT
 		public void run() {
 			contentProvider.setDisablesGenericInstanceReferencedBy(!isChecked());
 			refresh();
+			viewer.expandAll();
 		}
 	}
 
@@ -280,6 +308,7 @@ public class ExplorerContextView extends ViewPart implements IViewerProvider, IT
 		public void run() {
 			labelProvider.setShowPaths(isChecked());
 			refresh();
+			viewer.expandAll();
 		}
 	}
 
@@ -292,6 +321,7 @@ public class ExplorerContextView extends ViewPart implements IViewerProvider, IT
 		public void run() {
 			labelProvider.setShowTypes(isChecked());
 			refresh();
+			viewer.expandAll();
 		}
 	}
 

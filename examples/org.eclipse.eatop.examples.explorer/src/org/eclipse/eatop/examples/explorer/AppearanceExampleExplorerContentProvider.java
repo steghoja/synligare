@@ -98,7 +98,7 @@ public class AppearanceExampleExplorerContentProvider extends BasicExplorerConte
 				Object[] typeChildren = contentProvider.getChildren(dereferenced);
 				if (typeChildren.length > 0) {
 					for (Object o : typeChildren) {
-						childrenList.add(new ChildWrapper((EObject) o));
+						childrenList.add(new ChildWrapper((EObject) o, parentElement));
 					}
 				}
 
@@ -149,6 +149,9 @@ public class AppearanceExampleExplorerContentProvider extends BasicExplorerConte
 		}
 		if (object instanceof CategorizationNode) {
 			return ((CategorizationNode) object).getParent();
+		}
+		if (object instanceof ChildWrapper) {
+			return ((ChildWrapper) object).getParent();
 		}
 		return super.getParent(object);
 	}
