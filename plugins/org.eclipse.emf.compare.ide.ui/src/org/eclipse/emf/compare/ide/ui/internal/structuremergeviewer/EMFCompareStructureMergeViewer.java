@@ -58,7 +58,6 @@ import org.eclipse.emf.common.ui.CommonUIPlugin;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.compare.Comparison;
 import org.eclipse.emf.compare.ConflictKind;
 import org.eclipse.emf.compare.Diff;
@@ -82,11 +81,8 @@ import org.eclipse.emf.compare.ide.ui.internal.logical.ComparisonScopeBuilder;
 import org.eclipse.emf.compare.ide.ui.internal.logical.EmptyComparisonScope;
 import org.eclipse.emf.compare.ide.ui.internal.progress.JobProgressInfoComposite;
 import org.eclipse.emf.compare.ide.ui.internal.progress.JobProgressMonitorWrapper;
-import org.eclipse.emf.compare.ide.ui.internal.structuremergeviewer.provider.TreeCompareInputAdapterFactory;
-import org.eclipse.emf.compare.ide.ui.internal.structuremergeviewer.provider.TreeNodeCompareInput;
 import org.eclipse.emf.compare.ide.ui.internal.util.CompareHandlerService;
 import org.eclipse.emf.compare.ide.ui.internal.util.JFaceUtil;
-import org.eclipse.emf.compare.ide.ui.internal.util.PlatformElementUtil;
 import org.eclipse.emf.compare.internal.merge.MergeMode;
 import org.eclipse.emf.compare.rcp.EMFCompareRCPPlugin;
 import org.eclipse.emf.compare.rcp.internal.extension.impl.EMFCompareBuilderConfigurator;
@@ -681,7 +677,7 @@ public class EMFCompareStructureMergeViewer extends AbstractStructuredViewerWrap
 
 		IComparisonScope comparisonScope = input.getComparisonScope();
 		final Comparison comparison = comparator.compare(comparisonScope, BasicMonitor.toMonitor(monitor));
-		
+
 		compareInputChanged(input.getComparisonScope(), comparison);
 	}
 
@@ -700,10 +696,9 @@ public class EMFCompareStructureMergeViewer extends AbstractStructuredViewerWrap
 			// display problem tabs if any
 			SWTUtil.safeAsyncExec(new Runnable() {
 				public void run() {
-					if (comparison.getDiagnostic() == null) {
-						comparison.setDiagnostic(new BasicDiagnostic());
+					if (comparison.getDiagnostic() != null) {
+						updateProblemIndication(comparison.getDiagnostic());
 					}
-					updateProblemIndication(comparison.getDiagnostic());
 				}
 			});
 
@@ -868,18 +863,19 @@ public class EMFCompareStructureMergeViewer extends AbstractStructuredViewerWrap
 	 *            the comparison used to know if there are differences.
 	 */
 	private void selectFirstDiffOrDisplayLabelViewer(final Comparison comparison) {
-		ICompareInput compareInput = (ICompareInput)EcoreUtil.getAdapter(comparison.eAdapters(),
-				ICompareInput.class);
-		if (compareInput == null) {
-			compareInput = new TreeNodeCompareInput(new TreeCompareInputAdapterFactory());
-		}
-		List<Diff> differences = comparison.getDifferences();
-		if (differences.isEmpty()) {
-			navigatable.fireOpen(new NoDifferencesCompareInput(compareInput));
-		} else if (JFaceUtil.filterVisibleElement(getViewer(), IS_DIFF).isEmpty()) {
-			navigatable.fireOpen(new NoVisibleItemCompareInput(compareInput));
-		} else {
-			navigatable.selectChange(INavigatable.FIRST_CHANGE);
+		if (comparison != null) {
+			ICompareInput compareInput = (ICompareInput)EcoreUtil.getAdapter(comparison.eAdapters(),
+					ICompareInput.class);
+			List<Diff> differences = comparison.getDifferences();
+			if (differences.isEmpty()) {
+				if (compareInput != null) {
+					navigatable.fireOpen(new NoDifferencesCompareInput(compareInput));
+				}
+			} else if (JFaceUtil.filterVisibleElement(getViewer(), IS_DIFF).isEmpty()) {
+				navigatable.fireOpen(new NoVisibleItemCompareInput(compareInput));
+			} else {
+				navigatable.selectChange(INavigatable.FIRST_CHANGE);
+			}
 		}
 	}
 

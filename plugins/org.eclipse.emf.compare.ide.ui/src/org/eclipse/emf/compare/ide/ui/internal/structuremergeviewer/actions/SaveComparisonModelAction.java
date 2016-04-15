@@ -12,11 +12,11 @@ package org.eclipse.emf.compare.ide.ui.internal.structuremergeviewer.actions;
 
 import static com.google.common.collect.Maps.newHashMap;
 
-import com.google.common.collect.ImmutableList;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.NotSerializableException;
+import java.util.Collection;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -32,7 +32,9 @@ import org.eclipse.emf.compare.ide.ui.internal.EMFCompareIDEUIMessages;
 import org.eclipse.emf.compare.ide.ui.internal.EMFCompareIDEUIPlugin;
 import org.eclipse.emf.compare.rcp.ui.internal.configuration.IEMFCompareConfiguration;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.action.Action;
@@ -44,6 +46,8 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.statushandlers.StatusAdapter;
 import org.eclipse.ui.statushandlers.StatusManager;
+
+import com.google.common.collect.ImmutableList;
 
 /**
  * Action that manages the save of the comparison model.
@@ -127,10 +131,25 @@ public class SaveComparisonModelAction extends Action {
 		Copier copier = new Copier(false);
 		EObject comparisonCopy = copier.copy(comparison);
 		copier.copyReferences();
-
 		resource.getContents().add(comparisonCopy);
+		Map<EObject, Collection<Setting>> find = EcoreUtil.UnresolvedProxyCrossReferencer.find(comparison);
 		try {
-			resource.save(newHashMap());
+			if (find.keySet().isEmpty()) {
+				resource.save(newHashMap());
+			} else {
+				boolean found = false;
+				for (EObject string : find.keySet()) {
+					if (string.eResource() == null) {
+						found = true;
+						break;
+					}
+				}
+				if (found) {
+					MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), "Error whilst saving difference", "Files which has no link to a resource was found when attempting to save the difference, aborting save.\nPossible workaround for this problem is to: \n1. Save model and close the compare.\n2. Redo the same compare again.\n3. Save the difference without doing any merging.");
+				} else {
+					resource.save(newHashMap());
+				}
+			}
 		} catch (RuntimeException e) {
 			if (e.getCause() instanceof NotSerializableException) {
 				final Status status = new Status(IStatus.ERROR, EMFCompareIDEUIPlugin.PLUGIN_ID,
