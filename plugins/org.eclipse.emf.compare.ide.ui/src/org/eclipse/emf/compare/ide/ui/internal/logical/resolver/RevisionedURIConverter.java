@@ -102,10 +102,6 @@ final class RevisionedURIConverter extends StorageURIConverter {
 			if (targetFile != null) {
 				stream = openRevisionStream(targetFile);
 			} else {
-				// FIXME The file URI couldn't be resolved in the workspace...
-			}
-
-			if (stream == null) {
 				return super.createInputStream(uri, options);
 			}
 		}
@@ -133,8 +129,10 @@ final class RevisionedURIConverter extends StorageURIConverter {
 
 				if (provider != null) {
 					final IStorage storage = provider.getStorage(new NullProgressMonitor());
-					getLoadedRevisions().add(storage);
-					return storage.getContents();
+					if (storage != null) {
+						getLoadedRevisions().add(storage);
+						return storage.getContents();
+					}
 				}
 			} catch (CoreException e) {
 				logError(e);

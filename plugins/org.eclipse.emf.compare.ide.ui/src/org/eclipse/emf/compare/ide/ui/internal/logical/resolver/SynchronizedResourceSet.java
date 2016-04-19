@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2011, 2014 Obeo.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Obeo - initial API and implementation
+ *******************************************************************************/
 package org.eclipse.emf.compare.ide.ui.internal.logical.resolver;
 
 import com.google.common.collect.Maps;
@@ -30,6 +40,12 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
+/**
+ * A thread-safe implementation of a ResourceSet that will prevent loading of resources unless explicitely
+ * demanded through {@link #loadResource(URI)}.
+ * 
+ * @author <a href="mailto:laurent.goubet@obeo.fr">Laurent Goubet</a>
+ */
 class SynchronizedResourceSet extends ResourceSetImpl {
 	/** Associates URIs with their resources. */
 	private final ConcurrentHashMap<URI, Resource> uriCache;
@@ -47,17 +63,12 @@ class SynchronizedResourceSet extends ResourceSetImpl {
 		 */
 		loadOptions.put(XMLResource.OPTION_USE_PARSER_POOL, new NoNotificationParserPool());
 		loadOptions.put(XMLResource.OPTION_USE_DEPRECATED_METHODS, Boolean.FALSE);
-		loadOptions.put(XMLResource.OPTION_DISABLE_NOTIFY, Boolean.TRUE);
 
 		final int bufferSize = 16384;
 		final Map<String, Object> parserProperties = Maps.newHashMap();
 		parserProperties.put("http://apache.org/xml/properties/input-buffer-size", Integer //$NON-NLS-1$
 				.valueOf(bufferSize));
 		loadOptions.put(XMLResource.OPTION_PARSER_PROPERTIES, parserProperties);
-
-		// These two might be superfluous
-		loadOptions.put(XMLResource.OPTION_DEFER_ATTACHMENT, Boolean.TRUE);
-		loadOptions.put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, Boolean.TRUE);
 
 		/*
 		 * We don't use XMLResource.OPTION_USE_XML_NAME_TO_FEATURE_MAP whereas it could bring performance
@@ -128,6 +139,11 @@ class SynchronizedResourceSet extends ResourceSetImpl {
 		}
 	}
 
+	/*
+	 * TODO this should be made into an extension point : give the user a Resource, and ask for a Set<URI> in
+	 * return, representing the cross references of said resource. Warn the client that implementation should
+	 * be kept fast and should avoid resolution of proxies.
+	 */
 	public Set<URI> discoverCrossReferences(Resource resource, IProgressMonitor monitor) {
 		resource.eSetDeliver(false);
 		final List<EObject> roots = ((InternalEList<EObject>)resource.getContents()).basicList();
@@ -170,7 +186,7 @@ class SynchronizedResourceSet extends ResourceSetImpl {
 		return monitor.isCanceled() || Thread.currentThread().isInterrupted();
 	}
 
-	public void unload(Resource resource, IProgressMonitor monitor) {
+	public void unload(Resource resource, @SuppressWarnings("unused") IProgressMonitor monitor) {
 		final URI uri = resource.getURI();
 		uriCache.remove(uri);
 		getResources().remove(resource);
