@@ -23,7 +23,7 @@
 		<module>../../plugins/org.eclipse.eatop.workspace.ui</module>
 		<module>../../plugins/org.eclipse.eatop.sdk</module>
 		<module>../../plugins/org.eclipse.eatop.eastadl2112.edit</module>
-		<module>../../plugins/org.eclipse.emf.compare.ide.ui</module>
+		<!-- <module>../../plugins/org.eclipse.emf.compare.ide.ui</module> -->
 		<module>../../plugins/org.eclipse.eatop.connectorcreator</module>
 		<module>../../plugins/org.eclipse.eatop.connectorcreator.eadl</module>
 		
@@ -36,7 +36,7 @@
 		<module>../../examples/org.eclipse.eatop.examples.actions</module>
 		<module>../../examples/org.eclipse.eatop.examples.tableview.ui</module>
 		<module>../../examples/org.eclipse.eatop.examples.tableview</module>
-		<module>../../examples/org.eclipse.eatop.examples.emf.compare</module>
+		<!-- <module>../../examples/org.eclipse.eatop.examples.emf.compare</module> -->
 		
 		<module>../../volvo/org.eclipse.eatop.volvo.errormodelgenerator</module>
 		<module>../../volvo/org.eclipse.eatop.volvo.fmuimport</module>
@@ -52,6 +52,8 @@
 		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.modeloverview</module>
 		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.modelprocessor</module>
 		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.requirementmetricsviewer</module>
+		
+		<module>../../org.eclipse.eatop.semcon.placeandroute</module>
 		
 		
 
@@ -74,7 +76,7 @@
 		<module>../../features/org.eclipse.eatop.examples-feature</module>
 
 		<module>../../features/org.eclipse.eatop.examples.tableview.feature</module>
-		<module>../../features/org.eclipse.eatop.examples.emf.compare.feature</module>
+		<!-- <module>../../features/org.eclipse.eatop.examples.emf.compare.feature</module> -->
 		<module>../../features/org.eclipse.eatop.demonstrator-feature</module>
 		
 		<module>../../volvo/org.eclipse.eatop.volvo.errormodelgenerator.feature</module>
