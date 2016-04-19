@@ -114,14 +114,6 @@
             allPopups="true"
             locationURI="popup:compareWithMenu?after=compareWithGroup">
          <command
-               commandId="org.eclipse.emf.compare.ide.ui.compareInDialog"
-               label="%command.each.other.in.dialog"
-               style="push">
-            <visibleWhen
-                  checkEnabled="true">
-            </visibleWhen>
-         </command>
-         <command
                commandId="org.eclipse.emf.compare.ide.ui.compareInEditor"
                label="%command.each.other.in.editor"
                style="push">
@@ -275,6 +267,9 @@
             </or>
          </and>
       </enablement>
+      <extends-model
+            id="org.eclipse.core.resources.modelProvider">
+      </extends-model>
    </extension>
    <extension
          point="org.eclipse.emf.compare.ide.ui.modelResolvers">

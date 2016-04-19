@@ -53,6 +53,8 @@
 		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.modelprocessor</module>
 		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.requirementmetricsviewer</module>
 		
+		<module>../../org.eclipse.eatop.semcon.placeandroute</module>
+		
 		
 
 		<!-- Tests -->

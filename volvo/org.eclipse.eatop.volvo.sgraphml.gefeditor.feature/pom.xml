@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.eclipse.eatop.features</groupId>
 	<artifactId>org.eclipse.eatop.volvo.sgraphml.gefeditor.feature</artifactId>
-	<version>0.6.0-SNAPSHOT</version>
+	<version>0.7.0-SNAPSHOT</version>
 	<packaging>eclipse-feature</packaging>
 	<build>
 		<plugins>

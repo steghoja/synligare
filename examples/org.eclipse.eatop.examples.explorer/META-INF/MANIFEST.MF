@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.sphinx.emf.explorer,
  org.eclipse.eatop.common.ui,
  org.eclipse.eatop.eastadl2112
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: org.eclipse.eatop.examples.explorer,
