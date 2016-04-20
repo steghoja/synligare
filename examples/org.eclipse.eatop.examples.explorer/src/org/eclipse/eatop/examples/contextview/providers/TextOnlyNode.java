@@ -7,7 +7,7 @@ public class TextOnlyNode {
 	private String imageName;
 
 	public static enum NodeType {
-		REFERENCES, REFERENCED_BY, INSTANCE_REFERENCED_BY, OTHER
+		REFERENCES, REFERENCED_BY, INSTANCE_REFERENCED_BY, RELATION, OTHER
 	}
 
 	public TextOnlyNode(String text, NodeType type) {
@@ -19,6 +19,8 @@ public class TextOnlyNode {
 			imageName = "left";
 		} else if (type == NodeType.INSTANCE_REFERENCED_BY) {
 			imageName = "instref";
+		} else if (type == NodeType.RELATION) {
+			imageName = "relation";
 		} else {
 			imageName = "";
 		}

@@ -23,6 +23,7 @@ public class ContextViewLabelProvider extends AppearanceExampleExplorerLabelProv
 	private Image arrowLeft = Implementation.getImageDescriptor("icons/full/obj16/arrow_left.gif").createImage();
 	private Image arrowRight = Implementation.getImageDescriptor("icons/full/obj16/arrow_right.gif").createImage();
 	private Image instRef = Implementation.getImageDescriptor("icons/full/obj16/instref.png").createImage();
+	private Image relation = Implementation.getImageDescriptor("icons/full/obj16/type.gif").createImage();
 
 	private final static Map<String, String> relationshipLabels;
 	static {
@@ -30,6 +31,7 @@ public class ContextViewLabelProvider extends AppearanceExampleExplorerLabelProv
 		aMap.put("Satisfy_satisfiedBy", "Satisfied by");
 		aMap.put("satisfiedRequirement", "Satisfies");
 		aMap.put("Realization_realizedBy", "Realized by");
+		aMap.put("Realization_realized", "Realizes");
 		aMap.put("derived", "Derived");
 		aMap.put("derivedFrom", "Derived from");
 		aMap.put("refinedRequirement", "Refines");
@@ -85,6 +87,8 @@ public class ContextViewLabelProvider extends AppearanceExampleExplorerLabelProv
 				img = arrowLeft;
 			} else if (imageName.equals("instref")) {
 				img = instRef;
+			} else if (imageName.equals("relation")) {
+				img = relation;
 			}
 			if (img != null) {
 				return img;
@@ -111,6 +115,9 @@ public class ContextViewLabelProvider extends AppearanceExampleExplorerLabelProv
 		}
 		if (instRef != null) {
 			instRef.dispose();
+		}
+		if (relation != null) {
+			relation.dispose();
 		}
 	}
 }

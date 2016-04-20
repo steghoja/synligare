@@ -22,21 +22,11 @@ public class RelationshipContentProvider extends BasicContextContentProvider {
 	public Object[] getElements(Object inputElement) {
 		List<Object> elements = new ArrayList<Object>();
 
-		satisfiedByNode = new TextOnlyNode("Satified by", TextOnlyNode.NodeType.REFERENCED_BY);
-		if (hasChildren(satisfiedByNode)) {
-			elements.add(satisfiedByNode);
-		}
-
-		satifiesNode = new TextOnlyNode("Satisfies", TextOnlyNode.NodeType.REFERENCES);
-		if (hasChildren(satifiesNode)) {
-			elements.add(satifiesNode);
-		}
-
 		if (elementNodes == null) {
 			elementNodes = new HashMap<String, TextOnlyNode>();
 			Map<String, List<Object>> elementNameToChildren = getChildMap();
 			for (String elementName : elementNameToChildren.keySet()) {
-				elementNodes.put(elementName, new TextOnlyNode(elementName, TextOnlyNode.NodeType.REFERENCED_BY));
+				elementNodes.put(elementName, new TextOnlyNode(elementName, TextOnlyNode.NodeType.RELATION));
 			}
 		}
 
@@ -53,12 +43,6 @@ public class RelationshipContentProvider extends BasicContextContentProvider {
 	@Override
 	public Object[] getChildren(Object parentElement) {
 		List<Object> children = new ArrayList<Object>();
-		// if (parentElement == satisfiedByNode && input instanceof Requirement) {
-		// children = getSatisfiedBy();
-		// }
-		// if (parentElement == satifiesNode && input instanceof EObject) {
-		// children = getSatisfies();
-		// }
 
 		Map<String, List<Object>> elementNameToChildren = getChildMap();
 
@@ -133,41 +117,6 @@ public class RelationshipContentProvider extends BasicContextContentProvider {
 	public boolean hasChildren(Object element) {
 		return getChildren(element).length > 0;
 	}
-
-	// private List<Object> getSatisfiedBy() {
-	// List<Object> satisfiedBy = new ArrayList<Object>();
-	// for (EObject eoWithRefToSelected : ModelSearcher.findReferences((EObject) input)) {
-	// if (eoWithRefToSelected instanceof Satisfy) {
-	// for (EObject satisfyBy : eoWithRefToSelected.eContents()) {
-	// if (satisfyBy instanceof Satisfy_satisfiedBy) {
-	// for (EReference identifiableTargetRef : getReferencesByName(satisfyBy, "identifiable_target")) {
-	// satisfiedBy.add(satisfyBy.eGet(identifiableTargetRef));
-	// }
-	// }
-	// }
-	// }
-	// }
-	// return satisfiedBy;
-	// }
-	//
-	// private List<Object> getSatisfies() {
-	// Relationship r;
-	// List<Object> satifies = new ArrayList<Object>();
-	// for (EObject eoWithRefToSelected : ModelSearcher.findReferences((EObject) input)) {
-	// if (eoWithRefToSelected instanceof Satisfy_satisfiedBy) {
-	// EObject satisfy = eoWithRefToSelected.eContainer();
-	// if (satisfy instanceof Satisfy) {
-	// for (EReference satisfiesRequirementRef : getReferencesByName(satisfy, "satisfiedRequirement")) {
-	// Object requirementList = satisfy.eGet(satisfiesRequirementRef);
-	// if (requirementList instanceof EObjectResolvingEList<?>) {
-	// satifies.addAll((EObjectResolvingEList<?>) requirementList);
-	// }
-	// }
-	// }
-	// }
-	// }
-	// return satifies;
-	// }
 
 	private List<EReference> getReferencesByName(EObject referringObject, String refName) {
 		List<EReference> references = new ArrayList<EReference>();
