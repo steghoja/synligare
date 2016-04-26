@@ -11,6 +11,7 @@ import org.eclipse.eatop.examples.explorer.internal.Activator;
 import org.eclipse.eatop.examples.explorer.internal.Activator.Implementation;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.ui.provider.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
@@ -90,7 +91,7 @@ public class ExplorerContextView extends ViewPart implements IViewerProvider, IT
 	public void createPartControl(Composite parent) {
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		viewer.setContentProvider(contentProvider);
-		viewer.setLabelProvider(labelProvider);
+		viewer.setLabelProvider(new DelegatingStyledCellLabelProvider(labelProvider));
 		viewer.setInput(input);
 		viewer.setComparator(new ViewerSorter());
 		getSite().setSelectionProvider(viewer);

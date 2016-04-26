@@ -5,13 +5,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.eatop.common.ui.util.ModelSearcher;
+import org.eclipse.eatop.eastadl21.SafetyConstraint;
 import org.eclipse.eatop.examples.common.ui.providers.TypeNameLabelDecorator;
 import org.eclipse.eatop.examples.explorer.AppearanceExampleExplorerLabelProvider;
 import org.eclipse.eatop.examples.explorer.internal.Activator.Implementation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.StyledString.Styler;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.TextStyle;
+import org.eclipse.swt.widgets.Display;
 
 public class ContextViewLabelProvider extends AppearanceExampleExplorerLabelProvider {
 
@@ -74,6 +82,23 @@ public class ContextViewLabelProvider extends AppearanceExampleExplorerLabelProv
 			str += " [" + ModelSearcher.getPathTo((EObject) element) + "]"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		return str;
+	}
+
+	@Override
+	public StyledString getStyledText(Object element) {
+		StyledString ss = new StyledString(getText(element));
+		if (element instanceof SafetyConstraint) {
+			SafetyConstraint safetyConstraint = (SafetyConstraint) element;
+			ss.append(" " + safetyConstraint.getAsilValue().getLiteral(), new Styler() {
+				@Override
+				public void applyStyles(final TextStyle textStyle) {
+					Font boldFont = new Font(Display.getDefault(), new FontData("Segoe UI", 9, SWT.BOLD));
+					textStyle.font = boldFont;
+				}
+			});
+
+		}
+		return ss;
 	}
 
 	@Override
