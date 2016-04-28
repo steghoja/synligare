@@ -50,6 +50,7 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.ui.actions.SelectionAction;
 import org.eclipse.jface.viewers.ITreeSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.sphinx.emf.util.EcorePlatformUtil;
@@ -159,9 +160,6 @@ public class GotoModelElementAction extends SelectionAction {
 	        	return;
 	        }
 	        
-            List<Object> path = new ArrayList<Object>();
-	        
-	        
 	        EObject eObject = EAXMLprocessor.getEObjectbyDotPath(dotPath);
         	dotPath = EAXMLprocessor.toFatherPath(dotPath);
         	
@@ -169,49 +167,15 @@ public class GotoModelElementAction extends SelectionAction {
         	if (!dotPath.isEmpty())	{        	
         		father = EAXMLprocessor.getEObjectbyDotPath(dotPath);
         	}
-
-        	// ----- This code is needed until the explorer is updated to handle a selection change with virtual nodes.
-        	if (father instanceof EAPrototype){
-        		Utils.showInformationMessage("Navigation to virtual treeview element not implemented yet.");
-        		return;
-        	}
-        	// ----
         	
-	        while (father != null){
-	        	
-	        	if (father instanceof EAPrototype){
-	        		//if the father is a prototype, then EObject is virtually contained in father
-	        		ChildWrapper wrapper =  new ChildWrapper(eObject);
-	        		path.add(wrapper);
-	        	}
-	        	else{
-		        	path.add(0, eObject);
-	        	}
-		        eObject = father;
-	        	dotPath = EAXMLprocessor.toFatherPath(dotPath);
-	        	father = EAXMLprocessor.getEObjectbyDotPath(dotPath);
-	        }
-	        
-	        path.add(0, eObject);
-
-	        //add EAXML
-	        EAXML eaxml = (EAXML)eObject.eContainer();
-	        path.add(0, eaxml);
-	        
-	        Resource resource = eaxml.eResource();
-	        IFile file = EcorePlatformUtil.getFile(resource);
-	        path.add(0, file);
-	        
-	        //project
-	        IProject project = file.getProject();
-	        path.add(0, project);	        
-	        
-	        
-	        TreePath[] treePaths = new TreePath[1];
-	        treePaths[0] = new TreePath(path.toArray());
-
-	        ITreeSelection selection = new TreeSelection(treePaths);
-
+        	StructuredSelection selection = null;
+        	if (father instanceof EAPrototype){
+        		//if the father is a prototype, then EObject is virtually contained in father
+        		selection = new StructuredSelection( new ChildWrapper(eObject, father) );
+        	} else {
+        		selection = new StructuredSelection( eObject );
+        	}
+        	
 			IWorkbenchPage page= Activator.getDefault().getWorkbench().
 					getActiveWorkbenchWindow().getActivePage();
 
