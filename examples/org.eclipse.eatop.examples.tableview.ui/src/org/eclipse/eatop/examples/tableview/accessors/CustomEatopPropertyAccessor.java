@@ -17,8 +17,29 @@ public abstract class CustomEatopPropertyAccessor implements IEObjectPropertyAcc
 
 	protected final GEatopDisplayConverter displayConverter = new GEatopDisplayConverter();
 
+	private boolean isAdded;
+	
 	public CustomEatopPropertyAccessor() {
 		super();
+		isAdded = false;
+	}
+	
+	public void tryAddToList(List<IEObjectPropertyAccessor> accessorList, EObject testObject) {
+		if (!isAdded) {
+			Object dataForTestObject = getDataValue(testObject);
+			if (dataForTestObject != null) {
+				if (dataForTestObject instanceof List<?>) {
+					List<?> dataList = (List<?>)dataForTestObject;
+					if (dataList.size() > 0) {
+						accessorList.add(this);
+						isAdded = true;
+					}
+				} else {
+					accessorList.add(this);
+					isAdded = true;
+				}
+			}
+		}
 	}
 
 	@Override
