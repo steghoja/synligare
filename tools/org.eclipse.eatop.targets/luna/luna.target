@@ -24,6 +24,7 @@
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.nebula.feature.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.nebula.examples.release.feature.feature.group" version="0.0.0"/>
 <repository location="http://download.eclipse.org/technology/nebula/snapshot"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">

@@ -41,11 +41,15 @@ public class EObjectAccessorFactory extends GenericEObjectAccessorFactory {
 	@Override
 	protected List<IEObjectPropertyAccessor> createAccessors(List<? extends EObject> data) {
 		List<IEObjectPropertyAccessor> accessors = super.createAccessors(data);
-		Collections.addAll(accessors, new RequirementAccessor(),
-				new IncomingReferenceAccessor());
+		
+		IncomingReferenceAccessor incomingReferenceAccessor = new IncomingReferenceAccessor();
+		RequirementAccessor requirementAccessor = new RequirementAccessor();
+		TraceableSpecificationAccessor traceableSpecificationAccessor = new TraceableSpecificationAccessor();
 		for (EObject eo : data) {
+			requirementAccessor.tryAddToList(accessors, eo);
+			incomingReferenceAccessor.tryAddToList(accessors, eo);
 			if (eo instanceof DesignFunctionType) {
-				accessors.add(new TraceableSpecificationAccessor());
+				traceableSpecificationAccessor.tryAddToList(accessors, eo);
 				break;
 			}
 			if (eo instanceof HardwareComponentPrototype || eo instanceof FunctionConnector || eo instanceof DesignFunctionPrototype) {
