@@ -9,6 +9,7 @@ import org.eclipse.eatop.eastadl21.EAPackage;
 import org.eclipse.eatop.eastadl21.Eastadl21Factory;
 import org.eclipse.eatop.eastadl21.Eastadl21Package;
 import org.eclipse.eatop.eastadl21.Identifiable;
+import org.eclipse.eatop.eastadl21.Requirement;
 import org.eclipse.eatop.eastadl21.VVCase;
 import org.eclipse.eatop.eastadl21.VVLog;
 import org.eclipse.eatop.eastadl21.VVProcedure;
@@ -133,7 +134,7 @@ public class ModelUpdate {
 			});
 				
 			}
-
+		
 		
 }
 

@@ -52,10 +52,8 @@
 		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.modeloverview</module>
 		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.modelprocessor</module>
 		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.requirementmetricsviewer</module>
-		
 		<module>../../org.eclipse.eatop.semcon.placeandroute</module>
-		
-		
+		<module>../../volvo/org.eclipse.eatop.volvo.metrics</module>
 
 		<!-- Tests -->
 		<module>../../tests/org.eclipse.eatop.serialization.tests</module>
@@ -87,6 +85,7 @@
 		<module>../../volvo/org.eclipse.eatop.volvo.sgraphml.gefeditor.feature</module>
 		<module>../../volvo/org.eclipse.eatop.volvo.versionmanager.feature</module>
 		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.feature</module>
+		<module>../../volvo/org.eclipse.eatop.volvo.metrics-feature</module>
 
 		<module>./repository</module>
 		<module>./product</module>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="org.eclipse.eatop.volvo.metrics.metricsviewscategory"
+            name="Metric Views">
+      </category>
+      <view
+            category="org.eclipse.eatop.volvo.metrics.metricsviewscategory"
+            class="org.eclipse.eatop.volvo.metrics.views.AllocatedRequirementsView"
+            id="org.eclipse.eatop.volvo.metrics.AllocatedRequirementsView"
+            name="Allocated Requirements">
+      </view>
+      <view
+            category="org.eclipse.eatop.volvo.metrics.metricsviewscategory"
+            class="org.eclipse.eatop.volvo.metrics.views.VerifiedRequirementsView"
+            id="org.eclipse.eatop.volvo.metrics.VerifiedRequirementsView"
+            name="Verified Requirements">
+      </view>
+      <view
+            category="org.eclipse.eatop.volvo.metrics.metricsviewscategory"
+            class="org.eclipse.eatop.volvo.metrics.views.RealizedFeaturesView"
+            id="org.eclipse.eatop.volvo.metrics.RealizedFeaturesView"
+            name="Realized Features">
+      </view>
+      <view
+            category="org.eclipse.eatop.volvo.metrics.metricsviewscategory"
+            class="org.eclipse.eatop.volvo.metrics.views.SGwithFSCView"
+            id="org.eclipse.eatop.volvo.metrics.SGwithFSCView"
+            name="Safety Goals with Functional Safety Concepts">
+      </view>
+      <view
+            category="org.eclipse.eatop.volvo.metrics.metricsviewscategory"
+            class="org.eclipse.eatop.volvo.metrics.views.FSCwithTSCView"
+            id="org.eclipse.eatop.volvo.metrics.FSCwithTSCView"
+            name="Functional Safety Concepts with Technical Safety Concepts">
+      </view>
+   </extension>
+
+  <extension
+         point="org.eclipse.ui.popupMenus">
+
+      <objectContribution
+            objectClass="org.eclipse.emf.ecore.EObject" 
+            id="org.eclipse.eatop.volvo.metrics.MetricViewsContribution">
+         <menu
+               icon="icons/full/equations.png"
+               id="org.eclipse.eatop.volvo.metrics.metricsviewsmenu"
+               label="Metrics"
+               path="additions">
+            <groupMarker
+                  name="group">
+            </groupMarker>
+         </menu>
+         <action
+               class="org.eclipse.eatop.volvo.metrics.popup.actions.ShowMetricsViewAction"
+               enablesFor="1"
+               id="org.eclipse.eatop.volvo.metrics.showallocatedrequirementsaction"
+               label="Allocated Requirements"
+               menubarPath="org.eclipse.eatop.volvo.metrics.metricsviewsmenu/group">
+         </action>
+         <action
+               class="org.eclipse.eatop.volvo.metrics.popup.actions.ShowMetricsViewAction"
+               enablesFor="1"
+               id="org.eclipse.eatop.volvo.metrics.showverifiedrequirementsaction"
+               label="Verified Requirements"
+               menubarPath="org.eclipse.eatop.volvo.metrics.metricsviewsmenu/group">              
+         </action>
+         <action
+               class="org.eclipse.eatop.volvo.metrics.popup.actions.ShowMetricsViewAction"
+               enablesFor="1"
+               id="org.eclipse.eatop.volvo.metrics.showrealizedfuturesaction"
+               label="Realized Features"
+               menubarPath="org.eclipse.eatop.volvo.metrics.metricsviewsmenu/group">              
+         </action>
+         <action
+               class="org.eclipse.eatop.volvo.metrics.popup.actions.ShowMetricsViewAction"
+               enablesFor="1"
+               id="org.eclipse.eatop.volvo.metrics.showsgwithfscaction"
+               label="Safety Goals with Functional Safety Concept"
+               menubarPath="org.eclipse.eatop.volvo.metrics.metricsviewsmenu/group">              
+         </action>
+         <action
+               class="org.eclipse.eatop.volvo.metrics.popup.actions.ShowMetricsViewAction"
+               enablesFor="1"
+               id="org.eclipse.eatop.volvo.metrics.showfscwithtscaction"
+               label="Functional Safety Concepts with Technical Safety Concepts"
+               menubarPath="org.eclipse.eatop.volvo.metrics.metricsviewsmenu/group">              
+         </action>
+
+      </objectContribution>
+      </extension>
+
+</plugin>
