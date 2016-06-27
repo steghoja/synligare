@@ -69,8 +69,10 @@ public class EAXMLprocessor {
 			partsList.add(parts[i]);
 		}
 
+	
 		for (EAPackage top : topPackages){
-			EObject theEObject = recursiveGetEObject(top, partsList);
+			List<String> tempPartsList = new ArrayList<String>(partsList);
+			EObject theEObject = recursiveGetEObject(top, tempPartsList);
 			if (theEObject != null){
 				return theEObject;
 			}
