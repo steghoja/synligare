@@ -73,6 +73,10 @@
          id="org.eclipse.eatop.volvo.metrics.feature"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.eatop.app.semcon.allocationassistant.feature"
+         version="0.0.0"/>
+
    <plugin
          id="org.eclipse.eatop.examples.actions"
          download-size="0"
@@ -177,5 +181,13 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+   
+   <plugin
+         id="org.eclipse.eatop.app.semcon.allocationassistant"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+ 
 
 </feature>

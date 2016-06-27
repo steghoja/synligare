@@ -38,6 +38,7 @@
 		<module>../../examples/org.eclipse.eatop.examples.tableview</module>
 		<module>../../examples/org.eclipse.eatop.examples.emf.compare</module>
 		
+		<!-- volvo plugins -->
 		<module>../../volvo/org.eclipse.eatop.volvo.errormodelgenerator</module>
 		<module>../../volvo/org.eclipse.eatop.volvo.fmuimport</module>
 		<module>../../volvo/org.eclipse.eatop.volvo.fmusim</module>
@@ -52,8 +53,11 @@
 		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.modeloverview</module>
 		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.modelprocessor</module>
 		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.requirementmetricsviewer</module>
-		<module>../../org.eclipse.eatop.semcon.placeandroute</module>
 		<module>../../volvo/org.eclipse.eatop.volvo.metrics</module>
+
+        <!-- semcon modules -->
+		<module>../../org.eclipse.eatop.app.semcon.allocationassistant</module>
+		<module>../../org.eclipse.eatop.semcon.placeandroute</module>
 
 		<!-- Tests -->
 		<module>../../tests/org.eclipse.eatop.serialization.tests</module>
@@ -86,6 +90,8 @@
 		<module>../../volvo/org.eclipse.eatop.volvo.versionmanager.feature</module>
 		<module>../../volvo/org.eclipse.eatop.volvo.visualizer.feature</module>
 		<module>../../volvo/org.eclipse.eatop.volvo.metrics-feature</module>
+
+		<module>../../org.eclipse.eatop.app.semcon.allocationassistant.feature</module>
 
 		<module>./repository</module>
 		<module>./product</module>
