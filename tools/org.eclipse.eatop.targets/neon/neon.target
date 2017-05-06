@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="EATOP Neon Target" sequenceNumber="60">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.nebula.feature.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.nebula.examples.release.feature.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/technology/nebula/snapshot"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.sphinx.sdk.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.sphinx.testutils.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/sphinx/updates/interim"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.equinox.executable.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.sdk.ide" version="0.0.0"/>
+<unit id="org.eclipse.rcp.configuration.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.6"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.artop.eel.feature.group" version="1.0.0.201302082307"/>
+<unit id="org.artop.eel.source.feature.group" version="1.0.0.201302082307"/>
+<unit id="org.artop.eel.sdk.feature.group" version="1.0.0.201302082307"/>
+<repository location="https://www.artop.org/containers/artop-eel-update-site-1.0"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.nebula.widgets.nattable.extension.glazedlists.feature.feature.group" version="1.5.0.201703192131"/>
+<unit id="org.eclipse.nebula.widgets.nattable.core.feature.feature.group" version="1.5.0.201703192131"/>
+<unit id="org.eclipse.nebula.widgets.nattable.extension.poi.feature.feature.group" version="1.5.0.201703192131"/>
+<repository location="http://download.eclipse.org/nattable/releases/1.5.0/repository/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.transaction.sdk.feature.group" version="1.10.0.201606071900"/>
+<unit id="org.eclipse.xpand.sdk.feature.group" version="2.2.0.v201605260315"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.12.0.v20160526-0356"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.10.0.v201605250459"/>
+<unit id="org.eclipse.uml2.sdk.feature.group" version="5.2.3.v20170227-0935"/>
+<unit id="org.eclipse.emf.validation.sdk.feature.group" version="1.10.0.201606071713"/>
+<unit id="org.eclipse.graphiti.sdk.feature.feature.group" version="0.13.2.v20161129-0820"/>
+<unit id="org.eclipse.ocl.all.sdk.feature.group" version="5.2.0.v20160523-1914"/>
+<unit id="org.eclipse.wst.xml_ui.feature.feature.group" version="3.8.2.v201702270442"/>
+<unit id="org.eclipse.gmf.tooling.feature.group" version="3.3.1.201509291144"/>
+<unit id="org.eclipse.emf.mwe.sdk.feature.group" version="1.3.20.v201605261103"/>
+<unit id="org.eclipse.xsd.sdk.feature.group" version="2.12.0.v20160526-0356"/>
+<unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.10.0.201606071959"/>
+<unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.10.0.201606071631"/>
+<repository location="http://download.eclipse.org/releases/neon"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.slf4j.api" version="1.7.2.v20121108-1250"/>
+<unit id="org.apache.commons.codec" version="1.6.0.v201305230611"/>
+<unit id="org.apache.poi" version="3.9.0.v201405241750"/>
+<unit id="com.google.guava" version="15.0.0.v201403281430"/>
+<unit id="org.jdom" version="1.1.1.v201101151400"/>
+<unit id="ca.odell.glazedlists" version="1.9.0.v201303080712"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.license.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/cbi/updates/license"/>
+</location>
+</locations>
+<environment>
+<nl>en_EN</nl>
+</environment>
+<launcherArgs>
+<vmArgs>-Xms128m -Xmx512m -XX:PermSize=256M -XX:MaxPermSize=512M</vmArgs>
+</launcherArgs>
+</target>

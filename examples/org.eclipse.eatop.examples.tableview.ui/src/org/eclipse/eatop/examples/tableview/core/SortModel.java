@@ -124,4 +124,10 @@ public class SortModel extends Observable implements ISortModel {
 		this.accessor = newAccessor;
 	}
 
+	@Override
+	public Comparator<?> getColumnComparator(int columnIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
