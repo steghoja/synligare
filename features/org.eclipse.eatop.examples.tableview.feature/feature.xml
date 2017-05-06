@@ -31,13 +31,6 @@
          unpack="false"/>
 
    <plugin
-         id="ca.odell.glazedlists.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="ca.odell.glazedlists"
          download-size="0"
          install-size="0"
@@ -52,21 +45,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.nebula.widgets.nattable.core.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.nebula.widgets.nattable.extension.glazedlists"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.nebula.widgets.nattable.extension.glazedlists.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -80,21 +59,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.apache.poi.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.nebula.widgets.nattable.extension.poi"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.nebula.widgets.nattable.extension.poi.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
