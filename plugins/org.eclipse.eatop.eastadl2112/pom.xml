@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.eclipse.eatop.releng</groupId>
@@ -12,7 +12,7 @@
 	<artifactId>org.eclipse.eatop.eastadl2112</artifactId>
 	<version>0.5.0-SNAPSHOT</version>
 	<packaging>eclipse-plugin</packaging>
-<build>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -30,9 +30,9 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>com.github.goldin</groupId>
+				<groupId>ch.mfrey.maven.plugin</groupId>
 				<artifactId>copy-maven-plugin</artifactId>
-				<version>0.2.5</version>
+				<version>0.0.6</version>
 				<executions>
 					<execution>
 						<id>clean-unpacked-sources</id>
@@ -41,14 +41,32 @@
 							<goal>copy</goal>
 						</goals>
 						<configuration>
+							<showfiles>true</showfiles>
 							<resources>
 								<resource>
-									<targetPath>${basedir}/META-INF</targetPath>
-									<file>${basedir}/releng/original/MANIFEST.MF</file>
+									<move>false</move>
+									<replaceExisting>true</replaceExisting>
+									<directory>${basedir}</directory>
+									<includes>
+										<include>MANIFEST.MF</include>
+									</includes>
+									<paths>
+										<path>
+											<from>releng/original</from>
+											<to>META-INF</to>
+										</path>
+									</paths>
 								</resource>
 							</resources>
 						</configuration>
 					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>truezip-maven-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
 					<execution>
 						<id>unpack-sources</id>
 						<phase>process-sources</phase>
@@ -56,20 +74,11 @@
 							<goal>copy</goal>
 						</goals>
 						<configuration>
-							<resources>
-								<resource>
-									<targetPath>${basedir}/src</targetPath>
-									<directory>${basedir}/lib</directory>
-									<includes>
-										<include>*src.zip</include>
-									</includes>
-									<unpack>true</unpack>
-								</resource>
-								<resource>
-									<targetPath>${basedir}/META-INF</targetPath>
-									<file>${basedir}/releng/MANIFEST.MF</file>
-								</resource>
-							</resources>
+							<verbose>true</verbose>
+							<fileset>
+								<directory>${basedir}/lib/eastadl21src.zip</directory>
+								<outputDirectory>${basedir}/src</outputDirectory>
+							</fileset>
 						</configuration>
 					</execution>
 				</executions>
