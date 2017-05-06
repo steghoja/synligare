@@ -23,7 +23,7 @@
 		<module>../../plugins/org.eclipse.eatop.workspace.ui</module>
 		<module>../../plugins/org.eclipse.eatop.sdk</module>
 		<module>../../plugins/org.eclipse.eatop.eastadl2112.edit</module>
-		<module>../../plugins/org.eclipse.emf.compare.ide.ui</module>
+		<!-- <module>../../plugins/org.eclipse.emf.compare.ide.ui</module> -->
 		<module>../../plugins/org.eclipse.eatop.connectorcreator</module>
 		<module>../../plugins/org.eclipse.eatop.connectorcreator.eadl</module>
 		
@@ -108,6 +108,12 @@
 			<id>platform-mars</id>
 			<properties>
 				<platform.version.name>mars</platform.version.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>platform-neon</id>
+			<properties>
+				<platform.version.name>neon</platform.version.name>
 			</properties>
 		</profile>
 	</profiles>

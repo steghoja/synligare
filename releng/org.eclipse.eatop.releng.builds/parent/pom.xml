@@ -40,7 +40,7 @@
 		<system>Eclipse Hudson</system>
 	</ciManagement>
 	<properties>
-		<tycho.version>0.20.0</tycho.version>
+		<tycho.version>0.24.0</tycho.version>
 	</properties>
     <build>
 		<sourceDirectory>src</sourceDirectory>
@@ -81,11 +81,6 @@
 							<os>win32</os>
 							<ws>win32</ws>
 							<arch>x86_64</arch>
-						</environment>
-						<environment>
-							<os>macosx</os>
-							<ws>cocoa</ws>
-							<arch>x86</arch>
 						</environment>
 						<environment>
 							<os>macosx</os>
@@ -203,6 +198,12 @@
 			<id>platform-mars</id>
 			<properties>
 				<platform.version.name>mars</platform.version.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>platform-neon</id>
+			<properties>
+				<platform.version.name>neon</platform.version.name>
 			</properties>
 		</profile>
 		<profile>
